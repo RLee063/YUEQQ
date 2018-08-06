@@ -1,0 +1,71 @@
+page{
+  background:white;
+}
+
+::root{
+  --bar: 80rpx;
+}
+
+::-webkit-scrollbar{
+  display:none;
+}
+
+.user-head-image {
+  width: var(--bar, 80rpx);
+  height: 80rpx;
+  margin: 15rpx;
+  border-radius: 50%;
+}
+
+.user-name-text {
+  position: relative;
+  color: dimgray;
+  top: 20rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.user-moto-text {
+  position: relative;
+  color: darkgray;
+  top: 25rpx;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 25rpx;
+}
+
+.activity-pic{
+  height: 100%;
+  width: 100%;
+}
+
+/*--------------------------------------*/
+
+.activity-block {
+  height: 420rpx;
+  width: 650rpx;
+  margin: 10rpx auto;
+  margin-bottom: 25rpx;
+  border-radius: 1%;
+  background-color: white;
+  box-shadow:1px 2px 8px #CCCCCC;
+}
+
+.user-intro-text-block{
+  height: 100%;
+  flex-direction: column;
+}
+
+.user-head-image-block{
+  height: 100%;
+  width: 110rpx; 
+  float: left;
+}
+
+.activity-top-block{
+  height: 110rpx;
+  width: 100%rpx;
+}
+
+.activity-mid-block{
+  height: 260rpx;
+}

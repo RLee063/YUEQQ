@@ -1,0 +1,11 @@
+/* pages/addActy/addActy.wxss */
+
+input{
+  background: lightyellow;
+  border-style: solid;
+}
+
+.uploader-image {
+    width: 100%;
+    height: 360rpx;
+}

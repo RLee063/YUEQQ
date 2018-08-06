@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/addActy/addActy",
+    "pages/home/home",
+    "pages/index/index",
+    "pages/addCgi/addCgi"
+  ],
+  "window": {
+    "backgroundColor": "white",
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "white",
+    "navigationBarTitleText": "Wafer Quick Start",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "images/tabbar_a_u.png",
+        "selectedIconPath": "images/tabbar_a_s.png"
+      },
+      {
+        "pagePath": "pages/addActy/addActy",
+        "text": "新建",
+        "iconPath": "images/tabbar_b_u.png",
+        "selectedIconPath": "images/tabbar_b_s.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "帮助",
+        "iconPath": "images/tabbar_c_u.png",
+        "selectedIconPath": "images/tabbar_c_s.png"
+      }
+    ]
+  }
+}

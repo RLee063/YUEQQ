@@ -1,0 +1,15 @@
+
+  <view class="activity-block" wx:for="{{activitiesArray}}">
+    <view class="activity-top-block">
+      <view class="user-head-image-block">
+        <image src="{{item.UAvatarUrl}}" class="user-head-image"></image>
+      </view>
+      <view class="user-intro-text-block">
+        <view class="user-name-text">{{item.UName}}</view>
+        <view class="user-moto-text">{{item.UMotto}}</view>
+      </view>
+    </view>
+    <view class="activity-mid-block">
+      <image src="{{item.imgUrl}}" class="activity-pic" mode="aspectFill"></image>
+    </view>
+  </view>

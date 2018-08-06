@@ -1,0 +1,8 @@
+<!--pages/addActy/addActy.wxml-->
+
+<form bindsubmit='addActySubmit'>
+  Motto:<input name="userMotto" value="{{inputData}}"/>
+  <button bindtap='chooseImg'>点击选择图片</button>
+  <image wx:if="{{imgTempPath}}" src="{{imgTempPath}}" mode="aspectFit" class="uploader-image"/>
+  <button form-type='submit'>Submit</button>
+</form>
