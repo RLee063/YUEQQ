@@ -1,8 +1,8 @@
 .imga{
   float: right;
-  width: 40rpx;
-  height: 40rpx;
-  margin-right: 15rpx;
+  width: 50rpx;
+  height: 50rpx;
+  margin-right: 10rpx;
 }
 /* ------------- */
 page{
@@ -66,8 +66,8 @@ page{
 
 .activity-header{
   color: rgb(34, 34, 34);
-  font-family: "Microsoft YaHei";
-  font-size: 33rpx;
+  font-family: "黑体";
+  font-size: 35rpx;
   font-weight: 600;
   letter-spacing: 2rpx;
 }
@@ -78,15 +78,18 @@ page{
   font-family: "微软雅黑";
   font-size: 30rpx;
   float: left;
-
+  
+  padding-left: 0rpx;
   letter-spacing: 2rpx;
 }
 
 .activity-num{
-  color: rgb(87, 87, 87);
+  color: rgb(116, 116, 116);
   font-family: "微软雅黑";
   float: right;
-  font-size: 35rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  padding-top: 5rpx;
 }
 
 .activity-tags{
@@ -113,7 +116,6 @@ page{
 .activity-pic{
   height: 100%;
   width: 100%;
-  border-radius: 2%;
 }
 
 /*--------------------------------------*/
@@ -122,10 +124,10 @@ page{
   height: 550rpx;
   width: 650rpx;
   margin: auto;
-  margin-bottom: 25rpx;
+  margin-bottom: 35rpx;
   border-radius: 1%;
-  /* background-color: white; */
-  /* box-shadow:1px 2px 8px #CCCCCC; */
+  background-color: white; 
+  box-shadow:1px 2px 8px #CCCCCC;
 }
 
 .user-intro-text-block{
@@ -148,8 +150,6 @@ page{
 
 .activity-mid-block{
   margin-top: 10rpx;
-  margin-left: 20rpx;
-  margin-right: 20rpx;
   height: 260rpx;
 }
 
