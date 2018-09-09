@@ -3,7 +3,8 @@
     "pages/home/home",
     "pages/addActy/addActy",
     "pages/index/index",
-    "pages/addCgi/addCgi"
+    "pages/addCgi/addCgi",
+    "pages/viewUserInfo/viewUserInfo"
   ],
   "window": {
     "backgroundColor": "white",

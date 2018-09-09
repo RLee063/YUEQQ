@@ -34,6 +34,11 @@ Page({
     this.refresh(this)
   },
   onShow: function(){
-    
+  },
+  viewUserInfo: function(e){
+    console.log(e);
+    wx.navigateTo({
+      url: "../viewUserInfo/viewUserInfo?id=2"
+    })
   }
 })
