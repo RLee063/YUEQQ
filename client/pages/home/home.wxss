@@ -1,3 +1,10 @@
+.imga{
+  float: right;
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 15rpx;
+}
+/* ------------- */
 page{
   background:white;
 }
@@ -10,6 +17,29 @@ page{
   display:none;
 }
 
+.sport-type{
+  width: 80rpx;
+  height: 40rpx;
+  border-top: solid;
+  border-width: 1rpx;
+  float: right;
+  margin-top: 15rpx;
+  margin-right: 20rpx;
+
+  color: #ff9933;
+  font-size: 80%;
+  text-align: center;
+  font-family: "微软雅黑";
+  letter-spacing: 5rpx;
+
+  line-height: 60rpx;
+}
+/* ============================================ */
+.sport-type-image{
+  width: 40rpx;
+  height: 40rpx;
+}
+
 .user-head-image {
   width: var(--bar, 80rpx);
   height: 80rpx;
@@ -19,40 +49,90 @@ page{
 
 .user-name-text {
   position: relative;
-  color: dimgray;
+  color: rgb(92, 92, 92);
   top: 20rpx;
   font-size: 30rpx;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .user-moto-text {
   position: relative;
-  color: darkgray;
-  top: 25rpx;
+  color: rgb(114, 114, 114);
+  top: 20rpx;
   font-family: "Times New Roman", Times, serif;
-  font-size: 25rpx;
+  font-size: 28rpx;
+  letter-spacing: 0.1rpx;
+}
+
+.activity-header{
+  color: rgb(34, 34, 34);
+  font-family: "Microsoft YaHei";
+  font-size: 33rpx;
+  font-weight: 600;
+  letter-spacing: 2rpx;
+}
+
+.activity-time{
+  margin-top: 5rpx;
+  color: rgb(121, 121, 121);
+  font-family: "微软雅黑";
+  font-size: 30rpx;
+  float: left;
+
+  letter-spacing: 2rpx;
+}
+
+.activity-num{
+  color: rgb(87, 87, 87);
+  font-family: "微软雅黑";
+  float: right;
+  font-size: 35rpx;
+}
+
+.activity-tags{
+  height: 40rpx;
+
+  font-family: "微软雅黑";
+  float: left;
+  color: rgb(255, 123, 0);
+  font-size: 80%;
+  letter-spacing: 2rpx;
+  font-weight: bold;
+
+  padding-left: 10rpx;
+  padding-right: 10rpx; 
+  padding-top: 5rpx;
+  padding-bottom: 5rpx;
+  margin-right: 20rpx;
+  
+  background-color: rgb(247, 247, 247);
+
+  border-radius: 10%;
 }
 
 .activity-pic{
   height: 100%;
   width: 100%;
+  border-radius: 2%;
 }
 
 /*--------------------------------------*/
 
 .activity-block {
-  height: 420rpx;
+  height: 550rpx;
   width: 650rpx;
-  margin: 10rpx auto;
+  margin: auto;
   margin-bottom: 25rpx;
   border-radius: 1%;
-  background-color: white;
-  box-shadow:1px 2px 8px #CCCCCC;
+  /* background-color: white; */
+  /* box-shadow:1px 2px 8px #CCCCCC; */
 }
 
 .user-intro-text-block{
+  width: 50%;
   height: 100%;
   flex-direction: column;
+  float: left;
 }
 
 .user-head-image-block{
@@ -67,5 +147,23 @@ page{
 }
 
 .activity-mid-block{
+  margin-top: 10rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
   height: 260rpx;
+}
+
+.activity-buttom-block{
+  margin-top: 10rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  height: 180rpx;
+}
+
+.activity-buttom-buttom-block{
+  margin-top: 65rpx;
+  font-family: "微软雅黑";
+  clear: both;
+  font-size: 30rpx;
+  background-color: aquamarine;
 }

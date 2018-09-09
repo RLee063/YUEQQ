@@ -22,6 +22,7 @@ Page({
         qcloud.login({
             success(result) {
                 if (result) {
+                    console.log(result)
                     util.showSuccess('登录成功')
                     that.setData({
                         userInfo: result,
@@ -34,6 +35,7 @@ Page({
                         login: true,
                         success(result) {
                             util.showSuccess('登录成功')
+                            console.log(result.data.data)
                             that.setData({
                                 userInfo: result.data.data,
                                 logged: true

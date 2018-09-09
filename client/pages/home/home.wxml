@@ -5,11 +5,32 @@
         <image src="{{item.UAvatarUrl}}" class="user-head-image"></image>
       </view>
       <view class="user-intro-text-block">
-        <view class="user-name-text">{{item.UName}}</view>
-        <view class="user-moto-text">{{item.UMotto}}</view>
+        <view class="user-name-text">{{item.UName}}
+        </view>
+        <view class="user-moto-text">{{item.UMotto}}
+        </view>
+      </view>
+      <view class="sport-type">篮球
       </view>
     </view>
     <view class="activity-mid-block">
       <image src="{{item.imgUrl}}" class="activity-pic" mode="aspectFill"></image>
+    </view>
+    <view class="activity-buttom-block">
+      <view class="activity-header">别再宅了，出来打球
+      </view>
+      <view>
+        <view class="activity-time">明天 19:70
+        </view>
+        <view class="activity-num">6/7
+        </view >
+        <image class= "imga" src="../../images/tabbar_a_s.png"></image>
+      </view>
+      <view class="activity-buttom-buttom-block">
+        <view class="activity-tags">高手集结
+        </view>
+        <view class="activity-tags">娱乐为主
+        </view>
+      </view>
     </view>
   </view>

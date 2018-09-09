@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">获取用户信息</button>
+<button open-type="getUserInfo" lang="zh_CN">获取用户信息</button>
 
 <view class="container">
     <!-- 用户登录测试 -->
