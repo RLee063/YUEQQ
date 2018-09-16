@@ -34,12 +34,12 @@ Page({
                         url: config.service.requestUrl,
                         login: true,
                         success(result) {
-                            util.showSuccess('登录成功')
-                            console.log(result.data.data)
-                            that.setData({
-                                userInfo: result.data.data,
-                                logged: true
-                            })
+                          util.showSuccess('登录成功')
+                          wx.setStorageSync('openid', result.data.data.openId)
+                          that.setData({
+                              userInfo: result.data.data,
+                              logged: true
+                          })
                         },
 
                         fail(error) {

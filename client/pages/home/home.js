@@ -8,16 +8,18 @@ Page({
     activitiesArray: []
   },
   onReachBottom: function(){
-    console.log("shangla");
+    console.log("shangla")
   },
   onPullDownRefresh: function(){
     var that=this
     this.refresh(that)
   },
+
   refresh: function(that){
     wx.request({
       url: `${config.service.host}/weapp/pullRefresh`,
       success(result) {
+        console.log(result)
         acties = result.data
         console.log(result.data)
         that.setData({

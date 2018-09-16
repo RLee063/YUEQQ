@@ -1,8 +1,14 @@
 <!--pages/addActy/addActy.wxml-->
 
 <form bindsubmit='addActySubmit'>
-  Motto:<input name="userMotto" value="{{inputData}}"/>
+  活动标题:<input name="title" value="{{title}}"/>
+  活动最大人数:<input name="maxNum" value="{{maxNum}}"/>
+  标签:<input name="tags" value="{{tags}}"/>
+  <picker mode="date" value="{{date}}" bindchange="bindDateChange">选择日期:{{date}}</picker>
+  <picker mode="time" value="{{time}}" bindchange="bindTimeChange">选择时间:{{time}}</picker>
   <button bindtap='chooseImg'>点击选择图片</button>
   <image wx:if="{{imgTempPath}}" src="{{imgTempPath}}" mode="aspectFit" class="uploader-image"/>
   <button form-type='submit'>Submit</button>
 </form>
+
+<!-- 类别 2 times 人数 who 图片 title -->
