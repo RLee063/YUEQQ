@@ -1,4 +1,5 @@
 <!--pages/addActy/addActy.wxml-->
+<image />
 
 <form bindsubmit='addActySubmit'>
   活动标题:<input name="title" value="{{title}}"/>

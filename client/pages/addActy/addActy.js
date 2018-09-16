@@ -7,8 +7,8 @@ var config = require('../../config')
 //   avatarUrl: "",
 //   motto: "",
 //   imgUrl: "",
-
 // }
+
 Page({
   data: {
     imgTempPath:"",
@@ -20,7 +20,7 @@ Page({
     date: "2016-09-01",
     time: "20:18"
   },
-
+  
   bindDateChange: function(e){
     this.setData({
       date: e.detail.value
