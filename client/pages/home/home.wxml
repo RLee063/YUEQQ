@@ -4,31 +4,29 @@
       <image src="{{item.UAvatarUrl}}" class="user-head-image"></image>
     </view>
     <view class="user-intro-text-block">
-      <view class="user-name-text"  bindtap="viewUserInfo">{{item.UName}}
+      <view class="user-name-text"  bindtap="viewUserInfo">{{item.userName}}
       </view>
-      <view class="user-moto-text">{{item.UMotto}}
+      <view class="user-moto-text">{{item.createTime}}
       </view>
     </view>
-    <view class="sport-type">篮球
+    <view class="sport-type">{{item.sportType}}
     </view>
   </view>
   <view class="activity-mid-block">
     <image src="{{item.imgUrl}}" class="activity-pic" mode="aspectFill"></image>
   </view>
   <view class="activity-buttom-block">
-    <view class="activity-header">别再宅了，出来打球
+    <view class="activity-header">{{title}}
     </view>
     <view>
-      <view class="activity-time">明天 19:70
+      <view class="activity-time">{{startTime}}
       </view>
-      <view class="activity-num">6/7
+      <view class="activity-num">{{curNum}}/{{maxNum}}
       </view >
       <image class= "num-pic" src="../../images/人群.png"></image>
     </view>
     <view class="activity-buttom-buttom-block">
-      <view class="activity-tags">高手集结
-      </view>
-      <view class="activity-tags">娱乐为主
+      <view wx:for="{{activitiesArray.tags}}" class="activity-tags">{{item}}
       </view>
     </view>
   </view>

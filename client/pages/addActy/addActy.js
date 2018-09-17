@@ -11,14 +11,15 @@ var config = require('../../config')
 
 Page({
   data: {
-    imgTempPath:"",
+    imgTempPath: "https://qcloudtest-1257207887.cos.ap-guangzhou.myqcloud.com/1536468704720-MUpMq2yU3.jpg",
     title:"来打球吧朋友",
     maxNum: "6",
-    tags: "高手退散",
+    tags: ["高手退散", "我无敌了"],
     sportType: "羽毛球",
     startTime: "",
     date: "2016-09-01",
-    time: "20:18"
+    time: "20:18",
+    isDefaultImage: true
   },
   
   bindDateChange: function(e){
@@ -41,7 +42,8 @@ Page({
       sizeType: ['compressed'],
       success: function(res) {
         that.setData({
-          imgTempPath: res.tempFilePaths[0]
+          imgTempPath: res.tempFilePaths[0],
+          isDefaultImage: false
         })
       },
     })
@@ -65,25 +67,34 @@ Page({
     upLoadImgAndGetUrl(this)
   },
 
-  clearInfo: function(){
+  resetData: function(){
     this.setData({
-      imgTempPath: "",
-      title:"",
-      tags:"",
-      maxNum:"",
-      date:"",
-      time:""
+      imgTempPath: "https://qcloudtest-1257207887.cos.ap-guangzhou.myqcloud.com/1536468704720-MUpMq2yU3.jpg",
+      title: "来打球吧朋友",
+      maxNum: "6",
+      tags: ["高手退散", "我无敌了"],
+      sportType: "羽毛球",
+      startTime: "",
+      date: "2016-09-01",
+      time: "20:18",
+      isDefaultImage: true
     })
   }
 })
 
 function upLoadImgAndGetUrl(that) {
+  console.log(that.data.imgTempPath)
   util.showBusy('正在上传')
+  if(that.data.isDefaultImage){
+    uploadInfo(that.data.imgTempPath, that)
+    return
+  }
   wx.uploadFile({
     url: config.service.uploadUrl,
     filePath: that.data.imgTempPath,
     name: 'file',
     success: function (res) {
+      console.log(res)
       util.showSuccess('上传图片成功')
       res = JSON.parse(res.data)
       console.log(res)
@@ -116,7 +127,7 @@ function uploadInfo (imgUrl, that){
     return
   }
   var createTime = getNowFormatDate()
-  var startTime = that.data.date + that.data.tim
+  var startTime = that.data.date + that.data.time
   wx.checkSession({
     success: function (res) {
       console.log(res)
@@ -135,7 +146,7 @@ function uploadInfo (imgUrl, that){
         },
         success(result) {
           util.showSuccess('请求成功完成')
-          //that.clearInfo()
+          //that.resetData()
           wx.switchTab({
             url: '../home/home',
           })
