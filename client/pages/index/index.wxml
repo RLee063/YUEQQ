@@ -39,3 +39,5 @@
         </navigator>
     </view>
 </view>
+
+<view bindtap='otheruser'>dianji</view>
