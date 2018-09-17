@@ -127,7 +127,7 @@ function uploadInfo (imgUrl, that){
     return
   }
   var createTime = getNowFormatDate()
-  var startTime = that.data.date + that.data.time
+  var startTime = that.data.date +" "+ that.data.time+":00"
   wx.checkSession({
     success: function (res) {
       console.log(res)

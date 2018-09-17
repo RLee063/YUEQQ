@@ -24,7 +24,7 @@
     <!-- <button bindtap='chooseImg'>点击选择图片</button> -->
 
     <!-- <image wx:if="{{imgTempPath}}" src="{{imgTempPath}}" mode="aspectFit" class="uploader-image"/> -->
-    <!-- <button form-type='submit'>创建活动</button> -->
+    <button form-type='submit'>创建活动</button>
   </form>
 </view>
 
