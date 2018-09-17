@@ -10,5 +10,6 @@
 	},
 	"appid": "wx9564c30c15e103a2",
 	"projectname": "YueQiu_NodeJs",
+	"compileType": "miniprogram",
 	"condition": {}
 }

@@ -20,8 +20,8 @@ Page({
       url: `${config.service.host}/weapp/pullRefresh`,
       success(result) {
         console.log(result)
-        acties = result.data
-        console.log(result.data)
+        acties = result.data.data
+        console.log(result.data.data)
         that.setData({
           activitiesArray: acties
         })
@@ -41,6 +41,31 @@ Page({
     console.log(e);
     wx.navigateTo({
       url: "../viewUserInfo/viewUserInfo?id=2"
+    })
+  },
+
+  tapActivity: function(e){
+    console.log()
+    var uid = wx.getStorageSync('openid')
+    if(uid == ""){
+      util.showModel('请先登录')
+    }
+    console.log(uid)
+    wx.request({
+      url: `${config.service.host}/weapp/joinActivity`,
+      data:{
+        uid: uid,
+        aid: e.currentTarget.dataset.aid
+      },
+      success(result) {
+        console.log(result)
+        if(result.data.code==1){
+          util.showModel('加入成功');
+        }
+      },
+      fail(error) {
+        util.showModel('加入失败', error);
+      }
     })
   }
 })
