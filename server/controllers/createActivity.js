@@ -5,6 +5,14 @@ module.exports = async(ctx) => {
   console.log(ctx.query)
   var timeStamp = Math.round(new Date().getTime()/1000)
   var aid = uid + timeStamp
+
+  try {
+    
+  } catch (e) {
+    console.log(e)
+    return
+  }
+
   var activity = {
       Aid : aid,
       Type : sportType,
@@ -13,11 +21,14 @@ module.exports = async(ctx) => {
       Title : title,
       CreatorUid : uid,
       Tags : tags,
-      MaxNum : maxNum
+      MaxNum : maxNum,
+      index: 0
   }
+
   console.log(activity)
 
   try {
+      activity['index'] = (await mysql('ActivityInfo').select().where('startTime', startTime)).length
       await mysql('ActivityInfo').insert(activity)
       await mysql('ActivityPic').insert({
         Aid : aid,
