@@ -45,6 +45,7 @@ Page({
           imgTempPath: res.tempFilePaths[0],
           isDefaultImage: false
         })
+        console.log("已经设置isDefaultImage")
       },
     })
   },
@@ -85,7 +86,9 @@ Page({
 function upLoadImgAndGetUrl(that) {
   console.log(that.data.imgTempPath)
   util.showBusy('正在上传')
+  console.log(that.data.isDefaultImage)
   if(that.data.isDefaultImage){
+    console.log("错啦!")
     uploadInfo(that.data.imgTempPath, that)
     return
   }
@@ -139,7 +142,7 @@ function uploadInfo (imgUrl, that){
           title: that.data.title,
           startTime: startTime,
           createTime: createTime,
-          imgUrl: that.data.imgTempPath,
+          imgUrl: imgUrl,
           maxNum: that.data.maxNum,
           tags: that.data.tags,
           sportType: that.data.sportType
