@@ -11,18 +11,20 @@ module.exports = async(ctx) => {
     var activities = await mysql('ActivityInfo as info').join('ActivityPic as pic', 'info.Aid', 'pic.Aid').join('UserAvatar as user', 'user.uid', 'info.creatorUid').select().orderBy('StartTime','desc').limit(10)
 
     for(var i in activities){
-      console.log(activities[i])
+//      console.log(activities[i])
       activities[i]['startTime'] = formatTime(activities[i]['startTime'])
       activities[i]['createTime'] = formatTime(activities[i]['createTime'])
       tags = await mysql('tag as t').join('actTag as at', 'at.tid', 't.tid').where('aid', activities[i]['aid'])
       activities[i]['tags'] = tags
+      uids = await mysql('userAct as ua').join('ActivityInfo as ai', 'ua.aid', 'ai.aid').select('ua.uid')
+      activities[i]['members'] = uids
     }
 
     ctx.body = {
       code: 1,
       data: activities
     }
-    console.log(activities)
+//    console.log(activities)
   } catch (e) {
     console.log(e)
     ctx.body = {

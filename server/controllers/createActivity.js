@@ -23,6 +23,7 @@ module.exports = async(ctx) => {
   
 
   try {
+      //添加活动信息
       activity['index'] = (await mysql('ActivityInfo').select().where('startTime', startTime)).length
       await mysql('ActivityInfo').insert(activity)
       await mysql('ActivityPic').insert({
@@ -30,6 +31,12 @@ module.exports = async(ctx) => {
         PicUrl : imgUrl
       })
 
+      //将创建者加入活动
+      await mysql('userAct').insert({
+        aid: aid,
+        uid: uid
+      })
+      
       var cnt = 0
     for (var i in formatedTags){
         //添加 新tag
