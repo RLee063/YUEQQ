@@ -16,7 +16,7 @@ module.exports = async(ctx) => {
       activities[i]['createTime'] = formatTime(activities[i]['createTime'])
       tags = await mysql('tag as t').join('actTag as at', 'at.tid', 't.tid').where('aid', activities[i]['aid'])
       activities[i]['tags'] = tags
-      uids = await mysql('userAct as ua').join('ActivityInfo as ai', 'ua.aid', 'ai.aid').select('ua.uid')
+      uids = await mysql('userAct as ua').join('ActivityInfo as ai', 'ua.aid', 'ai.aid').select('ua.uid').where('ua.aid',activities[i]['aid'])
       activities[i]['members'] = uids
     }
 
