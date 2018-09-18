@@ -14,6 +14,8 @@ module.exports = async(ctx) => {
       console.log(activities[i])
       activities[i]['startTime'] = formatTime(activities[i]['startTime'])
       activities[i]['createTime'] = formatTime(activities[i]['createTime'])
+      tags = await mysql('tag as t').join('actTag as at', 'at.tid', 't.tid').where('aid', activities[i]['aid'])
+      activities[i]['tags'] = tags
     }
 
     ctx.body = {

@@ -2,16 +2,9 @@ const {mysql} = require('../qcloud')
 
 module.exports = async(ctx) => {
   const {uid, title,sportType,startTime,createTime,imgUrl,tags,maxNum} = ctx.query
-  console.log(ctx.query)
+
   var timeStamp = Math.round(new Date().getTime()/1000)
   var aid = uid + timeStamp
-
-  try {
-    
-  } catch (e) {
-    console.log(e)
-    return
-  }
 
   var activity = {
       Aid : aid,
@@ -20,12 +13,14 @@ module.exports = async(ctx) => {
       StartTime : startTime,
       Title : title,
       CreatorUid : uid,
-      Tags : tags,
       MaxNum : maxNum,
       index: 0
   }
 
-  console.log(activity)
+  var formatedTags = tags.split(' ')
+  formatedTags.pop()
+  console.log(formatedTags)
+  
 
   try {
       activity['index'] = (await mysql('ActivityInfo').select().where('startTime', startTime)).length
@@ -34,6 +29,31 @@ module.exports = async(ctx) => {
         Aid : aid,
         PicUrl : imgUrl
       })
+
+      var cnt = 0
+    for (var i in formatedTags){
+        //添加 新tag
+      if ((await mysql('tag').select().where('title', formatedTags[i])).length ===0){
+          cnt = (await mysql('tag').count('tid as num'))[0]['num']
+          await mysql('tag').insert({
+            tid: cnt+1,
+            title: formatedTags[i]
+          })
+        }
+      }
+
+      //关联tag 与 activity
+    for (var i in formatedTags){
+      var tid = (await mysql('tag').select('tid').where('title', formatedTags[i]))[0]['tid']
+        await mysql('actTag').insert({
+          Tid:tid,
+          Aid:aid
+        })
+      }
+
+      
+
+
       ctx.body = {
           code : 1,
           data : {
