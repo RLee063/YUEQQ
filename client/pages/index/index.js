@@ -11,6 +11,12 @@ Page({
         requestResult: ''
     },
 
+  otheruser: function () {
+    wx.navigateTo({
+      url: '../otheruser/otheruser',
+    })
+  },
+
     // 用户登录示例
     login: function() {
         if (this.data.logged) return
