@@ -41,5 +41,6 @@ router.get('/createActivity', controllers.createActivity)
 router.get('/querySingleActivity',controllers.queryActivity)
 //查询用户信息
 router.get('/userInfo', controllers.userInfo)
-
+//参加活动
+router.get('/joinActivity', controllers.joinActivity)
 module.exports = router
