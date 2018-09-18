@@ -8,7 +8,7 @@ module.exports = async(ctx) => {
 
   try {
       
-    var activities = await mysql('ActivityInfo as info').join('ActivityPic as pic', 'info.Aid', 'pic.Aid').join('UserAvatar as user', 'user.uid', 'info.creatorUid').select().orderBy('StartTime','desc').limit(10)
+    var activities = await mysql('ActivityInfo as info').join('ActivityPic as pic', 'info.Aid', 'pic.Aid').join('UserAvatar as user', 'user.uid', 'info.creatorUid').select().orderBy('StartTime','asc').orderBy('index','asc').limit(10)
 
     for(var i in activities){
 //      console.log(activities[i])
