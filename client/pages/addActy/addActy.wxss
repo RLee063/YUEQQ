@@ -55,13 +55,9 @@ picker{
   font-size: 0.8rem;
 }
 
-.tags-view{
-  height: 120rpx;
-}
-
 .tags{
   float: left;
-  margin-left: 80rpx;
+  margin-left: 100rpx;
   margin-right: 0rpx;
   margin-bottom: 30rpx;
   background-color: red;

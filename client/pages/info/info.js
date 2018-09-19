@@ -133,7 +133,7 @@ Page({
     var that = this;
     wx.request({
       url: `${config.service.host}/weapp/updateUserInfo`,
-      method: 'POST',
+      method: 'GET',
       data: {
         uid: that.data.openId,
         bkgdpic: that.data.imgTempPath,
@@ -180,7 +180,7 @@ Page({
    */
   onShow: function() {
     wx.request({
-      url: `${config.service.host}/weapp/updateUserInfo`,
+      url: `${config.service.host}/weapp/getUserInfo`,
       method: 'GET',
       data: {
         bkgdpic: this.data.imgTempPath,

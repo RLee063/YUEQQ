@@ -40,7 +40,7 @@ Page({
                 userInfo: result.data.data,
                 logged: true
               })
-              wx.getStorageSync(result.data.data.userinfo.openId, 'openid')
+             
             },
 
             fail(error) {

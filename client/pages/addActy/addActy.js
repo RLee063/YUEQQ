@@ -19,8 +19,7 @@ Page({
     startTime: "",
     date: "2016-09-01",
     time: "20:18",
-    isDefaultImage: true,
-    addTagInput:""
+    isDefaultImage: true
   },
   
   bindDateChange: function(e){
@@ -67,28 +66,6 @@ Page({
       return
     }
     upLoadImgAndGetUrl(this)
-  },
-
-  addTag: function(e){
-    var tags = this.data.tags
-    tags.push(e.detail.value)
-    this.setData({
-      tags: tags,
-      addTagInput:""
-    })
-  },
-
-  deleteTag: function(e){
-    var tags = this.data.tags
-    for(var i=0; i<tags.length; i++){
-      if(tags[i]==e.target.dataset.text){
-        tags.splice(i,1)
-        break
-      }
-    }
-    this.setData({
-      tags: tags
-    })
   },
 
   resetData: function(){
@@ -154,11 +131,6 @@ function uploadInfo (imgUrl, that){
   }
   var createTime = getNowFormatDate()
   var startTime = that.data.date +" "+ that.data.time+":00"
-  var tags = ""
-  for(var i=0; i<that.data.tags.length; i++){
-    tags += that.data.tags[i]
-    tags += " "
-  }
   wx.checkSession({
     success: function (res) {
       console.log(res)
@@ -172,7 +144,7 @@ function uploadInfo (imgUrl, that){
           createTime: createTime,
           imgUrl: imgUrl,
           maxNum: that.data.maxNum,
-          tags: tags,
+          tags: that.data.tags,
           sportType: that.data.sportType
         },
         success(result) {
