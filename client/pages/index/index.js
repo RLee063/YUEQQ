@@ -12,8 +12,12 @@ Page({
     },
 
   otheruser: function () {
+    var otherinfo = {
+      nickName:this.data.userInfo.nickName,
+      avatarUrl: this.data.userInfo.avatarUrl,
+    }
     wx.navigateTo({
-      url: '../otheruser/otheruser',
+      url: '../otheruser/otheruser?info=' + JSON.stringify(otherinfo),
     })
   },
 
