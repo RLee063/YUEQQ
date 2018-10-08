@@ -111,10 +111,10 @@ function upLoadImgAndGetUrl(that) {
   util.showBusy('正在上传')
   console.log(that.data.isDefaultImage)
   if(that.data.isDefaultImage){
-    console.log("错啦!")
     uploadInfo(that.data.imgTempPath, that)
     return
   }
+
   wx.uploadFile({
     url: config.service.uploadUrl,
     filePath: that.data.imgTempPath,

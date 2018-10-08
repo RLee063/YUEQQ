@@ -12,34 +12,10 @@ page{
 }
 
 /* ============================================ */
-.sport-type-image{
-  width: 40rpx;
-  height: 40rpx;
-}
-
 .user-head-image {
-  width: var(--bar, 80rpx);
-  height: 80rpx;
-  margin: 15rpx;
+  width: 103%;
+  height: 102%;
   border-radius: 50%;
-}
-
-.user-name-text {
-  position: relative;
-  color: rgb(92, 92, 92);
-  top: 20rpx;
-  font-size: 30rpx;
-  font-weight: 700;
-}
-
-.user-moto-text {
-  position: relative;
-  color: rgb(184, 184, 184);
-  top: 20rpx;
-  font-family: "Times New Roman", Times, serif;
-  font-size: 28rpx;
-  letter-spacing: 0.1rpx;
-  font-weight: bold;
 }
 
 .sport-type{
@@ -50,13 +26,11 @@ page{
   float: right;
   margin-top: 15rpx;
   margin-right: 20rpx;
-
   color: #ff9933;
   font-size: 80%;
   text-align: center;
   font-family: "微软雅黑";
   letter-spacing: 5rpx;
-
   line-height: 60rpx;
 }
 
@@ -108,7 +82,7 @@ page{
 }
 
 .activity-pic{
-  border-radius: 6px 6px 6px 6px / 6px 6px 6px 6px;
+  /* border-radius: 6px 6px 0px 0px / 6px 6px 0px 0px; */
   height: 100%;
   width: 100%;
 }
@@ -122,48 +96,39 @@ page{
 /*--------------------------------------*/
 
 .activity-block {
-  height: 550rpx;
+  /* border-radius: 6px 6px 0px 0px / 6px 6px 0px 0px; */
+  height: 350rpx;
   width: 90%;
   margin: auto;
   margin-top: 10rpx;
-  margin-bottom: 60rpx;
+  margin-bottom: 150rpx;
   background-color: rgb(255, 255, 255); 
-   /* box-shadow:1px 1px 6px #CCCCCC;  */
-}
-
-.user-intro-text-block{
-  width: 50%;
-  height: 100%;
-  flex-direction: column;
-  float: left;
+  box-shadow:-5px 8px 10px 0px rgb(173, 173, 173);
 }
 
 .user-head-image-block{
-  height: 100%;
-  width: 110rpx; 
+  height: 120rpx;
+  width: 120rpx; 
+  top: 180rpx;
+  left: 100rpx;
+  border-radius: 100%;
   float: left;
-}
-
-.activity-top-block{
-  height: 20%;
-  width: 100%rpx;
+  position: relative;
+  top: -100rpx;
 }
 
 .activity-mid-block{
-  border-radius: 5px 5px 0px 0px / 5px 5px 0px 0px;
-  padding-top: 10rpx;
-  height: 53%;
-  padding-left: 20rpx;
-  padding-right: 20rpx;
+  /* border-radius: 6px 6px 0px 0px / 6px 6px 0px 0px; */
+  height: 60%;
   box-shadow:1px 1px 6px rgb(255, 255, 255);
 }
 
 .activity-buttom-block{
-  border-radius: 0px 0px 5px 5px / 0px 0px 5px 5px;
+  /* border-radius: 0px 0px 5px 5px / 0px 0px 5px 5px; */
   padding-top: 10rpx;
   padding-left: 20rpx;
   padding-right: 30rpx;
-  height: 30%;
+  height: 40%;
   box-shadow:1px 1px 6px rgb(255, 255, 255);
   background-color: rgb(255, 255, 255);
 }
@@ -173,6 +138,7 @@ page{
   font-family: "微软雅黑";
   clear: both;
   font-size: 30rpx;
+  background-color: rgb(255, 255, 255);
 }
 /* ------------------ */
 
@@ -188,4 +154,6 @@ page{
 .add-activity-pic{
   height: 100%;
   width: 100%;
+  border-radius: 100%;
+  box-shadow:-1px 3px 10px rgb(109, 109, 109);
 }

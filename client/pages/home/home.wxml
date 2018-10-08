@@ -1,19 +1,9 @@
 <view class="activity-block" wx:for="{{activitiesArray}}" bindtap="tapActivity" data-aid="{{item.aid}}">
-  <view class="activity-top-block">
-    <view class="user-head-image-block" bindtap="viewUserInfo" data-uid="{{item.UName}}">
-      <image src="{{item.avatarUrl}}" class="user-head-image"></image>
-    </view>
-    <view class="user-intro-text-block">
-      <view class="user-name-text"  bindtap="viewUserInfo">{{item.aid}}
-      </view>
-      <view class="user-moto-text">{{item.createTime}}
-      </view>
-    </view>
-    <view class="sport-type">{{item.type}}
-    </view>
-  </view>
   <view class="activity-mid-block">
     <image src="{{item.picUrl}}" class="activity-pic" mode="aspectFill"></image>
+  </view>
+  <view class="user-head-image-block" bindtap="viewUserInfo" data-uid="{{item.UName}}">
+    <image src="{{item.avatarUrl}}" class="user-head-image"></image>
   </view>
   <view class="activity-buttom-block">
     <view class="activity-header">{{item.title}}
@@ -30,7 +20,18 @@
       </view>
     </view>
   </view>
-</view>
+</view> 
+
+<!-- <view class="activity-top-block">
+  <view class="user-intro-text-block">
+    <view class="user-name-text"  bindtap="viewUserInfo">{{item.aid}}
+    </view>
+    <view class="user-moto-text">{{item.createTime}}
+    </view>
+  </view>
+  <view class="sport-type">{{item.type}}
+  </view>
+</view> -->
 
 <view class="add-activity-block">
   <image src="../../images/tabbar_b_s.png" class="add-activity-pic"></image>

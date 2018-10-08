@@ -48,7 +48,7 @@ Page({
     console.log()
     var uid = wx.getStorageSync('openid')
     if(uid == ""){
-      util.showModel('请先登录')
+      util.showModel('请先登录', '刷新失败')
     }
     console.log(uid)
     wx.request({
@@ -60,7 +60,7 @@ Page({
       success(result) {
         console.log(result)
         if(result.data.code==1){
-          util.showModel('加入成功');
+          util.showModel('加入成功', '刷新失败');
         }
       },
       fail(error) {
