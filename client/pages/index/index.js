@@ -11,6 +11,16 @@ Page({
         requestResult: ''
     },
 
+  otheruser: function () {
+    var otherinfo = {
+      nickName:this.data.userInfo.nickName,
+      avatarUrl: this.data.userInfo.avatarUrl,
+    }
+    wx.navigateTo({
+      url: '../otheruser/otheruser?info=' + JSON.stringify(otherinfo),
+    })
+  },
+
     // 用户登录示例
     login: function() {
         if (this.data.logged) return

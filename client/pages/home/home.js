@@ -20,8 +20,8 @@ Page({
       url: `${config.service.host}/weapp/pullRefresh`,
       success(result) {
         console.log(result)
-        acties = result.data.data
-        console.log(result.data.data)
+        acties = result.data
+        console.log(result.data)
         that.setData({
           activitiesArray: acties
         })

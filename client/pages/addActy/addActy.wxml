@@ -17,10 +17,11 @@
     <view class="picker-view">选择日期:
       <picker mode="date" value="{{date}}" bindchange="bindDateChange">{{date}}</picker>
     </view>
-    <view class="tags-view">
-      标签:<input bindconfirm="addTag" placeholder="添加标签" value="{{addTagInput}}"></input>
+    <view class="tags-view">标签:
     </view>
-    <view class="tags" wx:for="{{tags}}" name="tags" bindlongpress="deleteTag" data-text="{{item}}">{{item}}</view>
+    <view class="tags" wx:for="{{tags}}" input name="tags" value="{{tags}}">{{item}}</view>
+    <!-- <button bindtap='chooseImg'>点击选择图片</button> -->
+
     <!-- <image wx:if="{{imgTempPath}}" src="{{imgTempPath}}" mode="aspectFit" class="uploader-image"/> -->
     <button form-type='submit' class="submit-button">创建活动</button>
   </form>

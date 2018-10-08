@@ -1,0 +1,20 @@
+/* pages/motto/motto.wxss */
+
+.changemotto {
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.textarea {
+  border: medium solid black;
+  background: lightyellow;
+}
+
+.limitcount {
+  color: gray;
+  display: flex;
+  justify-content: flex-end;
+}
+
+

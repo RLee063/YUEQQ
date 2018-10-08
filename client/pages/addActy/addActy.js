@@ -12,31 +12,30 @@ var config = require('../../config')
 Page({
   data: {
     imgTempPath: "https://qcloudtest-1257207887.cos.ap-guangzhou.myqcloud.com/1536468704720-MUpMq2yU3.jpg",
-    title:"来打球吧朋友",
+    title: "来打球吧朋友",
     maxNum: "6",
     tags: ["高手退散", "我无敌了"],
     sportType: "羽毛球",
     startTime: "",
     date: "2016-09-01",
     time: "20:18",
-    isDefaultImage: true,
-    addTagInput:""
+    isDefaultImage: true
   },
-  
-  bindDateChange: function(e){
+
+  bindDateChange: function(e) {
     this.setData({
       date: e.detail.value
     })
   },
 
-  bindTimeChange: function(e){
+  bindTimeChange: function(e) {
     console.log(e.detail.value)
     this.setData({
       time: e.detail.value
     })
   },
 
-  chooseImg: function(e){
+  chooseImg: function(e) {
     var that = this
     wx.chooseImage({
       count: 1,
@@ -51,15 +50,15 @@ Page({
     })
   },
 
-  addActySubmit: function(e){
-    if(e.detail.value.title === ""){
+  addActySubmit: function(e) {
+    if (e.detail.value.title === "") {
       wx.showToast({
         title: '请输入内容',
         icon: "none"
       })
       return
     }
-    if(this.data.imgTempPath==""){
+    if (this.data.imgTempPath == "") {
       wx.showToast({
         title: '请选择图片',
         icon: "none"
@@ -69,29 +68,7 @@ Page({
     upLoadImgAndGetUrl(this)
   },
 
-  addTag: function(e){
-    var tags = this.data.tags
-    tags.push(e.detail.value)
-    this.setData({
-      tags: tags,
-      addTagInput:""
-    })
-  },
-
-  deleteTag: function(e){
-    var tags = this.data.tags
-    for(var i=0; i<tags.length; i++){
-      if(tags[i]==e.target.dataset.text){
-        tags.splice(i,1)
-        break
-      }
-    }
-    this.setData({
-      tags: tags
-    })
-  },
-
-  resetData: function(){
+  resetData: function() {
     this.setData({
       imgTempPath: "https://qcloudtest-1257207887.cos.ap-guangzhou.myqcloud.com/1536468704720-MUpMq2yU3.jpg",
       title: "来打球吧朋友",
@@ -111,6 +88,8 @@ function upLoadImgAndGetUrl(that) {
   util.showBusy('正在上传')
   console.log(that.data.isDefaultImage)
   if(that.data.isDefaultImage){
+    console.log("错啦!")
+
     uploadInfo(that.data.imgTempPath, that)
     return
   }
@@ -119,7 +98,7 @@ function upLoadImgAndGetUrl(that) {
     url: config.service.uploadUrl,
     filePath: that.data.imgTempPath,
     name: 'file',
-    success: function (res) {
+    success: function(res) {
       console.log(res)
       util.showSuccess('上传图片成功')
       res = JSON.parse(res.data)
@@ -127,14 +106,14 @@ function upLoadImgAndGetUrl(that) {
       uploadInfo(res.data.imgUrl, that)
     },
 
-    fail: function (e) {
+    fail: function(e) {
       util.showModel('上传图片失败')
       return null
     }
   })
 }
 
-function uploadInfo (imgUrl, that){
+function uploadInfo(imgUrl, that) {
   if (imgUrl == null) {
     console.log(imgUrl)
     wx.showToast({
@@ -145,7 +124,7 @@ function uploadInfo (imgUrl, that){
   }
   //set data
   var uid = wx.getStorageSync('openid')
-  if(uid == ""){
+  if (uid == "") {
     wx.showToast({
       title: '请先登录:)',
       icon: "none"
@@ -153,14 +132,9 @@ function uploadInfo (imgUrl, that){
     return
   }
   var createTime = getNowFormatDate()
-  var startTime = that.data.date +" "+ that.data.time+":00"
-  var tags = ""
-  for(var i=0; i<that.data.tags.length; i++){
-    tags += that.data.tags[i]
-    tags += " "
-  }
+  var startTime = that.data.date + " " + that.data.time + ":00"
   wx.checkSession({
-    success: function (res) {
+    success: function(res) {
       console.log(res)
       wx.request({
         url: `${config.service.host}/weapp/createActivity`,
@@ -172,7 +146,7 @@ function uploadInfo (imgUrl, that){
           createTime: createTime,
           imgUrl: imgUrl,
           maxNum: that.data.maxNum,
-          tags: tags,
+          tags: that.data.tags,
           sportType: that.data.sportType
         },
         success(result) {
@@ -187,7 +161,7 @@ function uploadInfo (imgUrl, that){
         }
       })
     },
-    fail: function (res) {
+    fail: function(res) {
       util.showModel('请先登录', '在帮助中先授权再登录');
     }
   })
@@ -205,7 +179,7 @@ function getNowFormatDate() {
   if (strDate >= 0 && strDate <= 9) {
     strDate = "0" + strDate;
   }
-  var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate + " " + date.getHours() + seperator2 + date.getMinutes()+ seperator2 + date.getSeconds();
+  var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate + " " + date.getHours() + seperator2 + date.getMinutes() + seperator2 + date.getSeconds();
   console.log(currentdate)
   return currentdate;
 }
