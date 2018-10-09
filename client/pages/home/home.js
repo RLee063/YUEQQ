@@ -16,12 +16,12 @@ Page({
   },
 
   refresh: function(that){
+    var that=this
     wx.request({
       url: `${config.service.host}/weapp/pullRefresh`,
       success(result) {
-        console.log(result)
-        acties = result.data
-        console.log(result.data)
+        acties = result.data.data
+        that.formatActivitiesArray(acties)
         that.setData({
           activitiesArray: acties
         })
@@ -67,5 +67,13 @@ Page({
         util.showModel('加入失败', error);
       }
     })
+  },
+  formatActivitiesArray(acties){
+    acties.forEach(this.formatEachActivity, this)
+    //var startTimeArray = startTime.split(' ');
+  },
+  formatEachActivity(item){
+    var startTime = item.startTime.split(' ')
+    var date = startTime[0].split('-')
   }
 })
