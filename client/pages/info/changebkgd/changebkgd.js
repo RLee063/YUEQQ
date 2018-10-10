@@ -1,8 +1,10 @@
 import WeCropper from 'we-cropper-master/dist/we-cropper.js'
+var util = require('../../../utils/util.js')
+var config = require('../../../config')
 
 const device = wx.getSystemInfoSync() // 获取设备信息
 const width = device.windowWidth // 示例为一个与屏幕等宽的正方形裁剪框
-const height = device.windowHeight-20
+const height = device.windowHeight - 20
 
 
 
@@ -11,12 +13,12 @@ Page({
     bkgdpic: '',
     cropperOpt: {
       id: 'cropper',
-      width,  // 画布宽度
+      width, // 画布宽度
       height, // 画布高度
       scale: 2.5, // 最大缩放倍数
       zoom: 8, // 缩放系数
       cut: {
-        x: (width -400) / 2, // 裁剪框x轴起点
+        x: (width - 400) / 2, // 裁剪框x轴起点
         y: (height - 200) / 2, // 裁剪框y轴起点
         width: 400, // 裁剪框宽度
         height: 200 // 裁剪框高度
@@ -25,7 +27,9 @@ Page({
   },
 
   onLoad(option) {
-    const { cropperOpt } = this.data
+    const {
+      cropperOpt
+    } = this.data
 
     // 若同一个页面只有一个裁剪容器，在其它Page方法中可通过this.wecropper访问实例
     new WeCropper(cropperOpt)
@@ -59,7 +63,7 @@ Page({
     this.wecropper.touchEnd(e)
   },
 
-  chooseimage: function () {
+  chooseimage: function() {
     const self = this
 
     wx.chooseImage({
@@ -75,15 +79,80 @@ Page({
   },
 
   getCropperImage() {
-    this.wecropper.getCropperImage((src) => {
+    var that = this;
+    that.wecropper.getCropperImage((src) => {
       if (src) {
-        this.setData({ bkgdpic: src })
-        wx.setStorageSync('bkgdpic', this.data.bkgdpic);
+        that.setData({
+          bkgdpic: src
+        })
+        that.upLoadImgAndGetUrl(this)
+        wx.setStorageSync('bkgdpic', that.data.bkgdpic);
         wx.setStorageSync('changebkgd', 1);
         wx.navigateBack()
+
       } else {
         console.log('获取图片地址失败，请稍后重试')
       }
     })
+  },
+  upLoadImgAndGetUrl: function(that) {
+    console.log(that.data.bkgdpic)
+    util.showBusy('正在上传')
+    console.log(that.data.isDefaultImage)
+    if (that.data.isDefaultImage) {
+      console.log("错啦!")
+      that.uploadInfo(that.data.bkgdpic, that)
+      return
+    }
+    wx.uploadFile({
+      url: config.service.uploadUrl,
+      filePath: that.data.bkgdpic,
+      name: 'file',
+      success: function(res) {
+        console.log(res)
+        util.showSuccess('上传图片成功')
+        res = JSON.parse(res.data)
+        console.log(res)
+        that.uploadInfo(res.data.imgUrl, that)
+      },
+
+      fail: function(e) {
+        util.showModel('上传图片失败')
+        return null
+      }
+    })
+  },
+
+  uploadInfo: function(imgUrl, that) {
+    if (imgUrl == null) {
+      console.log(imgUrl)
+      wx.showToast({
+        title: 'imgUrl == null',
+        icon: "none"
+      })
+      return
+    }
+    wx.checkSession({
+      success: function(res) {
+        console.log(res)
+        wx.request({
+          url: `${config.service.host}/weapp/updateUserInfo`,
+          method: 'GET',
+          data: {
+            homePicUrl:that.data.bkgdpic
+          },
+          success(result) {
+            util.showSuccess('成功上传图片')
+          },
+          fail(error) {
+            util.showModel('请求失败', error);
+          }
+        })
+      },
+      fail: function(res) {
+        util.showModel('请先登录', '在帮助中先授权再登录');
+      }
+    })
   }
+
 })

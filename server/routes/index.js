@@ -38,6 +38,8 @@ router.get('/pullRefresh', controllers.pullRefresh)
 //创建活动
 router.get('/createActivity', controllers.createActivity)
 
+//router.get('/querySingleActivity', controllers.queryActivity)
+
 //查询用户信息
 router.get('/getUserInfo', controllers.getUserInfo)
 //更新信息

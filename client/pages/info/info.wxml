@@ -1,4 +1,4 @@
-<view class='container' style="background-image: url({{imgTempPath}}); background-size:  100%  480rpx">
+<view class='container' style="background-image: url({{ homePicUrl}}); background-size:  100%  480rpx">
 
 
   <view>
@@ -49,15 +49,15 @@
   <view class="allinfo">
     <view class="allinfo-text">
       <text>学院:  </text>
-      <text wx:if="{{collage}}">{{collage}}</text>
+      <text wx:if="{{college}}">{{college}}</text>
       <action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet">
-        <action-sheet-item bindtap='setcollage' data-name='计算机科学与技术学院'>计算机科学与技术学院 </action-sheet-item>
-        <action-sheet-item bindtap='setcollage' data-name='自动化学院'>自动化学院</action-sheet-item>
-        <action-sheet-item bindtap='setcollage' data-name='外国语学院'>外国语学院</action-sheet-item>
-        <action-sheet-item bindtap='setcollage' data-name='通信学院'>通信学院</action-sheet-item>
+        <action-sheet-item bindtap='setcollege' data-name='计算机科学与技术学院'>计算机科学与技术学院 </action-sheet-item>
+        <action-sheet-item bindtap='setcollege' data-name='自动化学院'>自动化学院</action-sheet-item>
+        <action-sheet-item bindtap='setcollege' data-name='外国语学院'>外国语学院</action-sheet-item>
+        <action-sheet-item bindtap='setcollege' data-name='通信学院'>通信学院</action-sheet-item>
         <action-sheet-cancel>取消</action-sheet-cancel>
       </action-sheet>
-      <image bindtap='addcollage' src='setting.png' class='changeinfo'></image>
+      <image bindtap='addcollege' src='setting.png' class='changeinfo'></image>
 
     </view>
   </view>
@@ -75,7 +75,7 @@
       <text>评级：</text>
       <text bindtap='scoreinfo' class='knowmore'>了解更多</text>
 
-      <view wx:if="{{score==1}}">
+      <view wx:if="{{credit==1}}">
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
         <image src='scorestar.png' style='width:15px;height:15px'></image>
         <image src='scorestar.png' style='width:15px;height:15px'></image>
@@ -83,7 +83,7 @@
         <image src='scorestar.png' style='width:15px;height:15px'></image>
       </view>
 
-      <view wx:elif="{{score==2}}">
+      <view wx:elif="{{credit==2}}">
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
         <image src='scorestar.png' style='width:15px;height:15px'></image>
@@ -92,7 +92,7 @@
 
       </view>
 
-      <view wx:elif="{{score==3}}">
+      <view wx:elif="{{credit==3}}">
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
@@ -100,7 +100,7 @@
         <image src='scorestar.png' style='width:15px;height:15px'></image>
       </view>
 
-      <view wx:elif="{{score==4}}">
+      <view wx:elif="{{credit==4}}">
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
@@ -109,7 +109,7 @@
       </view>
 
 
-      <view wx:elif="{{score==5}}">
+      <view wx:elif="{{credit==5}}">
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>

@@ -1,7 +1,7 @@
 // pages/info/info.js
 var util = require('../../utils/util.js')
 var config = require('../../config')
-var imgTempPath = ""
+var homePicUrl = ""
 
 
 Page({
@@ -13,9 +13,9 @@ Page({
     openId: '',
     flag: true,
     changebkgd: 0,
-    imgTempPath: "background.jpg",
-    score: 2,
-    scorearray: [1, 2, 3, 4, 5],
+    homePicUrl: "https://qcloudtest-1257207887.cos.ap-guangzhou.myqcloud.com/1536468704720-MUpMq2yU3.jpg",
+    credit: 2,
+    creditarray: [1, 2, 3, 4, 5],
     sex: 1,
     logged: false,
     userInfo: {},
@@ -23,7 +23,7 @@ Page({
     grade: null,
     motto: '',
     changemotto: 0,
-    collage: null,
+    college: null,
     hiddenmodalput: true,
     actionSheetHidden: true,
     hiddenmodalput2: true,
@@ -77,7 +77,7 @@ Page({
   },
 
 
-  addcollage: function() {
+  addcollege: function() {
     this.setData({
       //取反
       actionSheetHidden: !this.data.actionSheetHidden
@@ -90,9 +90,9 @@ Page({
     })
   },
 
-  setcollage: function(event) {
+  setcollege: function(event) {
     this.setData({
-      collage: event.currentTarget.dataset.name,
+      college: event.currentTarget.dataset.name,
       actionSheetHidden: !this.data.actionSheetHidden
     })
 
@@ -130,18 +130,17 @@ Page({
   },
 
   saveinfo: function() {
-    var that = this;
     wx.request({
       url: `${config.service.host}/weapp/updateUserInfo`,
       method: 'GET',
       data: {
-        uid: that.data.openId,
-        bkgdpic: that.data.imgTempPath,
-        score: that.data.score,
-        phone: that.data.phone,
-        motto: that.data.motto,
-        grade: that.data.grade,
-        collage: that.data.collage,
+        uid: this.data.openId,
+        homePicUrl: this.data.homePicUrl,
+        score: this.data.score,
+        phone: this.data.phone,
+        motto: this.data.motto,
+        grade: this.data.grade,
+        college: this.data.college,
       },
       success(result) {
         util.showSuccess('成功保存数据')
@@ -183,12 +182,8 @@ Page({
       url: `${config.service.host}/weapp/getUserInfo`,
       method: 'GET',
       data: {
-        bkgdpic: this.data.imgTempPath,
-        score: this.data.score,
-        phone: this.data.phone,
-        motto: this.data.motto,
-        grade: this.data.grade,
-        collage: this.data.collage,
+        uid: this.data.openId,
+
       },
       success(result) {
         console.log(result);
@@ -210,7 +205,7 @@ Page({
     })
     if (this.data.changebkgd == 1) {
       this.setData({
-        imgTempPath: wx.getStorageSync('bkgdpic')
+        homePicUrl: wx.getStorageSync('bkgdpic')
       })
     }
 

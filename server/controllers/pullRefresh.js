@@ -11,7 +11,7 @@ module.exports = async(ctx) => {
     var activities = await mysql('ActivityInfo as info').join('ActivityPic as pic', 'info.Aid', 'pic.Aid').join('UserAvatar as user', 'user.uid', 'info.creatorUid').select().orderBy('StartTime','asc').orderBy('index','asc').limit(10)
 
     for(var i in activities){
-//      console.log(activities[i])
+//    console.log(activities[i])
       activities[i]['startTime'] = formatTime(activities[i]['startTime'])
       activities[i]['createTime'] = formatTime(activities[i]['createTime'])
       tags = await mysql('tag as t').join('actTag as at', 'at.tid', 't.tid').where('aid', activities[i]['aid'])
