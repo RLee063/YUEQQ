@@ -130,6 +130,7 @@ Page({
   },
 
   saveinfo: function() {
+    console.log(this.data)
     wx.request({
       url: `${config.service.host}/weapp/updateUserInfo`,
       method: 'GET',
@@ -144,6 +145,7 @@ Page({
       },
       success(result) {
         util.showSuccess('成功保存数据')
+        console.log(result)
 
       },
       fail(error) {
@@ -203,13 +205,19 @@ Page({
     this.setData({
       changebkgd: wx.getStorageSync('changebkgd')
     })
+    console.log(this.data.changebkgd)
     if (this.data.changebkgd == 1) {
       this.setData({
         homePicUrl: wx.getStorageSync('bkgdpic')
       })
+      console.log(this.data.homePicUrl)
+      console.log(this.data.homePicUrl)
+      console.log(this.data.homePicUrl)
+      console.log(this.data.homePicUrl)
+      
     }
 
-    
+
 
   },
   /**
