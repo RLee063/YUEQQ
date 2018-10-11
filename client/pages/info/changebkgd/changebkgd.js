@@ -109,16 +109,11 @@ Page({
       success: function(res) {
         util.showSuccess('上传图片成功')
         res = JSON.parse(res.data)
-        console.log(res)
-        console.log(res)
-        console.log(res)
-        console.log(res.data.imgUrl)
         that.setData({
           bkgdpic: res.data.imgUrl
         })
         wx.setStorageSync('bkgdpic', that.data.bkgdpic);
         wx.setStorageSync('changebkgd', 1);
-        console.log(that.data)
         that.uploadInfo(res.data.imgUrl, that)
       },
 
