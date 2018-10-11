@@ -3,13 +3,42 @@ var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
 
+// 显示繁忙提示
+var showBusy = text => wx.showToast({
+  title: text,
+  icon: 'loading',
+  duration: 10000
+});
+
+// 显示成功提示
+var showSuccess = text => wx.showToast({
+  title: text,
+  icon: 'success'
+});
+
+// 显示失败提示
+var showModel = (title, content) => {
+  wx.hideToast();
+
+  wx.showModal({
+    title,
+    content: JSON.stringify(content),
+    showCancel: false
+  });
+};
+
+
 Page({
     data: {
         userInfo: {},
         logged: false,
         takeSession: false,
-        requestResult: ''
+        requestResult: '',
+
     },
+  onLoad: function(){
+    this.openTunnel()
+  },
 
   otheruser: function () {
     var otherinfo = {
@@ -174,8 +203,7 @@ Page({
 
         tunnel.on('close', () => {
             util.showSuccess('信道已断开')
-            console.log('WebSocket 信道已断开')
-            this.setData({ tunnelStatus: 'closed' })
+            tunnel.open()
         })
 
         tunnel.on('reconnecting', () => {
@@ -201,32 +229,17 @@ Page({
 
         // 打开信道
         tunnel.open()
-
-        this.setData({ tunnelStatus: 'connecting' })
     },
 
     /**
      * 点击「发送消息」按钮，测试使用信道发送消息
      */
     sendMessage() {
-        if (!this.data.tunnelStatus || !this.data.tunnelStatus === 'connected') return
-        // 使用 tunnel.isActive() 来检测当前信道是否处于可用状态
         if (this.tunnel && this.tunnel.isActive()) {
             // 使用信道给服务器推送「speak」消息
             this.tunnel.emit('speak', {
                 'word': 'I say something at ' + new Date(),
             });
         }
-    },
-
-    /**
-     * 点击「关闭信道」按钮，关闭已经打开的信道
-     */
-    closeTunnel() {
-        if (this.tunnel) {
-            this.tunnel.close();
-        }
-        util.showBusy('信道连接中...')
-        this.setData({ tunnelStatus: 'closed' })
     }
 })
