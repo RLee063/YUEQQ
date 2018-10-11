@@ -31,16 +31,19 @@ router.post('/tunnel', controllers.tunnel.post)
 router.get('/message', controllers.message.get)
 // POST 用来处理微信转发过来的客服消息
 router.post('/message', controllers.message.post)
-router.get('/demo', controllers.demo)
-router.get('/addActy', controllers.addActy)
+
+
 router.get('/pullRefresh', controllers.pullRefresh)
 
 //创建活动
 router.get('/createActivity', controllers.createActivity)
-//查询活动信息
+
 //router.get('/querySingleActivity', controllers.queryActivity)
+
 //查询用户信息
-router.get('/userInfo', controllers.userInfo)
+router.get('/getUserInfo', controllers.getUserInfo)
+//更新信息
+router.get('/updateUserInfo',controllers.updateUserInfo)
 //参加活动
 router.get('/joinActivity', controllers.joinActivity)
 module.exports = router

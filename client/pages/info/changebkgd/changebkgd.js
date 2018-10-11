@@ -86,8 +86,6 @@ Page({
           bkgdpic: src
         })
         that.upLoadImgAndGetUrl(this)
-        wx.setStorageSync('bkgdpic', that.data.bkgdpic);
-        wx.setStorageSync('changebkgd', 1);
         wx.navigateBack()
 
       } else {
@@ -109,10 +107,13 @@ Page({
       filePath: that.data.bkgdpic,
       name: 'file',
       success: function(res) {
-        console.log(res)
         util.showSuccess('上传图片成功')
         res = JSON.parse(res.data)
-        console.log(res)
+        that.setData({
+          bkgdpic: res.data.imgUrl
+        })
+        wx.setStorageSync('bkgdpic', that.data.bkgdpic);
+        wx.setStorageSync('changebkgd', 1);
         that.uploadInfo(res.data.imgUrl, that)
       },
 
@@ -139,7 +140,7 @@ Page({
           url: `${config.service.host}/weapp/updateUserInfo`,
           method: 'GET',
           data: {
-            homePicUrl:that.data.bkgdpic
+            homePicUrl: that.data.bkgdpic
           },
           success(result) {
             util.showSuccess('成功上传图片')

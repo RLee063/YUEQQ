@@ -136,7 +136,7 @@ Page({
       data: {
         uid: this.data.openId,
         homePicUrl: this.data.homePicUrl,
-        score: this.data.score,
+        credit: this.data.credit,
         phone: this.data.phone,
         motto: this.data.motto,
         grade: this.data.grade,
@@ -144,6 +144,7 @@ Page({
       },
       success(result) {
         util.showSuccess('成功保存数据')
+        console.log(result)
 
       },
       fail(error) {
@@ -178,15 +179,26 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    var that = this;
     wx.request({
       url: `${config.service.host}/weapp/getUserInfo`,
       method: 'GET',
       data: {
-        uid: this.data.openId,
+        uid: that.data.openId,
 
       },
+
       success(result) {
-        console.log(result);
+        console.log(result.data.data[0]);
+        that.setData({
+          homePicUrl: result.data.data[0].homePicUrl,
+          credit: result.data.data[0].credit,
+          sex: result.data.data[0].sex,
+          phone: result.data.data[0].phone,
+          grade: result.data.data[0].grade,
+          motto: result.data.data[0].motto,
+          college: result.data.data[0].college,
+        })
       },
       fail(error) {
         util.showModel('保存失败', error);
@@ -203,13 +215,14 @@ Page({
     this.setData({
       changebkgd: wx.getStorageSync('changebkgd')
     })
+    console.log(this.data.changebkgd)
     if (this.data.changebkgd == 1) {
       this.setData({
         homePicUrl: wx.getStorageSync('bkgdpic')
       })
     }
 
-    
+
 
   },
   /**
