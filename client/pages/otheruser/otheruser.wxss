@@ -79,7 +79,7 @@ page {
 }
 
 .information{
-  height:26%;
+  height:28%;
   width: 85%;
   background-color: gainsboro;
   border-width: 1px;

@@ -43,6 +43,53 @@
       </text>
     </view>
 
+    <view>
+      <image src='score.png' style='width:20px;height:20px'></image>
+      <text> 信用：
+      </text>
+              <view wx:if="{{credit==1}}">
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestar.png' style='width:15px;height:15px'></image>
+        <image src='scorestar.png' style='width:15px;height:15px'></image>
+        <image src='scorestar.png' style='width:15px;height:15px'></image>
+        <image src='scorestar.png' style='width:15px;height:15px'></image>
+      </view>
+
+      <view wx:elif="{{credit==2}}">
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestar.png' style='width:15px;height:15px'></image>
+        <image src='scorestar.png' style='width:15px;height:15px'></image>
+        <image src='scorestar.png' style='width:15px;height:15px'></image>
+
+      </view>
+
+      <view wx:elif="{{credit==3}}">
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestar.png' style='width:15px;height:15px'></image>
+        <image src='scorestar.png' style='width:15px;height:15px'></image>
+      </view>
+
+      <view wx:elif="{{credit==4}}">
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestar.png' style='width:15px;height:15px'></image>
+      </view>
+
+
+      <view wx:elif="{{credit==5}}">
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+      </view>
+    </view>
+
   </view>
 
   <view class='activity'>

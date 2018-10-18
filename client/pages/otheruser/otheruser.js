@@ -8,15 +8,14 @@ Page({
    * 页面的初始数据
    */
   data: {
+    avatarUrl:null,
     imgTempPath: 'background.jpg',
-    score: 2,
-    scorearray: [1, 2, 3, 4, 5],
-    sex: 1,
-    userInfo: null,
+    userInfo: {},
     phone: null,
     grade: null,
     motto: 'In god we trust',
     collage: null,
+    credit:4
   },
 
 
@@ -26,13 +25,13 @@ Page({
    */
   onLoad: function(options) {
     console.log("接收到的参数是testData=" + options.info);
-
     if (options.info == null) {
       wx.showToast({
         title: '数据为空',
       })
       return;
     }
+  
     var Info = JSON.parse(options.info);
     this.setData({
       userInfo: Info
