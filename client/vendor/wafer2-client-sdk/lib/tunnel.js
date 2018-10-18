@@ -26,7 +26,7 @@ var PACKET_TYPE_TIMEOUT = 'timeout';
 var PACKET_TYPE_CLOSE = 'close';
 
 // 断线重连最多尝试 5 次
-var DEFAULT_MAX_RECONNECT_TRY_TIMES = 5;
+var DEFAULT_MAX_RECONNECT_TRY_TIMES = 20;
 
 // 每次重连前，等待时间的增量值
 var DEFAULT_RECONNECT_TIME_INCREASE = 1000;

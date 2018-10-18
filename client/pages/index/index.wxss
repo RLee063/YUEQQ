@@ -122,3 +122,16 @@ page {
     line-height: 36rpx;
     word-break: break-all;
 }
+
+/* tunnel */
+
+.line {
+    padding-top: 30rpx;
+}
+
+.line-control {
+    border-bottom: #d9d9d9 1px solid;
+    border-top: #d9d9d9 1px solid;
+    background-color: #fff;
+    margin-top: 10rpx;
+}
