@@ -5,12 +5,13 @@ var util = require('../../utils/util.js')
 
 Page({
   data: {
-    imgUrl:"",
+    imgUrl: "",
     userInfo: {},
     logged: false,
     takeSession: false,
     requestResult: '',
-    phone:'13078754853'
+    phone: '13078754853',
+    homePicUrl: ""
   },
 
   // 用户登录示例
@@ -40,7 +41,7 @@ Page({
                 userInfo: result.data.data,
                 logged: true
               })
-             
+
             },
 
             fail(error) {
@@ -84,9 +85,9 @@ Page({
         console.log('request fail', error);
       }
     }
-    if (this.data.takeSession) {  // 使用 qcloud.request 带登录态登录
+    if (this.data.takeSession) { // 使用 qcloud.request 带登录态登录
       qcloud.request(options)
-    } else {    // 使用 wx.request 则不带登录态
+    } else { // 使用 wx.request 则不带登录态
       wx.request(options)
     }
   },
@@ -132,7 +133,7 @@ Page({
     })
   },
 
-  onLoad:function(){
+  onLoad: function () {
 
 
   },
@@ -144,28 +145,31 @@ Page({
       url: '../info/info',
     })
   },
+  activities: function () {
+    console.log(this.data.userInfo)
+    var selfinfo = {
+      nickName: this.data.userInfo.nickName,
+      avatarUrl: this.data.userInfo.avatarUrl,
+      motto: this.data.motto,
+      logged: this.data.logged,
+      sex: this.data.userInfo.gender,
+      uid: this.data.userInfo.openId
 
-  activities:function(){
+    }
     wx.navigateTo({
-      url: '../activities/activities',
+      url: '../activities/activities?info=' + JSON.stringify(selfinfo),
     })
   },
-
   settings: function () {
     wx.navigateTo({
       url: '../settings/settings',
     })
   },
 
-  interested:function(){
-    wx.navigateTo({
-      url: '../interested/interested',
-    })
-  },
 
-  makephonecall:function(){
+  makephonecall: function () {
     wx.makePhoneCall({
-      phoneNumber:this.data.phone,
+      phoneNumber: this.data.phone,
     })
   }
 

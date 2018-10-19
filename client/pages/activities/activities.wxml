@@ -1,0 +1,44 @@
+<!--pages/activities/activities.wxml-->
+<view class='container' style="background-image: url({{ homePicUrl}}); background-size:  100%  480rpx">
+
+  <view class='down'>
+    <image class="userinfo-avatar" src="{{logged ? userInfo.avatarUrl : './user-unlogin.png'}}" background-size="cover"></image>
+  </view>
+  <view class='down'>
+    <view class='loginshow'>
+      <text class="userinfo-nickname-logged" wx:if="{{logged}}">{{userInfo.nickName}}  </text>
+      <image wx:if='{{userInfo.sex==1}}' src='sex1.png' style='width:25px;height:25px' class='sex'></image>
+      <image wx:elif='{{userInfo.sex==2}}' src='sex2.png' style='width:25px;height:25px' class='sex'></image>
+    </view>
+  </view>
+
+  <view class="class">
+    <text>已创建的</text>
+  </view>
+  <view class="uploader">
+    <view class="uploader-text" bindtap="create_undo">
+      <text>未开始的活动 ></text>
+    </view>
+  </view>
+  <view class="uploader">
+    <view class="uploader-text" bindtap="create_did">
+      <text>已结束的活动 ></text>
+    </view>
+  </view>
+
+
+    <view class="class">
+    <text>已参加的</text>
+  </view>
+  <view class="uploader">
+    <view class="uploader-text" bindtap="attend_undo">
+      <text>未开始的活动 ></text>
+    </view>
+  </view>
+  <view class="uploader">
+    <view class="uploader-text" bindtap="attend_did">
+      <text>已结束的活动 ></text>
+    </view>
+  </view>
+
+</view>
