@@ -1,0 +1,73 @@
+page{
+  background: rgb(255, 255, 255);
+}
+
+.message-block{
+  padding-bottom:80rpx;
+}
+
+.user-avatar,.user-avatar-me, .user-avatar-other{
+  margin-top: 10rpx;
+  height: 100rpx;
+  width: 100rpx; 
+  border-radius: 100%;
+  box-shadow:2px 2px 8px rgb(196, 196, 196);
+}
+
+.user-avatar-me{
+  margin-right: 30rpx;
+  float: right;
+}
+
+.user-avatar-other{
+  margin-left: 30rpx;
+  float: left;
+}
+
+.message-text, .message-text-me, .message-text-other{
+  background: white;
+  width: 500rpx;
+  margin: 20rpx;
+  padding: 20rpx;
+  position: relative;
+  top: 30rpx;
+  box-shadow:1px 2px 8px rgb(161, 161, 161);
+
+  color: rgb(34, 34, 34);
+  font-family: "微软雅黑";
+  font-size: 30rpx;
+}
+
+.message-text-me{
+  border-radius: 8px 0px 8px 8px / 8px 0px 8px 8px;
+  background: rgb(82, 147, 209);
+  float: right;
+}
+
+.message-text-other{
+  border-radius: 0px 8px 8px 8px / 8px 8px 8px 8px;
+  float: left;
+}
+
+.message-edit-border,.message-input, .send-button{
+  border-top: solid;
+  border-width: unset;
+}
+
+.message-input{
+  position: fixed;
+  background: rgb(255, 255, 255);
+  border-top: solid;
+  top: 90%;
+  height: 10%;
+  width: 85%;
+}
+
+.send-button{
+  border-top: solid;
+  position: fixed;
+  left: 85%;
+  top: 90%;
+  height: 10%;
+  width: 15%;
+}

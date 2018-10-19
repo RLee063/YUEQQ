@@ -26,11 +26,6 @@
         </view>
     </view>
 
-    <view class="uploader">
-        <view class="uploader-text" bindtap="interested">
-            <text>感兴趣的></text>
-        </view>
-    </view>
 
     <view class='questions'  bindtap='makephonecall'>
     
