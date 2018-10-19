@@ -178,17 +178,6 @@ Page({
         })
     },
 
-    // 切换信道的按钮
-    switchChange: function (e) {
-        var checked = e.detail.value
-
-        if (checked) {
-            this.openTunnel()
-        } else {
-            this.closeTunnel()
-        }
-    },
-
     openTunnel: function () {
         util.showBusy('信道连接中...')
         // 创建信道，需要给定后台服务地址
@@ -223,8 +212,7 @@ Page({
 
         // 监听自定义消息（服务器进行推送）
         tunnel.on('speak', speak => {
-            util.showModel('信道消息', speak)
-            console.log('收到说话消息：', speak)
+            console.log(speak)
         })
 
         // 打开信道
@@ -237,8 +225,13 @@ Page({
     sendMessage() {
         if (this.tunnel && this.tunnel.isActive()) {
             // 使用信道给服务器推送「speak」消息
+            var uid = wx.getStorageInfoSync('openid')
             this.tunnel.emit('speak', {
-                'word': 'I say something at ' + new Date(),
+                'word': {
+                  'to':'o5ko3434RP2lZQNVamvVxfrAugoY',
+                  'from':'o5ko3434RP2lZQNVamvVxfrAugoY',
+                  'msg':'this is a msg to lg'
+                },
             });
         }
     }

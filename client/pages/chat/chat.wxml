@@ -1,0 +1,16 @@
+<!--client/pages/chat/chat.wxml-->
+<view wx:for="{{messageArray}}" class="message-block">
+  <view class="user-avatar-block">
+    <image class="user-avatar-me" src="{{item.avatarUrl}}" mode="aspectFill" wx:if="{{item.userType == 0}}"></image>
+    <image class="user-avatar-other" src="{{item.avatarUrl}}" mode="aspectFill" wx:else></image>
+  </view>
+  <view class="message-block">
+    <view class="message-text-me" wx:if="{{item.userType == 0}}">{{item.messageText}}</view>
+    <view class="message-text-other" wx:else>{{item.messageText}}</view>
+  </view>
+</view>
+
+<view >
+  <input class="message-input"/>
+  <view class="send-button">发送</view>
+</view>
