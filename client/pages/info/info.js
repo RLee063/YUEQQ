@@ -130,13 +130,14 @@ Page({
   },
 
   saveinfo: function() {
+    console.log(this.data)
     wx.request({
       url: `${config.service.host}/weapp/updateUserInfo`,
       method: 'GET',
       data: {
         uid: this.data.openId,
         homePicUrl: this.data.homePicUrl,
-        credit: this.data.credit,
+        score: this.data.score,
         phone: this.data.phone,
         motto: this.data.motto,
         grade: this.data.grade,
@@ -168,6 +169,7 @@ Page({
 
   },
 
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -179,26 +181,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    var that = this;
     wx.request({
       url: `${config.service.host}/weapp/getUserInfo`,
       method: 'GET',
       data: {
-        uid: that.data.openId,
+        uid: this.data.openId,
 
       },
-
       success(result) {
-        console.log(result.data.data[0]);
-        that.setData({
-          homePicUrl: result.data.data[0].homePicUrl,
-          credit: result.data.data[0].credit,
-          sex: result.data.data[0].sex,
-          phone: result.data.data[0].phone,
-          grade: result.data.data[0].grade,
-          motto: result.data.data[0].motto,
-          college: result.data.data[0].college,
-        })
+        console.log(result);
       },
       fail(error) {
         util.showModel('保存失败', error);
@@ -220,6 +211,11 @@ Page({
       this.setData({
         homePicUrl: wx.getStorageSync('bkgdpic')
       })
+      console.log(this.data.homePicUrl)
+      console.log(this.data.homePicUrl)
+      console.log(this.data.homePicUrl)
+      console.log(this.data.homePicUrl)
+      
     }
 
 

@@ -13,31 +13,39 @@
   </view>
 
   <view class="class">
-    <text>已创建的</text>
+    <text class='class2'>已创建的</text>
   </view>
   <view class="uploader">
-    <view class="uploader-text" bindtap="create_undo">
-      <text>未开始的活动 ></text>
+    <view  bindtap="create_undo">
+      <image src=' doing.png ' style='width:22px;height:22px ' class='icon '></image>
+      <text class="uploader-text"> 未开始的活动 </text>
+      <text class='arrow'>></text>
     </view>
   </view>
   <view class="uploader">
-    <view class="uploader-text" bindtap="create_did">
-      <text>已结束的活动 ></text>
+    <view  bindtap="create_did">
+      <image src='finished.png ' style='width:22px;height:22px ' class='icon '></image>
+      <text class="uploader-text"> 已结束的活动 </text>
+      <text class='arrow'>></text>
     </view>
   </view>
 
 
-    <view class="class">
-    <text>已参加的</text>
+  <view class="class">
+    <text class='class2 '>已参加的</text>
   </view>
   <view class="uploader">
-    <view class="uploader-text" bindtap="attend_undo">
-      <text>未开始的活动 ></text>
+    <view bindtap="attend_undo">
+      <image src='doing.png ' style='width:22px;height:22px ' class='icon '></image>
+      <text class="uploader-text"> 未开始的活动 </text>
+      <text class='arrow '>></text>
     </view>
   </view>
   <view class="uploader">
-    <view class="uploader-text" bindtap="attend_did">
-      <text>已结束的活动 ></text>
+    <view  bindtap="attend_did">
+      <image src='finished.png ' style='width:22px;height:22px ' class='icon '></image>
+      <text class="uploader-text"> 已结束的活动 </text>
+      <text class='arrow '>></text>
     </view>
   </view>
 
