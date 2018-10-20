@@ -16,10 +16,8 @@
     "pages/create_did/create_did",
     "pages/create_undo/create_undo",
     "pages/attend_undo/attend_undo",
-    "pages/create_did/did_lists",
-    "pages/create_undo/undo_lists",
-    "pages/attend_did/did_lists",
-    "pages/attend_did/undo_lists",
+    "pages/attend_did/attend_did",
+
     "pages/scoreinfo/scoreinfo"
 
 
