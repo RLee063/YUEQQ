@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/chat/chat",
     "pages/home/home",
+    "pages/chat/chat",
+    "pages/index/index",
     "pages/addActy/addActy",
     "pages/info/info",
     "pages/info/changebkgd/changebkgd",

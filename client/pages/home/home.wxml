@@ -23,7 +23,7 @@
       <image src="{{item.picUrl}}" class="activity-pic" mode="aspectFill"></image>
     </view>
 
-    <view class="user-head-image-block" bindtap="viewUserInfo" data-uid="{{item.UName}}">
+    <view class="user-head-image-block" bindtap="viewUserInfo" data-uid="{{item.creatorUid}}">
       <image src="{{item.avatarUrl}}" class="user-head-image"></image>
     </view>
 

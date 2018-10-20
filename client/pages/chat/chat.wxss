@@ -3,11 +3,12 @@ page{
 }
 
 .message-block{
-  padding-bottom:80rpx;
+  /* background: rgb(226, 107, 107);
+  border: solid; */
+  margin-bottom: 20rpx;
 }
 
 .user-avatar,.user-avatar-me, .user-avatar-other{
-  margin-top: 10rpx;
   height: 100rpx;
   width: 100rpx; 
   border-radius: 100%;
@@ -30,9 +31,8 @@ page{
   margin: 20rpx;
   padding: 20rpx;
   position: relative;
-  top: 30rpx;
-  box-shadow:1px 4px 8px rgb(189, 188, 188);
-
+  /* top: 30rpx; */
+  box-shadow:1px 3px 10px rgb(189, 188, 188);
   color: rgb(34, 34, 34);
   font-family: "微软雅黑";
   font-size: 30rpx;
@@ -48,6 +48,7 @@ page{
   border-radius: 0px 8px 8px 8px / 8px 8px 8px 8px;
   float: left;
 }
+
 
 
 .message-edit-block{
@@ -75,4 +76,5 @@ page{
   justify-content:center;
   color: rgb(102, 102, 102);
   letter-spacing: 0.1rem;
+  background: white;
 }

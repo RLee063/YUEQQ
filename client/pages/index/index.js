@@ -1,7 +1,7 @@
 //index.js
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
-var util = require('../../utils/util.js')
+
 
 // 显示繁忙提示
 var showBusy = text => wx.showToast({
@@ -33,8 +33,7 @@ Page({
         userInfo: {},
         logged: false,
         takeSession: false,
-        requestResult: '',
-
+        requestResult: ''
     },
   onLoad: function(){
     this.openTunnel()
@@ -75,12 +74,12 @@ Page({
                         success(result) {
                           util.showSuccess('登录成功')
                           wx.setStorageSync('openid', result.data.data.openId)
+                          wx.setStorageSync('me', result)
                           that.setData({
                               userInfo: result.data.data,
                               logged: true
                           })
                         },
-
                         fail(error) {
                             util.showModel('请求失败', error)
                             console.log('request fail', error)
@@ -178,61 +177,10 @@ Page({
         })
     },
 
-    openTunnel: function () {
-        util.showBusy('信道连接中...')
-        // 创建信道，需要给定后台服务地址
-        var tunnel = this.tunnel = new qcloud.Tunnel(config.service.tunnelUrl)
-
-        // 监听信道内置消息，包括 connect/close/reconnecting/reconnect/error
-        tunnel.on('connect', () => {
-            util.showSuccess('信道已连接')
-            console.log('WebSocket 信道已连接')
-            this.setData({ tunnelStatus: 'connected' })
-        })
-
-        tunnel.on('close', () => {
-            util.showSuccess('信道已断开')
-            tunnel.open()
-        })
-
-        tunnel.on('reconnecting', () => {
-            console.log('WebSocket 信道正在重连...')
-            util.showBusy('正在重连')
-        })
-
-        tunnel.on('reconnect', () => {
-            console.log('WebSocket 信道重连成功')
-            util.showSuccess('重连成功')
-        })
-
-        tunnel.on('error', error => {
-            util.showModel('信道发生错误', error)
-            console.error('信道发生错误：', error)
-        })
-
-        // 监听自定义消息（服务器进行推送）
-        tunnel.on('speak', speak => {
-            console.log(speak)
-        })
-
-        // 打开信道
-        tunnel.open()
-    },
 
     /**
      * 点击「发送消息」按钮，测试使用信道发送消息
      */
-    sendMessage() {
-        if (this.tunnel && this.tunnel.isActive()) {
-            // 使用信道给服务器推送「speak」消息
-            var uid = wx.getStorageInfoSync('openid')
-            this.tunnel.emit('speak', {
-                'word': {
-                  'to':'o5ko344qvKlQYv5kYMdTkWbkH8lg',
-                  'from':'o5ko3434RP2lZQNVamvVxfrAugoY',
-                  'msg':'this is a msg to lg'
-                },
-            });
-        }
-    }
+
+
 })
