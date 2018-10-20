@@ -38,19 +38,18 @@ Page({
   onShow: function(){
   },
   viewUserInfo: function(e){
-    console.log(e);
+    var uid = e.currentTarget.dataset.uid
     wx.navigateTo({
-      url: "../viewUserInfo/viewUserInfo?id=2"
+      // url: "../viewUserInfo/viewUserInfo?id=2"
+      url: "../chat/chat?uid="+uid
     })
   },
 
   tapActivity: function(e){
-    console.log()
     var uid = wx.getStorageSync('openid')
     if(uid == ""){
       util.showModel('请先登录', '刷新失败')
     }
-    console.log(uid)
     wx.request({
       url: `${config.service.host}/weapp/joinActivity`,
       data:{
@@ -58,7 +57,6 @@ Page({
         aid: e.currentTarget.dataset.aid
       },
       success(result) {
-        console.log(result)
         if(result.data.code==1){
           util.showModel('加入成功', '刷新失败');
         }
