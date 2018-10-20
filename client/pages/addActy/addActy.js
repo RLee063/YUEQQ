@@ -2,6 +2,16 @@
 var util = require('../../utils/util.js')
 var config = require('../../config')
 
+function yearMonthDayToDate(year, month, day){
+  var result=""
+  result += year
+  result += '-'
+  result += month
+  result += '-'
+  result += day
+  return result
+}
+
 // var info = {
 //   name: "",
 //   avatarUrl: "",
@@ -13,13 +23,43 @@ Page({
   data: {
     imgTempPath: "https://qcloudtest-1257207887.cos.ap-guangzhou.myqcloud.com/1536468704720-MUpMq2yU3.jpg",
     title: "来打球吧朋友",
-    maxNum: "6",
+    maxNum: 6,
     tags: ["高手退散", "我无敌了"],
     sportType: "羽毛球",
-    startTime: "",
-    date: "2016-09-01",
-    time: "20:18",
-    isDefaultImage: true
+    startTime: "12-20",
+    date: "",
+    time: "12:00",
+    isDefaultImage: true,
+    datePickerStart:"",
+    datePickerEnd:"",
+    maxNumRange: [],
+    sportTypeRange: ["篮球", "羽毛球", "乒乓球", "网球", "足球", "跑步"],
+    tagInput:""
+  },
+
+  onLoad: function(e){
+    var maxNumRange = [];
+    for(var i=2; i<30; i++){
+      maxNumRange.push(i)
+    }
+    var result;
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var nowDate = yearMonthDayToDate(year, month, day);
+    var endDate = yearMonthDayToDate(year, month+1, day);
+    this.setData({
+      date: nowDate,
+      datePickerStart: nowDate,
+      datePickerEnd: endDate,
+      maxNumRange: maxNumRange
+    })
+  },
+  bindMaxNumChange: function(e){
+    this.setData({
+      maxNum: this.data.maxNumRange[e.detail.value]
+    })
   },
 
   bindDateChange: function(e) {
@@ -29,12 +69,15 @@ Page({
   },
 
   bindTimeChange: function(e) {
-    console.log(e.detail.value)
     this.setData({
       time: e.detail.value
     })
   },
-
+  bindSportTypeChange: function(e){
+    this.setData({
+      sportType: this.data.sportTypeRange[e.detail.value]
+    })
+  },
   chooseImg: function(e) {
     var that = this
     wx.chooseImage({
@@ -66,6 +109,26 @@ Page({
       return
     }
     upLoadImgAndGetUrl(this)
+  },
+  addTag: function(e) {
+    if(e.detail.value=""){
+      return
+    }
+    var tags = this.data.tags
+    tags.push(e.detail.value)
+    this.setData({
+      tags: tags,
+      tagInput: ""
+    })
+  },
+
+  removeTag: function(e) {
+    console.log(e)
+    var tags = this.data.tags
+    tags.splice(tags.indexOf(e.target.dataset.name),1)
+    this.setData({
+      tags: tags
+    })
   },
 
   resetData: function() {

@@ -11,75 +11,51 @@ page{
   display:none;
 }
 
-/* ============================================ */
 .user-head-image {
   width: 100%;
   height: 100%;
   border-radius: 50%;
 }
 
-.sport-type{
-  width: 80rpx;
-  height: 40rpx;
-  border-top: solid;
-  border-width: 1rpx;
-  float: right;
-  margin-top: 15rpx;
-  margin-right: 20rpx;
-  color: #ff9933;
-  font-size: 80%;
-  text-align: center;
-  font-family: "微软雅黑";
-  letter-spacing: 5rpx;
-  line-height: 60rpx;
+
+.type-card-image{
+  width: 70%;
+  height: 70%;
+  margin-left: 15%;
+  margin-top: 11.25%;
 }
 
 .activity-title{
-  margin-left: 150rpx;
+  /* margin-top: 10rpx; */
+  position: relative;
+  top: 18%;
+  left: 24%;
   color: rgb(34, 34, 34);
   font-family: "黑体";
-  font-size: 35rpx;
+  font-size: 32rpx;
   font-weight: bold;
   letter-spacing: 2rpx;
 }
 
 .activity-time{
-  padding-top: 10rpx;
-  color: rgb(129, 129, 129);
+  /* padding-top: 15rpx; */
+  position: relative;
+  top: 35rpx;
+  left: 24%;
+  color: rgb(92, 92, 92);
   font-family: "微软雅黑";
-  font-size: 30rpx;
+  font-size: 28rpx;
   float: left;
-  /* font-weight: bold; */
-  padding-left: 0rpx;
-  letter-spacing: 2rpx;
 }
 
 .activity-num{
-  color: rgb(145, 145, 145);
+  position: relative;
+  color: rgb(99, 99, 99);
   font-family: "微软雅黑";
   float: right;
   font-size: 30rpx;
   font-weight: bold;
-  padding-top: 5rpx;
-}
-
-.activity-tags{
-  height: 45rpx;
-
-  font-family: "微软雅黑";
-  float: left;
-  color: rgb(255, 123, 0);
-  font-size: 80%;
-  letter-spacing: 2rpx;
-  font-weight: bold;
-
-  padding-left: 10rpx;
-  padding-right: 10rpx; 
-  padding-top: 10rpx;
-  margin-right: 20rpx;
-  
-  background-color: rgb(247, 247, 247);
-  border-radius: 20%;
+  top: 30rpx;
 }
 
 .activity-pic{
@@ -89,33 +65,69 @@ page{
 }
 
 .num-pic{
+  position: relative;
   float: right;
   width: 45rpx;
   height: 50rpx;
-  margin-right: 10rpx;
+  right: 5rpx;
+  top: 26rpx;
 }
 /*--------------------------------------*/
+.type-card, .type-card-basketball, .type-card-badminton, .type-card-tabletennis, .type-card-tennis, .type-card-football, .type-card-running{
+  position: absolute;
+  width: 120rpx;
+  height: 90rpx;
+  left: 520rpx;
+  top: -10rpx;
+  box-shadow: -3px 3px 8px  rgb(0, 0, 0);
+}
 
+.type-card-basketball{
+  background-image: linear-gradient(to bottom left, #cc208e 0%, #6713d2 100%);
+}
+
+.type-card-badminton{
+background-image: linear-gradient(to top right, #64b3f4 0%, #c2e59c 100%);
+}
+
+.type-card-tabletennis{
+  background-image: linear-gradient(to right top, #fa709a 0%, #fee140 100%);
+}
+
+.type-card-tennis{
+  background-image: linear-gradient(to top right, #0ba360 0%, #3cba92 100%);
+}
+
+.type-card-running{
+background-image: linear-gradient(to right top, #596164 100%, #868f96 0%);
+}
+
+.type-card-football{
+  background-image: linear-gradient(to top right, #f093fb 0%, #f5576c 100%);
+}
 .activity-block {
   /* border-radius: 6px 6px 0px 0px / 6px 6px 0px 0px; */
-  height: 350rpx;
+  position: relative;
+  height: 330rpx;
   width: 90%;
   margin: auto;
-  margin-top: 10rpx;
-  margin-bottom: 150rpx;
+  margin-top: 20rpx;
+  margin-bottom: 70rpx;
   background-color: rgb(255, 255, 255); 
-  box-shadow:-5px 8px 10px 0px rgb(173, 173, 173);
+  box-shadow:-1px 3px 10px 0px rgb(99, 99, 99);
 }
 
 .user-head-image-block{
   height: 120rpx;
   width: 120rpx; 
-  top: -60rpx;
+  top: 50%;
   left: 30rpx;
   border-radius: 100%;
   float: left;
-  position: relative;
-  box-shadow:1px 1px 6px rgb(0, 0, 0);
+  position: absolute;
+  /* box-shadow:-2px 1px 10px  rgb(0, 0, 0); */
+  border: solid;
+  border-color: white;
 }
 
 .activity-mid-block{
@@ -126,19 +138,11 @@ page{
 
 .activity-buttom-block{
   /* border-radius: 0px 0px 5px 5px / 0px 0px 5px 5px; */
-  padding-top: 10rpx;
+  /* padding-top: 10rpx; */
   padding-left: 20rpx;
   padding-right: 30rpx;
   height: 40%;
   box-shadow:1px 1px 6px rgb(255, 255, 255);
-  background-color: rgb(255, 255, 255);
-}
-
-.activity-buttom-buttom-block{
-  padding-top: 20rpx;
-  font-family: "微软雅黑";
-  clear: both;
-  font-size: 30rpx;
   background-color: rgb(255, 255, 255);
 }
 /* ------------------ */
