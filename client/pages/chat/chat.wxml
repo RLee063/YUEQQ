@@ -10,7 +10,7 @@
   </view>
 </view>
 
-<view >
+<view class="message-edit-block">
   <input class="message-input"/>
   <view class="send-button">发送</view>
 </view>

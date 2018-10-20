@@ -21,8 +21,6 @@
     "pages/attend_did/did_lists",
     "pages/attend_did/undo_lists",
     "pages/scoreinfo/scoreinfo"
-
-
   ],
   "window": {
     "backgroundColor": "white",

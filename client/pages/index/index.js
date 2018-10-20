@@ -228,7 +228,7 @@ Page({
             var uid = wx.getStorageInfoSync('openid')
             this.tunnel.emit('speak', {
                 'word': {
-                  'to':'o5ko3434RP2lZQNVamvVxfrAugoY',
+                  'to':'o5ko344qvKlQYv5kYMdTkWbkH8lg',
                   'from':'o5ko3434RP2lZQNVamvVxfrAugoY',
                   'msg':'this is a msg to lg'
                 },
