@@ -1,2 +1,23 @@
 <!--pages/create_undo/create_undo.wxml-->
-<text>pages/create_undo/create_undo.wxml</text>
+<view class='container'>
+  <view class="head"></view>
+  <view class="lists" wx:for="{{activityinfo}}" bindtap="details">
+    <view>
+      <image class="activityclass" src="./basketball.png" background-size="cover"></image>
+    </view>
+
+    <view class="introduce">
+      <text class="introduce-name">{{item.name}}</text>
+      <text class="introduce-time">{{item.time}}</text>
+    </view>
+
+    <view class="pnum">
+      <image class="punmsrc" src="../../images/人群.png" background-size="cover"></image>
+      <text class="pnum-text">{{item.punm}}</text>
+    </view>
+
+    <view class="array">
+      <text class="array-text">></text>
+    </view>
+  </view>
+</view>
