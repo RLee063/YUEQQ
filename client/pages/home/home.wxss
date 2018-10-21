@@ -83,15 +83,15 @@ page{
 }
 
 .type-card-basketball{
-  background-image: linear-gradient(to bottom left, #cc208e 0%, #6713d2 100%);
+  background-image: linear-gradient(to bottom left, #913b71 0%, #7835cf 100%);
 }
 
 .type-card-badminton{
-background-image: linear-gradient(to top right, #64b3f4 0%, #c2e59c 100%);
+background-image: linear-gradient(to top right, #5ea2da 0%, #3378a0 100%);
 }
 
 .type-card-tabletennis{
-  background-image: linear-gradient(to right top, #fa709a 0%, #fee140 100%);
+  background-image: linear-gradient(to right top, #f39548 0%, #fecb40 100%);
 }
 
 .type-card-tennis{
@@ -99,11 +99,11 @@ background-image: linear-gradient(to top right, #64b3f4 0%, #c2e59c 100%);
 }
 
 .type-card-running{
-background-image: linear-gradient(to right top, #596164 100%, #868f96 0%);
+background-image: linear-gradient(to right top, #4a4e50 100%, #868f96 0%);
 }
 
 .type-card-football{
-  background-image: linear-gradient(to top right, #f093fb 0%, #f5576c 100%);
+  background-image: linear-gradient(to top right, #e483b0 0%, #f55757 100%);
 }
 .activity-block {
   /* border-radius: 6px 6px 0px 0px / 6px 6px 0px 0px; */

@@ -36,7 +36,6 @@ Page({
         requestResult: ''
     },
   onLoad: function(){
-    this.openTunnel()
   },
 
   otheruser: function () {

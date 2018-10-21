@@ -24,7 +24,7 @@ Page({
       var otherUid = this.data.otherUid
       this.tunnel.emit('speak', {
         'word': {
-          'to': oppositeUid,
+          'to': this.data.oppositeUid,
           'from': myUid,
           'msg': msg
         },
