@@ -41,5 +41,5 @@
   </view> 
 </view>
 <view class="add-activity-block">
-  <image src="../../images/tabbar_b_s.png" class="add-activity-pic"></image>
+  <image src="../../images/tabbar_b_s.png" class="add-activity-pic" bindtap='addActy'></image>
 </view>

@@ -1,0 +1,2 @@
+<!--client/pages/authorize/authorize.wxml-->
+<button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">授权登录</button>

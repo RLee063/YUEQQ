@@ -17,7 +17,6 @@ page{
   border-radius: 50%;
 }
 
-
 .type-card-image{
   width: 70%;
   height: 70%;
@@ -79,7 +78,7 @@ page{
   height: 90rpx;
   left: 520rpx;
   top: -10rpx;
-  box-shadow: -3px 3px 8px  rgb(0, 0, 0);
+  box-shadow: -1px 2px 10px -1px rgb(0, 0, 0);
 }
 
 .type-card-basketball{
@@ -114,7 +113,7 @@ background-image: linear-gradient(to right top, #4a4e50 100%, #868f96 0%);
   margin-top: 20rpx;
   margin-bottom: 70rpx;
   background-color: rgb(255, 255, 255); 
-  box-shadow:-1px 3px 10px 0px rgb(99, 99, 99);
+  box-shadow:-1px 3px 10px -1px rgb(173, 173, 173);
 }
 
 .user-head-image-block{
@@ -128,6 +127,7 @@ background-image: linear-gradient(to right top, #4a4e50 100%, #868f96 0%);
   /* box-shadow:-2px 1px 10px  rgb(0, 0, 0); */
   border: solid;
   border-color: white;
+  
 }
 
 .activity-mid-block{
@@ -160,5 +160,5 @@ background-image: linear-gradient(to right top, #4a4e50 100%, #868f96 0%);
   height: 100%;
   width: 100%;
   border-radius: 100%;
-  box-shadow:-1px 1px 10px rgb(0, 0, 0);
+  /* box-shadow:-1px 2px 10px rgb(0, 0, 0); */
 }

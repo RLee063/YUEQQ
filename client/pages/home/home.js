@@ -14,7 +14,6 @@ Page({
     var that=this
     this.refresh(that)
   },
-
   refresh: function(that){
     var that=this
     wx.request({
@@ -44,7 +43,6 @@ Page({
       url: "../chat/chat?uid="+uid
     })
   },
-
   tapActivity: function(e){
     var uid = wx.getStorageSync('openid')
     if(uid == ""){
@@ -72,7 +70,6 @@ Page({
     //var startTimeArray = startTime.split(' ');
   },
   formatEachSportType(item){
-    /*console.log(item)*/
     switch(item.sportType){
       case "篮球":
         item.sportType = 0
@@ -93,9 +90,7 @@ Page({
         item.sportType = 5
         break
     }
-    /*console.log(item.sportType)*/
   },
-
   formatEachActivity(item){
     var result = ""
 
@@ -140,5 +135,10 @@ Page({
     result += ':'
     result += startTimes[1];
     item.startTime = result;
+  },
+  addActy: function(){
+    wx.navigateTo({
+      url: '../addActy/addActy',
+    })
   }
 })

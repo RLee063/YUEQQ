@@ -1,6 +1,9 @@
 page{
   background: rgb(255, 255, 255);
 }
+.top-block{
+  padding-bottom: 15%;
+}
 
 .message-block{
   /* background: rgb(226, 107, 107);
@@ -67,6 +70,7 @@ background: linear-gradient(to bottom, #D5DEE7 0%, #E8EBF2 50%, #E2E7ED 100%), l
   height: 100%;
   width: 80%;
   float: left;
+  background: white;
 }
 
 .send-button{

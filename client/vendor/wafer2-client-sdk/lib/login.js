@@ -15,7 +15,6 @@ var LoginError = (function () {
 
     LoginError.prototype = new Error();
     LoginError.prototype.constructor = LoginError;
-
     return LoginError;
 })();
 
@@ -40,7 +39,7 @@ var getWxLoginResult = function getLoginCode(callback) {
                     error.detail = userError;
                     callback(error, null);
                 },
-            });
+            })
         },
 
         fail: function (loginError) {
@@ -83,7 +82,7 @@ var login = function login(options) {
         }
         
         var userInfo = wxLoginResult.userInfo;
-        console.log(wxLoginResult)
+        // console.log(wxLoginResult)
         // 构造请求头，包含 code、encryptedData he iv
         var code = wxLoginResult.code;
         var encryptedData = wxLoginResult.encryptedData;
@@ -94,7 +93,7 @@ var login = function login(options) {
         header[constants.WX_HEADER_ENCRYPTED_DATA] = encryptedData;
         header[constants.WX_HEADER_IV] = iv;
 
-        console.log(header)
+        // console.log(header)
         // 请求服务器登录地址，获得会话信息
         wx.request({
             url: options.loginUrl,
@@ -103,15 +102,15 @@ var login = function login(options) {
             data: options.data,
             success: function (result) {
 
-                wx.setStorageSync('openid', result.data.data.userinfo.openId)
+               wx.setStorageSync('openid', result.data.data.userinfo.openId)
                 var data = result.data;
-                // 成功地响应会话信息
-                console.log(data)
+                // // 成功地响应会话信息
+                // console.log(data)
                 if (data && data.code === 0 && data.data.skey) {
                     var res = data.data
                     if (res.userinfo) {
                         Session.set(res.skey);
-                        console.log(userInfo);
+                        // console.log(userInfo);
                         options.success(userInfo);
                     } else {
                         var errorMessage = '登录失败(' + data.error + ')：' + (data.message || '未知错误');

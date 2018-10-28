@@ -1,11 +1,8 @@
 // client/pages/chat/chat.js
 var app = getApp();
 var messageGetor;
+
 Page({
-  
-  /**
-   * 页面的初始数据
-   */
   data: {
     messageArray:[],
     otherUid: [],
@@ -14,11 +11,12 @@ Page({
   },
 
   sendMessage: function(e) {
-    if (this.tunnel && this.tunnel.isActive()) {
+    console.log("hello")
+    console.log(app.tunnel.isActive())
+    if (app.tunnel && app.tunnel.isActive()) {
       if(e.detail.value.messageText==""){
         return
       }
-      // 使用信道给服务器推送「speak」消息
       var msg = e.detail.value.messageText
       var myUid = wx.getStorageSync('openid')
       var otherUid = this.data.otherUid
@@ -29,11 +27,9 @@ Page({
           'msg': msg
         },
       })
-
       this.setData({
         messageText: ""
       })
-
       var message = {}
       var myInfo = wx.getStorageSync('me')
       message.avatarUrl = '../../images/user1.jpg'
@@ -46,9 +42,7 @@ Page({
       wx.setStorageSync(key, messageArray)
     }
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  
   onLoad: function (options) {
     this.setData({
       oppositeUid: options.uid
@@ -56,6 +50,8 @@ Page({
     this.tunnel = app.tunnel;
     messageGetor = setInterval(this.getMessage, 500)
     this.getMessage()
+    app.checkIfArrayExistInStorage("message"+options.uid)
+    this.pageScrollToBottom()
   },
 
   getMessage(){
@@ -65,52 +61,12 @@ Page({
       messageArray: messageArray
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
 
+  pageScrollToBottom: function () {
+    wx.createSelectorQuery().select('#j_page').boundingClientRect(function (rect) {                    wx.pageScrollTo({
+        scrollTop: 1000000000,
+        duration: 0
+      })
+    }).exec()
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

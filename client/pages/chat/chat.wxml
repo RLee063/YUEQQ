@@ -1,14 +1,16 @@
-<view wx:for="{{messageArray}}" class="message-block">
-  <view class="user-avatar-block">
-    <image class="user-avatar-me" src="{{item.avatarUrl}}" mode="aspectFill" wx:if="{{item.userType == 0}}"></image>
-    <image class="user-avatar-other" src="{{item.avatarUrl}}" mode="aspectFill" wx:else></image>
+<scroll-view class="top-block">
+  <view wx:for="{{messageArray}}" class="message-block">
+    <view class="user-avatar-block">
+      <image class="user-avatar-me" src="{{item.avatarUrl}}" mode="aspectFill" wx:if="{{item.userType == 0}}"></image>
+      <image class="user-avatar-other" src="{{item.avatarUrl}}" mode="aspectFill" wx:else></image>
+    </view>
+    <view class="message-bubble">
+      <view class="message-text-me" wx:if="{{item.userType == 0}}">{{item.messageText}}</view>
+      <view class="message-text-other" wx:else>{{item.messageText}}</view>
+    </view>
+    <view style="clear:both;"></view>
   </view>
-  <view class="message-bubble">
-    <view class="message-text-me" wx:if="{{item.userType == 0}}">{{item.messageText}}</view>
-    <view class="message-text-other" wx:else>{{item.messageText}}</view>
-  </view>
-  <view style="clear:both;"></view>
-</view>
+</scroll-view>
 
 <form bindsubmit='sendMessage'>
   <view class="message-edit-block">
