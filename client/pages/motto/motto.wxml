@@ -1,0 +1,11 @@
+<!--pages/motto/motto.wxml-->
+<view >
+    <view class='textarea'>
+      <textarea bindconfirm='submit' bindinput='bindWordLimit' value='{{motto}}' maxlength='30' auto-focus='False'  show-confirm-bar='True' auto-auto-height='True'></textarea>
+    </view>
+  
+    <view class='limitcount'>
+      <text>{{userinput}}</text>
+    </view>
+      
+</view>

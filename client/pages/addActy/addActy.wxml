@@ -1,0 +1,32 @@
+<!--pages/addActy/addActy.wxml-->
+<view>
+  <image src="{{imgTempPath}}" class="activity-pic" mode="aspectFill" bindtap="chooseImg"/>
+</view>
+
+<view class="form-view">
+  <form bindsubmit='addActySubmit' style='background-color:red;height:200rpx'>
+    <view class="input-view">
+      活动标题:<input name="title" value="{{title}}"></input>
+    </view>
+    <view class="input-view">
+      活动人数:
+      <picker range="{{maxNumRange}}" bindchange="bindMaxNumChange" >{{maxNum}}</picker>
+    </view>
+    <view class="picker-view">选择时间:
+      <picker mode="time" value="{{time}}" bindchange="bindTimeChange">{{time}}</picker>
+    </view>
+    <view class="picker-view">选择日期:
+      <picker mode="date" value="{{date}}" bindchange="bindDateChange" start="{{datePickerStart}}" end="{{datePickerEnd}}">{{date}}</picker>
+    </view>
+    <view class="picker-view">选择球种:
+      <picker range = "{{sportTypeRange}}" bindchange="bindSportTypeChange" >{{sportType}}</picker>
+    </view>
+    <view class="tags-view">标签:
+        <input bindconfirm="addTag" value="{{tagInput}}"></input>
+    </view>
+    <view class="tags" wx:for="{{tags}}" input name="tags" value="{{tags}}" bindlongtap="removeTag" data-name="{{item}}">{{item}}</view>
+    <button form-type='submit' class="submit-button">创建活动</button>
+  </form>
+</view>
+
+<!-- 类别 2 times 人数 who 图片 title -->

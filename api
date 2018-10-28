@@ -1,0 +1,27 @@
+
+//发送消息格式
+data
+{
+    from : senderUid,
+    to : receiverUid,
+    sendTime : timeStamp, // 与from to 组成唯一标识
+    msg : "some text"
+
+}
+
+//收到消息格式同发送消息格式，服务器负责转发
+
+//发送成功确认消息格式 
+data
+{
+    from : senderUid,
+    to : receiverUid,
+    sendTime : timeStamp,
+    code : //1 代表成功，0代表失败
+}
+
+//收到确认消息格式同上
+
+心跳消息：
+客户端 data : "ping"
+服务端 data : "pong"

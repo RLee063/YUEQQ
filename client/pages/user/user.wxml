@@ -1,0 +1,35 @@
+<!--index.wxml-->
+<view class="container">
+  <view>
+    <image class="userinfo-avatar" src="{{logged ? userInfo.avatarUrl : './user-unlogin.png'}}" background-size="cover"></image>
+  </view>
+  <view class='loginshow' bindtap="login">
+    <text class="userinfo-nickname">{{logged ? userInfo.nickName : '点击登录'}}</text>
+    <text class="userinfo-nickname" wx:if="{{logged}}">{{userInfo.lastLoginTime}}</text>
+  </view>
+
+
+
+  <view class="uploader">
+    <view bindtap="information">
+      <image src=' info.png ' style='width:22px;height:22px ' class='icon '></image>
+      <text class="uploader-text"> 个人信息</text>
+      <text class='arrow1'>></text>
+    </view>
+  </view>
+
+  <view class="uploader">
+    <view bindtap="activities">
+      <image src=' activity.png ' style='width:22px;height:22px ' class='icon '></image>
+      <text class="uploader-text"> 创建/参加的活动</text>
+      <text class='arrow'>></text>
+    </view>
+  </view>
+
+
+  <view class='questions' bindtap='makephonecall'>
+
+    <image src='./phone.png' style='width:15px;height:15px'></image>
+    <text>联系客服</text>
+  </view>
+</view>

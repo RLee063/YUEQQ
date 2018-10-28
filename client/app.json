@@ -1,0 +1,59 @@
+{
+  "pages": [
+
+    "pages/home/home",
+    "pages/chat/chat",
+    "pages/index/index",
+    "pages/addActy/addActy",
+    "pages/info/info",
+    "pages/info/changebkgd/changebkgd",
+    "pages/user/user",
+    "pages/otheruser/otheruser",
+    "pages/motto/motto",
+    "pages/test/test",
+    "pages/addCgi/addCgi",
+    "pages/viewUserInfo/viewUserInfo",
+    "pages/activities/activities",
+    "pages/create_did/create_did",
+    "pages/create_undo/create_undo",
+    "pages/attend_undo/attend_undo",
+    "pages/attend_did/attend_did",
+
+    "pages/scoreinfo/scoreinfo"
+  ],
+  "window": {
+    "backgroundColor": "white",
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "white",
+    "navigationBarTitleText": "Wafer Quick Start",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "images/tabbar_a_u.png",
+        "selectedIconPath": "images/tabbar_a_s.png"
+      },
+      {
+        "pagePath": "pages/addActy/addActy",
+        "text": "新建",
+        "iconPath": "images/tabbar_b_u.png",
+        "selectedIconPath": "images/tabbar_b_s.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "帮助",
+        "iconPath": "images/tabbar_c_u.png",
+        "selectedIconPath": "images/tabbar_c_s.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "用户",
+        "iconPath": "images/tabbar_d_u.png",
+        "selectedIconPath": "images/tabbar_d_s.png"
+      }
+    ]
+  }
+}

@@ -1,0 +1,101 @@
+<view class='container' style="background-image: url({{imgTempPath}}); background-size:  100%  480rpx">
+
+
+  <view class='down'>
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+  </view>
+
+  <view class='loginshow'>
+    <text class="userinfo-nickname-logged">{{userInfo.nickName}}  </text>
+    <image wx:if='{{sex==1}}' src='sex1.png' style='width:25px;height:25px' class='sex'></image>
+    <image wx:else src='sex2.png' style='width:25px;height:25px' class='sex'></image>
+  </view>
+
+  <view class='motto'>{{motto}}</view>
+
+  <view class='information'>
+
+    <view>
+      <image src='phone.png' style='width:15px;height:15px'></image>
+      <text> 电话：
+        15528039020
+      </text>
+    </view>
+
+    <view>
+      <image src='collage.png' style='width:20px;height:20px'></image>
+      <text> 学院：
+        计算机科学与技术
+      </text>
+    </view>
+
+    <view>
+      <image src='grade.png' style='width:20px;height:20px'></image>
+      <text> 年级：
+        大三
+      </text>
+    </view>
+
+    <view>
+      <image src='hobby.png' style='width:20px;height:20px'></image>
+      <text> 兴趣：
+        篮球 羽毛球 乒乓球
+      </text>
+    </view>
+
+    <view>
+      <image src='score.png' style='width:20px;height:20px'></image>
+      <text> 信用：
+      </text>
+              <view wx:if="{{credit==1}}">
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestar.png' style='width:15px;height:15px'></image>
+        <image src='scorestar.png' style='width:15px;height:15px'></image>
+        <image src='scorestar.png' style='width:15px;height:15px'></image>
+        <image src='scorestar.png' style='width:15px;height:15px'></image>
+      </view>
+
+      <view wx:elif="{{credit==2}}">
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestar.png' style='width:15px;height:15px'></image>
+        <image src='scorestar.png' style='width:15px;height:15px'></image>
+        <image src='scorestar.png' style='width:15px;height:15px'></image>
+
+      </view>
+
+      <view wx:elif="{{credit==3}}">
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestar.png' style='width:15px;height:15px'></image>
+        <image src='scorestar.png' style='width:15px;height:15px'></image>
+      </view>
+
+      <view wx:elif="{{credit==4}}">
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestar.png' style='width:15px;height:15px'></image>
+      </view>
+
+
+      <view wx:elif="{{credit==5}}">
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+        <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
+      </view>
+    </view>
+
+  </view>
+
+  <view class='activity'>
+    
+
+  </view>
+
+
+</view>
