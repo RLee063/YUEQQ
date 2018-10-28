@@ -28,8 +28,9 @@ App({
     }]
     wx.setStorageSync("messageo5ko3434RP2lZQNVamvVxfrAugoY", messageArray)
     qcloud.setLoginUrl(config.service.loginUrl)
-    this.openTunnel()
+    /*this.openTunnel()*/
   },
+  /*
   openTunnel: function () {
     util.showBusy('信道连接中...')
     // 创建信道，需要给定后台服务地址
@@ -76,7 +77,7 @@ App({
 
     // 打开信道
     tunnel.open()
-  },
+  },*/
   getUserInfoByUid:function(uid){
     wx.request({
       url: `${config.service.host}/weapp/getUserInfo`,

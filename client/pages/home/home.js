@@ -72,7 +72,7 @@ Page({
     //var startTimeArray = startTime.split(' ');
   },
   formatEachSportType(item){
-    console.log(item)
+    /*console.log(item)*/
     switch(item.sportType){
       case "篮球":
         item.sportType = 0
@@ -93,7 +93,7 @@ Page({
         item.sportType = 5
         break
     }
-    console.log(item.sportType)
+    /*console.log(item.sportType)*/
   },
 
   formatEachActivity(item){
