@@ -8,9 +8,7 @@ Page({
     homePicUrl: "background.jpg",
     userInfo: {},
     logged: false,
-    takeSession: false,
     requestResult: '',
-    phone: '13078754853',
     motto: 'this is the motto',
     changemotto: 0,
   },
@@ -20,9 +18,8 @@ Page({
       userInfo: wx.getStorageSync('userInfo'),
       logged: wx.getStorageSync('logged')
     })
-    console.log(wx.getStorageSync('userInfo'))
-    console.log("on user page userinfo is" + this.data.userInfo)
 
+    console.log(wx.getStorageSync('userInfo'))
   },
 
   onShow: function() {
@@ -48,25 +45,14 @@ Page({
       motto: this.data.motto,
       logged: this.data.logged,
       sex: this.data.userInfo.gender,
-      uid: this.data.userInfo.openId
+      uid: wx.getStorageSync('openid')
 
     }
     wx.navigateTo({
       url: '../activities/activities?info=' + JSON.stringify(selfinfo),
     })
   },
-  settings: function() {
-    wx.navigateTo({
-      url: '../settings/settings',
-    })
-  },
 
-
-  makephonecall: function() {
-    wx.makePhoneCall({
-      phoneNumber: this.data.phone,
-    })
-  }
 
 
 

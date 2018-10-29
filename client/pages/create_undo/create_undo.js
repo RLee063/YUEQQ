@@ -5,6 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    uid: '',
+    newActyInfo: {},
     activityinfo: {
       num1: {
         name: "求求你揍我吧",
@@ -21,14 +23,35 @@ Page({
   },
 
   details: function() {
-
+    wx.navigateTo({
+      url: '../myActy/myActy',
+    })
   },
-
+  getActyInfo: function() {
+    var that = this
+    wx.request({
+      url: `${config.service.host}/weapp/getMyActivities`,
+      method: 'GET',
+      data: {
+        uid: that.data.uid,
+      },
+      success(result) {
+        that.setData({
+          newActyInfo: result
+        })
+      },
+      fail(error) {
+        util.showModel('查看活动列表失败', error);
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.setData({
+      uid: options
+    })
   },
 
   /**

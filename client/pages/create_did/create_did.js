@@ -21,7 +21,9 @@ Page({
   },
 
   details: function() {
-
+    wx.navigateTo({
+      url: '../myActy/myActy',
+    })
   },
 
   /**

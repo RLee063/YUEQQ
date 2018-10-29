@@ -13,13 +13,15 @@
     "pages/motto/motto",
     "pages/test/test",
     "pages/addCgi/addCgi",
+    "pages/scoreinfo/scoreinfo",
     "pages/viewUserInfo/viewUserInfo",
     "pages/activities/activities",
     "pages/create_did/create_did",
     "pages/create_undo/create_undo",
     "pages/attend_undo/attend_undo",
     "pages/attend_did/attend_did",
-    "pages/scoreinfo/scoreinfo"
+    "pages/myActy/myActy"
+    
   ],
   "window": {
     "backgroundColor": "white",
