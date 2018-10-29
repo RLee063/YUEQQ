@@ -6,8 +6,8 @@
   <view class='down'>
     <view class='loginshow'>
       <text class="userinfo-nickname" wx:if="{{logged}}">{{userInfo.nickName}}  </text>
-      <image class="seximg" wx:if='{{userInfo.gender==1}}' src='sex1.png' style='width:25px;height:25px'></image>
-      <image class="seximg" wx:elif='{{userInfo.gender==2}}' src='sex2.png' style='width:25px;height:25px'></image>
+      <image class="seximg" wx:if='{{userInfo.gender==1}}' src='sex1.png' style='width:55rpx;height:55rpx'></image>
+      <image class="seximg" wx:elif='{{userInfo.gender==2}}' src='sex2.png' style='width:55rpx;height:55rpx'></image>
     </view>
     <view class='loginshow'>
       <text class="userinfo-motto">{{motto}}  </text>
@@ -28,6 +28,14 @@
       <image src='activity.png ' style='width:22px;height:22px ' class='icon '></image>
       <text class="uploader-text"> 活动一览 </text>
       <image  src='../../images/intoarray.png' class='arrow'></image>
+    </view>
+  </view>
+
+  <view class="uploader">
+    <view bindtap="activities">
+      <image src='share.png ' style='width:22px;height:22px ' class='icon '></image>
+      <text class="uploader-text"> 推荐给好友 </text>
+      <image  src='../../images/intoarray.png' class='arrow2'></image>
     </view>
   </view>
 

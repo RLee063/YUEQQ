@@ -2,7 +2,6 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
-var app = getApp()
 
 Page({
   data: {
@@ -13,7 +12,6 @@ Page({
     motto: 'this is the motto',
     changemotto: 0,
   },
-
 
   onLoad: function() {
     this.setData({
@@ -31,6 +29,14 @@ Page({
     if (this.data.changemotto == 1) {
       this.setData({
         motto: wx.getStorageSync('newmotto')
+      })
+    }
+    this.setData({
+      changebkgd: wx.getStorageSync('changebkgd')
+    })
+    if (this.data.changebkgd == 1) {
+      this.setData({
+        homePicUrl: wx.getStorageSync('bkgdpic')
       })
     }
   },

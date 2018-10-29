@@ -135,8 +135,8 @@ page {
 
 .sex{
   position: relative;
-  left: 35rpx;
-  bottom: 17rpx;
+  left: 15rpx;
+  bottom: 12rpx;
 }
 
 
@@ -146,7 +146,6 @@ page {
   line-height: 18px;
   width:14px;
   height:14px
-
 }
 
 .changeinfo-motto{

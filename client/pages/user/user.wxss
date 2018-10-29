@@ -38,7 +38,7 @@ page {
 
 .uploader {
   position: relative;
-  top: 250rpx;
+  top: 290rpx;
   height: auto;
   width: 100%;
   padding: 0 0 0 40rpx;
@@ -106,6 +106,12 @@ page {
   width: 14px;
   height: 14px;
 }
+.arrow2 {
+  position: relative;
+  left: 375rpx;
+  width: 14px;
+  height: 14px;
+}
 
 .icon {
   position: relative;
@@ -124,6 +130,6 @@ page {
   display: flex;
   flex-direction: row;
   position: relative;
-  left: 50rpx;
-  bottom: 90rpx;
+  left: 55rpx;
+  bottom: 88rpx;
 }

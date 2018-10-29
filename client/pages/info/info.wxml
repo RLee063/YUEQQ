@@ -11,8 +11,8 @@
 
   <view class='loginshow'>
     <text class="userinfo-nickname-logged" wx:if="{{logged}}">{{userInfo.nickName}}  </text>
-    <image wx:if='{{sex==1}}' src='sex1.png' style='width:25px;height:25px' class='sex'></image>
-    <image wx:else src='sex2.png' style='width:25px;height:25px' class='sex'></image>
+    <image wx:if='{{sex==1}}' src='sex1.png' style='width:55rpx;height:55rpx' class='sex'></image>
+    <image wx:else src='sex2.png' style='width:55rpx;height:55rpx' class='sex'></image>
   </view>
 
 
