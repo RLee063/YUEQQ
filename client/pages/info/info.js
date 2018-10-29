@@ -131,11 +131,6 @@ Page({
 
   saveinfo: function() {
     console.log(this.data)
-    console.log(this.data)
-    console.log(this.data)
-    console.log(this.data)
-    console.log(this.data)
-
     wx.request({
       url: `${config.service.host}/weapp/updateUserInfo`,
       method: 'GET',
@@ -149,8 +144,11 @@ Page({
         college: this.data.college,
       },
       success(result) {
+
+        wx.switchTab({
+          url: '../user/user',
+        })
         util.showSuccess('成功保存数据')
-        console.log(result)
       },
       fail(error) {
         util.showModel('保存失败', error);
@@ -195,7 +193,6 @@ Page({
 
       },
       success(result) {
-        console.log(result.data.data[0]);
         that.setData({
           college: result.data.data[0].college,
           credit: result.data.data[0].credit,
@@ -223,7 +220,6 @@ Page({
       this.setData({
         homePicUrl: wx.getStorageSync('bkgdpic')
       })
-      console.log(this.data.homePicUrl)
     }
 
 
