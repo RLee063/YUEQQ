@@ -11,19 +11,19 @@ Page({
    */
   data: {
     openId: '',
-    flag: true,
-    changebkgd: 0,
-    homePicUrl: "https://qcloudtest-1257207887.cos.ap-guangzhou.myqcloud.com/1536468704720-MUpMq2yU3.jpg",
-    credit: 2,
-    creditarray: [1, 2, 3, 4, 5],
+    college: '',
     sex: 1,
     logged: false,
-    userInfo: {},
-    phone: null,
-    grade: null,
+    phone: '',
+    grade: '',
     motto: '',
+    homePicUrl: "https://qcloudtest-1257207887.cos.ap-guangzhou.myqcloud.com/1536468704720-MUpMq2yU3.jpg",
+    creditstar: 5,
+    creditarray: [1, 2, 3, 4, 5],
+    flag: true,
+    changebkgd: 0,
     changemotto: 0,
-    college: null,
+    userInfo: {},
     hiddenmodalput: true,
     actionSheetHidden: true,
     hiddenmodalput2: true,
@@ -131,13 +131,18 @@ Page({
 
   saveinfo: function() {
     console.log(this.data)
+    console.log(this.data)
+    console.log(this.data)
+    console.log(this.data)
+    console.log(this.data)
+
     wx.request({
       url: `${config.service.host}/weapp/updateUserInfo`,
       method: 'GET',
       data: {
         uid: this.data.openId,
         homePicUrl: this.data.homePicUrl,
-        score: this.data.score,
+        credit: this.data.creditstar,
         phone: this.data.phone,
         motto: this.data.motto,
         grade: this.data.grade,
@@ -145,10 +150,7 @@ Page({
       },
       success(result) {
         util.showSuccess('成功保存数据')
-
-        console.log("saved!!!"+result)
-
-
+        console.log(result)
       },
       fail(error) {
         util.showModel('保存失败', error);
@@ -162,6 +164,7 @@ Page({
     this.setData({
       userInfo: wx.getStorageSync('userInfo')
     })
+    console.log('userinfo is :' + wx.getStorageSync('userInfo'))
     this.setData({
       logged: wx.getStorageSync('logged')
     })
@@ -183,15 +186,23 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    var that = this
     wx.request({
       url: `${config.service.host}/weapp/getUserInfo`,
       method: 'GET',
       data: {
-        uid: this.data.openId,
+        uid: that.data.openId,
 
       },
       success(result) {
-        console.log(result);
+        console.log(result.data.data[0]);
+        that.setData({
+          college: result.data.data[0].college,
+          credit: result.data.data[0].credit,
+          phone: result.data.data[0].phone,
+          grade: result.data.data[0].grade,
+          motto: result.data.data[0].motto,
+        })
       },
       fail(error) {
         util.showModel('保存失败', error);
@@ -208,14 +219,11 @@ Page({
     this.setData({
       changebkgd: wx.getStorageSync('changebkgd')
     })
-
-
     if (this.data.changebkgd == 1) {
       this.setData({
         homePicUrl: wx.getStorageSync('bkgdpic')
       })
       console.log(this.data.homePicUrl)
-
     }
 
 

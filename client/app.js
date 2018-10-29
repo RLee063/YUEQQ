@@ -28,11 +28,9 @@ App({
     }]
     wx.setStorageSync("messageo5ko3434RP2lZQNVamvVxfrAugoY", messageArray)
     qcloud.setLoginUrl(config.service.loginUrl)
-
     /*this.openTunnel()*/
   },
   /*
-
   openTunnel: function () {
     util.showBusy('信道连接中...')
     // 创建信道，需要给定后台服务地址

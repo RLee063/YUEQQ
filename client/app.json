@@ -1,15 +1,14 @@
 {
   "pages": [
-
+    
     "pages/beginlogin/beginlogin",
-
+    "pages/user/user",
     "pages/home/home",
     "pages/chat/chat",
     "pages/index/index",
     "pages/addActy/addActy",
     "pages/info/info",
     "pages/info/changebkgd/changebkgd",
-    "pages/user/user",
     "pages/otheruser/otheruser",
     "pages/motto/motto",
     "pages/test/test",

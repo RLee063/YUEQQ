@@ -94,14 +94,8 @@ Page({
     })
   },
   upLoadImgAndGetUrl: function(that) {
-    console.log(that.data.bkgdpic)
+    console.log("更改后的图片路径："+that.data.bkgdpic)
     util.showBusy('正在上传')
-    console.log(that.data.isDefaultImage)
-    if (that.data.isDefaultImage) {
-      console.log("错啦!")
-      that.uploadInfo(that.data.bkgdpic, that)
-      return
-    }
     wx.uploadFile({
       url: config.service.uploadUrl,
       filePath: that.data.bkgdpic,
@@ -112,7 +106,13 @@ Page({
         console.log(res)
         console.log(res)
         console.log(res)
-        console.log(res.data.imgUrl)
+        console.log(res.imgUrl)
+        console.log(res.imgUrl)
+        console.log(res.imgUrl)
+        console.log(res.imgUrl)
+        console.log(res.imgUrl)
+        console.log(res.imgUrl)
+       
         that.setData({
           bkgdpic: res.data.imgUrl
         })

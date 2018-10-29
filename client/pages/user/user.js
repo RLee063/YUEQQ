@@ -5,15 +5,15 @@ var util = require('../../utils/util.js')
 
 Page({
   data: {
-    imgUrl: "",
+    homePicUrl: "background.jpg",
     userInfo: {},
     logged: false,
     takeSession: false,
     requestResult: '',
     phone: '13078754853',
-    homePicUrl: ""
+    motto: 'this is the motto',
+    changemotto: 0,
   },
-
 
   onLoad: function() {
     this.setData({
@@ -25,15 +25,23 @@ Page({
 
   },
 
-  information: function() {
+  onShow: function() {
+    this.setData({
+      changemotto: wx.getStorageSync('changemotto')
+    })
+    if (this.data.changemotto == 1) {
+      this.setData({
+        motto: wx.getStorageSync('newmotto')
+      })
+    }
+  },
 
+  information: function() {
     wx.navigateTo({
       url: '../info/info',
     })
   },
-
   activities: function() {
-
     var selfinfo = {
       nickName: this.data.userInfo.nickName,
       avatarUrl: this.data.userInfo.avatarUrl,
@@ -47,21 +55,19 @@ Page({
       url: '../activities/activities?info=' + JSON.stringify(selfinfo),
     })
   },
-
   settings: function() {
-
     wx.navigateTo({
       url: '../settings/settings',
     })
   },
 
 
-
   makephonecall: function() {
-
     wx.makePhoneCall({
       phoneNumber: this.data.phone,
     })
   }
+
+
 
 })

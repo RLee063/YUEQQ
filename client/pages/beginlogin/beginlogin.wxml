@@ -1,2 +1,2 @@
 <!--pages/beginlogin/beginlogin.wxml-->
-<button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="login">获取用户信息</button>
+<button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="startprogram">获取用户信息</button>

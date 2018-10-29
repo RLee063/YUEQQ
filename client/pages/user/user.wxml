@@ -1,35 +1,36 @@
-<!--index.wxml-->
-<view class="container">
-  <view>
+<view class='container' style="background-image: url({{ homePicUrl}}); background-size:  100%  480rpx">
+
+  <view class='down'>
     <image class="userinfo-avatar" src="{{logged ? userInfo.avatarUrl : './user-unlogin.png'}}" background-size="cover"></image>
   </view>
-  <view class='loginshow' bindtap="login">
-    <text class="userinfo-nickname">{{logged ? userInfo.nickName : '点击登录'}}</text>
-    <text class="userinfo-nickname" wx:if="{{logged}}">{{userInfo.lastLoginTime}}</text>
+  <view class='down'>
+    <view class='loginshow'>
+      <text class="userinfo-nickname" wx:if="{{logged}}">{{userInfo.nickName}}  </text>
+      <image class="seximg" wx:if='{{userInfo.gender==1}}' src='sex1.png' style='width:25px;height:25px'></image>
+      <image class="seximg" wx:elif='{{userInfo.gender==2}}' src='sex2.png' style='width:25px;height:25px'></image>
+    </view>
+    <view class='loginshow'>
+      <text class="userinfo-motto">{{motto}}  </text>
+    </view>
   </view>
-
 
 
   <view class="uploader">
     <view bindtap="information">
-      <image src=' info.png ' style='width:22px;height:22px ' class='icon '></image>
-      <text class="uploader-text"> 个人信息</text>
-      <text class='arrow1'>></text>
+      <image src='info.png ' style='width:22px;height:22px ' class='icon '></image>
+      <text class="uploader-text"> 个人资料 </text>
+      <image  src='../../images/intoarray.png' class='arrow'></image>
+      
     </view>
   </view>
-
   <view class="uploader">
     <view bindtap="activities">
-      <image src=' activity.png ' style='width:22px;height:22px ' class='icon '></image>
-      <text class="uploader-text"> 创建/参加的活动</text>
-      <text class='arrow'>></text>
+      <image src='activity.png ' style='width:22px;height:22px ' class='icon '></image>
+      <text class="uploader-text"> 活动一览 </text>
+      <image  src='../../images/intoarray.png' class='arrow'></image>
     </view>
   </view>
 
 
-  <view class='questions' bindtap='makephonecall'>
 
-    <image src='./phone.png' style='width:15px;height:15px'></image>
-    <text>联系客服</text>
-  </view>
 </view>

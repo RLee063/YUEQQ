@@ -6,7 +6,7 @@
   </view>
   <view class='down'>
     <view class='loginshow'>
-      <text class="userinfo-nickname-logged" wx:if="{{logged}}">{{userInfo.nickName}}  </text>
+      <text wx:if="{{logged}}">{{userInfo.nickName}}  </text>
       <image wx:if='{{userInfo.sex==1}}' src='sex1.png' style='width:25px;height:25px' class='sex'></image>
       <image wx:elif='{{userInfo.sex==2}}' src='sex2.png' style='width:25px;height:25px' class='sex'></image>
     </view>
@@ -16,17 +16,18 @@
     <text class='class2'>已创建的</text>
   </view>
   <view class="uploader">
-    <view  bindtap="create_undo">
+    <view bindtap="create_undo">
       <image src=' doing.png ' style='width:22px;height:22px ' class='icon '></image>
       <text class="uploader-text"> 未开始的活动 </text>
-      <text class='arrow'>></text>
+      <image src='../../images/intoarray.png' class='arrow'></image>
+
     </view>
   </view>
   <view class="uploader">
-    <view  bindtap="create_did">
+    <view bindtap="create_did">
       <image src='finished.png ' style='width:22px;height:22px ' class='icon '></image>
       <text class="uploader-text"> 已结束的活动 </text>
-      <text class='arrow'>></text>
+      <image src='../../images/intoarray.png' class='arrow'></image>
     </view>
   </view>
 
@@ -38,14 +39,14 @@
     <view bindtap="attend_undo">
       <image src='doing.png ' style='width:22px;height:22px ' class='icon '></image>
       <text class="uploader-text"> 未开始的活动 </text>
-      <text class='arrow '>></text>
+      <image src='../../images/intoarray.png' class='arrow'></image>
     </view>
   </view>
   <view class="uploader">
-    <view  bindtap="attend_did">
+    <view bindtap="attend_did">
       <image src='finished.png ' style='width:22px;height:22px ' class='icon '></image>
       <text class="uploader-text"> 已结束的活动 </text>
-      <text class='arrow '>></text>
+      <image src='../../images/intoarray.png' class='arrow'></image>
     </view>
   </view>
 

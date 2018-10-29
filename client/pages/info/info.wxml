@@ -24,7 +24,7 @@
       <modal hidden="{{hiddenmodalput}}" title="请输入手机号" confirm-text="确认" cancel-text="清空" bindcancel="cancelphone" bindconfirm="confirmphone">
         <input type='text' placeholder="请输入" bindinput='getphone'></input>
       </modal>
-      <image bindtap='addphone' src='setting.png' class='changeinfo'></image>
+      <image bindtap='addphone' src='../../images/intoarray.png' class='changeinfo'></image>
     </view>
   </view>
 
@@ -41,7 +41,7 @@
         <action-sheet-item bindtap='setgrade' data-grade='博士生'>博士生 </action-sheet-item>
         <action-sheet-cancel>取消</action-sheet-cancel>
       </action-sheet>
-      <image bindtap='addgrade' src='setting.png' class='changeinfo'></image>
+      <image bindtap='addgrade' src='../../images/intoarray.png' class='changeinfo'></image>
 
     </view>
   </view>
@@ -57,7 +57,7 @@
         <action-sheet-item bindtap='setcollege' data-name='通信学院'>通信学院</action-sheet-item>
         <action-sheet-cancel>取消</action-sheet-cancel>
       </action-sheet>
-      <image bindtap='addcollege' src='setting.png' class='changeinfo'></image>
+      <image bindtap='addcollege' src='../../images/intoarray.png' class='changeinfo'></image>
 
     </view>
   </view>
@@ -65,7 +65,7 @@
   <view class="allinfo">
     <view class="allinfo-text-motto">
       <text>个性签名:   </text>
-      <image bindtap='addmotto' src='setting.png' class='changeinfo-motto'></image>
+      <image bindtap='addmotto' src='../../images/intoarray.png' class='changeinfo-motto'></image>
       <view wx:if="{{motto}}">{{motto}}</view>
     </view>
   </view>
@@ -75,7 +75,7 @@
       <text>评级：</text>
       <text bindtap='scoreinfo' class='knowmore'>了解更多</text>
 
-      <view wx:if="{{credit==1}}">
+      <view  wx:if="{{creditstar==1}}">
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
         <image src='scorestar.png' style='width:15px;height:15px'></image>
         <image src='scorestar.png' style='width:15px;height:15px'></image>
@@ -83,7 +83,7 @@
         <image src='scorestar.png' style='width:15px;height:15px'></image>
       </view>
 
-      <view wx:elif="{{credit==2}}">
+      <view wx:elif="{{creditstar==2}}">
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
         <image src='scorestar.png' style='width:15px;height:15px'></image>
@@ -92,7 +92,7 @@
 
       </view>
 
-      <view wx:elif="{{credit==3}}">
+      <view wx:elif="{{creditstar==3}}">
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
@@ -100,7 +100,7 @@
         <image src='scorestar.png' style='width:15px;height:15px'></image>
       </view>
 
-      <view wx:elif="{{credit==4}}">
+      <view wx:elif="{{creditstar==4}}">
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
@@ -109,7 +109,7 @@
       </view>
 
 
-      <view wx:elif="{{credit==5}}">
+      <view wx:elif="{{creditstar==5}}">
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>
         <image src='scorestarlighted.png' style='width:15px;height:15px'></image>

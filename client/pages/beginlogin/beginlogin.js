@@ -36,13 +36,15 @@ Page({
     requestResult: '',
     authorized: false
   },
-  onLoad: function() {
+  onLoad: function(options) {
+
     if (wx.getStorageSync('logged') == true) {
       this.openTunnel()
       this.setData({
         authorized: true
       })
     }
+
 
   },
   onShow: function() {
@@ -104,16 +106,26 @@ Page({
     tunnel.open()
   },
 
+  startprogram: function() {
+    this.login()
+    if (wx.getStorageSync('logged') == true) {
+      this.openTunnel()
+    }
+
+  },
+
   // 用户登录示例
   login: function() {
     if (this.data.logged) return
 
-    util.showBusy('正在登录')
+
     var that = this
 
     // 调用登录接口
     qcloud.login({
+
       success(result) {
+        util.showBusy('正在登录')
         if (result) {
           util.showSuccess('登录成功')
           that.setData({
@@ -137,7 +149,6 @@ Page({
             success(result) {
               util.showSuccess('登录成功')
               wx.setStorageSync('me', result)
-              that.openTunnel()
               console.log("openid is :" + wx.getStorageSync('openid'))
               that.setData({
                 userInfo: result,
@@ -158,8 +169,9 @@ Page({
       },
 
       fail(error) {
-        util.showModel('登录失败', error)
+        util.showModel('登录失败', '请开启微信授权，否则无法登陆！' + error)
         console.log('登录失败', error)
+
       }
     })
   },
