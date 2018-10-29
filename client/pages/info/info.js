@@ -145,7 +145,9 @@ Page({
       },
       success(result) {
         util.showSuccess('成功保存数据')
-        console.log(result)
+
+        console.log("saved!!!"+result)
+
 
       },
       fail(error) {
@@ -206,16 +208,14 @@ Page({
     this.setData({
       changebkgd: wx.getStorageSync('changebkgd')
     })
-    console.log(this.data.changebkgd)
+
+
     if (this.data.changebkgd == 1) {
       this.setData({
         homePicUrl: wx.getStorageSync('bkgdpic')
       })
       console.log(this.data.homePicUrl)
-      console.log(this.data.homePicUrl)
-      console.log(this.data.homePicUrl)
-      console.log(this.data.homePicUrl)
-      
+
     }
 
 

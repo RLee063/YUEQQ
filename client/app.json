@@ -1,6 +1,7 @@
 {
   "pages": [
 
+    "pages/beginlogin/beginlogin",
     "pages/home/home",
     "pages/chat/chat",
     "pages/index/index",
@@ -18,7 +19,6 @@
     "pages/create_undo/create_undo",
     "pages/attend_undo/attend_undo",
     "pages/attend_did/attend_did",
-
     "pages/scoreinfo/scoreinfo"
   ],
   "window": {

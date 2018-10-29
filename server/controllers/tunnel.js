@@ -1,7 +1,10 @@
+
 const {
   tunnel
 } = require('../qcloud')
 const { mysql } = require('../qcloud')
+
+
 const debug = require('debug')('koa-weapp-demo')
 
 /**
@@ -10,7 +13,10 @@ const debug = require('debug')('koa-weapp-demo')
  * 实际使用请使用数据库存储
  */
 const userMap = {}
+
 const uidMap = {}
+
+
 // 保存 当前已连接的 WebSocket 信道ID列表
 const connectedTunnelIds = []
 
@@ -19,6 +25,7 @@ const connectedTunnelIds = []
  * @param  {String} type    消息类型
  * @param  {String} content 消息内容
  */
+
 const $broadcast = async (type, content) => {
   if (!(content['word']['to'] in uidMap)) {
     //toDo : 接送方不在线时的处理
@@ -60,6 +67,7 @@ const $broadcast = async (type, content) => {
 
   }
 
+
 }
 
 /**
@@ -67,7 +75,9 @@ const $broadcast = async (type, content) => {
  * @param  {String} tunnelId 信道ID
  */
 const $close = (tunnelId) => {
+
   tunnel.closeTunnel(tunnelId)
+
 }
 
 /**
@@ -75,6 +85,7 @@ const $close = (tunnelId) => {
  * 在客户端成功连接 WebSocket 信道服务之后会调用该方法，
  * 此时通知所有其它在线的用户当前总人数以及刚加入的用户是谁
  */
+
 async function onConnect(tunnelId) {
   console.log(`[onConnect] =>`, {
     tunnelId
@@ -98,6 +109,7 @@ async function onConnect(tunnelId) {
     console.log(`Unknown tunnelId(${tunnelId}) was connectd, close it`)
     $close(tunnelId)
   }
+
 }
 
 /**
@@ -106,6 +118,7 @@ async function onConnect(tunnelId) {
  * 在本示例，我们处理 `speak` 类型的消息，该消息表示有用户发言。
  * 我们把这个发言的信息广播到所有在线的 WebSocket 信道上
  */
+
 function onMessage(tunnelId, type, content) {
   console.log(`[onMessage] =>`, {
     tunnelId,
@@ -128,6 +141,7 @@ function onMessage(tunnelId, type, content) {
     default:
       break
   }
+
 }
 
 /**
@@ -135,6 +149,7 @@ function onMessage(tunnelId, type, content) {
  * 客户端关闭 WebSocket 信道或者被信道服务器判断为已断开后，
  * 会调用该方法，此时可以进行清理及通知操作
  */
+
 function onClose(tunnelId) {
   console.log(`[onClose] =>`, {
     tunnelId
@@ -195,3 +210,4 @@ module.exports = {
   }
 
 }
+

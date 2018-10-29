@@ -18,7 +18,9 @@ module.exports = async(ctx) => {
       activities[i]['tags'] = tags
       uids = await mysql('userAct as ua').join('ActivityInfo as ai', 'ua.aid', 'ai.aid').select('ua.uid').where('ua.aid',activities[i]['aid'])
       activities[i]['members'] = uids
+
       activities[i]['sportType'] = activities[i]['type']
+
     }
 
     ctx.body = {
