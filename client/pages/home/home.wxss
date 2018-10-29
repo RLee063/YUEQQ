@@ -66,7 +66,7 @@ page{
 .num-pic{
   position: relative;
   float: right;
-  width: 45rpx;
+  width: 40rpx;
   height: 50rpx;
   right: 5rpx;
   top: 26rpx;
@@ -86,7 +86,7 @@ page{
 }
 
 .type-card-badminton{
-background-image: linear-gradient(to top right, #5ea2da 0%, #3378a0 100%);
+background-image: linear-gradient(to top right, #1c65a0 0%, #3890c4 100%);
 }
 
 .type-card-tabletennis{

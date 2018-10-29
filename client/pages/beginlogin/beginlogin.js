@@ -19,7 +19,6 @@ var showSuccess = text => wx.showToast({
 // 显示失败提示
 var showModel = (title, content) => {
   wx.hideToast();
-
   wx.showModal({
     title,
     content: JSON.stringify(content),
@@ -65,7 +64,6 @@ Page({
     // 监听信道内置消息，包括 connect/close/reconnecting/reconnect/error
     tunnel.on('connect', () => {
       util.showSuccess('信道已连接')
-      console.log('WebSocket 信道已连接')
     })
 
     tunnel.on('close', () => {
@@ -74,34 +72,54 @@ Page({
     })
 
     tunnel.on('reconnecting', () => {
-      console.log('WebSocket 信道正在重连...')
       util.showBusy('正在重连')
     })
 
     tunnel.on('reconnect', () => {
-      console.log('WebSocket 信道重连成功')
       util.showSuccess('重连成功')
     })
 
     tunnel.on('error', error => {
       util.showModel('信道发生错误', error)
-      console.error('信道发生错误：', error)
     })
 
     // 监听自定义消息（服务器进行推送）
     tunnel.on('speak', speak => {
-      console.log(speak)
+      var uid = speak.who.openId
+      var chatId = speak.who.openId
+      //存储用户信息
+      app.storeUserInfoByUid(uid, speak.who)
+      //添加至chatList
+      var chatListRaw = app.getArrayFromStorage('chatListRaw')
+      var chat = {
+        chatId: chatId,
+        statusChanged: true,
+        newMessage: true,
+        unReaded: true,
+        messageArray: []
+      }
+      for(var i=0; i<chatListRaw.length; i++){
+        if(chatListRaw[i].chatId == chatId){
+          chat.messageArray = chatListRaw[i].messageArray
+          chatListRaw.splice(i,1)
+          break
+        }
+      }
+      
       var message = {}
-      message.avatarUrl = speak.who.avatarUrl
+      message.uid = uid
       message.messageText = speak.word.msg
       message.userType = 1
-      var key = "message" + speak.who.openId
+      chat.messageArray.push(message)
 
-      var messageArray = wx.getStorageSync(key)
-      messageArray.push(message)
-      wx.setStorageSync(key, messageArray)
+      chatListRaw.unshift(chat)
+      wx.setStorageSync('chatListRaw', chatListRaw)
+      console.log(chatListRaw)
+      //设置小红点
+      wx.showTabBarRedDot({
+        index: 1
+      })
     })
-
     // 打开信道
     tunnel.open()
   },
@@ -135,12 +153,9 @@ Page({
           wx.setStorageSync('userInfo', result);
           wx.setStorageSync('logged', true)
           that.openTunnel()
-          console.log("openid is :" + wx.getStorageSync('openid'))
           wx.switchTab({
             url: '../home/home'
           })
-
-
         } else {
           // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
           qcloud.request({
@@ -162,7 +177,6 @@ Page({
             },
             fail(error) {
               util.showModel('请求失败', error)
-              console.log('request fail', error)
             }
           })
         }
@@ -171,7 +185,6 @@ Page({
       fail(error) {
         util.showModel('登录失败', '请开启微信授权，否则无法登陆！' + error)
         console.log('登录失败', error)
-
       }
     })
   },

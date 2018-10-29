@@ -4,25 +4,22 @@ var messageGetor;
 
 Page({
   data: {
-    messageArray:[],
+    messageArray: [],
     otherUid: [],
-    oppositeUid: "",
+    chatId: "",
     messageText: "",
   },
 
   sendMessage: function(e) {
-    console.log("hello")
-    console.log(app.tunnel.isActive())
     if (app.tunnel && app.tunnel.isActive()) {
       if(e.detail.value.messageText==""){
         return
       }
       var msg = e.detail.value.messageText
       var myUid = wx.getStorageSync('openid')
-      var otherUid = this.data.otherUid
       this.tunnel.emit('speak', {
         'word': {
-          'to': this.data.oppositeUid,
+          'to': this.data.chatId,
           'from': myUid,
           'msg': msg
         },
@@ -30,36 +27,78 @@ Page({
       this.setData({
         messageText: ""
       })
+
       var message = {}
       var myInfo = wx.getStorageSync('me')
-      message.avatarUrl = '../../images/user1.jpg'
       message.userType = 0
       message.messageText = msg
-      
-      var key = "message"+this.data.oppositeUid
-      var messageArray = wx.getStorageSync(key)
-      messageArray.push(message)
-      wx.setStorageSync(key, messageArray)
+      message.uid = myUid
+      var chatListRaw = app.getArrayFromStorage('chatListRaw')
+      var chat = {
+        chatId: this.data.chatId,
+        statusChanged: true,
+        newMessage: true,
+        unReaded: true,
+        messageArray: []
+      }
+      for (var i = 0; i < chatListRaw.length; i++) {
+        if (chatListRaw[i].chatId == this.data.chatId) {
+          chat.messageArray = chatListRaw[i].messageArray
+          chatListRaw.splice(i, 1)
+          break
+        }
+      }
+      chat.messageArray.push(message)
+      chatListRaw.unshift(chat)
+
+      wx.setStorageSync('chatListRaw', chatListRaw)
+      this.getMessage()
     }
   },
-  
+
+  onUnload: function(){
+    clearInterval(messageGetor)
+  },
+
   onLoad: function (options) {
+    app.getUserInfoByUid(options.chatId)
+    this.tunnel = app.tunnel
     this.setData({
-      oppositeUid: options.uid
+      chatId: options.chatId
     })
-    this.tunnel = app.tunnel;
-    messageGetor = setInterval(this.getMessage, 500)
-    this.getMessage()
-    app.checkIfArrayExistInStorage("message"+options.uid)
-    this.pageScrollToBottom()
+    messageGetor = setInterval(this.getMessage, 1000)
+
+    var chatListRaw = app.getArrayFromStorage('chatListRaw')
+    console.log(options)
+    for(var i=0; i<chatListRaw.length; i++){
+      if(chatListRaw[i].chatId == options.chatId){
+        this.setData({
+          messageArray: chatListRaw[i].messageArray
+        })
+        if (chatListRaw[i].unReaded){
+          chatListRaw[i].statusChanged = true
+        }
+        chatListRaw[i].unReaded = false
+      }
+    }
+    wx.setStorageSync('chatListRaw', chatListRaw)
   },
 
   getMessage(){
-    var key = "message" + this.data.oppositeUid
-    var messageArray = wx.getStorageSync(key);
-    this.setData({
-      messageArray: messageArray
-    })
+    var chatListRaw = app.getArrayFromStorage('chatListRaw')
+    for (var i = 0; i < chatListRaw.length; i++) {
+      if (chatListRaw[i].chatId == this.data.chatId) {
+        if(chatListRaw[i].unReaded){
+          chatListRaw[i].unReaded = false
+          var messageArray = chatListRaw[i].messageArray
+          this.setData({
+            messageArray: messageArray
+          })
+        }
+      }
+      break
+    }
+    wx.setStorageSync('chatListRaw', chatListRaw)
   },
 
   pageScrollToBottom: function () {

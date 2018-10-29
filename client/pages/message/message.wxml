@@ -1,1 +1,9 @@
-<text>client/pages/message/message.wxml</text>
+<view wx:for="{{chatList}}" class="chat-block" bindtap="gotoChat" data-uid="{{item.chatId}}">
+  <view class="avatar-block">
+    <image class="avatar-image" src="{{item.avatarUrl}}" mode="aspectFit"></image>
+  </view>
+  <view class="text-block">  
+    <view class="name-text">{{item.uName}}</view>
+    <view class="message-text">{{item.lastMessageText}}</view>
+  </view>
+</view>

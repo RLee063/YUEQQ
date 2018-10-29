@@ -40,7 +40,7 @@ Page({
     var uid = e.currentTarget.dataset.uid
     wx.navigateTo({
       // url: "../viewUserInfo/viewUserInfo?id=2"
-      url: "../chat/chat?uid="+uid
+      url: "../chat/chat?chatId="+uid
     })
   },
   tapActivity: function(e){

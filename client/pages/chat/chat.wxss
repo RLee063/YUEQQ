@@ -2,13 +2,13 @@ page{
   background: rgb(255, 255, 255);
 }
 .top-block{
-  padding-bottom: 15%;
+  padding-bottom: 18%;
 }
 
 .message-block{
   /* background: rgb(226, 107, 107);
   border: solid; */
-  margin-bottom: 20rpx;
+  margin-bottom: 30rpx;
 }
 
 .user-avatar,.user-avatar-me, .user-avatar-other{
@@ -30,7 +30,7 @@ page{
 
 .message-text, .message-text-me, .message-text-other{
   background: white;
-  width: 500rpx;
+  max-width: 450rpx;
   margin: 20rpx;
   padding: 20rpx;
   position: relative;
@@ -39,6 +39,7 @@ page{
   color: rgb(34, 34, 34);
   font-family: "微软雅黑";
   font-size: 30rpx;
+  word-break: break-all;
 }
 
 .message-text-me{
@@ -53,8 +54,6 @@ background: linear-gradient(to bottom, #D5DEE7 0%, #E8EBF2 50%, #E2E7ED 100%), l
  background-blend-mode: normal,color-burn;
   float: left;
 }
-
-
 
 .message-edit-block{
   display: table;

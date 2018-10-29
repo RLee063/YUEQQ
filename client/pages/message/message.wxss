@@ -1,1 +1,43 @@
 /* client/pages/message/message.wxss */
+.chat-block{
+  margin-top: 100rpx;
+  height: 180rpx;
+  width: 100%;
+  background: rgb(216, 108, 108);
+}
+
+.avatar-block{
+  float: left;
+  height: 100%;
+  width: 25%;
+  background: pink;
+}
+
+.text-block{
+  float: left;
+  height: 100%;
+  width: 75%;
+  background: rgb(243, 239, 22);
+}
+
+.avatar-image{
+  height: 120rpx;
+  width: 120rpx; 
+  border-radius: 100%;
+  float: left;
+  margin: 30rpx;
+}
+
+.name-text{
+  margin-top: 10rpx;
+  float: left;
+  background: rgb(100, 196, 100);
+}
+
+.message-text{
+  position: relative;
+  top: 50rpx;
+  clear: left;
+  float: left;
+  background: rgb(97, 167, 199);
+}

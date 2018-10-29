@@ -24,11 +24,43 @@ App({
       }
     })
   },
-  checkIfArrayExistInStorage: function(key) {
+  getArrayFromStorage: function(key) {
     var ret = wx.getStorageSync(key)
     if(!ret){
-      var array = []
-      wx.setStorageSync(key, array)
+      var ret = []
+      wx.setStorageSync(key, ret)
+    }
+    return ret
+  },
+  getUserInfoByUid: function(uid){
+    var ret = wx.getStorageSync(uid)
+    var flag
+    if(!ret){
+      console.log("start request:" + uid)
+      var that = this
+      wx.request({
+        url: `${config.service.host}/weapp/getUserInfo`,
+        method: 'GET',
+        data: {
+          uid: uid,
+        },
+        success(result) {
+          wx.setStorageSync(uid, result.data.data[0])
+        },
+        fail(error) {
+          wx.setStorageSync(uid, "error")
+        }
+      })
+      return false
+    }
+    else{
+      return ret
     }
   },
+  storeUserInfoByUid: function(uid, userInfo){
+    var ret = wx.getStorageSync(uid)
+    if(!ret){
+      wx.setStorageSync(uid, userInfo)
+    }
+  }
 })
