@@ -4,7 +4,6 @@ const {
 } = require('../qcloud')
 const { mysql } = require('../qcloud')
 
-
 const debug = require('debug')('koa-weapp-demo')
 
 /**
@@ -15,7 +14,6 @@ const debug = require('debug')('koa-weapp-demo')
 const userMap = {}
 
 const uidMap = {}
-
 
 // 保存 当前已连接的 WebSocket 信道ID列表
 const connectedTunnelIds = []
@@ -85,6 +83,8 @@ const $close = (tunnelId) => {
  * 在客户端成功连接 WebSocket 信道服务之后会调用该方法，
  * 此时通知所有其它在线的用户当前总人数以及刚加入的用户是谁
  */
+
+
 
 async function onConnect(tunnelId) {
   console.log(`[onConnect] =>`, {
@@ -208,6 +208,7 @@ module.exports = {
         break
     }
   }
+
 
 }
 

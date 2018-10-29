@@ -2,6 +2,7 @@
   "pages": [
 
     "pages/beginlogin/beginlogin",
+
     "pages/home/home",
     "pages/chat/chat",
     "pages/index/index",
