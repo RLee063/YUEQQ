@@ -31,6 +31,7 @@ Page({
   },
   getActyInfo: function() {
     var that = this
+    console.log("发送的uid是" + that.data.uid)
     wx.request({
       url: `${config.service.host}/weapp/getMyActivities`,
       method: 'GET',
@@ -53,8 +54,9 @@ Page({
    */
   onLoad: function(options) {
     this.setData({
-      uid: options
+      uid: options.uid
     })
+    
     this.getActyInfo()
   },
 

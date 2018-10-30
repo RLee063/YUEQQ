@@ -12,6 +12,7 @@ Page({
 
   
   create_undo: function() {
+    console.log(this.data.userInfo.uid)
     wx.navigateTo({
       url: '../create_undo/create_undo?uid=' + this.data.userInfo.uid,
     })
