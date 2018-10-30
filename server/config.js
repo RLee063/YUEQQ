@@ -42,7 +42,10 @@ const CONF = {
 
   // 微信登录态有效期
   wxLoginExpires: 7200,
-  wxMessageToken: 'abcdefgh'
+  wxMessageToken: 'abcdefgh',
+  qcloudAppId: '1257207887',
+  qcloudSecretId: 'AKIDUpyVSG5JYbR4mIE0GCxAHE0jmqiXv4zp',
+  qcloudSecretKey: '890vlPrNhqowxmaDetxvhU5Wn3LZcUAi',
 }
 
 module.exports = CONF
