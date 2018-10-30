@@ -86,7 +86,7 @@ Page({
           bkgdpic: src
         })
         that.upLoadImgAndGetUrl(this)
-        wx.navigateBack()
+
 
       } else {
         console.log('获取图片地址失败，请稍后重试')
@@ -94,7 +94,6 @@ Page({
     })
   },
   upLoadImgAndGetUrl: function(that) {
-    console.log("更改后的图片路径："+that.data.bkgdpic)
     util.showBusy('正在上传')
     wx.uploadFile({
       url: config.service.uploadUrl,
@@ -103,16 +102,6 @@ Page({
       success: function(res) {
         util.showSuccess('上传图片成功')
         res = JSON.parse(res.data)
-        console.log(res)
-        console.log(res)
-        console.log(res)
-        console.log(res.imgUrl)
-        console.log(res.imgUrl)
-        console.log(res.imgUrl)
-        console.log(res.imgUrl)
-        console.log(res.imgUrl)
-        console.log(res.imgUrl)
-       
         that.setData({
           bkgdpic: res.data.imgUrl
         })
@@ -120,6 +109,7 @@ Page({
         wx.setStorageSync('changebkgd', 1);
         console.log(that.data)
         that.uploadInfo(res.data.imgUrl, that)
+
       },
 
       fail: function(e) {
@@ -149,6 +139,10 @@ Page({
           },
           success(result) {
             util.showSuccess('成功上传图片')
+            wx.navigateTo({
+              url: '../info',
+            })
+
           },
           fail(error) {
             util.showModel('请求失败', error);

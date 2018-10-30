@@ -193,6 +193,7 @@ Page({
 
       },
       success(result) {
+        console.log("服务器发回的个人信息：" + result)
         that.setData({
           college: result.data.data[0].college,
           credit: result.data.data[0].credit,

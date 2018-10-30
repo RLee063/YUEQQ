@@ -1,4 +1,6 @@
 // pages/create_undo/create_undo.js
+var util = require('../../utils/util.js')
+var config = require('../../config')
 Page({
 
   /**
@@ -36,6 +38,7 @@ Page({
         uid: that.data.uid,
       },
       success(result) {
+        console.log(result)
         that.setData({
           newActyInfo: result
         })
@@ -52,6 +55,7 @@ Page({
     this.setData({
       uid: options
     })
+    this.getActyInfo()
   },
 
   /**
