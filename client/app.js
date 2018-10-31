@@ -33,7 +33,7 @@ App({
     return ret
   },
   getUserInfoByUid: function(uid){
-    var ret = wx.getStorageSync(uid)
+    var ret = wx.getStorageSync(uid)                                             
     var flag
     if(!ret){
       console.log("start request:" + uid)

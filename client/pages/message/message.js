@@ -35,9 +35,7 @@ Page({
     redDotClear = setInterval(this.clearRedDot, 200)
   },
   refresh: function(){
-    console.log("refresh")
     var chatListRaw = app.getArrayFromStorage('chatListRaw')
-    console.log(chatListRaw)
     var chatList = this.data.chatList
     var flag = true
     for (var i = chatListRaw.length - 1; i >= 0; i--) {

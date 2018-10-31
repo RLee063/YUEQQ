@@ -26,7 +26,7 @@ var PACKET_TYPE_TIMEOUT = 'timeout';
 var PACKET_TYPE_CLOSE = 'close';
 
 // 断线重连最多尝试 5 次
-var DEFAULT_MAX_RECONNECT_TRY_TIMES = 20;
+var DEFAULT_MAX_RECONNECT_TRY_TIMES = 200;
 
 // 每次重连前，等待时间的增量值
 var DEFAULT_RECONNECT_TIME_INCREASE = 1000;
@@ -433,6 +433,7 @@ function Tunnel(serviceUrl) {
             });
         }
         else {
+            console.log("closeSocket 1")
             wx.closeSocket();
             waitBeforeReconnect += reconnectTimeIncrease;
             setStatus(STATUS_RECONNECTING);
@@ -499,7 +500,7 @@ function Tunnel(serviceUrl) {
         if (isActive() && emitClose !== false) {
             emitClosePacket();
         }
-
+        console.log("closeSocket 2")
         wx.closeSocket();
     }
 

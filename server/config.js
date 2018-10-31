@@ -8,6 +8,9 @@ const CONF = {
   // 微信小程序 App Secret
   appSecret: '0c9dcaf86179c6f4a616f11db297bd18',
 
+  qcloudAppId: '1257207887',
+  qcloudSecretId: 'AKIDUpyVSG5JYbR4mIE0GCxAHE0jmqiXv4zp',
+  qcloudSecretKey: '890vlPrNhqowxmaDetxvhU5Wn3LZcUAi',
   // 是否使用腾讯云代理登录小程序
   useQcloudLogin: false,
 
@@ -30,9 +33,9 @@ const CONF = {
      * 地区简称
      * @查看 https://cloud.tencent.com/document/product/436/6224
      */
-    region: 'ap-guangzhou',
+    region: 'ap-chengdu',
     // Bucket 名称
-    fileBucket: 'qcloudtest',
+    fileBucket: 'uestc0510',
     // 文件夹
     uploadFolder: ''
   },

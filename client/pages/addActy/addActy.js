@@ -12,13 +12,6 @@ function yearMonthDayToDate(year, month, day){
   return result
 }
 
-// var info = {
-//   name: "",
-//   avatarUrl: "",
-//   motto: "",
-//   imgUrl: "",
-// }
-
 Page({
   data: {
     imgTempPath: "https://qcloudtest-1257207887.cos.ap-guangzhou.myqcloud.com/1536468704720-MUpMq2yU3.jpg",
@@ -88,12 +81,18 @@ Page({
           imgTempPath: res.tempFilePaths[0],
           isDefaultImage: false
         })
-        console.log("已经设置isDefaultImage")
       },
     })
   },
 
   addActySubmit: function(e) {
+    console.log(e)
+    console.log(this.data)
+    this.setData({
+      title: e.detail.value.title
+    })
+    console.log(e)
+    console.log(this.data)
     if (e.detail.value.title === "") {
       wx.showToast({
         title: '请输入内容',
@@ -110,8 +109,10 @@ Page({
     }
     upLoadImgAndGetUrl(this)
   },
+
   addTag: function(e) {
-    if(e.detail.value=""){
+    console.log(e)
+    if(e.detail.value==""){
       return
     }
     var tags = this.data.tags
@@ -120,6 +121,7 @@ Page({
       tags: tags,
       tagInput: ""
     })
+    console.log(this.data)
   },
 
   removeTag: function(e) {
@@ -130,29 +132,11 @@ Page({
       tags: tags
     })
   },
-
-  resetData: function() {
-    this.setData({
-      imgTempPath: "https://qcloudtest-1257207887.cos.ap-guangzhou.myqcloud.com/1536468704720-MUpMq2yU3.jpg",
-      title: "来打球吧朋友",
-      maxNum: "6",
-      tags: ["高手退散", "我无敌了"],
-      sportType: "羽毛球",
-      startTime: "",
-      date: "2016-09-01",
-      time: "20:18",
-      isDefaultImage: true
-    })
-  }
 })
 
 function upLoadImgAndGetUrl(that) {
-  console.log(that.data.imgTempPath)
   util.showBusy('正在上传')
-  console.log(that.data.isDefaultImage)
   if(that.data.isDefaultImage){
-    console.log("错啦!")
-
     uploadInfo(that.data.imgTempPath, that)
     return
   }
@@ -162,10 +146,8 @@ function upLoadImgAndGetUrl(that) {
     filePath: that.data.imgTempPath,
     name: 'file',
     success: function(res) {
-      console.log(res)
       util.showSuccess('上传图片成功')
       res = JSON.parse(res.data)
-      console.log(res)
       uploadInfo(res.data.imgUrl, that)
     },
 
@@ -178,7 +160,6 @@ function upLoadImgAndGetUrl(that) {
 
 function uploadInfo(imgUrl, that) {
   if (imgUrl == null) {
-    console.log(imgUrl)
     wx.showToast({
       title: 'imgUrl == null',
       icon: "none"
@@ -198,7 +179,6 @@ function uploadInfo(imgUrl, that) {
   var startTime = that.data.date + " " + that.data.time + ":00"
   wx.checkSession({
     success: function(res) {
-      console.log(res)
       wx.request({
         url: `${config.service.host}/weapp/createActivity`,
         method: 'GET',
@@ -243,6 +223,5 @@ function getNowFormatDate() {
     strDate = "0" + strDate;
   }
   var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate + " " + date.getHours() + seperator2 + date.getMinutes() + seperator2 + date.getSeconds();
-  console.log(currentdate)
   return currentdate;
 }

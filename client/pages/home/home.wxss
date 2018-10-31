@@ -65,9 +65,11 @@ page{
 
 .num-pic{
   position: relative;
+  margin-top: 5rpx;
+  margin-right: 5rpx;
   float: right;
   width: 40rpx;
-  height: 50rpx;
+  height: 40rpx;
   right: 5rpx;
   top: 26rpx;
 }
@@ -76,9 +78,9 @@ page{
   position: absolute;
   width: 120rpx;
   height: 90rpx;
-  left: 520rpx;
+  left: 510rpx;
   top: -10rpx;
-  box-shadow: -1px 2px 10px -1px rgb(0, 0, 0);
+  box-shadow: -1px 2px 15px -5px rgb(0, 0, 0);
 }
 
 .type-card-basketball{
@@ -127,13 +129,13 @@ background-image: linear-gradient(to right top, #4a4e50 100%, #868f96 0%);
   /* box-shadow:-2px 1px 10px  rgb(0, 0, 0); */
   border: solid;
   border-color: white;
-  
+
+
 }
 
 .activity-mid-block{
   /* border-radius: 6px 6px 0px 0px / 6px 6px 0px 0px; */
   height: 60%;
-  box-shadow:1px 1px 10px rgb(255, 255, 255);
 }
 
 .activity-buttom-block{
