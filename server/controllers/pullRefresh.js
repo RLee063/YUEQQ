@@ -30,14 +30,14 @@ module.exports = async(ctx) => {
   try {
 
     if (aid === undefined) {
-      var activities = await mysql('ActivityInfo as info').join('ActivityPic as pic', 'info.Aid', 'pic.Aid').join('UserAvatar as user', 'user.uid', 'info.creatorUid').select().whereRaw('StartTime > ?', [getNowFormatDate()]).orderBy('StartTime', 'asc').orderBy('index', 'asc').limit(10)
+      var activities = await mysql('ActivityInfo as info').join('ActivityPic as pic', 'info.Aid', 'pic.Aid').join('UserAvatar as user', 'user.uid', 'info.creatorUid').select().whereRaw('StartTime > ?', [getNowFormatDate()]).orderBy('StartTime', 'asc').orderBy('ord', 'asc').limit(10)
     } else {
-      var lastAct = await mysql('ActivityInfo').select().where('aid', aid)
-      var activities = await mysql('ActivityInfo as info').join('ActivityPic as pic', 'info.Aid', 'pic.Aid').join('UserAvatar as user', 'user.uid', 'info.creatorUid').select().whereRaw('startTime > ?', [lastAct['startTime']]).orwhereRaw(
-        function() {
-          this.where('startTime', lastAct['startTime']).orwhereRaw('index > ?', [lastAct['index']])
+      var lastAct = (await mysql('ActivityInfo').select().where('aid', aid))[0]
+      var activities = await mysql('ActivityInfo as info').join('ActivityPic as pic', 'info.Aid', 'pic.Aid').join('UserAvatar as user', 'user.uid', 'info.creatorUid').select().whereRaw('startTime > ?', [lastAct['startTime']]).orWhere(
+        function () {
+          this.where('startTime', lastAct['startTime']).andWhereRaw("ord > ?", [lastAct['ord']])
         }
-      ).orderBy('StartTime', 'asc').orderBy('index', 'asc').limit(10)
+      ).orderBy('StartTime', 'asc').orderBy('ord', 'asc').limit(10)
     }
 
 

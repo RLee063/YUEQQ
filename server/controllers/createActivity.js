@@ -14,7 +14,7 @@ module.exports = async(ctx) => {
       Title : title,
       CreatorUid : uid,
       MaxNum : maxNum,
-      index: 0
+      ord: 0
   }
 
   var formatedTags = tags.split(' ')
@@ -24,7 +24,7 @@ module.exports = async(ctx) => {
 
   try {
       //添加活动信息
-      activity['index'] = (await mysql('ActivityInfo').select().where('startTime', startTime)).length
+      activity['ord'] = (await mysql('ActivityInfo').select().where('startTime', startTime)).length
       await mysql('ActivityInfo').insert(activity)
       await mysql('ActivityPic').insert({
         Aid : aid,
