@@ -37,8 +37,8 @@ router.get('/pullRefresh', controllers.pullRefresh)
 
 //创建活动
 router.get('/createActivity', controllers.createActivity)
-
-//router.get('/querySingleActivity', controllers.queryActivity)
+//查询活动信息
+router.get('/getActivityInfo', controllers.getActivityInfo)
 
 //查询用户信息
 router.get('/getUserInfo', controllers.getUserInfo)
@@ -46,4 +46,6 @@ router.get('/getUserInfo', controllers.getUserInfo)
 router.get('/updateUserInfo',controllers.updateUserInfo)
 //参加活动
 router.get('/joinActivity', controllers.joinActivity)
+//查询用户参与/创建过的互动
+router.get('/getMyActivities', controllers.getMyActivities)
 module.exports = router
