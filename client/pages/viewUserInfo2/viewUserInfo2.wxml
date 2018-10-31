@@ -1,2 +1,5 @@
 <!--pages/viewUserInfo/viewUserInfo.wxml-->
-<text>pages/viewUserInfo/viewUserInfo.wxml</text>
+<view>
+  <view name="" >
+  </view>
+</view>

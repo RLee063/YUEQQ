@@ -7,32 +7,32 @@ Page({
   data:{
     activitiesArray: []
   },
-  onReachBottom: function(){
-    var that = this
-    var activitiesArray = this.data.activitiesArray
-    var lastAid = activitiesArray[activitiesArray.length-1].aid
-    wx.request({
-      url: `${config.service.host}/weapp/pullRefresh`,
-      data: {
-        aid : lastAid
-      },
-      success(result) {
-        console.log(result)
-        var newActies = result.data.data
-        that.formatActivitiesArray(newActies)
-        var activitiesArray = that.data.activitiesArray
-        for(var i=0; i<newActies.length; i++){
-          activitiesArray.push(newActies[i])
-        }
-        that.setData({
-          activitiesArray: activitiesArray
-        })
-      },
-      fail(error) {
-        util.showModel('刷新失败', error);
-      }
-    })
-  },
+  // onReachBottom: function(){
+  //   var that = this
+  //   var activitiesArray = this.data.activitiesArray
+  //   var lastAid = activitiesArray[activitiesArray.length-1].aid
+  //   wx.request({
+  //     url: `${config.service.host}/weapp/pullRefresh`,
+  //     data: {
+  //       aid : lastAid
+  //     },
+  //     success(result) {
+  //       console.log(result)
+  //       var newActies = result.data.data
+  //       that.formatActivitiesArray(newActies)
+  //       var activitiesArray = that.data.activitiesArray
+  //       for(var i=0; i<newActies.length; i++){
+  //         activitiesArray.push(newActies[i])
+  //       }
+  //       that.setData({
+  //         activitiesArray: activitiesArray
+  //       })
+  //     },
+  //     fail(error) {
+  //       util.showModel('刷新失败', error);
+  //     }
+  //   })
+  // },
   onPullDownRefresh: function(){
     var that=this
     this.refresh(that)
@@ -44,6 +44,7 @@ Page({
       success(result) {
         acties = result.data.data
         that.formatActivitiesArray(acties)
+        console.log(acties)
         that.setData({
           activitiesArray: acties
         })
@@ -63,28 +64,14 @@ Page({
     var uid = e.currentTarget.dataset.uid
     wx.navigateTo({
       // url: "../viewUserInfo/viewUserInfo?id=2"
-      url: "../chat/chat?chatId="+uid
+      url: "../viewUserInfo/viewUserInfo?uid="+uid
     })
   },
   tapActivity: function(e){
-    var uid = wx.getStorageSync('openid')
-    if(uid == ""){
-      util.showModel('请先登录', '刷新失败')
-    }
-    wx.request({
-      url: `${config.service.host}/weapp/joinActivity`,
-      data:{
-        uid: uid,
-        aid: e.currentTarget.dataset.aid
-      },
-      success(result) {
-        if(result.data.code==1){
-          util.showModel('加入成功', '刷新失败');
-        }
-      },
-      fail(error) {
-        util.showModel('加入失败', error);
-      }
+    var aid = e.currentTarget.dataset.aid
+    wx.navigateTo({
+      // url: "../viewUserInfo/viewUserInfo?id=2"
+      url: "../viewActivityInfo/viewActivityInfo?aid=" + aid
     })
   },
   formatActivitiesArray(acties){

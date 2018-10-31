@@ -12,6 +12,13 @@ App({
   onLaunch: function () {
     that = this
     qcloud.setLoginUrl(config.service.loginUrl)
+    this.setSystemInfo()
+  },
+  setSystemInfo(){
+    var system = {
+      avatarUrl: ""
+    }
+    wx.setStorageSync("systemUid", system)
   },
   getUserInfoByUid:function(uid){
     wx.request({

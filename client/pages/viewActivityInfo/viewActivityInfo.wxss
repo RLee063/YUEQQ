@@ -1,0 +1,41 @@
+.father{
+  position: relative;
+}
+
+.pic{
+  width: 750rpx;
+  height: 320rpx;
+}
+
+.title{
+  position: absolute;
+  left: 20rpx;
+  top: -10rpx;
+  font-family: "microsoft yahei";
+  font-size: 40rpx;
+  color: white;
+  -webkit-text-stroke: 0.1px rgb(0, 0, 0);
+  letter-spacing: 0.2rem;
+}
+
+.avatar{
+  float: left;
+  height: 100rpx;
+  width: 100rpx;
+  margin-right: 10rpx;
+  border-radius: 100%;
+}
+
+.join{
+  position: fixed;
+  bottom: 50rpx;
+  left: 10%;
+  width: 80%;
+  background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  letter-spacing: 0.2rem;
+  font-size: 0.9rem;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 7% / 50% ;
+}

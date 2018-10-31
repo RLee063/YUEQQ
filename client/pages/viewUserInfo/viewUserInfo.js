@@ -1,4 +1,4 @@
-// pages/addCgi/addCgi.js
+// pages/viewUserInfo/viewUserInfo.js
 Page({
 
   /**

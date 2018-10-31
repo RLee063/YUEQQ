@@ -86,13 +86,9 @@ Page({
   },
 
   addActySubmit: function(e) {
-    console.log(e)
-    console.log(this.data)
     this.setData({
       title: e.detail.value.title
-    })
-    console.log(e)
-    console.log(this.data)
+    }) 
     if (e.detail.value.title === "") {
       wx.showToast({
         title: '请输入内容',

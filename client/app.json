@@ -1,8 +1,11 @@
 {
   "pages": [
     "pages/begin/begin",
-    "pages/user/user",
+    "pages/viewUserInfo/viewUserInfo",
+    "pages/viewActivityInfo/viewActivityInfo",
     "pages/home/home",
+    "pages/beginlogin/beginlogin",
+    "pages/user/user",
     "pages/chat/chat",
     "pages/index/index",
     "pages/addActy/addActy",
@@ -21,7 +24,6 @@
     "pages/myActy/myActy",
     "pages/authorize/authorize",
     "pages/message/message"
-
   ],
   "window": {
     "backgroundColor": "white",
