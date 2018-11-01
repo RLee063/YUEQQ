@@ -1,19 +1,19 @@
 <!--pages/create_undo/create_undo.wxml-->
 <view class='container'>
   <view class="head"></view>
-  <view class="lists" wx:for="{{activityinfo}}" bindtap="details">
+  <view class="lists" wx:for="{{newActyInfo}}" bindtap="details">
     <view>
       <image class="activityclass" src="./basketball.png" background-size="cover"></image>
     </view>
 
     <view class="introduce">
-      <text class="introduce-name">{{item.name}}</text>
-      <text class="introduce-time">{{item.time}}</text>
+      <text class="introduce-name">{{item.title}}</text>
+      <text class="introduce-time">{{item.startTime}}</text>
     </view>
 
     <view class="pnum">
       <image class="punmsrc" src="../../images/人群.png" background-size="cover"></image>
-      <text class="pnum-text">{{item.punm}}</text>
+      <text class="pnum-text">{{item.currentNum}}</text>
     </view>
 
     <view class="array">

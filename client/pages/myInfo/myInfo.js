@@ -1,7 +1,6 @@
 // pages/info/info.js
 var util = require('../../utils/util.js')
 var config = require('../../config')
-var homePicUrl = ""
 
 
 Page({
@@ -44,7 +43,7 @@ Page({
 
   scoreinfo: function() {
     wx.navigateTo({
-      url: '../scoreinfo/scoreinfo',
+      url: '../scoreInfo/scoreInfo',
     })
   },
 
@@ -144,7 +143,6 @@ Page({
         college: this.data.college,
       },
       success(result) {
-
         wx.switchTab({
           url: '../user/user',
         })
@@ -160,29 +158,13 @@ Page({
    */
   onLoad: function(options) {
     this.setData({
-      userInfo: wx.getStorageSync('userInfo')
-    })
-    console.log('userinfo is :' + wx.getStorageSync('userInfo'))
-    this.setData({
+      userInfo: wx.getStorageSync('userInfo'),
+      openId: wx.getStorageSync('openid'),
       logged: wx.getStorageSync('logged')
     })
-    this.setData({
-      openId: wx.getStorageSync('openid')
-    })
 
   },
 
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function() {
     var that = this
     wx.request({
@@ -190,10 +172,9 @@ Page({
       method: 'GET',
       data: {
         uid: that.data.openId,
-
       },
       success(result) {
-        console.log("服务器发回的个人信息：" + result)
+        console.log(result.data.data)
         that.setData({
           college: result.data.data[0].college,
           credit: result.data.data[0].credit,
@@ -201,6 +182,7 @@ Page({
           grade: result.data.data[0].grade,
           motto: result.data.data[0].motto,
         })
+
       },
       fail(error) {
         util.showModel('保存失败', error);
@@ -223,39 +205,6 @@ Page({
       })
     }
 
-
-
-  },
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
-  }
 })

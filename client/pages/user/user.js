@@ -18,11 +18,10 @@ Page({
       userInfo: wx.getStorageSync('userInfo'),
       logged: wx.getStorageSync('logged')
     })
-
-    console.log(wx.getStorageSync('userInfo'))
   },
 
   onShow: function() {
+
     this.setData({
       changemotto: wx.getStorageSync('changemotto')
     })
@@ -43,7 +42,7 @@ Page({
 
   information: function() {
     wx.navigateTo({
-      url: '../info/info',
+      url: '../myInfo/myInfo',
     })
   },
   activities: function() {
@@ -57,11 +56,12 @@ Page({
 
     }
     wx.navigateTo({
-      url: '../activities/activities?info=' + JSON.stringify(selfinfo),
+      url: '../myActivities/myActivities?info=' + JSON.stringify(selfinfo),
     })
   },
 
+  recommend: function() {
 
-
+  }
 
 })

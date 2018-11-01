@@ -31,7 +31,6 @@ Page({
       cropperOpt
     } = this.data
 
-    // 若同一个页面只有一个裁剪容器，在其它Page方法中可通过this.wecropper访问实例
     new WeCropper(cropperOpt)
       .on('ready', (ctx) => {
         console.log(`wecropper is ready for work!`)
@@ -67,9 +66,9 @@ Page({
     const self = this
 
     wx.chooseImage({
-      count: 1, // 默认9
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
       success(res) {
         const src = res.tempFilePaths[0]
 
@@ -106,9 +105,10 @@ Page({
           bkgdpic: res.data.imgUrl
         })
         wx.setStorageSync('bkgdpic', that.data.bkgdpic);
-        wx.setStorageSync('changebkgd', 1);
-        console.log(that.data)
-        that.uploadInfo(res.data.imgUrl, that)
+        wx.setStorageSync('changebkgd', 1)
+        wx.navigateBack({
+          url:"../myInfo"
+        })
 
       },
 
@@ -118,41 +118,4 @@ Page({
       }
     })
   },
-
-  uploadInfo: function(imgUrl, that) {
-    if (imgUrl == null) {
-      console.log(imgUrl)
-      wx.showToast({
-        title: 'imgUrl == null',
-        icon: "none"
-      })
-      return
-    }
-    wx.checkSession({
-      success: function(res) {
-        console.log(res)
-        wx.request({
-          url: `${config.service.host}/weapp/updateUserInfo`,
-          method: 'GET',
-          data: {
-            homePicUrl: that.data.bkgdpic
-          },
-          success(result) {
-            util.showSuccess('成功上传图片')
-            wx.navigateTo({
-              url: '../info',
-            })
-
-          },
-          fail(error) {
-            util.showModel('请求失败', error);
-          }
-        })
-      },
-      fail: function(res) {
-        util.showModel('请先登录', '在帮助中先授权再登录');
-      }
-    })
-  }
-
 })

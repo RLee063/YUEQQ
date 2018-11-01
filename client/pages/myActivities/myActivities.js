@@ -1,22 +1,40 @@
-// pages/info/info.js
-var imgTempPath = ""
-
-
+// pages/activities/activities.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    avatarUrl:null,
-    imgTempPath: 'background.jpg',
+    homePicUrl: "./background.jpg",
     userInfo: {},
-    phone: null,
-    grade: null,
-    motto: 'In god we trust',
-    collage: null,
-    credit:4
+    logged: true,
   },
+
+  
+  create_undo: function() {
+    console.log(this.data.userInfo.uid)
+    wx.navigateTo({
+      url: '../createUndo/createUndo?uid=' + this.data.userInfo.uid,
+    })
+  },
+
+  create_did: function() {
+    wx.navigateTo({
+      url: '../createDid/createDid?uid=' + this.data.userInfo.uid,
+    })
+  },
+  attend_undo: function() {
+    wx.navigateTo({
+      url: '../attendUndo/attendUndo?uid=' + this.data.userInfo.uid,
+    })
+  },
+
+  attend_did: function() {
+    wx.navigateTo({
+      url: '../attendDid/attendDid?uid=' + this.data.userInfo.uid,
+    })
+  },
+
 
 
 
@@ -31,11 +49,12 @@ Page({
       })
       return;
     }
-  
+
     var Info = JSON.parse(options.info);
     this.setData({
       userInfo: Info
     })
+    console.log(this.data.userInfo)
 
   },
 
@@ -51,8 +70,8 @@ Page({
    */
   onShow: function() {
 
-
   },
+
   /**
    * 生命周期函数--监听页面隐藏
    */

@@ -41,13 +41,22 @@ Page({
       success(result) {
         console.log(result)
         that.setData({
-          newActyInfo: result
+          newActyInfo: result.data.data.createdActivities
         })
+        console.log(that.data.newActyInfo)
+        that.formatInfo()
+        console.log(that.data.newActyInfo)
+
       },
       fail(error) {
         util.showModel('查看活动列表失败', error);
       }
     })
+  },
+  formatInfo: function() {
+    for (var i = 0; i < this.data.newActyInfo.length; i++) {
+      this.data.newActyInfo[i].startTime.slice(0, this.data.newActyInfo.startTime.length-4)
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -56,7 +65,7 @@ Page({
     this.setData({
       uid: options.uid
     })
-    
+
     this.getActyInfo()
   },
 
