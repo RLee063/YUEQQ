@@ -181,6 +181,7 @@ Page({
           phone: result.data.data[0].phone,
           grade: result.data.data[0].grade,
           motto: result.data.data[0].motto,
+          homePicUrl: result.data.data[0].homePicUrl
         })
 
       },
