@@ -1,1 +1,9 @@
 /* pages/viewUserInfo/viewUserInfo.wxss */
+.page{
+  height: 100%;
+}
+
+.home-pic{
+  width: 750rpx;
+  height: 320rpx;
+}

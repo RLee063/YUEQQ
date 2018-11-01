@@ -9,36 +9,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    members: [{ 
-      avatarUrl: "https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83erV2px9QVSr6vF2KMHm5kUgeATsZ3ERtMeia4tKibXK21OjEADgtY8ibk57JdYLCTTHDl20jaF9q3uew/132", 
-      uid: "1"
-    },{
-      avatarUrl: "https://wx.qlogo.cn/mmopen/vi_32/yOHWFZpCZyiakD3dSFAe9Yn93KMzxHAMzSPiaAWcXqAhUNKOoy9NN78EG7oX0qHD7EDxBapgyjHNECF8qq3Qvvhw/132", 
-      uid: "2"
-    },{
-      avatarUrl: "https://wx.qlogo.cn/mmopen/vi_32/BOj3yAxywFH5my2YicsOtmJUCzXbKsba0olTEsutBOnGXOLWsNYxHiaJYFuJIKR3O8hUxtqybbWiahn8NC2ib9AqlQ/132",
-        uid: "3"
-      
-    }
-    ],
-    activityInfo: {
-      aid: "o5ko344qvKlQYv5kYMdTkWbkH8lg1540884647",
-      avatarUrl: "https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83erV2px9QVSr6vF2KMHm5kUgeATsZ3ERtMeia4tKibXK21OjEADgtY8ibk57JdYLCTTHDl20jaF9q3uew/132",
-      createTime: "2018-10-30 15:30:46",
-      creatorUid: "o5ko344qvKlQYv5kYMdTkWbkH8lg",
-      currentNum: 1,
-      index: 0,
-      maxNum: 6,
-      members: [],
-      picUrl: "https://qcloudtest-1257207887.cos.ap-guangzhou.myqcloud.com/1536468704720-MUpMq2yU3.jpg",
-      sportType: 1,
-      startTime: "11月30日 12:00",
-      tags: [],
-      title: "你宅你🐎呢",
-      sportType: "羽毛球",
-      uid: "o5ko344qvKlQYv5kYMdTkWbkH8lg",
-      chatId: "cho5ko344qvKlQYv5kYMdTkWbkH8lg"
-    }
+    membersArray: [],
+    activityInfo: {}
+
   },
 
   /**
@@ -46,6 +19,7 @@ Page({
    */
   onLoad: function(options) {
     var aid = options.aid
+    var that = this
     console.log(aid)
     wx.request({
       url: `${config.service.host}/weapp/pullRefresh`,
@@ -53,12 +27,27 @@ Page({
         aid: aid
       },
       success: function(result) {
-        console.log(result)
+        that.setData({
+          activityInfo: result.data.data[0]
+        })
       },
       fail: function(error) {
         console.log(error)
       }
     })
+  },
+  //hold on
+  initMembersArray: function(){
+    var that = this
+    var members = this.data.members
+    for(var i=0; i<members.length; i++){
+      wx.request({
+        url: '${config.service.host}/weapp/pullRefresh',
+        data: {
+          uid: members.uid
+        }
+      })
+    }
   },
   joinActivity: function(){
     var uid = wx.getStorageSync('openid')
@@ -84,6 +73,7 @@ Page({
     })
   },
   navigateToChat: function(){
+    var activityInfo = this.data.activityInfo
     var chatListRaw = app.getArrayFromStorage('chatListRaw')
     var chatId = this.data.activityInfo.chatId
     var chat = {
@@ -108,6 +98,11 @@ Page({
     chatListRaw.unshift(chat)
     wx.setStorageSync('chatListRaw', chatListRaw)
 
+    var chatRoomInfo = {
+      avatarUrl: activityInfo.picUrl,
+      nickName: activityInfo.title
+    }
+    wx.setStorageSync(chatId, chatRoomInfo)
     wx.navigateTo({
       url: '../chat/chat?chatId=' + this.data.activityInfo.chatId
     })
@@ -158,3 +153,33 @@ Page({
 
   }
 })
+
+// {
+//   aid: "o5ko344qvKlQYv5kYMdTkWbkH8lg1540884647",
+//     avatarUrl: "https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83erV2px9QVSr6vF2KMHm5kUgeATsZ3ERtMeia4tKibXK21OjEADgtY8ibk57JdYLCTTHDl20jaF9q3uew/132",
+//       createTime: "2018-10-30 15:30:46",
+//         creatorUid: "o5ko344qvKlQYv5kYMdTkWbkH8lg",
+//           currentNum: 1,
+//             index: 0,
+//               maxNum: 6,
+//                 members: [],
+//                   picUrl: "https://qcloudtest-1257207887.cos.ap-guangzhou.myqcloud.com/1536468704720-MUpMq2yU3.jpg",
+//                     sportType: 1,
+//                       startTime: "11月30日 12:00",
+//                         tags: [],
+//                           title: "你宅你🐎呢",
+//                             sportType: "羽毛球",
+//                               uid: "o5ko344qvKlQYv5kYMdTkWbkH8lg",
+//                                 chatId: "cho5ko344qvKlQYv5kYMdTkWbkH8lg"
+// }
+
+// {
+//   avatarUrl: "https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83erV2px9QVSr6vF2KMHm5kUgeATsZ3ERtMeia4tKibXK21OjEADgtY8ibk57JdYLCTTHDl20jaF9q3uew/132",
+//     uid: "1"
+// }, {
+//   avatarUrl: "https://wx.qlogo.cn/mmopen/vi_32/yOHWFZpCZyiakD3dSFAe9Yn93KMzxHAMzSPiaAWcXqAhUNKOoy9NN78EG7oX0qHD7EDxBapgyjHNECF8qq3Qvvhw/132",
+//     uid: "2"
+// }, {
+//   avatarUrl: "https://wx.qlogo.cn/mmopen/vi_32/BOj3yAxywFH5my2YicsOtmJUCzXbKsba0olTEsutBOnGXOLWsNYxHiaJYFuJIKR3O8hUxtqybbWiahn8NC2ib9AqlQ/132",
+//     uid: "3"
+// }

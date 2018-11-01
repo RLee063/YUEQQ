@@ -12,7 +12,7 @@
   <view class="info-block">
     {{activityInfo.startTime}}
   </view>
-  <view wx:for="{{members}}">
+  <view wx:for="{{membersArray}}">
     <image class="avatar" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill"/>
   </view>
 </view>

@@ -1,2 +1,6 @@
 <!--pages/viewUserInfo/viewUserInfo.wxml-->
-<text>pages/viewUserInfo/viewUserInfo.wxml</text>
+<view>
+  <view>
+    <image class="home-pic" src="{{userInfo.homePicUrl}}"></image>
+  </view>
+</view>

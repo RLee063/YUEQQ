@@ -1,3 +1,4 @@
+
 // pages/beginlogin/beginlogin.js
 Page({
 

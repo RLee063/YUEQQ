@@ -4,10 +4,8 @@
     "pages/viewUserInfo/viewUserInfo",
     "pages/viewActivityInfo/viewActivityInfo",
     "pages/home/home",
-    "pages/beginlogin/beginlogin",
     "pages/user/user",
     "pages/chat/chat",
-    "pages/index/index",
     "pages/addActy/addActy",
     "pages/myInfo/myInfo",
     "pages/myInfo/changebkgd/changebkgd",
@@ -22,7 +20,6 @@
     "pages/attendUndo/attendUndo",
     "pages/attendDid/attendDid",
     "pages/myActy/myActy",
-    "pages/authorize/authorize",
     "pages/message/message"
   ],
   "window": {
@@ -43,12 +40,6 @@
       {
         "pagePath": "pages/message/message",
         "text": "消息",
-        "iconPath": "images/tabbar_c_u.png",
-        "selectedIconPath": "images/tabbar_c_s.png"
-      },
-      {
-        "pagePath": "pages/index/index",
-        "text": "帮助",
         "iconPath": "images/tabbar_c_u.png",
         "selectedIconPath": "images/tabbar_c_s.png"
       },

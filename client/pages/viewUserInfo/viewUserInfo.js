@@ -12,7 +12,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var uid = options.uid
+    var that = this
+    wx.request({
+      url: `${config.service.host}/weapp/getUserInfo`,
+      data: {
+        uid: uid
+      },
+      success(result){
+        console.log(result.data.data[0])
+        result.data.data[0].homePicUrl = "https://uestc0510-1257207887.cos.ap-chengdu.myqcloud.com/1541071318751-ngRXTme7y.png"
+        that.setData({
+          userInfo: result.data.data[0]
+        })
+      },
+      fail(error){
+        console.log(error)
+      }
+    })
   },
 
   /**
