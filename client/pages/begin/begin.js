@@ -38,7 +38,7 @@ Page({
   onLoad: function(options) {
 
     if (wx.getStorageSync('logged') == true) {
-      this.openTunnel()
+      // this.openTunnel()
       this.setData({
         authorized: true
       })

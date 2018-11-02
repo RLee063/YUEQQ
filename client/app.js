@@ -45,6 +45,7 @@ App({
           uid: uid,
         },
         success(result) {
+          console.log(result)
           wx.setStorageSync(uid, result.data.data[0])
         },
         fail(error) {
