@@ -1,9 +1,8 @@
 {
   "pages": [
     "pages/begin/begin",
-    "pages/beginlogin/beginlogin",
-    "pages/viewActivityInfo/viewActivityInfo",
     "pages/viewUserInfo/viewUserInfo",
+    "pages/viewActivityInfo/viewActivityInfo",
     "pages/home/home",
     "pages/user/user",
     "pages/chat/chat",
