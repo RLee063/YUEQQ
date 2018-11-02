@@ -1,15 +1,15 @@
 {
-	"miniprogramRoot": "client/",
-	"qcloudRoot": "server/",
-	"setting": {
-		"urlCheck": false,
-		"es6": true,
-		"postcss": true,
-		"minified": true,
-		"newFeature": true
-	},
-	"appid": "wx9564c30c15e103a2",
-	"projectname": "YueQQgit",
-	"compileType": "miniprogram",
-	"condition": {}
+  "miniprogramRoot": "./client",
+  "qcloudRoot": "./server",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "newFeature": true
+  },
+  "appid": "wx9564c30c15e103a2",
+  "projectname": "YueQiunewestJs",
+  "compileType": "miniprogram",
+  "condition": {}
 }
