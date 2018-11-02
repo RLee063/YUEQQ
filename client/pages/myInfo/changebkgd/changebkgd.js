@@ -104,6 +104,20 @@ Page({
         that.setData({
           bkgdpic: res.data.imgUrl
         })
+        wx.request({
+          url: `${config.service.host}/weapp/updateUserInfo`,
+          method: 'GET',
+          data: {
+            uid: that.data.openId,
+            bkgdpic: that.data.bkgdpic,
+          },
+          success(result) {
+            util.showSuccess('成功保存数据')
+          },
+          fail(error) {
+            util.showModel('保存失败', error);
+          }
+        })
         wx.setStorageSync('bkgdpic', that.data.bkgdpic);
         wx.setStorageSync('changebkgd', 1)
         wx.navigateBack({

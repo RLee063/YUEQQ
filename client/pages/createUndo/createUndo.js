@@ -41,9 +41,42 @@ Page({
     })
   },
   formatInfo: function() {
-    for (var i = 0; i < this.data.newActyInfo.length; i++) {
-      this.data.newActyInfo[i].startTime.slice(0, this.data.newActyInfo.startTime.length-4)
+    var tempActyInfo = this.data.newActyInfo
+    console.log(tempActyInfo.length)
+    for (var i = 0; i < tempActyInfo.length; i++) {
+      switch (tempActyInfo[i].sportType) {
+        case '乒乓球':
+          tempActyInfo[i].sportType = 0
+          break
+
+        case '篮球':
+          tempActyInfo[i].sportType = 1
+          break
+        case '网球':
+          tempActyInfo[i].sportType = 2
+          break
+        case '羽毛球':
+          tempActyInfo[i].sportType = 3
+          break
+        case '足球':
+          tempActyInfo[i].sportType = 4
+          break
+        case '跑步':
+          tempActyInfo[i].sportType = 5
+          break
+      }
     }
+
+    this.setData({
+      newActyInfo: tempActyInfo
+    })
+    console.log(this.data.newActyInfo)
+    console.log(this.data.newActyInfo)
+    console.log(this.data.newActyInfo)
+    console.log(this.data.newActyInfo)
+    console.log(this.data.newActyInfo)
+    
+
   },
   /**
    * 生命周期函数--监听页面加载

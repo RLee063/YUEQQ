@@ -124,10 +124,4 @@
     </view>
   </view>
 
-
-
-
-  <view class='save' bindtap='saveinfo'>
-    <button class='savebutton'>保存</button>
-  </view>
 </view>

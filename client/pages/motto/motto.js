@@ -20,6 +20,21 @@ Page({
     this.setData({
       motto: e.detail.value
     })
+    var that = this
+    wx.request({
+      url: `${config.service.host}/weapp/updateUserInfo`,
+      method: 'GET',
+      data: {
+        uid: that.data.openId,
+        motto: that.data.motto,
+      },
+      success(result) {
+        util.showSuccess('成功保存数据')
+      },
+      fail(error) {
+        util.showModel('保存失败', error);
+      }
+    })
     wx.setStorageSync('newmotto', this.data.motto);
     wx.setStorageSync('changemotto', 1);
     console.log(wx.getStorageSync('newmotto'))
