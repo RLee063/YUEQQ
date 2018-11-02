@@ -1,10 +1,19 @@
+page{
+  height: 100%;
+}
+
 .father{
   position: relative;
+  height: 100%;
+}
+
+.pic-block{
+  height: 30%;
 }
 
 .pic{
   width: 750rpx;
-  height: 320rpx;
+  height: 100%;
 }
 
 .title{
