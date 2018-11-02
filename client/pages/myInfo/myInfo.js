@@ -72,6 +72,21 @@ Page({
     this.setData({
       hiddenmodalput: true
     })
+    var that = this
+    wx.request({
+      url: `${config.service.host}/weapp/updateUserInfo`,
+      method: 'GET',
+      data: {
+        uid: that.data.openId,
+        phone: that.data.phone,
+      },
+      success(result) {
+        util.showSuccess('成功保存数据')
+      },
+      fail(error) {
+        util.showModel('保存失败', error);
+      }
+    })
 
   },
 
@@ -93,6 +108,21 @@ Page({
     this.setData({
       college: event.currentTarget.dataset.name,
       actionSheetHidden: !this.data.actionSheetHidden
+    })
+    var that = this
+    wx.request({
+      url: `${config.service.host}/weapp/updateUserInfo`,
+      method: 'GET',
+      data: {
+        uid: that.data.openId,
+        college: that.data.college,
+      },
+      success(result) {
+        util.showSuccess('成功保存数据')
+      },
+      fail(error) {
+        util.showModel('保存失败', error);
+      }
     })
 
   },
@@ -116,6 +146,21 @@ Page({
       grade: event.currentTarget.dataset.grade,
       actionSheetHidden2: !this.data.actionSheetHidden2
     })
+    var that = this
+    wx.request({
+      url: `${config.service.host}/weapp/updateUserInfo`,
+      method: 'GET',
+      data: {
+        uid: that.data.openId,
+        grade: that.data.grade,
+      },
+      success(result) {
+        util.showSuccess('成功保存数据')
+      },
+      fail(error) {
+        util.showModel('保存失败', error);
+      }
+    })
 
   },
 
@@ -128,31 +173,7 @@ Page({
     })
   },
 
-  saveinfo: function() {
-    console.log(this.data)
-    wx.request({
-      url: `${config.service.host}/weapp/updateUserInfo`,
-      method: 'GET',
-      data: {
-        uid: this.data.openId,
-        homePicUrl: this.data.homePicUrl,
-        credit: this.data.creditstar,
-        phone: this.data.phone,
-        motto: this.data.motto,
-        grade: this.data.grade,
-        college: this.data.college,
-      },
-      success(result) {
-        wx.switchTab({
-          url: '../user/user',
-        })
-        util.showSuccess('成功保存数据')
-      },
-      fail(error) {
-        util.showModel('保存失败', error);
-      }
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -185,6 +206,26 @@ Page({
           motto: result.data.data[0].motto,
           homePicUrl: result.data.data[0].homePicUrl
         })
+        if (that.data.college === 'null') {
+          that.setData({
+            college: '未填写'
+          })
+        }
+        if (that.data.phone === 'null') {
+          that.setData({
+            phone: '未填写'
+          })
+        }
+        if (that.data.grade === 'null') {
+          that.setData({
+            grade: '未填写'
+          })
+        }
+        if (that.data.motto === 'null') {
+          that.setData({
+            motto: '未填写'
+          })
+        }
         that.setData({
           changemotto: wx.getStorageSync('changemotto')
         })
