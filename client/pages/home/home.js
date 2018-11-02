@@ -8,7 +8,30 @@ Page({
     activitiesArray: []
   },
   onReachBottom: function(){
-    console.log("shangla")
+    var that = this
+    var activitiesArray = this.data.activitiesArray
+    var lastAid = activitiesArray[activitiesArray.length-1].aid
+    wx.request({
+      url: `${config.service.host}/weapp/pullRefresh`,
+      data: {
+        aid : lastAid
+      },
+      success(result) {
+        console.log(result)
+        var newActies = result.data.data
+        that.formatActivitiesArray(newActies)
+        var activitiesArray = that.data.activitiesArray
+        for(var i=0; i<newActies.length; i++){
+          activitiesArray.push(newActies[i])
+        }
+        that.setData({
+          activitiesArray: activitiesArray
+        })
+      },
+      fail(error) {
+        util.showModel('刷新失败', error);
+      }
+    })
   },
   onPullDownRefresh: function(){
     var that=this

@@ -166,6 +166,8 @@ Page({
   },
 
   onShow: function() {
+
+
     var that = this
     wx.request({
       url: `${config.service.host}/weapp/getUserInfo`,
@@ -183,28 +185,29 @@ Page({
           motto: result.data.data[0].motto,
           homePicUrl: result.data.data[0].homePicUrl
         })
+        that.setData({
+          changemotto: wx.getStorageSync('changemotto')
+        })
+        if (that.data.changemotto == 1) {
+          that.setData({
+            motto: wx.getStorageSync('newmotto')
+          })
+        }
+        that.setData({
+          changebkgd: wx.getStorageSync('changebkgd')
+        })
+        if (that.data.changebkgd == 1) {
+          that.setData({
+            homePicUrl: wx.getStorageSync('bkgdpic')
+          })
+        }
 
       },
       fail(error) {
         util.showModel('保存失败', error);
       }
     })
-    this.setData({
-      changemotto: wx.getStorageSync('changemotto')
-    })
-    if (this.data.changemotto == 1) {
-      this.setData({
-        motto: wx.getStorageSync('newmotto')
-      })
-    }
-    this.setData({
-      changebkgd: wx.getStorageSync('changebkgd')
-    })
-    if (this.data.changebkgd == 1) {
-      this.setData({
-        homePicUrl: wx.getStorageSync('bkgdpic')
-      })
-    }
+
 
   },
 

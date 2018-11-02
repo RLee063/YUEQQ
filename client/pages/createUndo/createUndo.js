@@ -9,19 +9,6 @@ Page({
   data: {
     uid: '',
     newActyInfo: {},
-    activityinfo: {
-      num1: {
-        name: "求求你揍我吧",
-        time: '2018-10-20',
-        punm: 4,
-      },
-      num2: {
-        name: "好的揍你",
-        time: '2018-10-21',
-        punm: 6,
-      }
-    }
-
   },
 
   details: function() {

@@ -4,10 +4,14 @@ var messageGetor;
 
 Page({
   data: {
+    avatarList: {
+
+    },
     messageArray: [],
     otherUid: [],
     chatId: "",
     messageText: "",
+    messageHeadIndex: 0
   },
 
   sendMessage: function(e) {
@@ -72,9 +76,11 @@ Page({
     console.log(options)
     for(var i=0; i<chatListRaw.length; i++){
       if(chatListRaw[i].chatId == options.chatId){
+        var headIndex = chatListRaw[i].messageArray.length - 1
         this.setData({
-          messageArray: chatListRaw[i].messageArray
+          messageHeadIndex: headIndex
         })
+        this.loadMessageArray(chatListRaw[i].messageArray)
         if (chatListRaw[i].unReaded){
           chatListRaw[i].statusChanged = true
         }
@@ -84,13 +90,27 @@ Page({
     wx.setStorageSync('chatListRaw', chatListRaw)
   },
 
+  loadMessageArray: function (messageArray){
+    var headIndex = this.data.messageHeadIndex
+    var start = headIndex >= 19 ? headIndex - 19 : 0
+    var currentMessageArray = this.data.messageArray
+    var tempArray = messageArray.slice(start, headIndex+1)
+    for( var i=tempArray.length-1; i>=0; i--){
+      currentMessageArray.unshift(tempArray[i])
+    }
+    this.setData({
+      messageArray: currentMessageArray,
+      messageHeadIndex: start-1
+    })
+  },
   getMessage(){
     var chatListRaw = app.getArrayFromStorage('chatListRaw')
     for (var i = 0; i < chatListRaw.length; i++) {
       if (chatListRaw[i].chatId == this.data.chatId) {
         if(chatListRaw[i].unReaded){
           chatListRaw[i].unReaded = false
-          var messageArray = chatListRaw[i].messageArray
+          var messageArray = this.data.messageArray
+          messageArray.push(chatListRaw[i].messageArray[chatListRaw[i].messageArray.length - 1])
           this.setData({
             messageArray: messageArray
           })
@@ -108,4 +128,13 @@ Page({
       })
     }).exec()
   },
+
+  onPullDownRefresh: function(){
+    var chatListRaw = app.getArrayFromStorage('chatListRaw')
+    for(var i=0; i<chatListRaw.length; i++){
+      if(chatListRaw[i].chatId == this.data.chatId){
+        this.loadMessageArray(chatListRaw[i].messageArray)
+      }
+    }
+  }
 })
