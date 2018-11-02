@@ -101,7 +101,7 @@ var login = function login(options) {
             method: options.method,
             data: options.data,
             success: function (result) {
-               wx.setStorageSync(result.data.data.userinfo.openId, result.data.data.userinfo)
+              console.log(result)
                wx.setStorageSync('openid', result.data.data.userinfo.openId)
                 var data = result.data;
                 // // 成功地响应会话信息

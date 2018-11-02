@@ -1,5 +1,5 @@
 <view wx:for="{{activitiesArray}}">
-  <view class="activity-block"  bindtap="tapActivity">
+  <view class="activity-block"  bindtap="tapActivity" data-aid="{{item.aid}}">
     <view class="type-card-basketball" wx:if="{{item.sportType == 0}}">
       <image src="../../images/basketball.svg" class="type-card-image" mode="aspectFit"></image>
     </view>
