@@ -128,17 +128,33 @@ Page({
     nowMonth ++;
 
     if(parseInt(startDate[0])>nowYear){
-      result += startDate.join('-')
-    }
-    else if (parseInt(startDate[1]) > nowMonth){
-      result += startDate[1]
-      result += '月'
-      result += startDate[2]
-      result += '日'
+      result += item.startTime
     }
     else{
-      var dec = parseInt(startDate[2])-nowDay
-      switch(dec){
+      var dec
+      if (parseInt(startDate[1]) > nowMonth){ 
+        switch (parseInt(startDate[1])){
+          case 2:
+            dec = parseInt(startDate[2]) - nowDay + 28
+          case 4:
+          case 6:
+          case 9:
+          case 11:
+            dec = parseInt(startDate[2]) - nowDay + 30
+          case 1:
+          case 3:
+          case 5:
+          case 7:
+          case 8:
+          case 10:
+          case 12:
+            dec = parseInt(startDate[2]) - nowDay + 30
+        }
+      }
+      else{
+        dec = parseInt(startDate[2]) - nowDay
+      }
+      switch (dec) {
         case 0:
           result += "今天"
           break;
@@ -149,7 +165,10 @@ Page({
           result += "后天"
           break;
         default:
-          result += startTime[2];
+          result += startDate[1]
+          result += '月'
+          result += startDate[2]
+          result += '日'
           break;
       }
     }
