@@ -11,6 +11,64 @@ page{
   display:none;
 }
 
+.intro-text, .recommendation-user-refresh-text, .recommendation-user-text{
+  color: rgb(180, 180, 180);
+  letter-spacing: 0.1rem;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.recommendation-acty-block{
+  height: 400rpx;
+  margin-bottom: 0rpx;
+}
+
+.recommendation-acty-item{
+  width: 40%;
+}
+
+.recommendation-acty-image{
+  height: 80%;
+  width: 90%;
+  margin-bottom: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
+  border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
+  box-shadow: -1px 5px 20px -3px rgb(0, 0, 0);
+}
+
+.recommendation-user-text{
+  float: left;
+  font-size: normal;
+  margin-left: 15rpx;
+}
+
+.recommendation-user-refresh-text{
+  margin-right: 15rpx;
+  float: right;
+}
+
+.recommendation-user-block{
+  height: 250rpx;
+  margin-bottom: 0rpx;
+}
+
+.recommendation-user-item{
+  width: 40%;
+}
+
+.recommendation-user-image{
+  height: 80%;
+  width: 80%;
+  margin-bottom: 5%;
+  margin-left: 10%;
+  margin-right: 10%;
+  border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
+  box-shadow: -1px 5px 10px -3px rgb(0, 0, 0);
+}
+
+
+
 .user-head-image {
   width: 100%;
   height: 100%;
@@ -112,8 +170,8 @@ background-image: linear-gradient(to right top, #4a4e50 100%, #868f96 0%);
   height: 330rpx;
   width: 90%;
   margin: auto;
-  margin-top: 20rpx;
-  margin-bottom: 70rpx;
+  margin-top: 10rpx;
+  margin-bottom: 60rpx;
   background-color: rgb(255, 255, 255); 
   box-shadow:-1px 3px 10px -1px rgb(173, 173, 173);
 }
