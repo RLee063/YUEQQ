@@ -1,5 +1,27 @@
-<view wx:for="{{activitiesArray}}">
-  <view class="activity-block"  bindtap="tapActivity" data-aid="{{item.aid}}">
+<swiper autoplay="1" indicator-dots="1" circular="1" interval="5000" duration="1000" previous-margin="40px" next-margin="40px" class="recommendation-acty-block">
+  <swiper-item wx:for="{{recommendationActivities}}" wx:key="item.aid" class="recommendation-acty-item">
+    <image src="{{item.picUrl}}" mode="center" class="recommendation-acty-image"></image>
+  </swiper-item>
+</swiper>
+
+<view style='height:70rpx;'>
+  <view class="recommendation-user-text">基友推荐</view>
+  <view class="recommendation-user-refresh-text">换一批</view>
+</view>
+
+<swiper autoplay="1" circular="1" interval="8000" duration="500" previous-margin="20px" next-margin="20px" class="recommendation-user-block" display-multiple-items="4">
+  <swiper-item wx:for="{{recommendationUsers}}" wx:key="item.aid" class="recommendation-user-item">
+    <image src="{{item.picUrl}}" mode="center" class="recommendation-user-image"></image>
+  </swiper-item>
+</swiper>
+
+<view style='height:70rpx;'>
+  <view class="recommendation-user-text">活动发现</view>
+  <view class="recommendation-user-refresh-text">刷新</view>
+</view>
+
+<view wx:for="{{activitiesArray}}" wx:key="item.aid">
+  <view class="activity-block" bindtap="tapActivity" data-aid="{{item.aid}}">
     <view class="type-card-basketball" wx:if="{{item.sportType == 0}}">
       <image src="../../images/basketball.svg" class="type-card-image" mode="aspectFit"></image>
     </view>
@@ -34,11 +56,11 @@
         <view class="activity-time">{{item.startTime}}
         </view>
         <view class="activity-num">{{item.currentNum}}/{{item.maxNum}}
-        </view >
-        <image class= "num-pic" src="../../images/人群.png"></image>
+        </view>
+        <image class="num-pic" src="../../images/人群.png"></image>
       </view>
     </view>
-  </view> 
+  </view>
 </view>
 <view class="add-activity-block">
   <image src="../../images/tabbar_b_s.png" class="add-activity-pic" bindtap='addActy'></image>

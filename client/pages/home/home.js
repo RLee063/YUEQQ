@@ -5,34 +5,36 @@ var acties = []
 
 Page({
   data:{
-    activitiesArray: []
+    activitiesArray: [],
+    recommendationActivities:[],
+    recommendationUsers:[]
   },
-  // onReachBottom: function(){
-  //   var that = this
-  //   var activitiesArray = this.data.activitiesArray
-  //   var lastAid = activitiesArray[activitiesArray.length-1].aid
-  //   wx.request({
-  //     url: `${config.service.host}/weapp/pullRefresh`,
-  //     data: {
-  //       aid : lastAid
-  //     },
-  //     success(result) {
-  //       console.log(result)
-  //       var newActies = result.data.data
-  //       that.formatActivitiesArray(newActies)
-  //       var activitiesArray = that.data.activitiesArray
-  //       for(var i=0; i<newActies.length; i++){
-  //         activitiesArray.push(newActies[i])
-  //       }
-  //       that.setData({
-  //         activitiesArray: activitiesArray
-  //       })
-  //     },
-  //     fail(error) {
-  //       util.showModel('刷新失败', error);
-  //     }
-  //   })
-  // },
+  onReachBottom: function(){
+    var that = this
+    var activitiesArray = this.data.activitiesArray
+    var lastAid = activitiesArray[activitiesArray.length-1].aid
+    wx.request({
+      url: `${config.service.host}/weapp/pullRefresh`,
+      data: {
+        aid : lastAid
+      },
+      success(result) {
+        console.log(result)
+        var newActies = result.data.data
+        that.formatActivitiesArray(newActies)
+        var activitiesArray = that.data.activitiesArray
+        for(var i=0; i<newActies.length; i++){
+          activitiesArray.push(newActies[i])
+        }
+        that.setData({
+          activitiesArray: activitiesArray
+        })
+      },
+      fail(error) {
+        util.showModel('刷新失败', error);
+      }
+    })
+  },
   onPullDownRefresh: function(){
     var that=this
     this.refresh(that)
@@ -46,7 +48,9 @@ Page({
         that.formatActivitiesArray(acties)
         console.log(acties)
         that.setData({
-          activitiesArray: acties
+          activitiesArray: acties,
+          recommendationActivities: acties,
+          recommendationUsers: acties
         })
         wx.stopPullDownRefresh()
       },
