@@ -4,7 +4,7 @@ module.exports = async(ctx) => {
   const {uid} = ctx.query
   try{
     createdActivities = await mysql('ActivityInfo').select().where('creatorUid', uid)
-    joniedAids = await mysql('userAct').select('aid').where('uid', uid)
+    joinedAids = await mysql('userAct').select('aid').where('uid', uid)
     joinedActivities = await mysql('ActivityInfo').select().where('aid', 'in', joinedAids)
     
     ctx.body = {

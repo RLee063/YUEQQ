@@ -15,8 +15,7 @@ module.exports = async (ctx) => {
     try {
       //update 
       await mysql('UserInfo').where('Uid',user['Uid']).update(user)
-      await mysql('UserAvatar').where('Uid',user['Uid']).update({AvatarUrl:ctx.state.data.userinfo['avatarUrl']})
-      await mysql('UserHomePic').where('Uid',user['Uid']).update({HomePicUrl:''})        
+      await mysql('UserAvatar').where('Uid',user['Uid']).update({AvatarUrl:ctx.state.data.userinfo['avatarUrl']})    
     } catch (e) {
       console.log('failed to update userInfo')
       console.log(e)

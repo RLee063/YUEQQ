@@ -46,6 +46,11 @@ const CONF = {
   qcloudAppId: '1257207887',
   qcloudSecretId: 'AKIDUpyVSG5JYbR4mIE0GCxAHE0jmqiXv4zp',
   qcloudSecretKey: '890vlPrNhqowxmaDetxvhU5Wn3LZcUAi',
+
+  //信道服务器
+  serverHost: '1qz2ek2e.qcloud.la',
+  tunnelServerUrl: "http://120.77.81.121",
+  tunnelSignatureKey:'abcdefg'
 }
 
 module.exports = CONF
