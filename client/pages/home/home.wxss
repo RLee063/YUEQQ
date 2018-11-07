@@ -1,6 +1,6 @@
 /* ------------- */
 page{
-  background:rgb(226, 226, 226);
+  background:rgb(211, 211, 211);
 }
 
 ::-webkit-scrollbar{
@@ -14,7 +14,6 @@ page{
 
 .recommendation-acty-block{
   height: 380rpx;
-  margin-bottom: 10rpx;
   background: white;
 }
 
@@ -53,24 +52,23 @@ page{
 .recommendation-user-block{
   color: rgrgb(124, 124, 124);
   height: 220rpx;
-  margin-bottom: 10rpx;
   padding-left: 30rpx;
   padding-right: 30rpx;
   background: white;
 }
 
 .recommendation-user-item{
-  width: 40%;
-}
-
-.recommendation-user-image{
-  height: 90%;
+  height: 85%;
   width: 80%;
   margin-left: 10%;
   margin-right: 10%;
   border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
   /* box-shadow: -1px 5px 10px -3px rgb(102, 102, 102); */
   box-shadow:-1px 3px 10px -1px rgb(173, 173, 173);
+}
+
+.recommendation-user-image{
+  
 }
 
 /* ===================== */
@@ -91,36 +89,39 @@ page{
 .activity-title{
   /* margin-top: 10rpx; */
   float: left;
-  position: relative;
-  top: 18%;
-  left: 24%;
-  color: rgb(34, 34, 34);
+  text-align: center;
+  height: 70rpx;
+  line-height: 70rpx;
+  margin-left: 150rpx;
+  color: rgb(39, 39, 39);
   font-family: "黑体";
   font-size: 32rpx;
   font-weight: bold;
   letter-spacing: 2rpx;
 }
 
-.activity-time{
-  clear: both;
-  /* padding-top: 15rpx; */
-  position: relative;
-  top: 35rpx;
-  left: 24%;
-  color: rgb(92, 92, 92);
+.activity-intro-text, .activity-time ,.activity-num{
+  text-align: center;
+  color: rgb(105, 105, 105);
   font-family: "微软雅黑";
-  font-size: 28rpx;
+  font-size: small;
+  font-weight: bold;
+  background: rgb(241, 241, 241);
+}
+
+.activity-time{
   float: left;
+  clear: both;
+  padding: 5rpx 10rpx 5rpx 10rpx;
+  border-radius: 15rpx 10rpx 10rpx 10rpx / 10rpx 10rpx 10rpx 10rpx;
+  margin: 5rpx 0rpx 15rpx 20rpx
 }
 
 .activity-num{
-  position: relative;
-  color: rgb(99, 99, 99);
-  font-family: "微软雅黑";
+  padding: 5rpx 10rpx 5rpx 10rpx;
+  border-radius: 15rpx 10rpx 10rpx 10rpx / 10rpx 10rpx 10rpx 10rpx;
+  margin: 5rpx 0rpx 15rpx 0rpx;
   float: right;
-  font-size: 30rpx;
-  font-weight: bold;
-  top: 30rpx;
 }
 
 .activity-pic{
@@ -130,9 +131,6 @@ page{
 }
 
 .num-pic{
-  position: relative;
-  margin-top: 5rpx;
-  margin-right: 5rpx;
   float: right;
   width: 40rpx;
   height: 40rpx;
@@ -154,7 +152,7 @@ page{
 }
 
 .type-card-badminton{
-background-image: linear-gradient(to top right, #1c65a0 0%, #3890c4 100%);
+  background-image: linear-gradient(to top right, #1c65a0 0%, #3890c4 100%);
 }
 
 .type-card-tabletennis{
@@ -179,23 +177,11 @@ background-image: linear-gradient(to right top, #4a4e50 100%, #868f96 0%);
   padding-bottom: 30rpx;
 }
 
-.activity-block {
-  /* border-radius: 6px 6px 0px 0px / 6px 6px 0px 0px; */
-  position: relative;
-  height: 330rpx;
-  width: 90%;
-  margin: auto;
-  margin-top: 10rpx;
-  margin-bottom: 60rpx;
-  background-color: rgb(255, 255, 255); 
-  box-shadow:-1px 3px 10px -1px rgb(173, 173, 173);
-}
-
 .user-head-image-block{
-  height: 120rpx;
-  width: 120rpx; 
-  top: 50%;
-  left: 30rpx;
+  height: 110rpx;
+  width: 110rpx; 
+  top: 148rpx;
+  left: 40rpx;
   border-radius: 100%;
   float: left;
   position: absolute;
@@ -204,9 +190,21 @@ background-image: linear-gradient(to right top, #4a4e50 100%, #868f96 0%);
   border-color: white;
 }
 
+.activity-block {
+  /* border-radius: 6px 6px 0px 0px / 6px 6px 0px 0px; */
+  position: relative;
+  width: 85%;
+  margin: auto;
+  margin-top: 10rpx;
+  margin-bottom: 60rpx;
+  box-shadow:-1px 3px 10px -1px rgb(173, 173, 173);
+  border-radius: 10px 10px 5px 5px / 10px 10px 5px 5px;
+  overflow: hidden;
+}
+
 .activity-mid-block{
   /* border-radius: 6px 6px 0px 0px / 6px 6px 0px 0px; */
-  height: 60%;
+  height: 200rpx;
 }
 
 .activity-buttom-block{

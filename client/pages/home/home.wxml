@@ -12,6 +12,7 @@
 <swiper autoplay="1" circular="1" interval="8000" duration="500" previous-margin="0px" next-margin="0px" class="recommendation-user-block" display-multiple-items="4">
   <swiper-item wx:for="{{recommendationUsers}}" wx:key="item.aid" class="recommendation-user-item">
     <image src="{{item.picUrl}}" mode="center" class="recommendation-user-image"></image>
+    <view class> </view>
   </swiper-item>
 </swiper>
 
@@ -55,7 +56,7 @@
         <view>
           <view class="activity-time">{{item.startTime}}</view>
           <view class="activity-num">{{item.currentNum}}/{{item.maxNum}}</view>
-          <image class="num-pic" src="../../images/人群.png"></image>
+          <!-- <image class="num-pic" src="../../images/人群.png"></image> -->
         </view>
       </view>
     </view>
