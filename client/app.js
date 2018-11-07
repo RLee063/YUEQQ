@@ -41,11 +41,7 @@ App({
     return ret
   },
   getUserInfoByUid: function(uid){
-    var ret = wx.getStorageSync(uid)                                             
-    var flag
-    if(!ret){
-      console.log("start request:" + uid)
-      var that = this
+    var ret = new Promise(function(resolve, reject){
       wx.request({
         url: `${config.service.host}/weapp/getUserInfo`,
         method: 'GET',
@@ -53,18 +49,16 @@ App({
           uid: uid,
         },
         success(result) {
-          console.log(result)
           wx.setStorageSync(uid, result.data.data[0])
+          resolve(result.data.data[0])
         },
         fail(error) {
+          reject(error)
           wx.setStorageSync(uid, "error")
         }
       })
-      return false
-    }
-    else{
-      return ret
-    }
+    })
+    return ret
   },
   storeUserInfoByUid: function(uid, userInfo){
     var ret = wx.getStorageSync(uid)

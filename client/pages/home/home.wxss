@@ -1,56 +1,62 @@
 /* ------------- */
 page{
-  background:white;
-}
-
-::root{
-  --bar: 80rpx;
+  background:rgb(226, 226, 226);
 }
 
 ::-webkit-scrollbar{
   display:none;
 }
 
-.intro-text, .recommendation-user-refresh-text, .recommendation-user-text{
-  color: rgb(180, 180, 180);
+.intro-text, .recommendation-left-text, .recommendation-right-text{
   letter-spacing: 0.1rem;
   font-size: 30rpx;
-  font-weight: bold;
 }
 
 .recommendation-acty-block{
-  height: 400rpx;
-  margin-bottom: 0rpx;
+  height: 380rpx;
+  margin-bottom: 10rpx;
+  background: white;
 }
 
 .recommendation-acty-item{
-  width: 40%;
+  width: 50%;
 }
 
 .recommendation-acty-image{
-  height: 80%;
-  width: 90%;
-  margin-bottom: 5%;
-  margin-left: 5%;
-  margin-right: 5%;
+  height: 85%;
+  width: 96%;
+  margin-left: 2%;
   border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
-  box-shadow: -1px 5px 20px -3px rgb(0, 0, 0);
+  box-shadow:-1px 3px 10px -1px rgb(173, 173, 173);
 }
 
-.recommendation-user-text{
+.recommendation-text-block{
+  line-height: 70rpx;
+  height: 70rpx;
+  background: white;
+}
+
+.recommendation-left-text{
+  color: rgb(46, 46, 46);
+  font-weight: bold;
   float: left;
   font-size: normal;
-  margin-left: 15rpx;
+  margin-left: 45rpx;
 }
 
-.recommendation-user-refresh-text{
-  margin-right: 15rpx;
+.recommendation-right-text{
+  margin-right: 45rpx;
   float: right;
+  color: rgb(167, 167, 167);
 }
 
 .recommendation-user-block{
-  height: 250rpx;
-  margin-bottom: 0rpx;
+  color: rgrgb(124, 124, 124);
+  height: 220rpx;
+  margin-bottom: 10rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  background: white;
 }
 
 .recommendation-user-item{
@@ -58,16 +64,16 @@ page{
 }
 
 .recommendation-user-image{
-  height: 80%;
+  height: 90%;
   width: 80%;
-  margin-bottom: 5%;
   margin-left: 10%;
   margin-right: 10%;
   border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
-  box-shadow: -1px 5px 10px -3px rgb(0, 0, 0);
+  /* box-shadow: -1px 5px 10px -3px rgb(102, 102, 102); */
+  box-shadow:-1px 3px 10px -1px rgb(173, 173, 173);
 }
 
-
+/* ===================== */
 
 .user-head-image {
   width: 100%;
@@ -84,6 +90,7 @@ page{
 
 .activity-title{
   /* margin-top: 10rpx; */
+  float: left;
   position: relative;
   top: 18%;
   left: 24%;
@@ -95,6 +102,7 @@ page{
 }
 
 .activity-time{
+  clear: both;
   /* padding-top: 15rpx; */
   position: relative;
   top: 35rpx;
@@ -164,6 +172,13 @@ background-image: linear-gradient(to right top, #4a4e50 100%, #868f96 0%);
 .type-card-football{
   background-image: linear-gradient(to top right, #e483b0 0%, #f55757 100%);
 }
+
+.activity-view-block{
+  background: white;
+  padding-top: 10rpx;
+  padding-bottom: 30rpx;
+}
+
 .activity-block {
   /* border-radius: 6px 6px 0px 0px / 6px 6px 0px 0px; */
   position: relative;
@@ -187,8 +202,6 @@ background-image: linear-gradient(to right top, #4a4e50 100%, #868f96 0%);
   /* box-shadow:-2px 1px 10px  rgb(0, 0, 0); */
   border: solid;
   border-color: white;
-
-
 }
 
 .activity-mid-block{

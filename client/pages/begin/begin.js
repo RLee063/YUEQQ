@@ -36,15 +36,12 @@ Page({
     authorized: false
   },
   onLoad: function(options) {
-
     if (wx.getStorageSync('logged') == true) {
-      // this.openTunnel()
+      this.openTunnel()
       this.setData({
         authorized: true
       })
     }
-
-
   },
   onShow: function() {
     if (this.data.authorized) {
@@ -127,7 +124,7 @@ Page({
   startprogram: function() {
     this.login()
     if (wx.getStorageSync('logged') == true) {
-      this.openTunnel()
+      // this.openTunnel()
     }
 
   },
@@ -152,7 +149,6 @@ Page({
           })
           wx.setStorageSync('userInfo', result);
           wx.setStorageSync('logged', true)
-          that.openTunnel()
           wx.switchTab({
             url: '../home/home'
           })

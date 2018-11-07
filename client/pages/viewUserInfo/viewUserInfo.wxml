@@ -2,9 +2,24 @@
 <view class="father">
   <image src="{{userInfo.avatarUrl}}" class="avatar-pic" mode="aspectFill"/>
   <view class="mid-block">
-    <view class="mid-in-block">1</view>
-    <view class="mid-in-block">2</view>
-    <view class="mid-in-block">3</view>
+    <view class="mid-in-block">
+      <view class="mid-in-in-block">
+        <view class="mid-top-text">1</view>
+        <view class="mid-bottom-text">关注</view>
+      </view>
+    </view>
+    <view class="mid-in-block">
+      <view class="mid-in-in-block">
+        <view class="mid-top-text">2</view>
+        <view class="mid-bottom-text">活动</view>
+      </view>
+    </view>
+    <view class="mid-in-block">
+      <view class="mid-in-in-right-block">
+        <view class="mid-top-text">3</view>
+        <view class="mid-bottom-text">粉丝</view>
+      </view>
+    </view>
   </view>
   <image class="home-pic" src="{{userInfo.homePicUrl}}" mode="aspectFill"></image> 
   <view class="info-block">

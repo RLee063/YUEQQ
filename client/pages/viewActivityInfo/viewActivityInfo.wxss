@@ -35,16 +35,22 @@ page{
   border-radius: 100%;
 }
 
-.join{
+.join, .join-mask{
   position: fixed;
   bottom: 50rpx;
-  left: 10%;
-  width: 80%;
+  left: 10%; 
+  width: 80%; 
+  height: 80rpx;
   background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
   color: white;
   letter-spacing: 0.2rem;
   font-size: 0.9rem;
   line-height: 80rpx;
   text-align: center;
-  border-radius: 7% / 50% ;
+  border-radius: 6.65%  / 50% ;
+  box-shadow: 0px 0px 10px rgb(189, 189, 189);
+}
+
+.join-mask{
+  background-image: none;
 }

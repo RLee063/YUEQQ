@@ -1,4 +1,4 @@
-const formatTime = date => {
+  const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -39,4 +39,12 @@ var showModel = (title, content) => {
     })
 }
 
-module.exports = { formatTime, showBusy, showSuccess, showModel }
+var px2rpx = (px) => {
+  return px * 750 / wx.getSystemInfoSync().windowWidth
+}
+
+var rpx2px = (rpx) => {
+  return rpx / 750 * wx.getSystemInfoSync().windowWidth
+}
+
+module.exports = { formatTime, showBusy, showSuccess, showModel ,px2rpx, rpx2px}

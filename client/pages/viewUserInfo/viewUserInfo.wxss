@@ -38,11 +38,31 @@ page{
 }
 
 .mid-in-block{
-  height: 95%;
-  width: 31.1%;
+  height: 100%;
+  width: 33.33%;
   float: left;
-  background: rgb(207, 89, 89);
-  border: solid;
+}
+
+.mid-in-in-block, .mid-in-in-right-block{
+  position: relative;
+  top: 10%;
+  height: 80%;
+  background:rgb(115, 207, 115);
+  border-right: solid;
+}
+
+.mid-in-in-right-block{
+  border: none;
+}
+
+.mid-top-text{
+  font-size: small;
+  text-align: center;
+}
+
+.mid-bottom-text{
+  font-size: small;
+  text-align: center;
 }
 
 .intro-block, .info-block, .skill-block, .recent-block{
