@@ -1,19 +1,35 @@
 <!--pages/create_undo/create_undo.wxml-->
 <view class='container'>
   <view class="head"></view>
-  <view class="lists" wx:for="{{activityinfo}}" bindtap="details">
-    <view>
-      <image class="activityclass" src="./basketball.png" background-size="cover"></image>
+  <view class="lists" wx:for="{{newActyInfo}}" wx:key="item.aid" bindtap="details" data-aid="{{item.aid}}">
+    <view wx:if="{{item.sportType===0}}">
+      <image class="activityclass"  src="./tabletennis.png" background-size="cover"></image>
+    </view>
+    <view wx:elif="{{item.sportType===1}}">
+      <image class="activityclass"  src="./basketball.png" background-size="cover"></image>
+    </view>
+    <view wx:elif="{{item.sportType===2}}">
+      <image class="activityclass"  src="./tennis.png" background-size="cover"></image>
+    </view>
+    <view wx:elif="{{item.sportType===3}}">
+      <image class="activityclass"  src="./badminton.png" background-size="cover"></image>
+    </view>
+    <view wx:elif="{{item.sportType===4}}">
+      <image class="activityclass"  src="./football.png" background-size="cover"></image>
+    </view>
+    <view wx:elif="{{item.sportType===5}}">
+      <image class="activityclass"  src="./running.png" background-size="cover"></image>
     </view>
 
+
     <view class="introduce">
-      <text class="introduce-name">{{item.name}}</text>
-      <text class="introduce-time">{{item.time}}</text>
+      <text class="introduce-name">{{item.title}}</text>
+      <text class="introduce-time">{{item.startTime}}</text>
     </view>
 
     <view class="pnum">
       <image class="punmsrc" src="../../images/人群.png" background-size="cover"></image>
-      <text class="pnum-text">{{item.punm}}</text>
+      <text class="pnum-text">{{item.currentNum}}</text>
     </view>
 
     <view class="array">

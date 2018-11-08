@@ -19,8 +19,8 @@
     "pages/createUndo/createUndo",
     "pages/attendUndo/attendUndo",
     "pages/attendDid/attendDid",
-    "pages/myActy/myActy",
-    "pages/message/message"
+    "pages/message/message",
+    "pages/joinerlist/joinerlist"
   ],
   "window": {
     "backgroundColor": "white",

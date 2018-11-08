@@ -1,22 +1,22 @@
-page{
+page {
   height: 100%;
 }
 
-.father{
+.father {
   position: relative;
   height: 100%;
 }
 
-.pic-block{
+.pic-block {
   height: 30%;
 }
 
-.pic{
+.pic {
   width: 750rpx;
   height: 100%;
 }
 
-.title{
+.title {
   position: absolute;
   left: 20rpx;
   top: -10rpx;
@@ -27,7 +27,7 @@ page{
   letter-spacing: 0.2rem;
 }
 
-.avatar{
+.avatar {
   float: left;
   height: 100rpx;
   width: 100rpx;
@@ -35,7 +35,7 @@ page{
   border-radius: 100%;
 }
 
-.join{
+.join {
   position: fixed;
   bottom: 50rpx;
   left: 10%;
@@ -46,5 +46,152 @@ page{
   font-size: 0.9rem;
   line-height: 80rpx;
   text-align: center;
-  border-radius: 7% / 50% ;
+  border-radius: 7% / 50%;
 }
+
+.activityclass {
+  width: 60rpx;
+  height: 60rpx;
+  margin: 20rpx;
+  border-radius: 20%;
+  position: relative;
+  top: 10rpx;
+}
+
+.activityinfo-title {
+  border-top: 4px, outset, black;
+  line-height: 52px;
+  font-size: 40rpx;
+  color: black;
+  font: '微软雅黑';
+  font-weight: 500;
+  letter-spacing: 5rpx;
+  
+}
+
+.titleAndClass {
+  display: flex;
+  flex-direction: row;
+  background-color:gray;
+  margin-bottom: 20rpx
+}
+
+.allinfo {
+  background-color: lightskyblue;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20rpx
+}
+
+.detailInfo {
+  height: auto;
+  width: auto;
+  padding: 0 0 0 20rpx;
+  margin: 3rpx;
+  flex-direction: column;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.detailInfo-text {
+  position: relative;
+  left: 60rpx;
+  border-top: 4px, outset, black;
+  width: 100%;
+  line-height: 52px;
+  font-size: 30rpx;
+  color: black;
+  font: '微软雅黑';
+  font-weight: 500;
+  letter-spacing: 5rpx;
+}
+
+.detailInfo-title {
+  position: relative;
+  left: 20rpx;
+  border-top: 4px, outset, black;
+  width: 100%;
+  line-height: 52px;
+  font-size: 30rpx;
+  color: black;
+  font: '微软雅黑';
+  font-weight: 500;
+  letter-spacing: 5rpx;
+}
+
+.icon {
+  position: relative;
+  top: 5px;
+}
+.creatorInfo-avatar {
+  width: 40rpx;
+  height: 40rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  position: relative;
+  top: 30rpx;
+  left: 45rpx
+
+}
+.detailInfo-creator{
+  height: auto;
+  width: auto;
+  padding: 0 0 0 20rpx;
+  margin: 3rpx;
+  flex-direction: column;
+  align-items: flex-start;
+  box-sizing: border-box;
+  position: relative;
+  bottom: 30rpx
+
+}
+.detailInfo-creator-text{
+  position: relative;
+  left: 35rpx;
+  border-top: 4px, outset, black;
+  width: 100%;
+  line-height: 52px;
+  font-size: 30rpx;
+  color: black;
+  font: '微软雅黑';
+  font-weight: 500;
+  letter-spacing: 5rpx;
+}
+
+.detailInfo-joiner {
+  height: auto;
+  width: auto;
+  padding: 0 0 0 20rpx;
+  margin: 3rpx;
+  flex-direction: row;
+  align-items: flex-start;
+  box-sizing: border-box;
+  background-color:aliceblue;
+}
+.joinerInfo-avatar {
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 5rpx;
+  border-radius: 50%;
+  position: relative;
+  top: 10rpx;
+  left: 165rpx
+
+}
+.joinerInfo-num{
+  position: relative;
+  left: 200rpx;
+  border-top: 4px, outset, black;
+  width: 100%;
+  line-height: 52px;
+  font-size: 30rpx;
+  color: black;
+  font: '微软雅黑';
+  font-weight: 500;
+  letter-spacing: 5rpx;
+}
+.joinerInfo-avatar{
+  flex-direction: row;
+
+}
+

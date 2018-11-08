@@ -10,7 +10,75 @@ Page({
    */
   data: {
     membersArray: [],
-    activityInfo: {}
+    activityInfo: {},
+    members: 3,
+    creatorUid: '',
+    creator: {
+      avatarUrl: 'https://wx.qlogo.cn/mmopen/vi_32/yOHWFZpCZyiakD3dSFAe9Yn93KMzxHAMzSPiaAWcXqAhUNKOoy9NN78EG7oX0qHD7EDxBapgyjHNECF8qq3Qvvhw/132',
+      name: 'NightCall',
+    },
+    joiner: [{
+        avatarUrl: 'https://wx.qlogo.cn/mmopen/vi_32/yOHWFZpCZyiakD3dSFAe9Yn93KMzxHAMzSPiaAWcXqAhUNKOoy9NN78EG7oX0qHD7EDxBapgyjHNECF8qq3Qvvhw/132'
+      },
+      {
+        avatarUrl: 'https://wx.qlogo.cn/mmopen/vi_32/yOHWFZpCZyiakD3dSFAe9Yn93KMzxHAMzSPiaAWcXqAhUNKOoy9NN78EG7oX0qHD7EDxBapgyjHNECF8qq3Qvvhw/132'
+      },
+      {
+        avatarUrl: 'https://wx.qlogo.cn/mmopen/vi_32/yOHWFZpCZyiakD3dSFAe9Yn93KMzxHAMzSPiaAWcXqAhUNKOoy9NN78EG7oX0qHD7EDxBapgyjHNECF8qq3Qvvhw/132'
+      },
+    ]
+
+  },
+  formatInfo: function() {
+    var tempActyInfo = this.data.activityInfo
+    console.log(this.data.activityInfo)
+
+    switch (tempActyInfo.sportType) {
+      case '乒乓球':
+        tempActyInfo.sportType = 0
+        break
+
+      case '篮球':
+        tempActyInfo.sportType = 1
+        break
+      case '网球':
+        tempActyInfo.sportType = 2
+        break
+      case '羽毛球':
+        tempActyInfo.sportType = 3
+        break
+      case '足球':
+        tempActyInfo.sportType = 4
+        break
+      case '跑步':
+        tempActyInfo.sportType = 5
+        break
+    }
+    this.setData({
+      activityInfo: tempActyInfo
+    })
+  },
+
+  getCreaterInfo: function() {
+    var that = this
+    wx.request({
+      url: `${config.service.host}/weapp/getUserInfo`,
+      method: 'GET',
+      data: {
+        uid: that.data.creatorUid,
+      },
+
+      success(result) {
+        that.setData({
+          creator: result.data.data[0]
+
+        })
+        console.log(that.data.creator)
+      },
+      fail: function(error) {
+        console.log(error)
+      }
+    })
 
   },
 
@@ -20,49 +88,41 @@ Page({
   onLoad: function(options) {
     var aid = options.aid
     var that = this
-    console.log(aid)
     wx.request({
       url: `${config.service.host}/weapp/pullRefresh`,
       data: {
         aid: aid
       },
       success: function(result) {
+
         that.setData({
-          activityInfo: result.data.data[0]
+          activityInfo: result.data.data[0],
+          creatorUid: result.data.data[0].creatorUid
         })
+        that.formatInfo()
+        that.getCreaterInfo()
+
       },
       fail: function(error) {
         console.log(error)
       }
     })
   },
-  //hold on
-  initMembersArray: function(){
-    var that = this
-    var members = this.data.members
-    for(var i=0; i<members.length; i++){
-      wx.request({
-        url: '${config.service.host}/weapp/pullRefresh',
-        data: {
-          uid: members.uid
-        }
-      })
-    }
-  },
-  joinActivity: function(){
+
+  joinActivity: function() {
     var uid = wx.getStorageSync('openid')
-    if(uid == ""){
+    if (uid == "") {
       util.showModel('请先登录', '刷新失败')
     }
     var that = this
     wx.request({
       url: `${config.service.host}/weapp/joinActivity`,
-      data:{
+      data: {
         uid: uid,
         aid: this.data.activityInfo.chatId
       },
       success(result) {
-        if(result.data.code==1){
+        if (result.data.code == 1) {
           util.showModel('加入成功', "");
         }
         that.navigateToChat()
@@ -72,7 +132,7 @@ Page({
       }
     })
   },
-  navigateToChat: function(){
+  navigateToChat: function() {
     var activityInfo = this.data.activityInfo
     var chatListRaw = app.getArrayFromStorage('chatListRaw')
     var chatId = this.data.activityInfo.chatId
@@ -107,16 +167,22 @@ Page({
       url: '../chat/chat?chatId=' + this.data.activityInfo.chatId
     })
   },
-  onReady: function() {
-
+  viewCreator: function() {
+    wx.navigateTo({
+      url: '../viewUserInfo/viewUserInfo?uId=' + this.data.activityInfo.creatorUid
+    })
+  },
+  joinerlist: function() {
+    var members = JSON.stringify(this.data.activityInfo.members)
+    wx.navigateTo({
+      url: '../joinerlist/joinerlist?members=' + members
+    })
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
-
-  },
+  onShow: function() {},
 
   /**
    * 生命周期函数--监听页面隐藏

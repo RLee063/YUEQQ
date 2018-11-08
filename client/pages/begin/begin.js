@@ -183,7 +183,7 @@ Page({
       },
 
       fail(error) {
-        util.showModel('登录失败', '请开启微信授权，否则无法登陆！' + error)
+        util.showModel('登录失败', '请开启微信授权，否则无法登陆！' )
         console.log('登录失败', error)
       }
     })

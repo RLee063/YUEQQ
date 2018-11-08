@@ -3,18 +3,57 @@
   <view name="activityPic" class="pic-block">
     <image class="pic" src="{{activityInfo.picUrl}}" mode="aspectFill"></image>
   </view>
-  <view class="info-block">
-    {{activityInfo.title}}
+  <view class='titleAndClass'>
+    <view wx:if="{{activityInfo.sportType===0}}">
+      <image class="activityclass" src="./tabletennis.png" background-size="cover"></image>
+    </view>
+    <view wx:elif="{{activityInfo.sportType===1}}">
+      <image class="activityclass" src="./basketball.png" background-size="cover"></image>
+    </view>
+    <view wx:elif="{{activityInfo.sportType===2}}">
+      <image class="activityclass" src="./tennis.png" background-size="cover"></image>
+    </view>
+    <view wx:elif="{{activityInfo.sportType===3}}">
+      <image class="activityclass" src="./badminton.png" background-size="cover"></image>
+    </view>
+    <view wx:elif="{{activityInfo.sportType===4}}">
+      <image class="activityclass" src="./football.png" background-size="cover"></image>
+    </view>
+    <view wx:elif="{{activityInfo.sportType===5}}">
+      <image class="activityclass" src="./running.png" background-size="cover"></image>
+    </view>
+    <view class="activityinfo-title">
+      {{activityInfo.title}}
+    </view>
   </view>
-  <view class="info-block">
-    {{activityInfo.sportType}}
+  <view class='allinfo'>
+    <view class="detailInfo">
+      <image src='startTime.svg ' style='width:22px;height:22px ' class='icon '></image>
+      <text class="detailInfo-title"> 开始时间:</text>
+      <text class="detailInfo-text">{{activityInfo.startTime}} </text>
+    </view>
+    <view class="detailInfo">
+      <image src='description.svg ' style='width:22px;height:22px ' class='icon '></image>
+      <text class="detailInfo-title"> 活动描述:</text>
+      <text class="detailInfo-text">{{activityInfo.description}} </text>
+    </view>
+
+    <view class="detailInfo-creator" bindtap='viewCreator'>
+      <image src='creator.svg ' style='width:22px;height:22px ' class='icon '></image>
+      <text class="detailInfo-title"> 创建同学:</text>
+      <image class="creatorInfo-avatar" src="{{creator.avatarUrl}}" background-size="cover"></image>
+      <text class="detailInfo-creator-text"> {{creator.nickName}} >  </text>
+    </view>
+
   </view>
-  <view class="info-block">
-    {{activityInfo.startTime}}
+
+  <view class="detailInfo-joiner" bindtap='joinerlist'>
+    <image src='friends.svg ' style='width:22px;height:22px ' class='icon '></image>
+    <text class="detailInfo-title"> 活动朋友:</text>
+      <image wx:for="{{joiner}}" class="joinerInfo-avatar" src="{{item.avatarUrl}}" background-size="cover"></image>
+    <text class="joinerInfo-num"> ...共{{joiner.length}}人 ></text>
   </view>
-  <view wx:for="{{membersArray}}">
-    <image class="avatar" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill"/>
-  </view>
+
 </view>
 
 <view>

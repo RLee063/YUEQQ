@@ -1,0 +1,23 @@
+<view class='container'>
+  <view class="head"></view>
+  <view class="lists" wx:for="{{joinerInfo}}" wx:key="item.uid" bindtap="details" data-uid="{{item.uid}}">
+    <view>
+      <image class="activityclass" src='{{item.avatarUrl}}' background-size="cover"></image>
+    </view>
+    <view class="introduce">
+      <view class='introduce-name'>
+        <text class="introduce-name">{{item.nickName}}</text>
+        <image class="seximg" wx:if='{{item.sex==1}}' src='../../images/sex1.png' style='width:55rpx;height:55rpx'></image>
+        <image class="seximg" wx:elif='{{item.sex==2}}' src='../../images/sex2.png' style='width:55rpx;height:55rpx'></image>
+      </view>
+      <view class='introduce-grade'>
+        <text class="introduce-time">{{item.grade}}-</text>
+        <text class="introduce-time">{{item.college}}</text>
+      </view>
+    </view>
+
+    <view class="array">
+      <text class="array-text">></text>
+    </view>
+  </view>
+</view>
