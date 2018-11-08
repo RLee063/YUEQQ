@@ -3,7 +3,7 @@ const {mysql} = require('../qcloud')
 module.exports = async(ctx) => {
     const {uid} = ctx.query
     try {
-        resInfo = (await mysql('UserInfo as ui').join('UserAvatar as ua', 'ua.uid','ui.uid').join('UserHomePic as uhp','ui.uid','uhp.uid').where('ui.uid',uid))
+        resInfo = (await mysql('UserInfo as ui').join('UserAvatar as ua', 'ua.uid','ui.uid').join('UserHomePic as uhp','ui.uid','uhp.uid').select().where('ui.uid',uid))
 
         if(resInfo.length === 0){
             ctx.body = {

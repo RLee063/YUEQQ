@@ -3,8 +3,8 @@ const {mysql} = require('../qcloud')
 module.exports = async(ctx) =>{
     const {aid} = ctx.query
     try {
-        var activity = await mysql().select().from('ActivityInfo').where('Aid',aid)[0]
-        var imgUrl = await mysql().select.from('ActivityPic').where('Aid',aid)[0]
+        var activity = (await mysql().select().from('ActivityInfo').where('aid',aid))[0]
+        var imgUrl = (await mysql().select.from('ActivityPic').where('aid',aid))[0]
         activity['imgUrl'] = imgUrl['PicUrl']
         
         ctx.body = {

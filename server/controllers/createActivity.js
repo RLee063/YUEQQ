@@ -1,20 +1,21 @@
 const {mysql} = require('../qcloud')
 
 module.exports = async(ctx) => {
-  const {uid, title,sportType,startTime,createTime,imgUrl,tags,maxNum} = ctx.query
+  const { uid, title, sportType, startTime, createTime, imgUrl, tags, maxNum, description} = ctx.query
 
   var timeStamp = Math.round(new Date().getTime()/1000)
   var aid = uid + timeStamp
 
   var activity = {
       Aid : aid,
-      Type : sportType,
+      'sportType' : sportType,
       CreateTime : createTime,
       StartTime : startTime,
       Title : title,
       CreatorUid : uid,
       MaxNum : maxNum,
-      index: 0
+      ord: 0,
+    'description': description
   }
 
   var formatedTags = tags.split(' ')
@@ -24,7 +25,7 @@ module.exports = async(ctx) => {
 
   try {
       //添加活动信息
-      activity['index'] = (await mysql('ActivityInfo').select().where('startTime', startTime)).length
+      activity['ord'] = (await mysql('ActivityInfo').select().where('startTime', startTime)).length
       await mysql('ActivityInfo').insert(activity)
       await mysql('ActivityPic').insert({
         Aid : aid,
