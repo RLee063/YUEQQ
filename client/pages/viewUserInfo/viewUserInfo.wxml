@@ -34,5 +34,7 @@
     <canvas canvas-id='skillCanvas' class="skill-canvas"></canvas>
   </view>
   <view class="recent-block"></view>
+
+  <view class="talk" bindtap="talkTo">FA</view>
 </view>
 

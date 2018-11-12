@@ -101,5 +101,11 @@ Page({
       angle += angle_incre
     }
     return ret
+  },
+  talkTo(){
+    var uid = this.data.userInfo.uid
+    wx.navigateTo({
+      url: "../chat/chat?chatId=" + uid
+    })
   }
 })

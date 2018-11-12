@@ -1,8 +1,8 @@
 <scroll-view class="top-block">
   <view wx:for="{{messageArray}}" class="message-block">
     <view class="user-avatar-block">
-      <image class="user-avatar-me" src="{{item.avatarUrl}}" mode="aspectFill" wx:if="{{item.userType == 0}}"></image>
-      <image class="user-avatar-other" src="{{item.avatarUrl}}" mode="aspectFill" wx:else></image>
+      <image class="user-avatar-me" src="{{avatarList[item.uid]}}" mode="aspectFill" wx:if="{{item.userType == 0}}"></image>
+      <image class="user-avatar-other" src="{{avatarList[item.uid]}}" mode="aspectFill" wx:else></image>
     </view>
     <view class="message-bubble">
       <view class="message-text-me" wx:if="{{item.userType == 0}}">{{item.messageText}}</view>

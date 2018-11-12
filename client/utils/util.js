@@ -81,4 +81,40 @@ var getUserInfoFromServer = function(uid){
   return ret
 }
 
-module.exports = { formatTime, showBusy, showSuccess, showModel ,px2rpx, rpx2px, getUserInfo}
+var getActivityInfo = function (aid) {
+  var ret
+  var activityInfo = wx.getStorageSync(aid)
+  if (activityInfo) {
+      ret = new Promise(function (resolve, reject) {
+      resolve(activityInfo)
+    })
+  }
+  else {
+    ret = getActivityInfoFromServer(aid)
+  }
+  return ret
+}
+
+var getActivityInfoFromServer = function (aid) {
+  var ret = new Promise(function (resolve, reject) {
+    wx.request({
+      url: `${config.service.host}/weapp/getActivityInfo`,
+      method: 'GET',
+      data: {
+        aid: aid,
+      },
+      success(result) {
+        console.log(result)
+        wx.setStorageSync(aid, result.data.data)
+        resolve(result.data.data)
+      },
+      fail(error) {
+        reject(error)
+      }
+    })
+  }
+  )
+  return ret
+}
+
+module.exports = { formatTime, showBusy, showSuccess, showModel ,px2rpx, rpx2px, getUserInfo, getUserInfoFromServer, getActivityInfo, getActivityInfoFromServer}

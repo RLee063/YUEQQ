@@ -1,4 +1,4 @@
-<view wx:for="{{chatList}}" class="chat-block" bindtap="gotoChat" data-uid="{{item.chatId}}">
+<view wx:for="{{chatList}}" class="chat-block" bindtap="gotoChat" data-uid="{{item.chatId}}" data-isGroup="{{item.isGroup}}">
   <view class="avatar-block">
     <image class="avatar-image" src="{{item.avatarUrl}}" mode="aspectFit"></image>
   </view>

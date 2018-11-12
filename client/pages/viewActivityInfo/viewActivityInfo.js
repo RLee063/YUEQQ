@@ -6,21 +6,19 @@ var that
 
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
     membersArray: [],
     activityInfo: {},
-    evaluating: false
+    evaluating: false,
+    aid: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var aid = "o5ko344qvKlQYv5kYMdTkWbkH8lg1541147786"
-    // var aid = options.aid
+    // var aid = "o5ko344qvKlQYv5kYMdTkWbkH8lg1541147786"
+    var aid = options.aid
     that = this
     this.setData({
       aid: aid
@@ -28,16 +26,19 @@ Page({
     this.refresh()
     // var aid = options.aid
   },
+  
   refresh: function() {
     var that = this
     var aid = this.data.aid
+    console.log(aid)
     wx.request({
-      url: `${config.service.host}/weapp/pullRefresh`,
+      url: `${config.service.host}/weapp/getActivityInfo`,
       data: {
         aid: aid
       },
       success: function(result) {
-        var activityInfo = result.data.data[0]
+        var activityInfo = result.data.data
+        console.log(activityInfo)
         var creatorUid = activityInfo.members[0].uid
         var me = wx.getStorageSync('openid')
         var isOwner = me == creatorUid ? 1 : 0
@@ -49,7 +50,7 @@ Page({
             break
           }
         }
-        activityInfo.status = 2
+        activityInfo.status = 0
         that.setData({
           activityInfo: activityInfo,
           hasJoined: hasJoined,
@@ -69,7 +70,6 @@ Page({
   },
   setMemberInfo: function(userInfo) {
     var membersArray = that.data.membersArray
-    membersArray.push(userInfo)
     membersArray.push(userInfo)
     that.setData({
       membersArray: membersArray
@@ -93,59 +93,60 @@ Page({
       util.showModel('请先登录', '刷新失败')
     }
     var that = this
+    console.log(uid)
+    console.log(this.data.aid)
     wx.request({
       url: `${config.service.host}/weapp/joinActivity`,
       data: {
         uid: uid,
-        aid: this.data.activityInfo.chatId
+        aid: this.data.aid
       },
       success(result) {
         if (result.data.code == 1) {
           util.showModel('加入成功', "");
         }
-        that.navigateToChat()
+        that.refresh()
       },
       fail(error) {
         util.showModel('加入失败', error);
       }
     })
-
   },
-  navigateToChat: function() {
-    var activityInfo = this.data.activityInfo
-    var chatListRaw = app.getArrayFromStorage('chatListRaw')
-    var chatId = this.data.activityInfo.chatId
-    var chat = {
-      chatId: chatId,
-      statusChanged: true,
-      newMessage: true,
-      unReaded: true,
-      messageArray: []
-    }
-    for (var i = 0; i < chatListRaw.length; i++) {
-      if (chatListRaw[i].chatId == chatId) {
-        chat.messageArray = chatListRaw[i].messageArray
-        chatListRaw.splice(i, 1)
-        break
-      }
-    }
-    var message = {}
-    message.uid = "systemUid"
-    message.messageText = "你已经加入活动拉！快和其他人聊聊吧！"
-    message.userType = 1
-    chat.messageArray.push(message)
-    chatListRaw.unshift(chat)
-    wx.setStorageSync('chatListRaw', chatListRaw)
+  // navigateToChat: function() {
+  //   var activityInfo = this.data.activityInfo
+  //   var chatListRaw = app.getArrayFromStorage('chatListRaw')
+  //   var chatId = this.data.activityInfo.chatId
+  //   var chat = {
+  //     chatId: chatId,
+  //     statusChanged: true,
+  //     newMessage: true,
+  //     unReaded: true,
+  //     messageArray: []
+  //   }
+  //   for (var i = 0; i < chatListRaw.length; i++) {
+  //     if (chatListRaw[i].chatId == chatId) {
+  //       chat.messageArray = chatListRaw[i].messageArray
+  //       chatListRaw.splice(i, 1)
+  //       break
+  //     }
+  //   }
+  //   var message = {}
+  //   message.uid = "systemUid"
+  //   message.messageText = "你已经加入活动拉！快和其他人聊聊吧！"
+  //   message.userType = 1
+  //   chat.messageArray.push(message)
+  //   chatListRaw.unshift(chat)
+  //   wx.setStorageSync('chatListRaw', chatListRaw)
 
-    var chatRoomInfo = {
-      avatarUrl: activityInfo.picUrl,
-      nickName: activityInfo.title
-    }
-    wx.setStorageSync(chatId, chatRoomInfo)
-    wx.navigateTo({
-      url: '../chat/chat?chatId=' + this.data.activityInfo.chatId
-    })
-  },
+  //   var chatRoomInfo = {
+  //     avatarUrl: activityInfo.picUrl,
+  //     nickName: activityInfo.title
+  //   }
+  //   wx.setStorageSync(chatId, chatRoomInfo)
+  //   wx.navigateTo({
+  //     url: '../chat/chat?chatId=' + this.data.activityInfo.chatId
+  //   })
+  // },
   viewMemberInfo: function(){
     wx.showActionSheet({
       itemList: ['A', 'B', 'C'],
@@ -266,6 +267,16 @@ Page({
     }
     this.p4.x += this.p4.directionX
     this.p4.y += this.p4.directionY
+  },
+
+  joinChat:function() {
+    var chatInfo = {}
+    chatInfo.chatId = this.data.aid
+    chatInfo.isGroup = true
+    var chatInfoString = JSON.stringify(chatInfo)
+    wx.navigateTo({
+      url: '../chat/chat?chatInfo=' + chatInfoString,
+    })
   },
   onReady: function() {
 

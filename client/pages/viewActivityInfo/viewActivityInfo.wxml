@@ -1,7 +1,7 @@
 <!--client/pages/viewActivityInfo/viewActivityInfo.wxml-->
 <view class="father">
   <view name="activityPic" class="pic-block">
-    <image class="pic" src="{{activityInfo.picUrl}}" mode="aspectFill"></image>
+    <image class="pic" src="{{activityInfo.imgUrl}}" mode="aspectFill"></image>
   </view>
   <view class="info-block">
     {{activityInfo.title}}
@@ -15,8 +15,8 @@
   <view wx:for="{{membersArray}}">
     <image catchtap="viewMemberInfo" class="avatar" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill"/>
   </view>
+  <button bindtap="joinChat">加入聊天室</button>
 </view>
-
 <view wx:if="{{evaluating}}">
   <view class="evaluate-mask"></view>
   <swiper interval="5000" duration="1000" next-margin="15px" class="evaluate-swiper">
@@ -26,7 +26,6 @@
     </swiper-item>
   </swiper>
 </view>
-
 <view>
   <view wx:if="{{((hasJoined)&&(activityInfo.status==0))}}" class="join">准备中</view>
   <view wx:elif="{{(!isFull)&&(activityInfo.status==0)}}" class="join" bindtap="joinActivity">参加活动</view>
