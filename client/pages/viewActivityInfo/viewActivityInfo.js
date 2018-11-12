@@ -57,7 +57,7 @@ Page({
           hasEvaluated: 0
         })
         for (var i = 0; i < activityInfo.members.length; i++) {
-          var pMemberInfo = app.getUserInfoByUid(activityInfo.members[i].uid)
+          var pMemberInfo = util.getUserInfo(activityInfo.members[i].uid)
           pMemberInfo.then(userInfo => that.setMemberInfo(userInfo))
         }
       },

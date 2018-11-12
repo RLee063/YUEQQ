@@ -40,26 +40,6 @@ App({
     }
     return ret
   },
-  getUserInfoByUid: function(uid){
-    var ret = new Promise(function(resolve, reject){
-      wx.request({
-        url: `${config.service.host}/weapp/getUserInfo`,
-        method: 'GET',
-        data: {
-          uid: uid,
-        },
-        success(result) {
-          wx.setStorageSync(uid, result.data.data[0])
-          resolve(result.data.data[0])
-        },
-        fail(error) {
-          reject(error)
-          wx.setStorageSync(uid, "error")
-        }
-      })
-    })
-    return ret
-  },
   storeUserInfoByUid: function(uid, userInfo){
     var ret = wx.getStorageSync(uid)
     if(!ret){

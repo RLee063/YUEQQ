@@ -1,11 +1,11 @@
-  const formatTime = date => {
+var config = require('../config.js')
+const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
   const hour = date.getHours()
   const minute = date.getMinutes()
-  const second = date.getSeconds()
-
+  const second = date.getSeconds() 
   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
@@ -47,7 +47,38 @@ var rpx2px = (rpx) => {
 }
 
 var getUserInfo = function(uid){
-  
+  var ret
+  var userInfo = wx.getStorageSync(uid)
+  if (userInfo) {
+    ret = new Promise(function (resolve, reject) {
+      resolve(userInfo)
+    })
+  }
+  else{
+    ret = getUserInfoFromServer(uid)
+  }
+  return ret
 }
 
-module.exports = { formatTime, showBusy, showSuccess, showModel ,px2rpx, rpx2px}
+var getUserInfoFromServer = function(uid){
+  var ret = new Promise(function (resolve, reject) {
+      wx.request({
+        url: `${config.service.host}/weapp/getUserInfo`,
+        method: 'GET',
+        data: {
+          uid: uid,
+        },
+        success(result) {
+          wx.setStorageSync(uid, result.data.data[0])
+          resolve(result.data.data[0])
+        },
+        fail(error) {
+          reject(error)
+        }
+      })
+    }
+  )
+  return ret
+}
+
+module.exports = { formatTime, showBusy, showSuccess, showModel ,px2rpx, rpx2px, getUserInfo}
