@@ -4,16 +4,25 @@
   </swiper-item>
 </swiper>
 
+<view class='line'></view>
+
 <view class="recommendation-text-block">
   <view class="recommendation-left-text">基友推荐</view>
   <view class="recommendation-right-text">换一批</view>
 </view>
 
-<swiper autoplay="1" circular="1" interval="8000" duration="500" previous-margin="0px" next-margin="0px" class="recommendation-user-block" display-multiple-items="4">
-  <swiper-item wx:for="{{recommendationUsers}}" wx:key="item.aid" class="recommendation-user-item">
-    <image src="{{item.picUrl}}" mode="center" class="recommendation-user-image"></image>
+<swiper autoplay="1" circular="1" interval="8000" duration="500" class="recommendation-user-block" display-multiple-items="3">
+  <swiper-item wx:for="{{recommendationUsers}}" wx:key="item.aid">
+    <view style="background-image:url({{item.picUrl}});" mode="center" class="recommendation-user-item">
+        <view class="recommendation-user-item-background"> </view>
+        <image src="{{item.avatarUrl}}" mode="aspectFill" class="recommendation-user-image"></image>
+        <view class="recommendation-user-name">{{item.title}}</view>
+        <view class="recommendation-user-reason">经常打球</view>
+    </view>
   </swiper-item>
 </swiper>
+
+<view class='line'></view>
 
 <view class="recommendation-text-block">
   <view class="recommendation-left-text">活动发现</view>
@@ -23,7 +32,7 @@
 <view class="activity-view-block">
   <view wx:for="{{activitiesArray}}" wx:key="item.aid">
     <view class="activity-block" bindtap="tapActivity" data-aid="{{item.aid}}">
-      <view class="type-card-basketball" wx:if="{{item.sportType == 0}}">
+      <!-- <view class="type-card-basketball" wx:if="{{item.sportType == 0}}">
         <image src="../../images/basketball.svg" class="type-card-image" mode="aspectFit"></image>
       </view>
       <view class="type-card-badminton" wx:if="{{item.sportType == 1}}">
@@ -40,7 +49,7 @@
       </view>
       <view class="type-card-running" wx:if="{{item.sportType == 5}}">
         <image src="../../images/running.svg" class="type-card-image" mode="aspectFit"></image>
-      </view>
+      </view> -->
 
       <view class="activity-mid-block">
         <image src="{{item.picUrl}}" class="activity-pic" mode="aspectFill"></image>
@@ -55,7 +64,7 @@
         <view>
           <view class="activity-time">{{item.startTime}}</view>
           <view class="activity-num">{{item.currentNum}}/{{item.maxNum}}</view>
-          <image class="num-pic" src="../../images/人群.png"></image>
+          <!-- <image class="num-pic" src="../../images/人群.png"></image> -->
         </view>
       </view>
     </view>

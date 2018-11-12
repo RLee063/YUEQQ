@@ -7,7 +7,7 @@ Page({
   data:{
     activitiesArray: [],
     recommendationActivities:[],
-    recommendationUsers:[]
+    recommendationUsers:[{},{},{},{},{},{}]
   },
   onReachBottom: function(){
     var that = this
