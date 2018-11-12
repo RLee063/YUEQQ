@@ -1,14 +1,20 @@
 /* ------------- */
 page{
-  background:rgb(211, 211, 211);
+  background:rgb(240, 240, 240);
 }
 
 ::-webkit-scrollbar{
   display:none;
 }
 
+.line{
+  height: 10rpx;
+  background: rgb(236, 236, 236);
+}
+
 .intro-text, .recommendation-left-text, .recommendation-right-text{
-  letter-spacing: 0.1rem;
+  line-height: 80rpx;
+  letter-spacing: 0.05rem;
   font-size: 30rpx;
 }
 
@@ -17,9 +23,6 @@ page{
   background: white;
 }
 
-.recommendation-acty-item{
-  width: 50%;
-}
 
 .recommendation-acty-image{
   height: 85%;
@@ -36,7 +39,7 @@ page{
 }
 
 .recommendation-left-text{
-  color: rgb(46, 46, 46);
+  color: rgb(87, 87, 87);
   font-weight: bold;
   float: left;
   font-size: normal;
@@ -46,29 +49,68 @@ page{
 .recommendation-right-text{
   margin-right: 45rpx;
   float: right;
-  color: rgb(167, 167, 167);
+  color: rgb(121, 121, 121);
 }
 
 .recommendation-user-block{
   color: rgrgb(124, 124, 124);
-  height: 220rpx;
+  height: 330rpx;
   padding-left: 30rpx;
   padding-right: 30rpx;
   background: white;
 }
 
 .recommendation-user-item{
-  height: 85%;
-  width: 80%;
-  margin-left: 10%;
-  margin-right: 10%;
   border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
-  /* box-shadow: -1px 5px 10px -3px rgb(102, 102, 102); */
-  box-shadow:-1px 3px 10px -1px rgb(173, 173, 173);
+  overflow: hidden;
+  width: 86%;
+  margin-left: 7%;
+  margin-top: 2%;
+  height: 85%;
+  box-shadow: -1rpx 2rpx 10rpx rgb(211, 211, 211);
+  background-repeat: no-repeat;
+  background-size: 100% 50%;
 }
 
 .recommendation-user-image{
-  
+  display: block;
+  height: 100rpx;
+  width: 100rpx;
+  margin: auto;
+  margin-top: 33%;
+  border-radius: 50%;
+  border: solid;
+  border-color: rgba(221, 221, 221, 0.5);
+  background-clip: border-box;
+}
+
+.recommendation-user-name{
+  white-space:nowrap;
+  margin-top: 7rpx;
+  padding-left: 5%;
+  padding-right: 5%;
+  overflow: hidden;
+  text-align: center;
+  font-size: small;
+  color: rgb(49, 49, 49);
+  font-weight: 600;
+  margin-bottom: 10rpx;
+}
+
+.recommendation-user-reason{
+  width: 80%;
+  line-height: 50rpx;
+  margin-left: 10%;
+  border-top: solid;
+  border-color: rgb(202, 202, 202);
+  border-width: thin;
+  white-space:nowrap;
+  margin-top: 0rpx;
+  overflow: hidden;
+  text-align: center;
+  font-size: small;
+  color: rgb(84, 147, 167);
+  font-weight: 600;
 }
 
 /* ===================== */
@@ -106,7 +148,7 @@ page{
   font-family: "微软雅黑";
   font-size: small;
   font-weight: bold;
-  background: rgb(241, 241, 241);
+  background: rgb(243, 243, 243);
 }
 
 .activity-time{
@@ -114,13 +156,13 @@ page{
   clear: both;
   padding: 5rpx 10rpx 5rpx 10rpx;
   border-radius: 15rpx 10rpx 10rpx 10rpx / 10rpx 10rpx 10rpx 10rpx;
-  margin: 5rpx 0rpx 15rpx 20rpx
+  margin: 10rpx 0rpx 15rpx 20rpx;
 }
 
 .activity-num{
   padding: 5rpx 10rpx 5rpx 10rpx;
   border-radius: 15rpx 10rpx 10rpx 10rpx / 10rpx 10rpx 10rpx 10rpx;
-  margin: 5rpx 0rpx 15rpx 0rpx;
+  margin: 10rpx 0rpx 15rpx 0rpx;
   float: right;
 }
 
