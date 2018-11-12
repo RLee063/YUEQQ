@@ -11,7 +11,8 @@ Page({
    */
   data: {
     membersArray: [],
-    activityInfo: {}
+    activityInfo: {},
+    evaluating: false
   },
 
   /**
@@ -30,7 +31,6 @@ Page({
   refresh: function() {
     var that = this
     var aid = this.data.aid
-    console.log(aid)
     wx.request({
       url: `${config.service.host}/weapp/pullRefresh`,
       data: {
@@ -69,6 +69,7 @@ Page({
   },
   setMemberInfo: function(userInfo) {
     var membersArray = that.data.membersArray
+    membersArray.push(userInfo)
     membersArray.push(userInfo)
     that.setData({
       membersArray: membersArray
@@ -145,17 +146,23 @@ Page({
       url: '../chat/chat?chatId=' + this.data.activityInfo.chatId
     })
   },
-
-  evaluateActivity: function() {
-    var params = {}
-    params.membersArray = that.data.membersArray
-    params.aid = that.data.aid
-    var paramsString = JSON.stringify(params)
-    wx.navigateTo({
-      url: '../evaluate/evaluate?params=' + paramsString
+  viewMemberInfo: function(){
+    wx.showActionSheet({
+      itemList: ['A', 'B', 'C'],
+      success(res) {
+        console.log(res.tapIndex)
+      },
+      fail(res) {
+        console.log(res.errMsg)
+      }
     })
   },
-
+  evaluateActivity: function() {
+    console.log("here")
+    this.setData({
+      evaluating: (this.data.evaluating + 1) % 2
+    })
+  },
   drawJoinMask: function() {
     var height = util.rpx2px(80)
     var width = 200
@@ -192,6 +199,7 @@ Page({
     var width = util.rpx2px(560)
     var rate = 200
     ctx.beginPath()
+    ctx.setGlobalAlpha(0.5)
     ctx.moveTo(rate, 0)
     ctx.lineTo(width, 0)
     ctx.arc(width, height/2, util.rpx2px(40), 1.5*Math.PI, 0.5*Math.PI)
@@ -227,7 +235,7 @@ Page({
     var height = util.rpx2px(80)
     var width = util.rpx2px(560)
     var rate = 200
-    ctx.setGlobalAlpha(0.5)
+    ctx.setGlobalAlpha(0.2)
     ctx.beginPath()
     ctx.moveTo(rate, 0)
     ctx.lineTo(width, 0)

@@ -13,8 +13,18 @@
     {{activityInfo.startTime}}
   </view>
   <view wx:for="{{membersArray}}">
-    <image class="avatar" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill"/>
+    <image catchtap="viewMemberInfo" class="avatar" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill"/>
   </view>
+</view>
+
+<view wx:if="{{evaluating}}">
+  <view class="evaluate-mask"></view>
+  <swiper interval="5000" duration="1000" next-margin="15px" class="evaluate-swiper">
+    <swiper-item wx:for="{{membersArray}}" wx:key="{{item.uid}}" class="evaluate-item">
+        <view class="evaluate-block">
+        </view>
+    </swiper-item>
+  </swiper>
 </view>
 
 <view>
@@ -23,8 +33,9 @@
   <view wx:elif="{{(isFull)&&(activityInfo.status==0)}}" class="join" >活动已满</view>
   <view wx:elif="{{(isOwner&&(activityInfo.status==1))}}" class="join" bindtap="endActivity">结束活动</view>
   <view wx:elif="{{(!isOwner)&&(activityInfo.status==1)}}" class="join">进行中</view>
-  <view wx:elif="{{(!hasEvaluated)&&(activityInfo.status==2)}}" class="join" bindtap="evaluateActivity">评价</view>
+  <view wx:elif="{{(!hasEvaluated)&&(activityInfo.status==2)}}" class="join" bindtap="evaluateActivity">评价
+    <canvas class="join-mask" canvas-id='joinMask2'></canvas>
+    <canvas class="join-mask" canvas-id='joinMask'></canvas>
+  </view>
   <view wx:elif="{{(hasEvaluated)&&(activityInfo.status==2)}}" class="join">已结束</view>
-  <canvas class="join-mask" canvas-id='joinMask2'></canvas>
-  <canvas class="join-mask" canvas-id='joinMask'></canvas>
 </view>

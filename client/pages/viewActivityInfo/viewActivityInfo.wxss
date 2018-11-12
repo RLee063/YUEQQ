@@ -1,4 +1,5 @@
 page{
+  position: relative;
   height: 100%;
 }
 
@@ -53,4 +54,28 @@ page{
 
 .join-mask{
   background-image: none;
+}
+
+.evaluate-mask{
+  position: absolute;
+  background: rgb(255, 255, 255);
+  opacity: 0.5;
+  height: 100%;
+  width: 750rpx;
+  top: 0rpx;
+}
+
+.evaluate-swiper{
+  position: absolute;
+  top: 25%;
+  height: 700rpx;
+  width: 100%;
+}
+
+.evaluate-block{
+  height: 100%;
+  width: 550rpx;
+  position: absolute;
+  margin-left: 100rpx;
+  background: rgb(255, 0, 0);
 }
