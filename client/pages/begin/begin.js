@@ -36,25 +36,21 @@ Page({
     authorized: false
   },
   onLoad: function(options) {
-
     if (wx.getStorageSync('logged') == true) {
-      // this.openTunnel()
+      this.login()
+      this.openTunnel()
       this.setData({
         authorized: true
       })
     }
-
-
   },
   onShow: function() {
     if (this.data.authorized) {
       wx.switchTab({
         url: '../home/home'
       })
-
       return
     }
-
   },
   openTunnel: function() {
     util.showBusy('信道连接中...')
@@ -85,8 +81,9 @@ Page({
 
     // 监听自定义消息（服务器进行推送）
     tunnel.on('speak', speak => {
+      console.log(speak)
       var uid = speak.who.openId
-      var chatId = speak.who.openId
+      var chatId = speak.word.from
       //存储用户信息
       app.storeUserInfoByUid(uid, speak.who)
       //添加至chatList
@@ -96,7 +93,8 @@ Page({
         statusChanged: true,
         newMessage: true,
         unReaded: true,
-        messageArray: []
+        messageArray: [],
+        isGroup: speak.word.isGroup
       }
       for(var i=0; i<chatListRaw.length; i++){
         if(chatListRaw[i].chatId == chatId){
@@ -127,7 +125,7 @@ Page({
   startprogram: function() {
     this.login()
     if (wx.getStorageSync('logged') == true) {
-      this.openTunnel()
+      // this.openTunnel()
     }
 
   },
@@ -135,8 +133,6 @@ Page({
   // 用户登录示例
   login: function() {
     if (this.data.logged) return
-
-
     var that = this
 
     // 调用登录接口
@@ -150,9 +146,9 @@ Page({
             userInfo: result,
             logged: true
           })
+          console.log("logged")
           wx.setStorageSync('userInfo', result);
           wx.setStorageSync('logged', true)
-          that.openTunnel()
           wx.switchTab({
             url: '../home/home'
           })
@@ -163,8 +159,8 @@ Page({
             login: true,
             success(result) {
               util.showSuccess('登录成功')
-              wx.setStorageSync('me', result)
-              console.log("openid is :" + wx.getStorageSync('openid'))
+              console.log(result)
+              wx.setStorageSync('me', result.data.data)
               that.setData({
                 userInfo: result,
                 logged: true

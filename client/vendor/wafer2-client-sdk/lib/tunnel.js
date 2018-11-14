@@ -189,7 +189,7 @@ function Tunnel(serviceUrl) {
             onClose: handleSocketClose,
             onError: handleSocketError,
         });
-
+        console.log(url)
         wx.connectSocket({ url: url });
         isFirstConnection = false;
     }

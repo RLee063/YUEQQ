@@ -1,22 +1,62 @@
 // client/pages/chat/chat.js
 var app = getApp();
 var messageGetor;
+var util = require('../../utils/util.js')
+var that;
 
 Page({
   data: {
     avatarList: {
-
+      "o5ko3434RP2lZQNVamvVxfrAugoY": "https://cdn.pixabay.com/photo/2018/09/22/17/05/ara-3695678__340.jpg"
     },
     messageArray: [],
     otherUid: [],
     chatId: "",
     messageText: "",
-    messageHeadIndex: 0
+    messageHeadIndex: 0,
+    isGroup: 0
   },
 
-  sendMessage: function(e) {
+  onUnload: function(){
+    clearInterval(messageGetor)
+  },
+
+  onLoad: function (options) {
+    console.log(options)
+    var chatInfoString = options.chatInfo
+    var chatInfo = JSON.parse(chatInfoString)
+    console.log(chatInfo)
+    this.setData({
+      chatId: chatInfo.chatId,
+      isGroup: chatInfo.isGroup
+    })
+
+    that = this
+    this.tunnel = app.tunnel
+    messageGetor = setInterval(this.getMessage, 1000)
+
+    this.updateAvatarList()
+
+    var chatListRaw = app.getArrayFromStorage('chatListRaw')
+    for(var i=0; i<chatListRaw.length; i++){
+      if(chatListRaw[i].chatId == chatInfo.chatId){
+        var headIndex = chatListRaw[i].messageArray.length - 1
+        this.setData({
+          messageHeadIndex: headIndex
+        })
+        this.loadMessageArray(chatListRaw[i].messageArray)
+        if (chatListRaw[i].unReaded){
+          chatListRaw[i].statusChanged = true
+        }
+        chatListRaw[i].unReaded = false
+      }
+    }
+    wx.setStorageSync('chatListRaw', chatListRaw)
+  },
+  sendMessage: function (e) {
+    console.log("AvatarList" + JSON.stringify(this.data.avatarList))
     if (app.tunnel && app.tunnel.isActive()) {
-      if(e.detail.value.messageText==""){
+      if (e.detail.value.messageText == "") {
         return
       }
       var msg = e.detail.value.messageText
@@ -25,7 +65,8 @@ Page({
         'word': {
           'to': this.data.chatId,
           'from': myUid,
-          'msg': msg
+          'msg': msg,
+          'isGroup': this.data.isGroup
         },
       })
       this.setData({
@@ -43,7 +84,8 @@ Page({
         statusChanged: true,
         newMessage: true,
         unReaded: true,
-        messageArray: []
+        messageArray: [],
+        isGroup: this.data.isGroup
       }
       for (var i = 0; i < chatListRaw.length; i++) {
         if (chatListRaw[i].chatId == this.data.chatId) {
@@ -59,37 +101,6 @@ Page({
       this.getMessage()
     }
   },
-
-  onUnload: function(){
-    clearInterval(messageGetor)
-  },
-
-  onLoad: function (options) {
-    app.getUserInfoByUid(options.chatId)
-    this.tunnel = app.tunnel
-    this.setData({
-      chatId: options.chatId
-    })
-    messageGetor = setInterval(this.getMessage, 1000)
-
-    var chatListRaw = app.getArrayFromStorage('chatListRaw')
-    console.log(options)
-    for(var i=0; i<chatListRaw.length; i++){
-      if(chatListRaw[i].chatId == options.chatId){
-        var headIndex = chatListRaw[i].messageArray.length - 1
-        this.setData({
-          messageHeadIndex: headIndex
-        })
-        this.loadMessageArray(chatListRaw[i].messageArray)
-        if (chatListRaw[i].unReaded){
-          chatListRaw[i].statusChanged = true
-        }
-        chatListRaw[i].unReaded = false
-      }
-    }
-    wx.setStorageSync('chatListRaw', chatListRaw)
-  },
-
   loadMessageArray: function (messageArray){
     var headIndex = this.data.messageHeadIndex
     var start = headIndex >= 19 ? headIndex - 19 : 0
@@ -114,13 +125,44 @@ Page({
           this.setData({
             messageArray: messageArray
           })
+          //是否要更新头像列表
+          if(!this.data.avatarList[messageArray[messageArray.length-1].uid]){
+            console.log("更新头像")
+            this.updateAvatarList()
+          }
         }
       }
       break
     }
     wx.setStorageSync('chatListRaw', chatListRaw)
   },
-
+  updateAvatarList: function(){
+    if(this.data.isGroup){
+      var avatarList = {}
+      var groupInfoPromise = util.getActivityInfo(this.data.chatId)
+      groupInfoPromise.then(activityInfo => {
+        for(var i=0; i<activityInfo.members.length; i++){
+          avatarList[activityInfo.members[i].uid] = activityInfo.members[i].avatarUrl
+        }
+        that.setData({
+          avatarList: avatarList
+        })
+      })
+    }
+    else{
+      var myInfo = wx.getStorageSync('me')
+      var avatarList = {}
+      avatarList[myInfo.openId] = myInfo.avatarUrl
+      console.log(this.data.chatId)
+      var otherInfoPromise =  util.getUserInfo(this.data.chatId)
+      otherInfoPromise.then(userInfo => {
+        avatarList[userInfo.uid] = userInfo.avatarUrl
+        that.setData({
+          avatarList: avatarList
+        })
+      })
+    }
+  }, 
   pageScrollToBottom: function () {
     wx.createSelectorQuery().select('#j_page').boundingClientRect(function (rect) {                    wx.pageScrollTo({
         scrollTop: 1000000000,

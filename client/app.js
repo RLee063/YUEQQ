@@ -8,7 +8,7 @@ App({
   globalData:{
     logged: false,
     authorized: false,
-    sportType: ['乒乓球', '篮球', '网球', '羽毛球','足球',  '跑步']
+    sportType: ['乒乓球', '篮球', '网球', '羽毛球', '足球',  '跑步']
   },
   onLaunch: function () {
     that = this
@@ -39,32 +39,6 @@ App({
       wx.setStorageSync(key, ret)
     }
     return ret
-  },
-  getUserInfoByUid: function(uid){
-    var ret = wx.getStorageSync(uid)                                             
-    var flag
-    if(!ret){
-      console.log("start request:" + uid)
-      var that = this
-      wx.request({
-        url: `${config.service.host}/weapp/getUserInfo`,
-        method: 'GET',
-        data: {
-          uid: uid,
-        },
-        success(result) {
-          console.log(result)
-          wx.setStorageSync(uid, result.data.data[0])
-        },
-        fail(error) {
-          wx.setStorageSync(uid, "error")
-        }
-      })
-      return false
-    }
-    else{
-      return ret
-    }
   },
   storeUserInfoByUid: function(uid, userInfo){
     var ret = wx.getStorageSync(uid)

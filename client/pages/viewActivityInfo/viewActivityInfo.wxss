@@ -1,4 +1,5 @@
 page{
+  position: relative;
   height: 100%;
 }
 
@@ -27,7 +28,7 @@ page{
   letter-spacing: 0.2rem;
 }
 
-.avatar{
+.avatar, .avatar-signed, .avatar-unsigned{
   float: left;
   height: 100rpx;
   width: 100rpx;
@@ -35,16 +36,74 @@ page{
   border-radius: 100%;
 }
 
-.join{
+.avatar-signed{
+  border: solid;
+  border-color: green;
+}
+
+.join, .join-mask{
   position: fixed;
   bottom: 50rpx;
-  left: 10%;
-  width: 80%;
+  left: 10%; 
+  width: 80%; 
+  height: 80rpx;
   background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
   color: white;
   letter-spacing: 0.2rem;
   font-size: 0.9rem;
   line-height: 80rpx;
   text-align: center;
-  border-radius: 7% / 50% ;
+  border-radius: 6.65%  / 50% ;
+  box-shadow: 0px 0px 10px rgb(189, 189, 189);
+}
+
+.join-mask{
+  background-image: none;
+}
+
+.sub-mask{
+  position: absolute;
+  background: rgb(255, 255, 255);
+  opacity: 0.5;
+  height: 100%;
+  width: 750rpx;
+  top: 0rpx;
+}
+
+.evaluate-swiper{
+  position: absolute;
+  top: 25%;
+  height: 50%;
+  width: 100%;
+}
+
+.evaluate-item{
+  height: 100%;
+  margin-left: 100rpx;
+  position: absolute;
+}
+
+.evaluate-block{
+  height: 100%;
+  width: 550rpx;
+  background: rgb(255, 0, 0);
+}
+
+.end-block{
+  top: 25%;
+  height: 50%;
+  width: 550rpx;
+  position: absolute;
+  margin-left: 100rpx;
+  background: rgb(255, 0, 0);
+}
+
+.more{
+  position: absolute;
+  height: 100rpx;
+  width: 100rpx;
+  left: 650rpx;
+  top: 0rpx;
+  background: white;
+  line-height: 100rpx;
 }

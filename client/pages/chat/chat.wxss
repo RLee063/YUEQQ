@@ -6,8 +6,6 @@ page{
 }
 
 .message-block{
-  /* background: rgb(226, 107, 107);
-  border: solid; */
   margin-bottom: 30rpx;
 }
 

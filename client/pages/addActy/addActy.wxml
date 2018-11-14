@@ -21,6 +21,15 @@
     <view class="picker-view">选择球种:
       <picker range = "{{sportTypeRange}}" bindchange="bindSportTypeChange" >{{sportType}}</picker>
     </view>
+    <view class="input-view">
+      信用限制:<input name="creditLimit" value="{{creditLimit}}"></input>
+    </view>
+    <view class="input-view">
+      级别限制:<input name="levelLimit" value="{{levelLimit}}"></input>
+    </view>
+    <view class="textarea-view">请输入详细描述:
+      <textarea name="description" value="{{description}}" auto-height="true"> </textarea>
+    </view>
     <view class="tags-view">标签:
         <input bindconfirm="addTag" value="{{tagInput}}"></input>
     </view>

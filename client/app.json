@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/message/message",
     "pages/begin/begin",
-    "pages/viewUserInfo/viewUserInfo",
     "pages/viewActivityInfo/viewActivityInfo",
+    "pages/viewUserInfo/viewUserInfo",
     "pages/home/home",
     "pages/user/user",
     "pages/chat/chat",
@@ -13,14 +14,14 @@
     "pages/motto/motto",
     "pages/test/test",
     "pages/addCgi/addCgi",
-    "pages/scoreInfo/scoreInfo",
+    "pages/scoreinfo/scoreinfo",
     "pages/myActivities/myActivities",
     "pages/createDid/createDid",
     "pages/createUndo/createUndo",
     "pages/attendUndo/attendUndo",
     "pages/attendDid/attendDid",
     "pages/myActy/myActy",
-    "pages/message/message"
+    "pages/evaluate/evaluate"
   ],
   "window": {
     "backgroundColor": "white",

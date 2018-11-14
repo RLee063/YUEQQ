@@ -1,12 +1,16 @@
 var app = getApp()
+var util = require('../../utils/util')
 var redDotClear
 var refresh
+var that
+
 Page({
   data: {
     chatList:[]
   },
 
   onLoad: function (options) {
+    that = this
     var chatListRaw = app.getArrayFromStorage('chatListRaw')
     var chatList = []
     console.log(chatListRaw)
@@ -74,32 +78,71 @@ Page({
   },
   getChatByChatRaw(chatRaw){
     var chatId = chatRaw.chatId
-    var userInfo = app.getUserInfoByUid(chatRaw.chatId)
-    if(!userInfo){
-      console.log("no such userInfo")
-      return false
-    }
-    var avatarUrl = userInfo.avatarUrl
-    var uName = userInfo.nickName
+    var isGroup = chatRaw.isGroup
     var lastMessage = chatRaw.messageArray[chatRaw.messageArray.length - 1]
     var lastMessageText = lastMessage.messageText
+    var lastMessageTime = "19:00"
+    var lastMessageUname = "Stairway"
     var unReaded = chatRaw.unReaded
-
     var chat = {
       chatId: chatId,
-      uName: uName,
-      avatarUrl: avatarUrl,
+      uName: "",
+      avatarUrl: "",
       lastMessageText: lastMessageText,
-      unReaded: unReaded
+      lastMessageTime: lastMessageTime,
+      lastMessageUname: lastMessageUname,
+      unReaded: unReaded,
+      isGroup: isGroup,
     }
+    this.completeListInfo(chatRaw)
     return chat
   },
+
+  completeListInfo: function (chatRaw){
+    if(chatRaw.isGroup){
+      var actyInfoPromise = util.getActivityInfo(chatRaw.chatId)
+      actyInfoPromise.then(activityInfo => {
+        var chatList = that.data.chatList
+        for(var i=0; i<chatList.length; i++){
+          if(chatList[i].chatId == chatRaw.chatId){
+            chatList[i].avatarUrl = activityInfo.imgUrl
+            chatList[i].uName = activityInfo.title
+            break
+          }
+        }
+        that.setData({
+          chatList: chatList
+        })
+      })
+    }
+    else{
+      var userInfoPromise = util.getUserInfo(chatRaw.chatId)
+      userInfoPromise.then(userInfo => {
+        var chatList = that.data.chatList
+        for (var i = 0; i < chatList.length; i++) {
+          if (chatList[i].chatId == chatRaw.chatId) {
+            chatList[i].avatarUrl = userInfo.avatarUrl
+            chatList[i].uName = userInfo.nickName
+            break
+          }
+        }
+        that.setData({
+          chatList: chatList
+        })
+      })
+    }
+  },
+
   gotoChat: function(e){
     console.log(e)
-    var chatId = e.currentTarget.dataset.uid
+    var chatInfo = {
+      chatId: e.currentTarget.dataset.uid,
+      isGroup: e.currentTarget.dataset.isgroup
+    }
+    var chatInfoString = JSON.stringify(chatInfo)
     wx.navigateTo({
       // url: "../viewUserInfo/viewUserInfo?id=2"
-      url: "../chat/chat?chatId=" + chatId
+      url: "../chat/chat?chatInfo=" + chatInfoString
     })
   },
   clearRedDot:function(){
