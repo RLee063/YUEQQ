@@ -1,0 +1,117 @@
+/* pages/viewUserInfo/viewUserInfo.wxss */
+page{
+  height: 100%;
+}
+
+.father{
+  height: 100%;
+  position: relative;
+}
+
+.home-pic{
+  width: 100%;
+  height: 30%;
+  margin-bottom: 60rpx;
+}
+
+.avatar-pic{
+  height: 150rpx;
+  width: 150rpx; 
+  left: 300rpx;
+  top: 10%;
+  border-radius: 100%;
+  position: absolute;
+  border: solid;
+  border-color: rgba(0, 0, 0, 1);
+  box-shadow: 0px 0px 15px black;
+}
+
+.mid-block{
+  position: absolute;
+  height: 8%;
+  width: 550rpx;
+  left: 100rpx;
+  top: 25%;
+  background: white;
+  border: solid;
+  box-shadow: 0px 0px 15px black;
+}
+
+.mid-in-block{
+  height: 100%;
+  width: 33.33%;
+  float: left;
+}
+
+.mid-in-in-block, .mid-in-in-right-block{
+  position: relative;
+  top: 10%;
+  height: 80%;
+  background:rgb(115, 207, 115);
+  border-right: solid;
+}
+
+.mid-in-in-right-block{
+  border: none;
+}
+
+.mid-top-text{
+  font-size: small;
+  text-align: center;
+}
+
+.mid-bottom-text{
+  font-size: small;
+  text-align: center;
+}
+
+.intro-block, .info-block, .skill-block, .recent-block{
+  width: 92%;
+  margin: auto;
+  margin-top: 30rpx;
+  background: rgb(115, 207, 115);
+}
+
+.info-block{
+  
+}
+
+.info-in-block, .info-college, .info-grade, .info-phone{
+  height: 100rpx;
+  background: rgb(245, 151, 151);
+  margin: 10rpx;
+
+  line-height: 100rpx;
+  padding-left: 30rpx;
+  font-size: small;
+}
+
+.skill-block{
+  height: 250px;
+}
+
+.skill-canvas{
+  margin: auto;
+  width: 250px;
+  height: 100%;
+}
+
+.recent-block{
+  height: 20%;
+}
+
+.talk{
+  position: fixed;
+  bottom: 50rpx;
+  left: 10%; 
+  width: 80%; 
+  height: 80rpx;
+  background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  letter-spacing: 0.2rem;
+  font-size: 0.9rem;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 6.65%  / 50% ;
+  box-shadow: 0px 0px 10px rgb(189, 189, 189);
+}

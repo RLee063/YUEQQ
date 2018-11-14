@@ -24,10 +24,12 @@ Page({
     // var aid = "o5ko344qvKlQYv5kYMdTkWbkH8lg1541147786"
     var aid = options.aid
     that = this
+    var myUid = wx.getStorageSync('openid')
     this.setData({
-      aid: aid
+      aid: aid,
+      myUid: myUid
     })
-    this.data.myUid = wx.getStorageSync('openid')
+    console.log(this.data)
     this.refresh()
     // var aid = options.aid
   },

@@ -63,9 +63,8 @@
   <view class="sub-mask"></view>
   <view class="end-block">
     <view wx:for="{{membersArray}}">
-      <image wx:if="{{transferTo == myUid}}"></image>
-      <image catchtap="chooseTransfer" wx:elif="{{transferTo == item.uid}}" class="avatar-signed" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill"/>
-      <image catchtap="chooseTransfer" wx:else class="avatar-unsigned" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill"/>
+      <image catchtap="chooseTransfer" wx:if="{{(myUid != item.uid)&&(transferTo == item.uid)}}" class="avatar-signed" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill"/>
+      <image catchtap="chooseTransfer" wx:elif="{{myUid != item.uid}}" class="avatar-unsigned" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill"/>
     </view>
   </view>
   <view class="join" catchtap='completeTransfer'>完成</view>

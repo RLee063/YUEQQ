@@ -1,0 +1,40 @@
+<!--pages/viewUserInfo/viewUserInfo.wxml-->
+<view class="father">
+  <image src="{{userInfo.avatarUrl}}" class="avatar-pic" mode="aspectFill"/>
+  <view class="mid-block">
+    <view class="mid-in-block">
+      <view class="mid-in-in-block">
+        <view class="mid-top-text">1</view>
+        <view class="mid-bottom-text">关注</view>
+      </view>
+    </view>
+    <view class="mid-in-block">
+      <view class="mid-in-in-block">
+        <view class="mid-top-text">2</view>
+        <view class="mid-bottom-text">活动</view>
+      </view>
+    </view>
+    <view class="mid-in-block">
+      <view class="mid-in-in-right-block">
+        <view class="mid-top-text">3</view>
+        <view class="mid-bottom-text">粉丝</view>
+      </view>
+    </view>
+  </view>
+  <image class="home-pic" src="{{userInfo.homePicUrl}}" mode="aspectFill"></image> 
+  <view class="info-block">
+    <view wx:if="{{userInfo.college}}" class="info-college">学院：{{userInfo.college}}
+    </view>
+    <view wx:if="{{userInfo.grade}}" class="info-grade">年级：{{userInfo.grade}}
+    </view>
+    <view wx:if="{{userInfo.phone}}" class="info-phone">电话：{{userInfo.phone}}
+    </view>
+  </view>
+  <view class="skill-block">
+    <canvas canvas-id='skillCanvas' class="skill-canvas"></canvas>
+  </view>
+  <view class="recent-block"></view>
+
+  <view class="talk" bindtap="talkTo" wx:if="{{isViewOtherInfo}}">FA</view>
+</view>
+
