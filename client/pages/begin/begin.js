@@ -94,16 +94,19 @@ Page({
         newMessage: true,
         unReaded: true,
         messageArray: [],
-        isGroup: speak.word.isGroup
+        isGroup: speak.word.isGroup,
+        unReadedNum: 0
       }
       for(var i=0; i<chatListRaw.length; i++){
         if(chatListRaw[i].chatId == chatId){
+          chat.unReadedNum = chatListRaw[i].unReadedNum
+          console.log(chat)
           chat.messageArray = chatListRaw[i].messageArray
           chatListRaw.splice(i,1)
           break
         }
       }
-      
+      chat.unReadedNum += 1
       var message = {}
       message.uid = uid
       message.messageText = speak.word.msg
@@ -126,7 +129,7 @@ Page({
   startprogram: function() {
     this.login()
     if (wx.getStorageSync('logged') == true) {
-      // this.openTunnel()
+      this.openTunnel()
     }
 
   },
