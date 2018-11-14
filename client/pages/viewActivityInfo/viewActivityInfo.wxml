@@ -17,24 +17,56 @@
   </view>
   <button bindtap="joinChat">加入聊天室</button>
 </view>
-<view wx:if="{{evaluating}}">
-  <view class="evaluate-mask"></view>
-  <swiper interval="5000" duration="1000" next-margin="15px" class="evaluate-swiper">
-    <swiper-item wx:for="{{membersArray}}" wx:key="{{item.uid}}" class="evaluate-item">
-        <view class="evaluate-block">
-        </view>
-    </swiper-item>
-  </swiper>
-</view>
+
 <view>
   <view wx:if="{{((hasJoined)&&(activityInfo.status==0))}}" class="join">准备中</view>
   <view wx:elif="{{(!isFull)&&(activityInfo.status==0)}}" class="join" bindtap="joinActivity">参加活动</view>
   <view wx:elif="{{(isFull)&&(activityInfo.status==0)}}" class="join" >活动已满</view>
   <view wx:elif="{{(isOwner&&(activityInfo.status==1))}}" class="join" bindtap="endActivity">结束活动</view>
   <view wx:elif="{{(!isOwner)&&(activityInfo.status==1)}}" class="join">进行中</view>
-  <view wx:elif="{{(!hasEvaluated)&&(activityInfo.status==2)}}" class="join" bindtap="evaluateActivity">评价
-    <canvas class="join-mask" canvas-id='joinMask2'></canvas>
-    <canvas class="join-mask" canvas-id='joinMask'></canvas>
+  <view wx:elif="{{(hasJoined)&&(!hasEvaluated)&&(activityInfo.status==2)}}" class="join" bindtap="evaluateActivity">评价
+    <!-- <canvas class="join-mask" canvas-id='joinMask2'></canvas>
+    <canvas class="join-mask" canvas-id='joinMask'></canvas> -->
   </view>
-  <view wx:elif="{{(hasEvaluated)&&(activityInfo.status==2)}}" class="join">已结束</view>
+  <view wx:elif="{{(activityInfo.status==2)}}" class="join">已结束</view>
+</view>
+
+<view class='more' catchtap='showMoreOptions'>更多</view>
+
+<view wx:if="{{evaluating}}">
+  <view class="sub-mask"></view>
+  <swiper interval="5000" duration="1000" class="evaluate-swiper" next-margin='150rpx'>
+    <swiper-item wx:for="{{membersArray}}" wx:key="{{item.uid}}" class="evaluate-item">
+        <view class="evaluate-block">
+          <image class="avatar" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill"/>
+          <button>up</button>
+          <button>down</button>
+        </view>
+    </swiper-item>
+  </swiper>
+  <view class="join" catchtap='completeEvaluateActivity'>完成</view>
+</view>
+
+<view wx:if="{{ending}}">
+  <view class="sub-mask"></view>
+  <view class="end-block">
+    <view wx:for="{{membersArray}}">
+      <image catchtap="sign" wx:if="{{!item.signed}}" class="avatar-unsigned" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill"/>
+      <image catchtap="sign" wx:if="{{item.signed}}" class="avatar-signed" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill"/>
+    </view>
+  </view>
+  <view class="join" catchtap='completeEndActivity'>完成</view>
+</view>
+
+
+<view wx:if="{{transfering}}">
+  <view class="sub-mask"></view>
+  <view class="end-block">
+    <view wx:for="{{membersArray}}">
+      <image wx:if="{{transferTo == myUid}}"></image>
+      <image catchtap="chooseTransfer" wx:elif="{{transferTo == item.uid}}" class="avatar-signed" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill"/>
+      <image catchtap="chooseTransfer" wx:else class="avatar-unsigned" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill"/>
+    </view>
+  </view>
+  <view class="join" catchtap='completeTransfer'>完成</view>
 </view>

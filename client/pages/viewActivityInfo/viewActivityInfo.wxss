@@ -28,12 +28,17 @@ page{
   letter-spacing: 0.2rem;
 }
 
-.avatar{
+.avatar, .avatar-signed, .avatar-unsigned{
   float: left;
   height: 100rpx;
   width: 100rpx;
   margin-right: 10rpx;
   border-radius: 100%;
+}
+
+.avatar-signed{
+  border: solid;
+  border-color: green;
 }
 
 .join, .join-mask{
@@ -56,7 +61,7 @@ page{
   background-image: none;
 }
 
-.evaluate-mask{
+.sub-mask{
   position: absolute;
   background: rgb(255, 255, 255);
   opacity: 0.5;
@@ -68,14 +73,37 @@ page{
 .evaluate-swiper{
   position: absolute;
   top: 25%;
-  height: 700rpx;
+  height: 50%;
   width: 100%;
+}
+
+.evaluate-item{
+  height: 100%;
+  margin-left: 100rpx;
+  position: absolute;
 }
 
 .evaluate-block{
   height: 100%;
   width: 550rpx;
+  background: rgb(255, 0, 0);
+}
+
+.end-block{
+  top: 25%;
+  height: 50%;
+  width: 550rpx;
   position: absolute;
   margin-left: 100rpx;
   background: rgb(255, 0, 0);
+}
+
+.more{
+  position: absolute;
+  height: 100rpx;
+  width: 100rpx;
+  left: 650rpx;
+  top: 0rpx;
+  background: white;
+  line-height: 100rpx;
 }

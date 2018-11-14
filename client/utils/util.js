@@ -69,6 +69,7 @@ var getUserInfoFromServer = function(uid){
           uid: uid,
         },
         success(result) {
+          console.log(result)
           wx.setStorageSync(uid, result.data.data[0])
           resolve(result.data.data[0])
         },

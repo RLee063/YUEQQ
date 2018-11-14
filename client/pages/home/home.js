@@ -67,7 +67,6 @@ Page({
   viewUserInfo: function(e){
     var uid = e.currentTarget.dataset.uid
     wx.navigateTo({
-      // url: "../viewUserInfo/viewUserInfo?id=2"
       url: "../viewUserInfo/viewUserInfo?uid="+uid
     })
   },

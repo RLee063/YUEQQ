@@ -10,6 +10,10 @@ Page({
     membersArray: [],
     activityInfo: {},
     evaluating: false,
+    ending: false,
+    transfering: false,
+    transferTo: "",
+    myUid: "",
     aid: ""
   },
 
@@ -23,6 +27,7 @@ Page({
     this.setData({
       aid: aid
     })
+    this.data.myUid = wx.getStorageSync('openid')
     this.refresh()
     // var aid = options.aid
   },
@@ -31,12 +36,16 @@ Page({
     var that = this
     var aid = this.data.aid
     console.log(aid)
+    wx.showLoading({
+      title: '',
+    })
     wx.request({
       url: `${config.service.host}/weapp/getActivityInfo`,
       data: {
         aid: aid
       },
       success: function(result) {
+        wx.hideLoading()
         var activityInfo = result.data.data
         console.log(activityInfo)
         var creatorUid = activityInfo.members[0].uid
@@ -50,17 +59,22 @@ Page({
             break
           }
         }
-        activityInfo.status = 0
+        activityInfo.status = 1
+        for(var i=0; i<activityInfo.members.length; i++){
+          activityInfo.members[i].signed = false
+        }
         that.setData({
           activityInfo: activityInfo,
           hasJoined: hasJoined,
           isOwner: isOwner,
-          hasEvaluated: 0
+          hasEvaluated: 0,
+          membersArray: activityInfo.members
         })
-        for (var i = 0; i < activityInfo.members.length; i++) {
-          var pMemberInfo = util.getUserInfo(activityInfo.members[i].uid)
-          pMemberInfo.then(userInfo => that.setMemberInfo(userInfo))
-        }
+        // that.data.membersArray.splice(0, that.data.membersArray.length)
+        // for (var i = 0; i < activityInfo.members.length; i++) {
+        //   var pMemberInfo = util.getUserInfo(activityInfo.members[i].uid)
+        //   pMemberInfo.then(userInfo => that.setMemberInfo(userInfo))
+        // }
       },
       fail: function(error) {
         console.log(error)
@@ -70,22 +84,11 @@ Page({
   },
   setMemberInfo: function(userInfo) {
     var membersArray = that.data.membersArray
+    userInfo.signed = false
     membersArray.push(userInfo)
     that.setData({
       membersArray: membersArray
     })
-  },
-  initMembersArray: function() {
-    var that = this
-    var members = this.data.members
-    for (var i = 0; i < members.length; i++) {
-      wx.request({
-        url: '${config.service.host}/weapp/pullRefresh',
-        data: {
-          uid: members.uid
-        }
-      })
-    }
   },
   joinActivity: function() {
     var uid = wx.getStorageSync('openid')
@@ -112,56 +115,175 @@ Page({
       }
     })
   },
-  // navigateToChat: function() {
-  //   var activityInfo = this.data.activityInfo
-  //   var chatListRaw = app.getArrayFromStorage('chatListRaw')
-  //   var chatId = this.data.activityInfo.chatId
-  //   var chat = {
-  //     chatId: chatId,
-  //     statusChanged: true,
-  //     newMessage: true,
-  //     unReaded: true,
-  //     messageArray: []
-  //   }
-  //   for (var i = 0; i < chatListRaw.length; i++) {
-  //     if (chatListRaw[i].chatId == chatId) {
-  //       chat.messageArray = chatListRaw[i].messageArray
-  //       chatListRaw.splice(i, 1)
-  //       break
-  //     }
-  //   }
-  //   var message = {}
-  //   message.uid = "systemUid"
-  //   message.messageText = "你已经加入活动拉！快和其他人聊聊吧！"
-  //   message.userType = 1
-  //   chat.messageArray.push(message)
-  //   chatListRaw.unshift(chat)
-  //   wx.setStorageSync('chatListRaw', chatListRaw)
-
-  //   var chatRoomInfo = {
-  //     avatarUrl: activityInfo.picUrl,
-  //     nickName: activityInfo.title
-  //   }
-  //   wx.setStorageSync(chatId, chatRoomInfo)
-  //   wx.navigateTo({
-  //     url: '../chat/chat?chatId=' + this.data.activityInfo.chatId
-  //   })
-  // },
+  chooseTransfer: function(e){
+    this.setData({
+      transferTo: e.currentTarget.dataset.uid == this.data.transferTo ? "" : e.currentTarget.dataset.uid
+    })
+  },
+  sign: function(e){
+    console.log(e)
+    var membersArray = this.data.membersArray
+    for(var i=0; i<membersArray.length; i++){
+      if (e.currentTarget.dataset.uid == membersArray[i].uid){
+        console.log(membersArray)
+        membersArray[i].signed = (membersArray[i].signed + 1) % 2
+        //break
+      }
+    }
+    this.setData({
+      membersArray: membersArray
+    })
+  },
   viewMemberInfo: function(){
+    
+  },
+  showMoreOptions: function(){
+    var itemList = []
+    if(this.data.isOwner){
+      itemList.push("解散活动")
+      itemList.push("转让活动")
+    }
+    else{
+      itemList.push("举报")
+      if (this.data.hasJoined) {
+        itemList.push("退出活动")
+      }
+    }
     wx.showActionSheet({
-      itemList: ['A', 'B', 'C'],
+      itemList: itemList,
+      // 创建者：[解散活动，转让活动]
+      // 参与者：[举报，退出活动]
+      // 未参与者: [举报]
       success(res) {
-        console.log(res.tapIndex)
+        if(that.data.isOwner){
+          switch(res.tapIndex){
+          case 0:
+            that.disbandedActivity()
+            break;
+          case 1:
+            that.transferActivity()
+            break;
+          }
+        }
+        else{
+          if(that.data.hasJoined){
+            switch(res.tapIndex){
+              case 0:
+                that.reportActivity()
+                break
+              case 1:
+                that.exitActivity()
+                break
+            }
+          }
+          else{
+            switch(res.tapIndex){
+              case 0:
+                that.reportActivity()
+                break
+            }
+          }
+        }
+        console.log(res)
       },
       fail(res) {
         console.log(res.errMsg)
       }
     })
   },
+  disbandedActivity: function() {
+    wx.request({
+      url: `${config.service.host}/weapp/disbandedActivity`,
+      data: {
+        aid: that.data.aid
+      },
+    })
+  },
+  transferActivity: function() {
+    this.setData({
+      transfering: true
+    })
+    wx.request({
+      url: `${config.service.host}/weapp/transferActivity`,
+      data: {
+        aid: that.data.aid,
+        uid: ""
+      }
+    })
+  },
+  reportActivity: function() {
+    wx.request({
+      url: `${config.service.host}/weapp/reportActivity`,
+      data: {
+        aid: that.data.aid
+      },
+    })
+  },
+  exitActivity: function() {
+    var uid = wx.getStorageSync('openid')
+    wx.request({
+      url: `${config.service.host}/weapp/exitActivity`,
+      data: {
+        aid: that.data.aid,
+        uid: uid
+      },
+    })
+  },
   evaluateActivity: function() {
     console.log("here")
     this.setData({
-      evaluating: (this.data.evaluating + 1) % 2
+      evaluating: true
+    })
+  },
+  completeEvaluateActivity: function(){
+    this.setData({
+      evaluating: false
+    })
+  },
+  endActivity: function(){
+    var aid = this.data.aid
+    wx.showLoading({
+      title: '正在结束活动',
+    })
+    wx.request({
+      url: `${config.service.host}/weapp/endActivity`,
+      data: {
+        aid: aid
+      },
+      success: result => {
+        wx.hideLoading()
+        console.log(result)
+        this.setData({
+          ending: true
+        })
+        this.refresh()
+      },
+      fail: error => {
+        wx.hideLoading()
+      }
+    })
+  },
+  completeEndActivity: function(){
+    // var members = []
+    // for(var i=0; i<this.data.members.length; i++){
+    //   var member = {
+    //     uid : this.data.members[i].uid,
+    //     signed: this.data.members[i].signed
+    //   }
+    // }
+    wx.request({
+      url: `${config.service.host}/weapp/signForActivity`,
+      data: {
+        members: this.data.members
+      },
+      success: result => {
+        this.setData({
+          ending: false
+        })
+        this.refresh()
+      },
+      fail: error => {
+      }
     })
   },
   drawJoinMask: function() {
@@ -329,48 +451,38 @@ Page({
 
 
 
+  // navigateToChat: function() {
+  //   var activityInfo = this.data.activityInfo
+  //   var chatListRaw = app.getArrayFromStorage('chatListRaw')
+  //   var chatId = this.data.activityInfo.chatId
+  //   var chat = {
+  //     chatId: chatId,
+  //     statusChanged: true,
+  //     newMessage: true,
+  //     unReaded: true,
+  //     messageArray: []
+  //   }
+  //   for (var i = 0; i < chatListRaw.length; i++) {
+  //     if (chatListRaw[i].chatId == chatId) {
+  //       chat.messageArray = chatListRaw[i].messageArray
+  //       chatListRaw.splice(i, 1)
+  //       break
+  //     }
+  //   }
+  //   var message = {}
+  //   message.uid = "systemUid"
+  //   message.messageText = "你已经加入活动拉！快和其他人聊聊吧！"
+  //   message.userType = 1
+  //   chat.messageArray.push(message)
+  //   chatListRaw.unshift(chat)
+  //   wx.setStorageSync('chatListRaw', chatListRaw)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// {
-//   aid: "o5ko344qvKlQYv5kYMdTkWbkH8lg1540884647",
-//     avatarUrl: "https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83erV2px9QVSr6vF2KMHm5kUgeATsZ3ERtMeia4tKibXK21OjEADgtY8ibk57JdYLCTTHDl20jaF9q3uew/132",
-//       createTime: "2018-10-30 15:30:46",
-//         creatorUid: "o5ko344qvKlQYv5kYMdTkWbkH8lg",
-//           currentNum: 1,
-//             index: 0,
-//               maxNum: 6,
-//                 members: [],
-//                   picUrl: "https://qcloudtest-1257207887.cos.ap-guangzhou.myqcloud.com/1536468704720-MUpMq2yU3.jpg",
-//                     sportType: 1,
-//                       startTime: "11月30日 12:00",
-//                         tags: [],
-//                           title: "你宅你🐎呢",
-//                             sportType: "羽毛球",
-//                               uid: "o5ko344qvKlQYv5kYMdTkWbkH8lg",
-//                                 chatId: "cho5ko344qvKlQYv5kYMdTkWbkH8lg"
-// }
-
-// {
-//   avatarUrl: "https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83erV2px9QVSr6vF2KMHm5kUgeATsZ3ERtMeia4tKibXK21OjEADgtY8ibk57JdYLCTTHDl20jaF9q3uew/132",
-//     uid: "1"
-// }, {
-//   avatarUrl: "https://wx.qlogo.cn/mmopen/vi_32/yOHWFZpCZyiakD3dSFAe9Yn93KMzxHAMzSPiaAWcXqAhUNKOoy9NN78EG7oX0qHD7EDxBapgyjHNECF8qq3Qvvhw/132",
-//     uid: "2"
-// }, {
-//   avatarUrl: "https://wx.qlogo.cn/mmopen/vi_32/BOj3yAxywFH5my2YicsOtmJUCzXbKsba0olTEsutBOnGXOLWsNYxHiaJYFuJIKR3O8hUxtqybbWiahn8NC2ib9AqlQ/132",
-//     uid: "3"
-// }
+  //   var chatRoomInfo = {
+  //     avatarUrl: activityInfo.picUrl,
+  //     nickName: activityInfo.title
+  //   }
+  //   wx.setStorageSync(chatId, chatRoomInfo)
+  //   wx.navigateTo({
+  //     url: '../chat/chat?chatId=' + this.data.activityInfo.chatId
+  //   })
+  // },

@@ -1,34 +1,32 @@
 // pages/viewUserInfo/viewUserInfo.js
 
 var config = require('../../config')
+var util = require('../../utils/util.js')
 var app = getApp()
 
 Page({
   data: {
-
+    isViewOtherInfo: false
   },
 
   onLoad: function (options) {
-    // var uid = options.uid
-    var uid = wx.getStorageSync('openid')
-    var that = this
-    wx.request({
-      url: `${config.service.host}/weapp/getUserInfo`,
-      data: {
-        uid: uid
-      },
-      success(result){
-        console.log(result.data.data[0])
-        result.data.data[0].homePicUrl = "https://cdn.pixabay.com/photo/2018/10/13/17/31/fall-leaves-3744649__340.jpg"
-        result.data.data[0].avatarUrl = "https://cdn.pixabay.com/photo/2018/09/22/17/05/ara-3695678__340.jpg"
-        that.setData({
-          userInfo: result.data.data[0]
-        })
-      },
-      fail(error){
-        console.log(error)
-      }
+    var uid = options.uid
+    var myUid = wx.getStorageSync('openid')
+    if(!uid){
+      uid = myUid
+    }
+    this.setData({
+      isViewOtherInfo: uid == myUid ? false : true
     })
+    var that = this
+    var userInfoPromise = util.getUserInfoFromServer(uid)
+    userInfoPromise.then(userInfo => {
+      console.log(userInfo)
+      that.setData({
+        userInfo: userInfo
+      })
+    })
+  
   },
 
   onReady: function(){
