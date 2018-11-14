@@ -7,7 +7,7 @@ Page({
   data:{
     activitiesArray: [],
     recommendationActivities:[],
-    recommendationUsers:[]
+    recommendationUsers:[{},{},{},{},{},{}]
   },
   onReachBottom: function(){
     var that = this
@@ -68,7 +68,6 @@ Page({
     console.log(e)
     var uid = e.currentTarget.dataset.uid
     wx.navigateTo({
-      // url: "../viewUserInfo/viewUserInfo?id=2"
       url: "../viewUserInfo/viewUserInfo?uid="+uid
     })
   },

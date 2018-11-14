@@ -86,8 +86,10 @@ Page({
   },
 
   addActySubmit: function(e) {
+    console.log(e)
     this.setData({
-      title: e.detail.value.title
+      title: e.detail.value.title,
+      description: e.detail.value.description
     }) 
     if (e.detail.value.title === "") {
       wx.showToast({
@@ -186,7 +188,8 @@ function uploadInfo(imgUrl, that) {
           imgUrl: imgUrl,
           maxNum: that.data.maxNum,
           tags: that.data.tags,
-          sportType: that.data.sportType
+          sportType: that.data.sportType,
+          description: that.data.description
         },
         success(result) {
           util.showSuccess('请求成功完成')

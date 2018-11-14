@@ -103,6 +103,7 @@ var login = function login(options) {
             success: function (result) {
               console.log(result)
                wx.setStorageSync('openid', result.data.data.userinfo.openId)
+               wx.setStorageSync('me', result.data.data.userinfo)
                 var data = result.data;
                 // // 成功地响应会话信息
                 // console.log(data)

@@ -40,7 +40,7 @@ picker{
   height: 400rpx;
 }
 
-.input-view,.picker-view,.tags-view{
+.input-view,.picker-view,.tags-view,.textarea-view{
   margin-left: 20rpx;
   margin-right: 20rpx;
   height: 150rpx;
@@ -53,6 +53,10 @@ picker{
   color: rgb(94, 94, 94);
   font-weight: bold;
   font-size: 0.8rem;
+}
+
+.textarea-view{
+  height: auto;
 }
 
 .tags{
