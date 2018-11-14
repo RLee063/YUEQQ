@@ -139,7 +139,7 @@ Page({
   updateAvatarList: function(){
     if(this.data.isGroup){
       var avatarList = {}
-      var groupInfoPromise = util.getActivityInfo(this.data.chatId)
+      var groupInfoPromise = util.getActivityInfoFromServer(this.data.chatId)
       groupInfoPromise.then(activityInfo => {
         for(var i=0; i<activityInfo.members.length; i++){
           avatarList[activityInfo.members[i].uid] = activityInfo.members[i].avatarUrl
