@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/message/message",
     "pages/begin/begin",
     "pages/viewActivityInfo/viewActivityInfo",
     "pages/viewUserInfo/viewUserInfo",
@@ -20,7 +21,6 @@
     "pages/attendUndo/attendUndo",
     "pages/attendDid/attendDid",
     "pages/myActy/myActy",
-    "pages/message/message",
     "pages/evaluate/evaluate"
   ],
   "window": {

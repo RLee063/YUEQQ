@@ -1,43 +1,71 @@
 /* client/pages/message/message.wxss */
 .chat-block{
-  margin-top: 100rpx;
-  height: 180rpx;
-  width: 100%;
-  background: rgb(216, 108, 108);
+  position: relative;
+  height: 150rpx;
+  width: 95%;
+  margin: auto;
+  /* background: rgb(216, 108, 108);
+  border: solid; */
 }
 
 .avatar-block{
   float: left;
   height: 100%;
-  width: 25%;
-  background: pink;
+  width: 155rpx;
+  /* background: pink; */
 }
 
 .text-block{
   float: left;
   height: 100%;
   width: 75%;
-  background: rgb(243, 239, 22);
+  /* background: rgb(243, 239, 22); */
 }
 
 .avatar-image{
-  height: 120rpx;
-  width: 120rpx; 
+  height: 110rpx;
+  width: 110rpx; 
   border-radius: 100%;
   float: left;
-  margin: 30rpx;
+  margin: 20rpx;
 }
 
 .name-text{
   margin-top: 10rpx;
-  float: left;
-  background: rgb(100, 196, 100);
+  margin-left: 5rpx;
+  line-height: 70rpx;
+  /* background: rgb(100, 196, 100); */
+  color: rgb(46, 46, 46);
+  font-size: 31rpx;
+  font-weight: bold;
+  letter-spacing: 0.05rem;
 }
 
-.message-text{
-  position: relative;
-  top: 50rpx;
-  clear: left;
+.message-text , .message-uname, .message-time{
+  margin-bottom: 10rpx;
+  line-height: 60rpx;
   float: left;
-  background: rgb(97, 167, 199);
+  /* background: rgb(97, 167, 199); */
+  color: rgb(59, 59, 59);
+  font-size: 28rpx;
+  letter-spacing: 0.05rem;
+}
+
+.message-time{
+  float: right;
+  line-height: 0rpx;
+}
+
+.message-num {
+  position: absolute;
+  top: 15rpx;
+  left: 95rpx;
+  line-height: 38rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  text-align: center;
+  border-radius: 19rpx 19rpx 19rpx 19rpx / 19rpx 19rpx 19rpx 19rpx;
+  color: white;
+  font-size: 30rpx;
+  background: rgb(255, 65, 65);
 }

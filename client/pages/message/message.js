@@ -81,14 +81,18 @@ Page({
     var isGroup = chatRaw.isGroup
     var lastMessage = chatRaw.messageArray[chatRaw.messageArray.length - 1]
     var lastMessageText = lastMessage.messageText
+    var lastMessageTime = "19:00"
+    var lastMessageUname = "Stairway"
     var unReaded = chatRaw.unReaded
     var chat = {
       chatId: chatId,
       uName: "",
       avatarUrl: "",
       lastMessageText: lastMessageText,
+      lastMessageTime: lastMessageTime,
+      lastMessageUname: lastMessageUname,
       unReaded: unReaded,
-      isGroup: isGroup
+      isGroup: isGroup,
     }
     this.completeListInfo(chatRaw)
     return chat
