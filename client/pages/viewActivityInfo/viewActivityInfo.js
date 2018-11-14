@@ -48,7 +48,7 @@ Page({
         wx.hideLoading()
         var activityInfo = result.data.data
         console.log(activityInfo)
-        var creatorUid = activityInfo.members[0].uid
+        var creatorUid = activityInfo.creatorUid
         var me = wx.getStorageSync('openid')
         var isOwner = me == creatorUid ? 1 : 0
         var hasJoined = 0
@@ -59,7 +59,6 @@ Page({
             break
           }
         }
-        activityInfo.status = 1
         for(var i=0; i<activityInfo.members.length; i++){
           activityInfo.members[i].signed = false
         }
@@ -203,12 +202,17 @@ Page({
     this.setData({
       transfering: true
     })
-    wx.request({
-      url: `${config.service.host}/weapp/transferActivity`,
-      data: {
-        aid: that.data.aid,
-        uid: ""
-      }
+    // wx.request({
+    //   url: `${config.service.host}/weapp/transferActivity`,
+    //   data: {
+    //     aid: that.data.aid,
+    //     uid: ""
+    //   }
+    // })
+  },
+  completeTransfer: function () {
+    this.setData({
+      transfering: false
     })
   },
   reportActivity: function() {
