@@ -108,6 +108,7 @@ Page({
       message.uid = uid
       message.messageText = speak.word.msg
       message.userType = 1
+      message.time = speak.word.time
       chat.messageArray.push(message)
 
       chatListRaw.unshift(chat)
