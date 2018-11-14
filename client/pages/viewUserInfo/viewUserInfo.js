@@ -104,8 +104,13 @@ Page({
   },
   talkTo(){
     var uid = this.data.userInfo.uid
+    var chatInfo = {
+      chatId: uid,
+      isGroup: false
+    }
+    var chatInfoString = JSON.stringify(chatInfo)
     wx.navigateTo({
-      url: "../chat/chat?chatId=" + uid
+      url: "../chat/chat?chatInfo=" + chatInfoString
     })
   }
 })

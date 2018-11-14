@@ -17,10 +17,46 @@ Page({
     isGroup: 0
   },
 
-  sendMessage: function(e) {
-    console.log("AvatarList" + JSON.stringify(this.data.avatarList) )
+  onUnload: function(){
+    clearInterval(messageGetor)
+  },
+
+  onLoad: function (options) {
+    console.log(options)
+    var chatInfoString = options.chatInfo
+    var chatInfo = JSON.parse(chatInfoString)
+    console.log(chatInfo)
+    this.setData({
+      chatId: chatInfo.chatId,
+      isGroup: chatInfo.isGroup
+    })
+
+    that = this
+    this.tunnel = app.tunnel
+    messageGetor = setInterval(this.getMessage, 1000)
+
+    this.updateAvatarList()
+
+    var chatListRaw = app.getArrayFromStorage('chatListRaw')
+    for(var i=0; i<chatListRaw.length; i++){
+      if(chatListRaw[i].chatId == chatInfo.chatId){
+        var headIndex = chatListRaw[i].messageArray.length - 1
+        this.setData({
+          messageHeadIndex: headIndex
+        })
+        this.loadMessageArray(chatListRaw[i].messageArray)
+        if (chatListRaw[i].unReaded){
+          chatListRaw[i].statusChanged = true
+        }
+        chatListRaw[i].unReaded = false
+      }
+    }
+    wx.setStorageSync('chatListRaw', chatListRaw)
+  },
+  sendMessage: function (e) {
+    console.log("AvatarList" + JSON.stringify(this.data.avatarList))
     if (app.tunnel && app.tunnel.isActive()) {
-      if(e.detail.value.messageText==""){
+      if (e.detail.value.messageText == "") {
         return
       }
       var msg = e.detail.value.messageText
@@ -65,43 +101,6 @@ Page({
       this.getMessage()
     }
   },
-
-  onUnload: function(){
-    clearInterval(messageGetor)
-  },
-
-  onLoad: function (options) {
-    var chatInfoString = options.chatInfo
-    var chatInfo = JSON.parse(chatInfoString)
-    console.log(chatInfo)
-    this.setData({
-      chatId: chatInfo.chatId,
-      isGroup: chatInfo.isGroup
-    })
-
-    that = this
-    this.tunnel = app.tunnel
-    messageGetor = setInterval(this.getMessage, 1000)
-
-    this.updateAvatarList()
-
-    var chatListRaw = app.getArrayFromStorage('chatListRaw')
-    for(var i=0; i<chatListRaw.length; i++){
-      if(chatListRaw[i].chatId == chatInfo.chatId){
-        var headIndex = chatListRaw[i].messageArray.length - 1
-        this.setData({
-          messageHeadIndex: headIndex
-        })
-        this.loadMessageArray(chatListRaw[i].messageArray)
-        if (chatListRaw[i].unReaded){
-          chatListRaw[i].statusChanged = true
-        }
-        chatListRaw[i].unReaded = false
-      }
-    }
-    wx.setStorageSync('chatListRaw', chatListRaw)
-  },
-
   loadMessageArray: function (messageArray){
     var headIndex = this.data.messageHeadIndex
     var start = headIndex >= 19 ? headIndex - 19 : 0
