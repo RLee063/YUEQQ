@@ -61,12 +61,14 @@ Page({
       }
       var msg = e.detail.value.messageText
       var myUid = wx.getStorageSync('openid')
+
       this.tunnel.emit('speak', {
         'word': {
           'to': this.data.chatId,
           'from': myUid,
           'msg': msg,
-          'isGroup': this.data.isGroup
+          'isGroup': this.data.isGroup,
+          'time': util.getTime()
         },
       })
       this.setData({

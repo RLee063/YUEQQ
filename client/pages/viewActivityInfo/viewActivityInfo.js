@@ -216,6 +216,13 @@ Page({
     this.setData({
       transfering: false
     })
+    wx.request({
+      url: `${config.service.host}/weapp/transferActivity`,
+      data: {
+        aid: that.data.aid,
+        uid: that.data.transferTo
+      },
+    })
   },
   reportActivity: function() {
     wx.request({
