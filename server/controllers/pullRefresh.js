@@ -14,7 +14,7 @@ module.exports = async(ctx) => {
   try {
 
     if (aid === undefined) {
-      var activities = await mysql('ActivityInfo as info').select().whereRaw('StartTime > ?', [tool.getNowFormatDate()]).orderBy('StartTime', 'asc').orderBy('ord', 'asc').limit(10)
+      var activities = await mysql('ActivityInfo as info').select().whereRaw('StartTime > ?', [tool.getNowFormatDate()]).andWhere('disbanded', 0).orderBy('StartTime', 'asc').orderBy('ord', 'asc').limit(10)
       for(var i in activities)
       {
         activities[i]['picUrl'] = (await mysql('ActivityPic').select('picUrl').where('aid', activities[i]['aid']))[0]['picUrl']
@@ -23,7 +23,7 @@ module.exports = async(ctx) => {
 
     } else {
       var lastAct = (await mysql('ActivityInfo').select().where('aid', aid))[0]
-      var activities = await mysql('ActivityInfo as info').select().whereRaw('startTime > ?', [lastAct['startTime']]).orWhere(
+      var activities = await mysql('ActivityInfo as info').select().whereRaw('startTime > ?', [lastAct['startTime']]).andWhere('disbanded', 0).orWhere(
         function () {
           this.where('startTime', lastAct['startTime']).andWhereRaw("ord > ?", [lastAct['ord']])
         }
@@ -38,13 +38,26 @@ module.exports = async(ctx) => {
 
 
     for (var i in activities) {
-      //    console.log(activities[i])
+      //calculate status
+      if(activities[i]['startTime'] > new Date()){
+        activities[i]['status'] = 0
+      } else if(activities[i]['endTime'] < new Date()){
+        activities[i]['status'] = 2
+      }else{
+        activities[i]['status'] = 1
+      }
+      //  fromat time
       activities[i]['startTime'] = tool.formatTime(activities[i]['startTime'])
       activities[i]['createTime'] = tool.formatTime(activities[i]['createTime'])
+      activities[i]['endTime'] = tool.formatTime(activities[i]['endTime'])
+      //get tags
       tags = await mysql('tag as t').join('actTag as at', 'at.tid', 't.tid').where('aid', activities[i]['aid'])
       activities[i]['tags'] = tags
+      //get members
       uids = await mysql('userAct as ua').join('ActivityInfo as ai', 'ua.aid', 'ai.aid').select('ua.uid').where('ua.aid', activities[i]['aid'])
       activities[i]['members'] = uids
+      
+
 
     }
 

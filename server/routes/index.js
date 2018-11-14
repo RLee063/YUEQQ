@@ -48,4 +48,14 @@ router.get('/updateUserInfo',controllers.updateUserInfo)
 router.get('/joinActivity', controllers.joinActivity)
 //查询用户参与/创建过的互动
 router.get('/getMyActivities', controllers.getMyActivities)
+//解散活动
+router.get('/disbandActivity', controllers.disbandActivity)
+//结束活动
+router.get('/endActivity',controllers.endActivity)
+//退出活动
+router.get('/exitActivity',controllers.exitActivity)
+//创建者签到
+router.get('/signForActivity',controllers.signForActivity)
+//转让活动
+router.get('/transferActivity',controllers.transferActivity)
 module.exports = router

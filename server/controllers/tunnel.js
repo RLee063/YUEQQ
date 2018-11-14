@@ -151,18 +151,17 @@ async function onMessage(tunnelId, type, content) {
   switch (type) {
     case 'speak':
       if (tunnelId in userMap) {
-        var aids = await mysql('ActivityInfo').select().where('aid',content.word['to'])
-        if(aids.length === 1){
-          try{
-            var chatMems = await mysql('userACt').select('uid').where('aid', content.word['aid'])
+        if (content.word['isGroup']) {
+          content.word['from'] = content.word['to']
+          try {
+            var chatMems = await mysql('userAct').select('uid').where('aid', content.word['to'])
             for (var n in chatMems) {
-              content.word['to'] = chatMems[n]
+              content.word['to'] = chatMems[n]['uid']
               $broadcast('speak', {
                 'who': userMap[tunnelId],
                 'word': content.word
               })
             }
-
           }catch(e){
             console.log(e)
             ctx.body = {

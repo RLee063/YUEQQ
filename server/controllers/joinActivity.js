@@ -8,6 +8,8 @@ module.exports = async (ctx) => {
       aid:aid,
       uid:uid
     })
+    currentNum = (await mysql('ActivityInfo').select('currentNum').where('aid',aid))[0]['currentNum']
+    await mysql('ActivityInfo').where('aid',aid).update({'currentNum':currentNum + 1})
 
     ctx.body = {
       code: 1

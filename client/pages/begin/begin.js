@@ -125,7 +125,7 @@ Page({
   startprogram: function() {
     this.login()
     if (wx.getStorageSync('logged') == true) {
-      // this.openTunnel()
+       this.openTunnel()
     }
 
   },

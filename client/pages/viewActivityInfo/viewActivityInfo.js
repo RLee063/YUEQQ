@@ -192,7 +192,7 @@ Page({
   },
   disbandedActivity: function() {
     wx.request({
-      url: `${config.service.host}/weapp/disbandedActivity`,
+      url: `${config.service.host}/weapp/disbandActivity`,
       data: {
         aid: that.data.aid
       },

@@ -54,7 +54,6 @@ Page({
     wx.setStorageSync('chatListRaw', chatListRaw)
   },
   sendMessage: function (e) {
-    console.log("AvatarList" + JSON.stringify(this.data.avatarList))
     if (app.tunnel && app.tunnel.isActive()) {
       if (e.detail.value.messageText == "") {
         return
