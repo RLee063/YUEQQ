@@ -4,9 +4,9 @@
   </view>
   <view class="text-block">  
     <view class="name-text">{{item.uName}}</view>
+    <view class="message-time">{{item.lastMessageTime}}</view>
     <view class="message-uname">{{item.lastMessageUname}}：</view>
     <view class="message-text">{{item.lastMessageText}}</view>
-    <view class="message-time">{{item.lastMessageTime}}</view>
   </view>
   <view class="message-num" wx:if="{{item.unReaded}}">{{item.unReadedNum}}</view>
 </view>

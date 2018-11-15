@@ -4,8 +4,8 @@
   height: 150rpx;
   width: 95%;
   margin: auto;
-  /* background: rgb(216, 108, 108);
-  border: solid; */
+  /* background: rgb(216, 108, 108); */
+  /* border: solid; */
 }
 
 .avatar-block{
@@ -39,6 +39,7 @@
   font-size: 31rpx;
   font-weight: bold;
   letter-spacing: 0.05rem;
+  float: left;
 }
 
 .message-text , .message-uname, .message-time{
@@ -52,8 +53,13 @@
 }
 
 .message-time{
+  line-height: 100%;
+  margin-top: 40rpx;
   float: right;
-  line-height: 0rpx;
+}
+
+.message-uname{
+  clear: both;
 }
 
 .message-num {

@@ -107,9 +107,11 @@ Page({
     userInfoPromise1.then(userInfo => {
       var chatList = that.data.chatList 
       for (var i = 0; i < chatList.length; i++) {
-        if (chatList[i].lastMessageUid == lastMessageUid) {
-          chatList[i].lastMessageUname = userInfo.nickName
-          break
+        if (chatList[i].chatId == chatRaw.chatId){
+          if (chatList[i].lastMessageUid == lastMessageUid) {
+            chatList[i].lastMessageUname = userInfo.nickName
+            break
+          }
         }
       }
       that.setData({
@@ -176,12 +178,12 @@ Page({
     var nowDay = nowDate.getDate();
     nowMonth++;
 
-    if (parseInt(startDate[0]) > nowYear) {
+    if (parseInt(startDate[0]) < nowYear) {
       result += time
     }
     else {
       var dec
-      if (parseInt(startDate[1]) > nowMonth) {
+      if (parseInt(startDate[1]) < nowMonth) {
         switch (parseInt(startDate[1])) {
           case 2:
             dec = parseInt(startDate[2]) - nowDay + 28
@@ -209,11 +211,11 @@ Page({
           result += ':'
           result += startTimes[1];
           break;
-        case 1:
-          result += "明天"
+        case -1:
+          result += "昨天"
           break;
-        case 2:
-          result += "后天"
+        case -2:
+          result += "前天"
           break;
         default:
           result += startDate[1]
