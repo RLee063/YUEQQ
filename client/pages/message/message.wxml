@@ -8,5 +8,5 @@
     <view class="message-text">{{item.lastMessageText}}</view>
     <view class="message-time">{{item.lastMessageTime}}</view>
   </view>
-  <view class="message-num">9+</view>
+  <view class="message-num" wx:if="{{item.unReaded}}">{{item.unReadedNum}}</view>
 </view>

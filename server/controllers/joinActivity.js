@@ -4,16 +4,24 @@ module.exports = async (ctx) => {
   const {aid, uid} = ctx.query
 
   try {
-    await mysql('userAct').insert({
-      aid:aid,
-      uid:uid
-    })
-    currentNum = (await mysql('ActivityInfo').select('currentNum').where('aid',aid))[0]['currentNum']
-    await mysql('ActivityInfo').where('aid',aid).update({'currentNum':currentNum + 1})
+    var act = (await mysql('ActivityIfo').select('currentNum').where('aid',aid))[0]
+    if(act['currentNum']>= act['maxNum']){
+      ctx.body = {
+        code: -1,
+        msg:'活动人数已满'
+      }
+    }else{
+      await mysql('userAct').insert({
+        aid: aid,
+        uid: uid
+      })
+      await mysql('ActivityInfo').where('aid', aid).increment('currentNum',1)
 
-    ctx.body = {
-      code: 1
+      ctx.body = {
+        code: 1
+      }
     }
+
   }catch(e){
     console.log(e)
     ctx.body = {

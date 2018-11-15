@@ -49,6 +49,7 @@ Page({
           chatListRaw[i].statusChanged = true
         }
         chatListRaw[i].unReaded = false
+        chatListRaw[i].unReadedNum = 0
       }
     }
     wx.setStorageSync('chatListRaw', chatListRaw)
@@ -85,16 +86,19 @@ Page({
         statusChanged: true,
         newMessage: true,
         unReaded: true,
+        unReadedNum: 0,
         messageArray: [],
         isGroup: this.data.isGroup
       }
       for (var i = 0; i < chatListRaw.length; i++) {
         if (chatListRaw[i].chatId == this.data.chatId) {
           chat.messageArray = chatListRaw[i].messageArray
+          chat.unReadedNum = chatListRaw[i].unReadedNum
           chatListRaw.splice(i, 1)
           break
         }
       }
+      chat.unReadedNum += 1
       chat.messageArray.push(message)
       chatListRaw.unshift(chat)
 
@@ -120,17 +124,22 @@ Page({
     for (var i = 0; i < chatListRaw.length; i++) {
       if (chatListRaw[i].chatId == this.data.chatId) {
         if(chatListRaw[i].unReaded){
-          chatListRaw[i].unReaded = false
           var messageArray = this.data.messageArray
-          messageArray.push(chatListRaw[i].messageArray[chatListRaw[i].messageArray.length - 1])
+          for (var j = chatListRaw[i].unReadedNum - 1; j>=0; j--){
+            messageArray.push(chatListRaw[i].messageArray[chatListRaw[i].messageArray.length - (j+1)])
+            console.log(messageArray)
+            //是否要更新头像列表
+            if (!this.data.avatarList[messageArray[messageArray.length - 1].uid]) {
+              console.log("更新头像")
+              this.updateAvatarList()
+            }
+          }
           this.setData({
             messageArray: messageArray
           })
-          //是否要更新头像列表
-          if(!this.data.avatarList[messageArray[messageArray.length-1].uid]){
-            console.log("更新头像")
-            this.updateAvatarList()
-          }
+          chatListRaw[i].unReadedNum = 0
+          chatListRaw[i].unReaded = false
+
         }
       }
       break

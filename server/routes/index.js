@@ -58,4 +58,6 @@ router.get('/exitActivity',controllers.exitActivity)
 router.get('/signForActivity',controllers.signForActivity)
 //转让活动
 router.get('/transferActivity',controllers.transferActivity)
+//活动结束后评价
+router.get('/evaluate',controllers.evaluate)
 module.exports = router
