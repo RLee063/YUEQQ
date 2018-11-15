@@ -100,10 +100,8 @@ page{
 
 .more{
   position: absolute;
-  height: 100rpx;
-  width: 100rpx;
-  left: 650rpx;
-  top: 0rpx;
-  background: white;
-  line-height: 100rpx;
+  height: 60rpx;
+  width: 60rpx;
+  left: 670rpx;
+  top: 20rpx;
 }

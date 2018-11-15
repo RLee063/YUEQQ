@@ -31,7 +31,9 @@
   <view wx:elif="{{(activityInfo.status==2)}}" class="join">已结束</view>
 </view>
 
-<view class='more' catchtap='showMoreOptions'>更多</view>
+<view catchtap='showMoreOptions'>
+  <image src="../../images/more.png" class="more"></image>
+</view>
 
 <view wx:if="{{evaluating}}">
   <view class="sub-mask"></view>
