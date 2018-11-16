@@ -4,8 +4,8 @@
   height: 150rpx;
   width: 95%;
   margin: auto;
-  /* background: rgb(216, 108, 108); */
-  /* border: solid; */
+  /* background: rgb(216, 108, 108);
+  border: solid; */
 }
 
 .avatar-block{
@@ -31,9 +31,9 @@
 }
 
 .name-text{
-  margin-top: 10rpx;
+  margin-top: 30rpx;
   margin-left: 5rpx;
-  line-height: 70rpx;
+  line-height: 50rpx;
   /* background: rgb(100, 196, 100); */
   color: rgb(46, 46, 46);
   font-size: 31rpx;
@@ -43,8 +43,8 @@
 }
 
 .message-text , .message-uname, .message-time{
-  margin-bottom: 10rpx;
-  line-height: 60rpx;
+  margin-bottom: 30rpx;
+  line-height: 50rpx;
   float: left;
   /* background: rgb(97, 167, 199); */
   color: rgb(59, 59, 59);
@@ -53,6 +53,7 @@
 }
 
 .message-time{
+  margin-bottom: 0rpx;
   line-height: 100%;
   margin-top: 40rpx;
   float: right;
