@@ -101,7 +101,6 @@ page{
 
 }
 
-
 .info-in-block, .info-in-top-block{
   height: 80rpx;
   /* background: rgb(245, 151, 151); */

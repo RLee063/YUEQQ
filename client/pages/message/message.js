@@ -82,6 +82,10 @@ Page({
     var isGroup = chatRaw.isGroup
     var lastMessage = chatRaw.messageArray[chatRaw.messageArray.length - 1]
     var lastMessageText = lastMessage.messageText
+    if(lastMessageText.length>30){
+      lastMessageText = lastMessageText.slice(0, 28) + "..."
+    }
+
     var lastMessageTime = this.getTimeFromFormatTime(lastMessage.time)
     var unReaded = chatRaw.unReaded
     var unReadedNum = chatRaw.unReadedNum > 9 ? "9+" : chatRaw.unReadedNum
@@ -110,6 +114,11 @@ Page({
         if (chatList[i].chatId == chatRaw.chatId){
           if (chatList[i].lastMessageUid == lastMessageUid) {
             chatList[i].lastMessageUname = userInfo.nickName
+
+            if (userInfo.nickName.length + chatList[i].lastMessageText.length > 30){
+              chatList[i].lastMessageText = chatList[i].lastMessageText.slice(0, 28 - userInfo.nickName.length) + "..."
+            }
+
             break
           }
         }
