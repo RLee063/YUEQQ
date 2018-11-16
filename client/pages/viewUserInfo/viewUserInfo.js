@@ -10,7 +10,7 @@ Page({
   },
 
   onLoad: function (options) {
-    var uid = options.uid
+    var uid = "o5ko3434RP2lZQNVamvVxfrAugoY"
     var myUid = wx.getStorageSync('openid')
     if(!uid){
       uid = myUid
@@ -56,6 +56,7 @@ Page({
     ctx.setFillStyle()
     ctx.translate(-20, 7)
     var sportType = app.globalData.sportType
+    ctx.setStrokeStyle('#4C4C4C')
     for (var i = 0; i < points.length; i++) {
       if(i==0||i==3){
         ctx.fillText(sportType[i], -5, points[i].y * 1.2)
@@ -65,13 +66,14 @@ Page({
     }
     ctx.translate(20, -7)
     //lines
-    ctx.setStrokeStyle('#3C3C3C')
+    ctx.setStrokeStyle('#4C4C4C')
     for (var i = 0; i < points.length; i++) {
       ctx.moveTo(0, 0)
       ctx.lineTo(points[i].x, points[i].y)
       ctx.stroke()
     }
     //polygon
+    ctx.setStrokeStyle('#4C4C4C')
     this.drawPolygonByPoints(points, ctx)
     points = this.getPolygonPointsByRadius([60, 60, 60, 60, 60, 60])
     this.drawPolygonByPoints(points, ctx)
