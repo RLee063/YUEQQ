@@ -1,6 +1,6 @@
 /* ------------- */
 page{
-  background:rgb(240, 240, 240);
+  background:rgb(255, 255, 255);
 }
 
 ::-webkit-scrollbar{
@@ -113,11 +113,84 @@ page{
   font-weight: 600;
 }
 
+/* ======================== */
+.query-criterias-block{
+  width: 90%;
+  margin: auto;
+  margin-top: 10rpx;
+  border-top: solid;
+  border-color: rgb(236, 236, 236);
+  border-width: 4rpx;
+  height: 80rpx;
+}
+
+.criteria,.criteria-show{
+  line-height: 80rpx;
+  letter-spacing: 0.05rem;
+  font-size: 30rpx;
+  position: relative;
+  width: 33.33%;
+  text-align: center;
+  float: left;
+  color: rgb(88, 88, 88);
+}
+
+.criteria-show{
+  font-weight: bold;
+}
+
+.criteria-button-block,.criteria-button-scroll-block{
+  float: left;
+  width: 33.33%;
+  margin-bottom: 0rpx;
+}
+
+.criteria-button-scroll-block{
+  height: 255rpx;
+}
+
+.criteria-button, .criteria-button-choosen{
+  width: 70%;
+  margin: auto;
+  line-height: 70rpx;
+  letter-spacing: 0.02rem;
+  font-size: 28rpx;
+  text-align: center;
+  color: rgb(88, 88, 88);
+  background: none;
+  border-top: solid;
+  border-bottom: solid;
+  border-width: 2rpx;
+  border-color: rgb(236, 236, 236);
+}
+
+.criteria-button-choosen{
+  color: rgb(57, 218, 183);
+  font-weight: bolder;
+}
+
+.criteria-comfirm{
+  width: 90%;
+  margin: auto;
+  clear: both;
+
+  line-height: 80rpx;
+  text-align: right;
+  letter-spacing: 0.05rem;
+  font-size: 30rpx;
+  color: rgb(88, 88, 88);
+  font-weight: bold;
+
+  border-bottom: solid;
+  border-color: rgb(236, 236, 236);
+  border-width: 4rpx;
+}
 /* ===================== */
 
 .user-head-image {
   width: 100%;
   height: 100%;
+
   border-radius: 50%;
 }
 

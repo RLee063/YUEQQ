@@ -1,13 +1,24 @@
 var util = require('../../utils/util.js')
 var config = require('../../config')
-
+var app = getApp()
 var acties = []
 
 Page({
   data:{
     activitiesArray: [],
     recommendationActivities:[],
-    recommendationUsers:[{},{},{},{},{},{}]
+    recommendationUsers:[{},{},{},{},{},{}],
+
+    criteriasTitle: ["排序类型","排序方式","活动类型"],
+    criterias: [
+      ["与我相关", "开始时间", "发起时间"],
+      ["升序", "降序"],
+      ["与我相关"]
+    ],
+    criteriaHidden: 0,
+    criteriasMap:[
+      [0,0,0], [0,0], [0,0,0,0,0,0]
+    ]
   },
   onReachBottom: function(){
     var that = this
@@ -61,8 +72,25 @@ Page({
   },
   onLoad: function(){
     this.refresh(this)
+    this.initData()
   },
   onShow: function(){
+  },
+  initData: function(){
+    var old = this.data.criterias[2]
+    var nwe = old.concat(app.globalData.sportType)
+    
+    var criterias = this.data.criterias
+    criterias[2] = nwe
+
+    var criteriasMap = this.data.criteriasMap
+    criteriasMap[0] = [1, 0, 0, 0, 0, 0, 0, 0]
+    criteriasMap[1] = [1, 0, 0, 0, 0, 0, 0, 0]
+    criteriasMap[2] = [1, 0, 0, 0, 0, 0, 0, 0]
+    this.setData({
+      criterias: criterias,
+      criteriasMap: criteriasMap
+    })
   },
   viewUserInfo: function(e){
     var uid = e.currentTarget.dataset.uid
@@ -167,6 +195,46 @@ Page({
     result += ':'
     result += startTimes[1];
     item.startTime = result;
+  },
+  hideShowCriteria: function(e){
+
+    var criteriaHidden = (this.data.criteriaHidden+1)%2
+    this.setData({
+      criteriaHidden: criteriaHidden
+    })
+  },
+  criteriaUniqueChoose: function(i1, i2){
+    var criteriasMap = this.data.criteriasMap
+    for(var i=0; i<criteriasMap[i1].length; i++){
+      if(i!=i2){
+        criteriasMap[i1][i] = 0
+      }
+      else{
+        criteriasMap[i1][i] = 1
+      }
+    }
+    this.setData({
+      criteriasMap: criteriasMap
+    })
+    console.log(this.data)
+  },
+  criteriaMultipleChoose: function(i1, i2){
+    var criteriasMap = this.data.criteriasMap
+    criteriasMap[i1][i2] = (criteriasMap[i1][i2]+1)%2
+    this.setData({
+      criteriasMap: criteriasMap
+    })
+    console.log(this.data)
+  },
+  tapCriteria:function(e){
+    var i1 = e.currentTarget.dataset.index
+    var i2 = e.target.dataset.index
+    if (i1 < 2) {
+      this.criteriaUniqueChoose(i1, i2)
+    }
+    else {
+      this.criteriaMultipleChoose(i1, i2)
+    }
   },
   addActy: function(){
     wx.navigateTo({
