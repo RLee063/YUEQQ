@@ -7,12 +7,8 @@
     <view class="addbutton" bindtap="getCropperImage">提交更改</view>
   </view>
 </view>
-
   <template name="we-croppe-master">
     <canvas class="cropper  {{cutImage}}" disable-scroll="true" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd" style="width:{{width}}rpx;height:{{height}}rpx;" canvas-id="{{id}}">
     </canvas>
   </template>
-
-
-
 </view>

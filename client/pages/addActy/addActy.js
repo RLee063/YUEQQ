@@ -73,16 +73,19 @@ Page({
   },
   chooseImg: function(e) {
     var that = this
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['compressed'],
-      success: function(res) {
-        that.setData({
-          imgTempPath: res.tempFilePaths[0],
-          isDefaultImage: false
-        })
-      },
+    wx.navigateTo({
+      url: '../cropper/cropper',
     })
+    // wx.chooseImage({
+    //   count: 1,
+    //   sizeType: ['compressed'],
+    //   success: function(res) {
+    //     that.setData({
+    //       imgTempPath: res.tempFilePaths[0],
+    //       isDefaultImage: false
+    //     })
+    //   },
+    // })
   },
 
   addActySubmit: function(e) {

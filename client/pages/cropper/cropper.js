@@ -1,12 +1,11 @@
 import WeCropper from 'we-cropper-master/dist/we-cropper.js'
-var util = require('../../../utils/util.js')
-var config = require('../../../config')
+var util = require('../../utils/util.js')
+var config = require('../../config')
 
+var pages;
 const device = wx.getSystemInfoSync() // 获取设备信息
 const width = device.windowWidth // 示例为一个与屏幕等宽的正方形裁剪框
 const height = device.windowHeight - 20
-
-
 
 Page({
   data: {
@@ -27,6 +26,7 @@ Page({
   },
 
   onLoad(option) {
+    pages = getCurrentPages()
     const {
       cropperOpt
     } = this.data
@@ -38,18 +38,12 @@ Page({
       .on('beforeImageLoad', (ctx) => {
         console.log(`before picture loaded, i can do something`)
         console.log(`current canvas context: ${ctx}`)
-        wx.showToast({
-          title: '上传中',
-          icon: 'loading',
-          duration: 20000
-        })
       })
       .on('imageLoad', (ctx) => {
         console.log(`picture loaded`)
         console.log(`current canvas context: ${ctx}`)
-        wx.hideToast()
       })
-
+    this.chooseImage()
   },
   touchStart(e) {
     this.wecropper.touchStart(e)
@@ -60,7 +54,7 @@ Page({
   touchEnd(e) {
     this.wecropper.touchEnd(e)
   },
-  chooseimage: function() {
+  chooseImage: function () {
     const self = this
     wx.chooseImage({
       count: 1,
@@ -86,41 +80,27 @@ Page({
       }
     })
   },
-  upLoadImgAndGetUrl: function(that) {
+  upLoadImgAndGetUrl: function (that) {
     util.showBusy('正在上传')
     wx.uploadFile({
       url: config.service.uploadUrl,
       filePath: that.data.bkgdpic,
       name: 'file',
-      success: function(res) {
+      success: function (res) {
         util.showSuccess('上传图片成功')
         res = JSON.parse(res.data)
-        that.setData({
-          bkgdpic: res.data.imgUrl
+        console.log(pages)
+        var prevPage = pages[pages.length - 2];
+        prevPage.setData({
+          imgTempPath: res.data.imgUrl
         })
-        wx.request({
-          url: `${config.service.host}/weapp/updateUserInfo`,
-          method: 'GET',
-          data: {
-            uid: that.data.openId,
-            bkgdpic: that.data.bkgdpic,
-          },
-          success(result) {
-            util.showSuccess('成功保存数据')
-          },
-          fail(error) {
-            util.showModel('保存失败', error);
-          }
-        })
-        wx.setStorageSync('bkgdpic', that.data.bkgdpic);
-        wx.setStorageSync('changebkgd', 1)
+        
         wx.navigateBack({
-          url:"../myInfo"
+          delta: 1
         })
-
       },
 
-      fail: function(e) {
+      fail: function (e) {
         util.showModel('上传图片失败')
         return null
       }

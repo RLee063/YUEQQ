@@ -1,0 +1,26 @@
+/* pages/info/changebkgd/changebkgd.wxss */
+
+.cropper-wrapper-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: gainsboro;
+}
+
+.add {
+  position:fixed;
+  bottom: 0rpx;
+  width: 100%;
+}
+
+.addbutton {
+  line-height: 100rpx;
+  text-align: center;
+  color: rgb(61, 61, 61);
+  width: 50%;
+  float: left;
+  font-weight: bold;
+  background-color: rgb(255, 255, 255);
+}

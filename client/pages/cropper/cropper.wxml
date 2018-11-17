@@ -1,0 +1,14 @@
+<import src="we-cropper-master/dist/we-cropper.wxml" />
+<view class='container'>
+<view class='cropper-wrapper-image'>
+  <view class='add' >
+    <template is="we-cropper" data="{{...cropperOpt}}" />
+    <view class="addbutton" bindtap="chooseImage">重新选择</view>
+    <view class="addbutton" bindtap="getCropperImage">完成</view>
+  </view>
+</view>
+  <template name="we-croppe-master">
+    <canvas class="cropper  {{cutImage}}" disable-scroll="true" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd" style="width:{{width}}rpx; height:{{height}}rpx;" canvas-id="{{id}}">
+    </canvas>
+  </template>
+</view>
