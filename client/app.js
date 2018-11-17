@@ -6,6 +6,7 @@ var that
 
 App({
   globalData:{
+    isAdmin: false,
     logged: false,
     authorized: false,
     sportType: ['乒乓球', '篮球', '网球', '羽毛球', '足球',  '跑步'],

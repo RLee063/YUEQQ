@@ -1,7 +1,7 @@
 page{
   position: relative;
   height: 100%;
-  background:rgb(245, 245, 245);
+  background:rgb(250, 250, 250);
 }
 
 .father{
@@ -16,23 +16,21 @@ page{
   width: 170rpx;
   right: 20rpx;
   top: 320rpx;
-  background:rgb(255, 255, 255);
-  box-shadow: 0 0 10rpx rgb(158, 158, 158) inset;
-  /* border: solid;
-  border-width: thick;
-  border-color: rgba(245, 245, 245, 0.5); */
+  background-color:rgb(255, 255, 255);
+  box-shadow: 0rpx 0rpx 7rpx rgb(158, 158, 158) inset;
 }
 
 .canvas-image{
-  margin: 5%;
-  height: 90%;
-  width: 90%;
+  margin: 8%;
+  height: 84%;
+  width: 84%;
 }
 
 .pic-block{
   width: 100%;
   height: 400rpx;
   box-shadow: 0rpx 0rpx 20rpx rgb(153, 153, 153);
+  margin-bottom: 30rpx;
 }
 
 .pic{
@@ -51,7 +49,7 @@ page{
   text-shadow: 0 0 10rpx black;
 }
 
-.avatar, .avatar-signed, .avatar-unsigned{
+.avatar, .avatar-signed, .avatar-unsigned, .avatar-more{
   float: left;
   height: 100rpx;
   width: 100rpx;
@@ -59,9 +57,85 @@ page{
   border-radius: 100%;
 }
 
+.avatar-more{
+  background: rgb(250, 250, 250);
+}
+
+.avatar-more-image{
+  transform: rotate(90deg);
+  margin: 30%;
+  height: 40%;
+  width: 40%;
+}
+
 .avatar-signed{
   border: solid;
   border-color: green;
+}
+
+.intro-block, .info-block, .skill-block, .recent-block, .members-block{
+  width: 96%;
+  margin: auto;
+  margin-top: 10rpx;
+  background: white;
+}
+
+.members-block{
+  margin-left: 50rpx;
+  height: 130rpx;
+  clear: both;
+}
+
+.info-in-block, .info-in-top-block{
+  height: 80rpx;
+  /* background: rgb(245, 151, 151); */
+  margin: 15rpx;
+  padding-left: 30rpx;
+  clear: both;  
+  border-top: solid;
+  border-width: thin;
+  border-color: rgb(226, 226, 226);
+}
+
+.info-in-top-block{
+  border: none;
+}
+
+.info-text ,.info-title,.info-intro,.join-chat {
+  float: left;
+  line-height: 85rpx;
+  color: rgb(94, 94, 94);
+  font-size: 30rpx;
+}
+
+.description-text{
+  clear: both;
+  text-indent:60rpx;
+  font-size: 30rpx;
+  margin-left: 50rpx;
+  margin-right: 40rpx;
+  padding-bottom: 30rpx;
+  line-height: 50rpx;
+  color: rgb(94, 94, 94);
+}
+
+.info-title {
+  width: 30%;
+  clear: left;
+  font-weight: bolder;
+  color: rgb(87, 87, 87);
+}
+
+.info-intro{
+  font-weight: bolder;
+  color: rgb(87, 87, 87);
+  margin-left: 45rpx;
+}
+
+.join-chat{
+  float: right;
+  font-weight: bold;
+  margin-right: 30rpx;
 }
 
 .join, .join-mask{
@@ -77,7 +151,6 @@ page{
   line-height: 80rpx;
   text-align: center;
   border-radius: 6.65%  / 50% ;
-  box-shadow: 0px 0px 10px rgb(189, 189, 189);
 }
 
 .join-mask{

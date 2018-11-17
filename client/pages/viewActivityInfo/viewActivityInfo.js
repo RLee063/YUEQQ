@@ -61,6 +61,16 @@ Page({
         for(var i=0; i<activityInfo.members.length; i++){
           activityInfo.members[i].signed = false
         }
+//faker
+        activityInfo.introduction = "大家都可以来玩呀！"
+        activityInfo.averageSkills = "白银"
+        activityInfo.creditLimit = "❤ ❤ ❤"
+        activityInfo.members.push(activityInfo.members[0])
+        activityInfo.members.push(activityInfo.members[0])
+        activityInfo.members.push(activityInfo.members[0])
+        activityInfo.members.push(activityInfo.members[0])
+        activityInfo.members.push(activityInfo.members[0])
+
         that.setData({
           activityInfo: activityInfo,
           hasJoined: hasJoined,
@@ -68,11 +78,6 @@ Page({
           hasEvaluated: 0,
           membersArray: activityInfo.members
         })
-        // that.data.membersArray.splice(0, that.data.membersArray.length)
-        // for (var i = 0; i < activityInfo.members.length; i++) {
-        //   var pMemberInfo = util.getUserInfo(activityInfo.members[i].uid)
-        //   pMemberInfo.then(userInfo => that.setMemberInfo(userInfo))
-        // }
       },
       fail: function(error) {
         console.log(error)
