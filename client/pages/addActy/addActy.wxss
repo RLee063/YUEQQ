@@ -1,5 +1,9 @@
 /* pages/addActy/addActy.wxss */
 
+page{
+  background: rgb(248, 248, 248);
+}
+
 button{
   background: white;
   color: rgb(94, 94, 94);
@@ -13,46 +17,76 @@ button{
   border-radius: 0;
 }
 
-input{
-  height: 100%;
-  padding-right: 20rpx;
-  /* background: rgb(123, 240, 88); */
-  float: right;
-  text-align: right;
-  font-weight: normal;
-  font-size: 0.9rem;
-  color: rgb(66, 66, 66);
-}
-
-picker{
-  height: 100%;
-  padding-right: 20rpx;
-  /* background: rgb(123, 240, 88); */
-  float: right;
-  text-align: right;
-  font-weight: normal;
-  font-size: 0.9rem;
-  color: rgb(66, 66, 66);
-}
 
 .activity-pic{
   width: 100%;
   height: 400rpx;
 }
 
-.input-view,.picker-view,.tags-view,.textarea-view{
-  margin-left: 20rpx;
-  margin-right: 20rpx;
-  height: 150rpx;
-  line-height: 150rpx;
-  padding-left: 30rpx;
+.intput-view,.fixed-view,.flex-view{
+  width: 95%;
+  margin: auto;
+  background: white;
   border-top: solid;
   border-width: 1rpx;
   border-color: rgb(206, 206, 206);
-  letter-spacing: 0.005rem;
-  color: rgb(94, 94, 94);
+}
+
+.flex-view{
+  border-bottom: solid;
+  border-width: 1rpx;
+  border-color: rgb(206, 206, 206);
+}
+
+.fixed-view{
+  height: 100rpx;
+}
+
+.input-title{
+  line-height: 100rpx;
+  color: rgb(75, 75, 75);
   font-weight: bold;
-  font-size: 0.8rem;
+  font-size: 30rpx;
+  float: left;
+  width: 25%;
+  margin-left: 30rpx;
+}
+
+input, picker{
+  height: 100%;
+  line-height: 100rpx;
+  float: left;
+  font-size: 30rpx;
+  color: rgb(66, 66, 66);
+}
+
+picker{
+  text-align: right;
+  width: 50%;
+  float: right;
+  margin-right: 30rpx;
+}
+
+slider{
+  margin-top: 30rpx;
+}
+
+textarea{
+  clear: both;
+  margin-left: 60rpx;
+  color: rgb(54, 54, 54);
+  font-weight: normal;
+  font-size: 30rpx;
+  margin-bottom: 30rpx;
+  padding-bottom: 30rpx;
+}
+
+.right-image{
+  margin-top: 30rpx;
+  height: 40rpx;
+  width: 40rpx;
+  float: right;
+  margin-right: 30rpx;
 }
 
 .textarea-view{
@@ -71,4 +105,13 @@ picker{
 
 .submit-button{
   clear: both;
+  border: none;
+  height: 100rpx;
+  width: 95%;
+  margin: auto;
+  border-radius: 0rpx;
+  line-height: 100rpx;
+  font-size: 30rpx;
+  font-weight: bold;
 }
+

@@ -4,36 +4,50 @@
 </view>
 
 <view class="form-view">
-  <form bindsubmit='addActySubmit' style='background-color:red;height:200rpx'>
-    <view class="input-view">
-      活动标题:<input name="title" value="{{title}}"></input>
+  <form bindsubmit='addActySubmit'>
+    <view class="fixed-view">
+      <view class="input-title">活动标题:</view>
+      <input class="input-text" name="title" value="{{title}}" placeholder="输入活动标题"></input>
     </view>
-    <view class="input-view">
-      活动人数:
-      <picker range="{{maxNumRange}}" bindchange="bindMaxNumChange" >{{maxNum}}</picker>
+    <view class="fixed-view">
+      <view class="input-title">活动简介:</view>
+      <input class="input-text" name="title" value="{{title}}" placeholder="输入活动简介"></input>
     </view>
-    <view class="picker-view">选择时间:
-      <picker mode="time" value="{{time}}" bindchange="bindTimeChange">{{time}}</picker>
+    <view class="fixed-view">
+      <view class="input-title">活动人数:</view>
+      <image class="right-image" src="../../images/right.png"></image>
+      <picker value="{{maxNum-2}}" range="{{maxNumRange}}" bindchange="bindMaxNumChange" >{{maxNum}}</picker>
     </view>
-    <view class="picker-view">选择日期:
+    <view class="fixed-view">
+      <view class="input-title">开始日期:</view>
+      <image class="right-image" src="../../images/right.png"></image>
       <picker mode="date" value="{{date}}" bindchange="bindDateChange" start="{{datePickerStart}}" end="{{datePickerEnd}}">{{date}}</picker>
     </view>
-    <view class="picker-view">选择球种:
+    <view class="fixed-view">
+      <view class="input-title">开始时间:</view>
+      <image class="right-image" src="../../images/right.png"></image>
+      <picker mode="time" value="{{time}}" start="{{timePickerStart}}" bindchange="bindTimeChange">{{time}}</picker>
+    </view>
+    <view class="fixed-view">
+      <view class="input-title">约球类型:</view>
+      <image class="right-image" src="../../images/right.png"></image>
       <picker range = "{{sportTypeRange}}" bindchange="bindSportTypeChange" >{{sportType}}</picker>
     </view>
-    <view class="input-view">
-      信用限制:<input name="creditLimit" value="{{creditLimit}}"></input>
+    <view class="fixed-view">
+      <view class="input-title">信用限制:</view>
+      <slider activeColor="#12CBC4" block-size="20" bindchange="slider4change" min="0" max="5" show-value/>
     </view>
-    <view class="input-view">
-      级别限制:<input name="levelLimit" value="{{levelLimit}}"></input>
+    <view class="flex-view">
+      <view class="input-title">详细描述:</view>
+      <textarea placeholder="输入详细描述" name="description" value="{{description}}" auto-height="true"> </textarea>
     </view>
-    <view class="textarea-view">请输入详细描述:
-      <textarea name="description" value="{{description}}" auto-height="true"> </textarea>
-    </view>
+
+    <!--
     <view class="tags-view">标签:
         <input bindconfirm="addTag" value="{{tagInput}}"></input>
     </view>
-    <view class="tags" wx:for="{{tags}}" input name="tags" value="{{tags}}" bindlongtap="removeTag" data-name="{{item}}">{{item}}</view>
+    <view class="tags" wx:for="{{tags}}" input name="tags" value="{{tags}}" bindlongtap="removeTag" data-name="{{item}}">{{item}}</view> -->
+
     <button form-type='submit' class="submit-button">创建活动</button>
   </form>
 </view>

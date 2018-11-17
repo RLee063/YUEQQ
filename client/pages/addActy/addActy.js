@@ -1,7 +1,7 @@
 // pages/addActy/addActy.js
 var util = require('../../utils/util.js')
 var config = require('../../config')
-
+var app = getApp()
 function yearMonthDayToDate(year, month, day){
   var result=""
   result += year
@@ -15,38 +15,63 @@ function yearMonthDayToDate(year, month, day){
 Page({
   data: {
     imgTempPath: "https://qcloudtest-1257207887.cos.ap-guangzhou.myqcloud.com/1536468704720-MUpMq2yU3.jpg",
-    title: "来打球吧朋友",
+    title: "",
     maxNum: 6,
     tags: ["高手退散", "我无敌了"],
-    sportType: "羽毛球",
-    startTime: "12-20",
+    sportType: "",
+    startTime: "",
     date: "",
-    time: "12:00",
+    time: "",
     isDefaultImage: true,
+    timePickerStart:"",
     datePickerStart:"",
     datePickerEnd:"",
     maxNumRange: [],
-    sportTypeRange: ["篮球", "羽毛球", "乒乓球", "网球", "足球", "跑步"],
+    sportTypeRange: [],
     tagInput:""
   },
 
+  // data: {
+  //   imgTempPath: "https://qcloudtest-1257207887.cos.ap-guangzhou.myqcloud.com/1536468704720-MUpMq2yU3.jpg",
+  //   title: "来打球吧朋友",
+  //   maxNum: 6,
+  //   tags: ["高手退散", "我无敌了"],
+  //   sportType: "羽毛球",
+  //   startTime: "12-20",
+  //   date: "",
+  //   time: "12:00",
+  //   isDefaultImage: true,
+  //   timePickerStart: "",
+  //   datePickerStart: "",
+  //   datePickerEnd: "",
+  //   maxNumRange: [],
+  //   sportTypeRange: ["篮球", "羽毛球", "乒乓球", "网球", "足球", "跑步"],
+  //   tagInput: ""
+  // },
   onLoad: function(e){
     var maxNumRange = [];
     for(var i=2; i<30; i++){
       maxNumRange.push(i)
     }
-    var result;
+
     var date = new Date();
     var year = date.getFullYear();
     var month = date.getMonth() + 1;
     var day = date.getDate();
     var nowDate = yearMonthDayToDate(year, month, day);
     var endDate = yearMonthDayToDate(year, month+1, day);
+    var timeArray = util.getTime().split(" ")[1].split(":")
+    var nowTime = timeArray[0]+":"+timeArray[1]
+    var sportTypeRange = app.globalData.sportType
     this.setData({
       date: nowDate,
       datePickerStart: nowDate,
       datePickerEnd: endDate,
-      maxNumRange: maxNumRange
+      maxNumRange: maxNumRange,
+      timePickerStart: nowTime,
+      time: nowTime,
+      sportTypeRange: sportTypeRange,
+      sportType: sportTypeRange[0]
     })
   },
   bindMaxNumChange: function(e){
