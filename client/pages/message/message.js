@@ -8,7 +8,6 @@ Page({
   data: {
     chatList:[]
   },
-
   onLoad: function (options) {
     that = this
   },
