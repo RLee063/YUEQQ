@@ -2,6 +2,7 @@
 var util = require('../../utils/util.js')
 var config = require('../../config')
 var app = getApp()
+var that
 function yearMonthDayToDate(year, month, day){
   var result=""
   result += year
@@ -30,30 +31,12 @@ Page({
     sportTypeRange: [],
     tagInput:""
   },
-
-  // data: {
-  //   imgTempPath: "https://qcloudtest-1257207887.cos.ap-guangzhou.myqcloud.com/1536468704720-MUpMq2yU3.jpg",
-  //   title: "来打球吧朋友",
-  //   maxNum: 6,
-  //   tags: ["高手退散", "我无敌了"],
-  //   sportType: "羽毛球",
-  //   startTime: "12-20",
-  //   date: "",
-  //   time: "12:00",
-  //   isDefaultImage: true,
-  //   timePickerStart: "",
-  //   datePickerStart: "",
-  //   datePickerEnd: "",
-  //   maxNumRange: [],
-  //   sportTypeRange: ["篮球", "羽毛球", "乒乓球", "网球", "足球", "跑步"],
-  //   tagInput: ""
-  // },
   onLoad: function(e){
+    var that = this
     var maxNumRange = [];
     for(var i=2; i<30; i++){
       maxNumRange.push(i)
     }
-
     var date = new Date();
     var year = date.getFullYear();
     var month = date.getMonth() + 1;
@@ -158,6 +141,11 @@ Page({
       tags: tags
     })
   },
+  receiveImageUrl: function (imgUrl) {
+    that.setData({
+      imgTempPath:imgUrl
+    })
+  }
 })
 
 function upLoadImgAndGetUrl(that) {

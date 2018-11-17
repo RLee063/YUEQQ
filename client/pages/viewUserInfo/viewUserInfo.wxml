@@ -1,5 +1,8 @@
 <!--pages/viewUserInfo/viewUserInfo.wxml-->
 <view class="father">
+  <view catchtap='showMoreOptions'>
+    <image src="../../images/more.png" class="more"></image>
+  </view>
   <image src="{{userInfo.avatarUrl}}" class="avatar-pic" mode="aspectFill"/>
   <view class="nick-name">{{userInfo.nickName}}</view>
   <!-- <view class="gender"></view> -->

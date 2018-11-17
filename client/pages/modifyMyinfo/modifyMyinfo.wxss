@@ -1,0 +1,118 @@
+/* pages/addActy/addActy.wxss */
+
+page{
+  background: rgb(248, 248, 248);
+}
+
+button{
+  background: white;
+  color: rgb(94, 94, 94);
+  letter-spacing: 0.2rem;
+  font-size: 0.9rem;
+  height: 120rpx;
+  line-height: 120rpx;
+  border-top: solid;
+  border-width: 1rpx;
+  border-color: rgb(0, 0, 0);
+  border-radius: 0;
+}
+
+
+.activity-pic{
+  width: 100%;
+  height: 400rpx;
+}
+
+.intput-view,.fixed-view,.flex-view{
+  width: 95%;
+  margin: auto;
+  background: white;
+  border-top: solid;
+  border-width: 1rpx;
+  border-color: rgb(206, 206, 206);
+}
+
+.flex-view{
+  border-bottom: solid;
+  border-width: 1rpx;
+  border-color: rgb(206, 206, 206);
+}
+
+.fixed-view{
+  height: 100rpx;
+}
+
+.input-title{
+  line-height: 100rpx;
+  color: rgb(75, 75, 75);
+  font-weight: bold;
+  font-size: 30rpx;
+  float: left;
+  width: 25%;
+  margin-left: 30rpx;
+}
+
+input, picker{
+  height: 100%;
+  line-height: 100rpx;
+  float: left;
+  font-size: 30rpx;
+  color: rgb(66, 66, 66);
+}
+
+picker{
+  text-align: right;
+  width: 50%;
+  float: right;
+  margin-right: 30rpx;
+}
+
+slider{
+  margin-top: 30rpx;
+}
+
+textarea{
+  clear: both;
+  margin-left: 60rpx;
+  color: rgb(54, 54, 54);
+  font-weight: normal;
+  font-size: 30rpx;
+  margin-bottom: 30rpx;
+  padding-bottom: 30rpx;
+}
+
+.right-image{
+  margin-top: 30rpx;
+  height: 40rpx;
+  width: 40rpx;
+  float: right;
+  margin-right: 30rpx;
+}
+
+.textarea-view{
+  height: auto;
+}
+
+.tags{
+  float: left;
+  margin-left: 100rpx;
+  margin-right: 0rpx;
+  margin-bottom: 30rpx;
+  background-color: red;
+  height: 50rpx;
+  margin-top: 20rpx;
+}
+
+.submit-button{
+  clear: both;
+  border: none;
+  height: 100rpx;
+  width: 95%;
+  margin: auto;
+  border-radius: 0rpx;
+  line-height: 100rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-top: 30rpx;
+}
+

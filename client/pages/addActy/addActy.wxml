@@ -1,6 +1,6 @@
 <!--pages/addActy/addActy.wxml-->
 <view>
-  <image src="{{imgTempPath}}" class="activity-pic" mode="aspectFill" bindtap="chooseImg"/>
+  <image src="{{userInfo.avatarUrl}}" class="activity-pic" mode="aspectFill" bindtap="chooseImg"/>
 </view>
 
 <view class="form-view">

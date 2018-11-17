@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/modifyMyinfo/modifyMyinfo",
     "pages/begin/begin",
     "pages/addActy/addActy",
     "pages/viewUserInfo/viewUserInfo",

@@ -8,7 +8,9 @@ App({
   globalData:{
     logged: false,
     authorized: false,
-    sportType: ['乒乓球', '篮球', '网球', '羽毛球', '足球',  '跑步']
+    sportType: ['乒乓球', '篮球', '网球', '羽毛球', '足球',  '跑步'],
+    grades: ["大一", "大二", "大三", "大四", "研究生", "博士生"],
+    colleges: ["计算机学院", "医学院", "数学院", "电子学院", "外语学院"]
   },
   onLaunch: function () {
     that = this

@@ -91,10 +91,7 @@ Page({
         res = JSON.parse(res.data)
         console.log(pages)
         var prevPage = pages[pages.length - 2];
-        prevPage.setData({
-          imgTempPath: res.data.imgUrl
-        })
-        
+        prevPage.receiveImageUrl(res.data.imgUrl)
         wx.navigateBack({
           delta: 1
         })

@@ -112,5 +112,23 @@ Page({
     wx.navigateTo({
       url: "../chat/chat?chatInfo=" + chatInfoString
     })
-  }
+  },
+  showMoreOptions: function () {
+    var itemList = ["修改个人信息"]
+    wx.showActionSheet({
+      itemList: itemList,
+      success(res) {
+        var data = {
+          uid: wx.getStorageSync('openid')
+        }
+        var dataString = JSON.stringify(data)
+        wx.navigateTo({
+          url: '../modifyMyinfo/modifyMyinfo?data='+dataString,
+        })
+      },
+      fail(res) {
+        console.log(res.errMsg)
+      }
+    })
+  },
 })

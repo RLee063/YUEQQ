@@ -4,6 +4,14 @@ page{
   background: rgb(243, 243, 243);
 }
 
+.more{
+  position: absolute;
+  height: 50rpx;
+  width: 50rpx;
+  right: 20rpx;
+  top: 20rpx;
+}
+
 .father{
   height: 100%;
   position: relative;
