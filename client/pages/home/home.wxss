@@ -61,7 +61,7 @@ page{
 }
 
 .recommendation-user-item{
-  border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
+  border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
   overflow: hidden;
   width: 86%;
   margin-left: 7%;
@@ -308,12 +308,12 @@ background-image: linear-gradient(to right top, #4a4e50 100%, #868f96 0%);
 .activity-block {
   /* border-radius: 6px 6px 0px 0px / 6px 6px 0px 0px; */
   position: relative;
-  width: 85%;
+  width: 90%;
   margin: auto;
   margin-top: 10rpx;
   margin-bottom: 60rpx;
-  box-shadow:-1px 3px 10px -1px rgb(173, 173, 173);
-  border-radius: 10px 10px 5px 5px / 10px 10px 5px 5px;
+  box-shadow:-1px 3px 8px -1px rgb(173, 173, 173);
+  border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
   overflow: hidden;
 }
 

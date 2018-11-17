@@ -2,13 +2,13 @@ var util = require('../../utils/util.js')
 var config = require('../../config')
 var app = getApp()
 var acties = []
+var that
 
 Page({
   data:{
     activitiesArray: [],
     recommendationActivities:[],
     recommendationUsers:[{},{},{},{},{},{}],
-
     criteriasTitle: ["排序类型","排序方式","活动类型"],
     criterias: [
       ["与我相关", "开始时间", "发起时间"],
@@ -51,7 +51,23 @@ Page({
     this.refresh(that)
   },
   refresh: function(that){
-    var that=this
+    that.refreshRecommendActivities()
+    that.refreshRecommendUsers()
+    that.refreshActivities()
+  },
+  refreshRecommendActivities: function(){
+
+  },
+  refreshRecommendUsers: function(){
+    wx.request({
+      url: `${config.service.host}/weapp/getRecommendUsers`,
+      success: result=>{
+        console.log(result)
+      }
+    })
+  },
+  refreshActivities: function(){
+    var that = this
     wx.request({
       url: `${config.service.host}/weapp/pullRefresh`,
       success(result) {
@@ -71,6 +87,7 @@ Page({
     })
   },
   onLoad: function(){
+    that = this
     this.refresh(this)
     this.initData()
   },

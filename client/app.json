@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/addActy/addActy",
     "pages/begin/begin",
+    "pages/addActy/addActy",
     "pages/modifyMyinfo/modifyMyinfo",
     "pages/viewUserInfo/viewUserInfo",
     "pages/viewActivityInfo/viewActivityInfo",
