@@ -53,6 +53,7 @@ button{
 }
 
 input, picker{
+  width: 65%;
   height: 100%;
   line-height: 100rpx;
   float: left;
@@ -72,6 +73,7 @@ slider{
 }
 
 textarea{
+  height: 300rpx;
   clear: both;
   margin-left: 60rpx;
   color: rgb(54, 54, 54);

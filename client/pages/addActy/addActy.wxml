@@ -1,6 +1,6 @@
 <!--pages/addActy/addActy.wxml-->
 <view>
-  <image src="{{userInfo.avatarUrl}}" class="activity-pic" mode="aspectFill" bindtap="chooseImg"/>
+  <image src="{{imgTempPath}}" class="activity-pic" mode="aspectFill" bindtap="chooseImg"/>
 </view>
 
 <view class="form-view">
@@ -11,12 +11,7 @@
     </view>
     <view class="fixed-view">
       <view class="input-title">活动简介:</view>
-      <input class="input-text" name="title" value="{{title}}" placeholder="输入活动简介"></input>
-    </view>
-    <view class="fixed-view">
-      <view class="input-title">活动人数:</view>
-      <image class="right-image" src="../../images/right.png"></image>
-      <picker value="{{maxNum-2}}" range="{{maxNumRange}}" bindchange="bindMaxNumChange" >{{maxNum}}</picker>
+      <input class="input-text" name="introduction" value="{{introduction}}" placeholder="输入活动简介"></input>
     </view>
     <view class="fixed-view">
       <view class="input-title">开始日期:</view>
@@ -31,11 +26,15 @@
     <view class="fixed-view">
       <view class="input-title">约球类型:</view>
       <image class="right-image" src="../../images/right.png"></image>
-      <picker range = "{{sportTypeRange}}" bindchange="bindSportTypeChange" >{{sportType}}</picker>
+      <picker value="{{sportType}}" range="{{sportTypeRange}}" bindchange="bindSportTypeChange" >{{sportType}}</picker>
+    </view>
+    <view class="fixed-view">
+      <view class="input-title">活动人数:</view>
+      <slider value='{{maxNum}}' activeColor="#12CBC4" block-size="20" bindchange="bindMaxNumChange" min="2" max="12" show-value/>
     </view>
     <view class="fixed-view">
       <view class="input-title">信用限制:</view>
-      <slider activeColor="#12CBC4" block-size="20" bindchange="slider4change" min="0" max="5" show-value/>
+      <slider value='{{creditLimit}}' activeColor="#12CBC4" block-size="20" bindchange="bindCreditLimitChange" min="0" max="5" show-value/>
     </view>
     <view class="flex-view">
       <view class="input-title">详细描述:</view>

@@ -130,7 +130,18 @@ var getTime = function() {
   if (strDate >= 0 && strDate <= 9) {
     strDate = "0" + strDate;
   }
-  var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate + " " + date.getHours() + seperator2 + date.getMinutes() + seperator2 + date.getSeconds();
+
+  var one2two = function(str){
+
+    if(str.toString().length < 2){
+      return "0"+str
+    }
+    else{
+      return str
+    }
+  }
+
+  var currentdate = date.getFullYear() + seperator1 + one2two(month) + seperator1 + one2two(strDate) + " " + one2two(date.getHours()) + seperator2 + one2two(date.getMinutes()) + seperator2 + one2two(date.getSeconds());
   return currentdate;
 }
 
