@@ -17,12 +17,9 @@ Page({
     aid: ""
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function(options) {
-    // var aid = "o5ko344qvKlQYv5kYMdTkWbkH8lg1541147786"
-    var aid = options.aid
+    var aid = "o5ko3434RP2lZQNVamvVxfrAugoY1542197043"
+    // var aid = options.aid
     that = this
     var myUid = wx.getStorageSync('openid')
     this.setData({

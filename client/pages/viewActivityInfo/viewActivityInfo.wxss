@@ -1,6 +1,7 @@
 page{
   position: relative;
   height: 100%;
+  background:rgb(245, 245, 245);
 }
 
 .father{
@@ -8,8 +9,30 @@ page{
   height: 100%;
 }
 
+.canvas{
+  border-radius: 50%;
+  position: absolute;
+  height: 170rpx;
+  width: 170rpx;
+  right: 20rpx;
+  top: 320rpx;
+  background:rgb(255, 255, 255);
+  box-shadow: 0 0 10rpx rgb(158, 158, 158) inset;
+  /* border: solid;
+  border-width: thick;
+  border-color: rgba(245, 245, 245, 0.5); */
+}
+
+.canvas-image{
+  margin: 5%;
+  height: 90%;
+  width: 90%;
+}
+
 .pic-block{
-  height: 30%;
+  width: 100%;
+  height: 400rpx;
+  box-shadow: 0rpx 0rpx 20rpx rgb(153, 153, 153);
 }
 
 .pic{
@@ -19,13 +42,13 @@ page{
 
 .title{
   position: absolute;
-  left: 20rpx;
-  top: -10rpx;
-  font-family: "microsoft yahei";
-  font-size: 40rpx;
+  top: 330rpx;
+  left: 30rpx;
+  font-size: 43rpx;
   color: white;
-  -webkit-text-stroke: 0.1px rgb(0, 0, 0);
-  letter-spacing: 0.2rem;
+  letter-spacing: 0.05rem;
+  /* font-weight: 599; */
+  text-shadow: 0 0 10rpx black;
 }
 
 .avatar, .avatar-signed, .avatar-unsigned{
@@ -100,8 +123,8 @@ page{
 
 .more{
   position: absolute;
-  height: 60rpx;
-  width: 60rpx;
-  left: 670rpx;
+  height: 50rpx;
+  width: 50rpx;
+  right: 20rpx;
   top: 20rpx;
 }

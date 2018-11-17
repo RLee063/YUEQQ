@@ -1,9 +1,13 @@
 <!--client/pages/viewActivityInfo/viewActivityInfo.wxml-->
 <view class="father">
+  <view class="canvas">
+    <image class="canvas-image" src="../../images/篮球.png"></image>
+  </view>
+  <!-- <canvas canvas-id='icon-background' class="icon-background-canvas"> </canvas> -->
   <view name="activityPic" class="pic-block">
     <image class="pic" src="{{activityInfo.imgUrl}}" mode="aspectFill"></image>
   </view>
-  <view class="info-block">
+  <view class="title">
     {{activityInfo.title}}
   </view>
   <view class="info-block">
