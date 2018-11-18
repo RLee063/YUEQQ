@@ -12,14 +12,21 @@ Page({
     evaluating: false,
     ending: false,
     transfering: false,
+    revoming: false,
     transferTo: "",
     myUid: "",
-    aid: ""
+    aid: "",
+    swiperIndex: 0,
+    current: 0,
+    waveCanvasHeight: 80,
+    waveCanvasWidth: 500,
+    waveHeight: 80,
+    waveWidth: 400
   },
 
   onLoad: function(options) {
-    var aid = "o5ko3434RP2lZQNVamvVxfrAugoY1542197043"
-    // var aid = options.aid
+    //var aid = "o5ko3434RP2lZQNVamvVxfrAugoY1542197043"
+    var aid = options.aid
     that = this
     var myUid = wx.getStorageSync('openid')
     this.setData({
@@ -60,6 +67,8 @@ Page({
         }
         for(var i=0; i<activityInfo.members.length; i++){
           activityInfo.members[i].signed = false
+          activityInfo.members[i].removed = false
+          activityInfo.members[i].evaluate = 0
         }
 //faker
         activityInfo.introduction = "大家都可以来玩呀！"
@@ -70,6 +79,23 @@ Page({
         activityInfo.members.push(activityInfo.members[0])
         activityInfo.members.push(activityInfo.members[0])
         activityInfo.members.push(activityInfo.members[0])
+        activityInfo.members.push(activityInfo.members[0])
+        activityInfo.members.push(activityInfo.members[0])
+        activityInfo.members.push(activityInfo.members[0])
+        activityInfo.members.push(activityInfo.members[0])
+        activityInfo.members.push(activityInfo.members[0])
+        activityInfo.members.push(activityInfo.members[0])
+        activityInfo.members.push(activityInfo.members[0])
+        activityInfo.members.push(activityInfo.members[0])
+        activityInfo.members.push(activityInfo.members[0])
+        activityInfo.members.push(activityInfo.members[0])
+        activityInfo.members.push(activityInfo.members[0])
+        activityInfo.members.push(activityInfo.members[0])
+        activityInfo.members.push(activityInfo.members[0])
+        activityInfo.members.push(activityInfo.members[0])
+        activityInfo.members.push(activityInfo.members[0])
+        activityInfo.description ="activityInfo.descriptionactivityInfo.descriptionactivityInfo.descriptionactivityInfo.descriptionactivityInfo.descriptionactivityInfo.description"
+        activityInfo.status = 2
 
         that.setData({
           activityInfo: activityInfo,
@@ -92,6 +118,15 @@ Page({
     that.setData({
       membersArray: membersArray
     })
+  },
+  onSlideChangeEnd:function(e){
+    console.log(e)
+    that.setData({
+    swiperIndex: e.detail.current
+    })
+    console.log("INDEX:"+e.currentTarget.index)
+    console.log("CURRENT:" + e.currentTarget.current)
+    console.log("current2:" + e.detail.current)
   },
   joinActivity: function() {
     var uid = wx.getStorageSync('openid')
@@ -145,6 +180,7 @@ Page({
     if(this.data.isOwner){
       itemList.push("解散活动")
       itemList.push("转让活动")
+      itemList.push("移除成员")
     }
     else{
       itemList.push("举报")
@@ -165,6 +201,9 @@ Page({
             break;
           case 1:
             that.transferActivity()
+            break;
+          case 2:
+            that.removeMember()
             break;
           }
         }
@@ -206,13 +245,6 @@ Page({
     this.setData({
       transfering: true
     })
-    // wx.request({
-    //   url: `${config.service.host}/weapp/transferActivity`,
-    //   data: {
-    //     aid: that.data.aid,
-    //     uid: ""
-    //   }
-    // })
   },
   completeTransfer: function () {
     this.setData({
@@ -223,6 +255,38 @@ Page({
       data: {
         aid: that.data.aid,
         uid: that.data.transferTo
+      },
+    })
+  },
+  chooseRemove: function(e){
+    console.log(e)
+    var membersArray = that.data.membersArray
+    membersArray[e.currentTarget.dataset.index] = (membersArray[e.currentTarget.dataset.index] + 1) % 2
+    that.setData({
+      membersArray: membersArray
+    })
+  },
+  removeMember: function() {
+    that.setData({
+      removing: true
+    })
+  },
+  completeRemoveMember: function(){
+    that.setData({
+      removing: false
+    })
+    var members = that.data.membersArray
+    var removeMembers = []
+    for(var i=0; i<members.length; i++){
+      if(members[i].removed){
+        removeMembers.push(members[i].uid)
+      }
+    }
+    wx.request({
+      url: `${config.service.host}/weapp/remove`,
+      data: {
+        aid: that.data.aid,
+        members: removeMembers
       },
     })
   },
@@ -249,6 +313,16 @@ Page({
     this.setData({
       evaluating: true
     })
+  },
+  evaluate: function (e) {
+    var membersArray = that.data.membersArray
+    membersArray[e.target.dataset.index].evaluate = e.target.dataset.code
+    that.setData({
+      membersArray: membersArray
+    })
+    console.log("INDEX:" + e.target.dataset.index)
+    console.log("CURRENT:" + e.target.dataset.current)
+    console.log("current2:" + e.detail.current)
   },
   completeEvaluateActivity: function(){
     this.setData({
@@ -302,8 +376,8 @@ Page({
     })
   },
   drawJoinMask: function() {
-    var height = util.rpx2px(80)
-    var width = 200
+    var height = util.rpx2px(that.data.waveHeight)
+    var width = util.rpx2px(that.data.waveWidth)
     this.p1 = {
       x: width,
       y: height/4,
@@ -333,9 +407,9 @@ Page({
   },
   waveAmination: function() {
     var ctx = wx.createCanvasContext('joinMask')
-    var height = util.rpx2px(80)
-    var width = util.rpx2px(560)
-    var rate = 200
+    var height = util.rpx2px(that.data.waveCanvasHeight)
+    var width = util.rpx2px(that.data.waveCanvasWidth)
+    var rate = util.rpx2px(that.data.waveWidth)
     ctx.beginPath()
     ctx.setGlobalAlpha(0.5)
     ctx.moveTo(rate, 0)
@@ -349,7 +423,7 @@ Page({
     ctx.fill()
     ctx.draw()
     var point = {
-      x: 200
+      x: util.rpx2px(that.data.waveWidth)
     }
     if ((this.p1.x + this.p1.directionX > (point.x + 10)) || (this.p1.x + this.p1.directionX < (point.x - 10))) {
       this.p1.directionX = 0 - (this.p1.directionX)
@@ -370,10 +444,10 @@ Page({
   },
   waveAmination2: function () {
     var ctx = wx.createCanvasContext('joinMask2')
-    var height = util.rpx2px(80)
-    var width = util.rpx2px(560)
-    var rate = 200
-    ctx.setGlobalAlpha(0.2)
+    var height = util.rpx2px(that.data.waveCanvasHeight)
+    var width = util.rpx2px(that.data.waveCanvasWidth)
+    var rate = util.rpx2px(that.data.waveWidth)
+    ctx.setGlobalAlpha(0.5)
     ctx.beginPath()
     ctx.moveTo(rate, 0)
     ctx.lineTo(width, 0)
@@ -386,7 +460,7 @@ Page({
     ctx.fill()
     ctx.draw()
     var point = {
-      x: 200
+      x: util.rpx2px(that.data.waveWidth)
     }
     if ((this.p3.x + this.p3.directionX > (point.x + 10)) || (this.p3.x + this.p3.directionX < (point.x - 10))) {
       this.p3.directionX = 0 - (this.p3.directionX)

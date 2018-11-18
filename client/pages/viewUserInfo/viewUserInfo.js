@@ -10,7 +10,8 @@ Page({
   },
 
   onLoad: function (options) {
-    var uid = "o5ko3434RP2lZQNVamvVxfrAugoY"
+    var uid = options.uid
+    // var uid = "o5ko3434RP2lZQNVamvVxfrAugoY"
     var myUid = wx.getStorageSync('openid')
     if(!uid){
       uid = myUid

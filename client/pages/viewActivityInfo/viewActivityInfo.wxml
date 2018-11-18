@@ -50,9 +50,9 @@
     <view style='clear:both;'></view>
   </view>
 
-  <view class="info-block">
+  <view class="info-block" wx:if="{{activityInfo.description}}">
     <view class="info-intro">详细说明：</view>
-    <view class="description-text">详细说明详细说明详细说明详细说明详细说明详细说明详细说明详细说明详细说明详细说明详细说明详细说明详细说明详细说明详细说明详细说明详细说明详细说明详细说明详细说明详细说明详细说明详细说明详细说明详细说明详细说明详细说</view>
+    <view class="description-text">{{activityInfo.description}}</view>
     <view style='clear:both;'></view>
   </view>
 
@@ -70,8 +70,6 @@
   <view wx:elif="{{(isOwner&&(activityInfo.status==1))}}" class="join" bindtap="endActivity">结束活动</view>
   <view wx:elif="{{(!isOwner)&&(activityInfo.status==1)}}" class="join">进行中</view>
   <view wx:elif="{{(hasJoined)&&(!hasEvaluated)&&(activityInfo.status==2)}}" class="join" bindtap="evaluateActivity">评价
-    <!-- <canvas class="join-mask" canvas-id='joinMask2'></canvas>
-    <canvas class="join-mask" canvas-id='joinMask'></canvas> -->
   </view>
   <view wx:elif="{{(activityInfo.status==2)}}" class="join">已结束</view>
 </view>
@@ -80,14 +78,23 @@
   <image src="../../images/more.png" class="more"></image>
 </view>
 
+
+
 <view wx:if="{{evaluating}}">
   <view class="sub-mask"></view>
-  <swiper interval="5000" duration="1000" class="evaluate-swiper" next-margin='150rpx'>
-    <swiper-item wx:for="{{membersArray}}" wx:key="{{item.uid}}" class="evaluate-item">
+  <swiper interval="5000" duration="1000" current="{{current}}" class="evaluate-swiper" next-margin='150rpx' bindchange='onSlideChangeEnd'>
+    <swiper-item wx:for="{{membersArray}}" class="evaluate-item">
       <view class="evaluate-block">
-        <image class="avatar" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill" />
-        <button>up</button>
-        <button>down</button>
+        <image class="avatar-biger" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill" />
+        <view class="skill-wave" catchtap='completeRemoveMember'></view>
+        <view wx:if="{{index==swiperIndex}}">
+          <canvas class="skill-wave-mask" canvas-id='joinMask2'></canvas>
+          <canvas class="skill-wave-mask" canvas-id='joinMask'></canvas>
+        </view>
+        <view class="evaluate-button-left" data-code="1" data-uid="{{item.uid}}" bindtap='evaluate' data-index="{{index}}" data-current="{{current}}" wx:if="{{item.evaluate!=1}}">👆</view>
+        <view class="evaluate-button-left-down" data-code="0" data-uid="{{item.uid}}" bindtap='evaluate' data-index="{{index}}" data-current="{{current}}" wx:else>👆</view>
+        <view class="evaluate-button-right" data-code="-1" data-uid="{{item.uid}}" bindtap='evaluate' data-index="{{index}}" data-current="{{current}}" wx:if="{{item.evaluate!=-1}}">👇</view>
+        <view class="evaluate-button-right-down" data-code="0" data-uid="{{item.uid}}" bindtap='evaluate' data-index="{{index}}" data-current="{{current}}" wx:if="{{item.evaluate==-1}}">👇</view>
       </view>
     </swiper-item>
   </swiper>
@@ -96,23 +103,41 @@
 
 <view wx:if="{{ending}}">
   <view class="sub-mask"></view>
-  <view class="end-block">
+  <scroll-view class="child-block">
+    <view class="child-block-title">活动结束啦！</view>
+    <view class="child-block-warning">给成员们签个到吧</view>
     <view wx:for="{{membersArray}}">
-      <image catchtap="sign" wx:if="{{!item.signed}}" class="avatar-unsigned" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill" />
-      <image catchtap="sign" wx:if="{{item.signed}}" class="avatar-signed" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill" />
+      <image catchtap="sign" wx:if="{{!item.signed}}" class="avatar-big-unsigned" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill" />
+      <image catchtap="sign" wx:if="{{item.signed}}" class="avatar-big-signed" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill" />
     </view>
-  </view>
+  </scroll-view>
   <view class="join" catchtap='completeEndActivity'>完成</view>
 </view>
 
-
 <view wx:if="{{transfering}}">
   <view class="sub-mask"></view>
-  <view class="end-block">
-    <view wx:for="{{membersArray}}">
-      <image catchtap="chooseTransfer" wx:if="{{(myUid != item.uid)&&(transferTo == item.uid)}}" class="avatar-signed" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill" />
-      <image catchtap="chooseTransfer" wx:elif="{{myUid != item.uid}}" class="avatar-unsigned" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill" />
+  <scroll-view class="child-block" scroll-y>
+    <view class="child-block-title">活动转让</view>
+    <view class="child-block-warning">选择被转让的成员吧</view>
+    <view wx:for="{{membersArray}}" >
+      <image catchtap="chooseTransfer"  class="avatar-big-signed" wx:if="{{(myUid != item.uid)&&(transferTo == item.uid)}}" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill" />
+      <image catchtap="chooseTransfer" class="avatar-big-unsigned" wx:elif="{{myUid != item.uid}}" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill" />
     </view>
-  </view>
+  </scroll-view>
   <view class="join" catchtap='completeTransfer'>完成</view>
 </view>
+
+<view wx:if="{{removing}}">
+  <view class="sub-mask"></view>
+  <scroll-view class="child-block">
+    <view class="child-block-title">移除成员</view>
+    <view class="child-block-warning">慎重一点哦 T T</view>
+    <view wx:for="{{membersArray}}">
+      <view wx:if="{{item.uid==myUid}}"></view>
+      <image catchtap="chooseRemove" data-index="{{index}}" wx:elif="{{!item.removed}}" class="avatar-big-unsigned" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill" />
+      <image catchtap="chooseRemove" data-index="{{index}}" wx:else="{{item.removed}}" class="avatar-big-signed" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill" />
+    </view>
+  </scroll-view>
+  <view class="join" catchtap='completeRemoveMember'>完成</view>
+</view>
+

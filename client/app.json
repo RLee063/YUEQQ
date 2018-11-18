@@ -1,7 +1,7 @@
 {
   "pages": [
-        "pages/viewActivityInfo/viewActivityInfo",
     "pages/begin/begin",
+    "pages/viewActivityInfo/viewActivityInfo",
     "pages/addActy/addActy",
     "pages/modifyMyinfo/modifyMyinfo",
     "pages/viewUserInfo/viewUserInfo",
@@ -23,7 +23,8 @@
     "pages/attendDid/attendDid",
     "pages/myActy/myActy",
     "pages/evaluate/evaluate",
-    "pages/cropper/cropper"
+    "pages/cropper/cropper",
+    "pages/displayUsers/displayUsers"
   ],
   "window": {
     "backgroundColor": "white",
