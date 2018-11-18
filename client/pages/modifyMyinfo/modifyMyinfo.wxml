@@ -24,6 +24,18 @@
       <image class="right-image" src="../../images/right.png"></image>
       <picker value="{{userInfo.grade}}" bindchange="bindGradeChange" range="{{grades}}">{{userInfo.grade}}</picker>
     </view>
+
+    <view class="flex-view" wx:if="{{isFirstLogin}}">
+      <view class="input-title">能力值*</view>
+      <view class="warning-text">能力值可以帮助你找到合适的对手</view>
+
+      <view wx:for="{{sportType}}">
+        <view class="input-title-child">{{item}}:</view>
+        <slider value='{{maxNum}}' data-index="{{index}}" activeColor="#12CBC4" block-size="20" bindchange="bindSkillsChange" min="0" max="80" show-value/>
+        <view style="clear:both;"></view>
+      </view>
+    </view>
+
     <button form-type='submit' class="submit-button">完成</button>
   </form>
 </view>

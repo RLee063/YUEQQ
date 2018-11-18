@@ -166,7 +166,6 @@ Page({
     var data = {
       uid: wx.getStorageSync('openid'),
       createTime: createTime,
-
       title: that.data.title,
       introduction: that.data.introduction,
       startTime: startTime,
