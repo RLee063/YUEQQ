@@ -56,8 +56,8 @@
   clear: both;
 }
 
-.follow-block-size,.follow-block,.unfollow-block{
-  position: fixed;
+.ended-block,.ready-block,.ongoing-block{
+  position: absolute;
   font-size: 25rpx;
   border: solid;
   border-width: thin;
@@ -70,12 +70,17 @@
   top: 50rpx;
 }
 
-.follow-block{
-  border-color: rgb(129, 209, 255);
-  color: rgb(129, 215, 255);
+.ready-block{
+  border-color: rgb(68, 164, 219);
+  color: rgb(64, 165, 212);
 }
 
-.unfollow-block{
-  border-color: rgb(255, 132, 132);
-  color: rgb(255, 123, 123);
+.ongoing-block{
+  border-color: rgb(255, 216, 40);
+  color: rgb(255, 216, 40);
+}
+
+.ended-block{
+  border-color: rgb(255, 83, 83);
+  color: rgb(255, 86, 86);
 }
