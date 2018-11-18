@@ -1,0 +1,29 @@
+<!--pages/addActy/addActy.wxml-->
+<view>
+  <image src="{{userInfo.homePicUrl}}" class="activity-pic" mode="aspectFill" bindtap="chooseImg"/>
+</view>
+
+<view class="form-view">
+  <form bindsubmit='doSubmit'>
+    <view class="fixed-view">
+      <view class="input-title">个性签名:</view>
+      <input class="input-text" name="motto" value="{{userInfo.motto}}" placeholder="输入个性签名"></input>
+    </view>
+    <view class="fixed-view">
+      <view class="input-title">电话:</view>
+      <input class="input-text" name="phone" value="{{userInfo.phone}}" placeholder="输入号码"></input>
+    </view>
+
+    <view class="fixed-view">
+      <view class="input-title">学院:</view>
+      <image class="right-image" src="../../images/right.png"></image>
+      <picker value="{{userInfo.college}}" range="{{colleges}}" bindchange="bindCollegeChange" >{{userInfo.college}}</picker>
+    </view>
+    <view class="fixed-view">
+      <view class="input-title">年级:</view>
+      <image class="right-image" src="../../images/right.png"></image>
+      <picker value="{{userInfo.grade}}" bindchange="bindGradeChange" range="{{grades}}">{{userInfo.grade}}</picker>
+    </view>
+    <button form-type='submit' class="submit-button">完成</button>
+  </form>
+</view>

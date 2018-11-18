@@ -1,13 +1,14 @@
 {
   "pages": [
     "pages/begin/begin",
-    "pages/message/message",
     "pages/viewActivityInfo/viewActivityInfo",
+    "pages/addActy/addActy",
+    "pages/modifyMyinfo/modifyMyinfo",
     "pages/viewUserInfo/viewUserInfo",
+    "pages/message/message",
     "pages/home/home",
     "pages/user/user",
     "pages/chat/chat",
-    "pages/addActy/addActy",
     "pages/myInfo/myInfo",
     "pages/myInfo/changebkgd/changebkgd",
     "pages/viewUserInfo2/viewUserInfo2",
@@ -21,7 +22,9 @@
     "pages/attendUndo/attendUndo",
     "pages/attendDid/attendDid",
     "pages/myActy/myActy",
-    "pages/evaluate/evaluate"
+    "pages/evaluate/evaluate",
+    "pages/cropper/cropper",
+    "pages/displayUsers/displayUsers"
   ],
   "window": {
     "backgroundColor": "white",

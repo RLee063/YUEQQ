@@ -51,7 +51,6 @@ Page({
       })
 
   },
-
   touchStart(e) {
     this.wecropper.touchStart(e)
   },
@@ -61,17 +60,14 @@ Page({
   touchEnd(e) {
     this.wecropper.touchEnd(e)
   },
-
   chooseimage: function() {
     const self = this
-
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success(res) {
         const src = res.tempFilePaths[0]
-
         self.wecropper.pushOrign(src)
       }
     })
@@ -85,8 +81,6 @@ Page({
           bkgdpic: src
         })
         that.upLoadImgAndGetUrl(this)
-
-
       } else {
         console.log('获取图片地址失败，请稍后重试')
       }

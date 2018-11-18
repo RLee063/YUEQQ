@@ -77,6 +77,7 @@ Page({
 
       var message = {}
       var myInfo = wx.getStorageSync('me')
+      message.time = util.getTime()
       message.userType = 0
       message.messageText = msg
       message.uid = myUid

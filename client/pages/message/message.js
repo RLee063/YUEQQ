@@ -8,7 +8,6 @@ Page({
   data: {
     chatList:[]
   },
-
   onLoad: function (options) {
     that = this
   },
@@ -82,6 +81,10 @@ Page({
     var isGroup = chatRaw.isGroup
     var lastMessage = chatRaw.messageArray[chatRaw.messageArray.length - 1]
     var lastMessageText = lastMessage.messageText
+    if(lastMessageText.length>30){
+      lastMessageText = lastMessageText.slice(0, 28) + "..."
+    }
+
     var lastMessageTime = this.getTimeFromFormatTime(lastMessage.time)
     var unReaded = chatRaw.unReaded
     var unReadedNum = chatRaw.unReadedNum > 9 ? "9+" : chatRaw.unReadedNum
@@ -107,9 +110,16 @@ Page({
     userInfoPromise1.then(userInfo => {
       var chatList = that.data.chatList 
       for (var i = 0; i < chatList.length; i++) {
-        if (chatList[i].lastMessageUid == lastMessageUid) {
-          chatList[i].lastMessageUname = userInfo.nickName
-          break
+        if (chatList[i].chatId == chatRaw.chatId){
+          if (chatList[i].lastMessageUid == lastMessageUid) {
+            chatList[i].lastMessageUname = userInfo.nickName
+
+            if (userInfo.nickName.length + chatList[i].lastMessageText.length > 30){
+              chatList[i].lastMessageText = chatList[i].lastMessageText.slice(0, 28 - userInfo.nickName.length) + "..."
+            }
+
+            break
+          }
         }
       }
       that.setData({
@@ -176,12 +186,12 @@ Page({
     var nowDay = nowDate.getDate();
     nowMonth++;
 
-    if (parseInt(startDate[0]) > nowYear) {
+    if (parseInt(startDate[0]) < nowYear) {
       result += time
     }
     else {
       var dec
-      if (parseInt(startDate[1]) > nowMonth) {
+      if (parseInt(startDate[1]) < nowMonth) {
         switch (parseInt(startDate[1])) {
           case 2:
             dec = parseInt(startDate[2]) - nowDay + 28
@@ -209,11 +219,11 @@ Page({
           result += ':'
           result += startTimes[1];
           break;
-        case 1:
-          result += "明天"
+        case -1:
+          result += "昨天"
           break;
-        case 2:
-          result += "后天"
+        case -2:
+          result += "前天"
           break;
         default:
           result += startDate[1]
