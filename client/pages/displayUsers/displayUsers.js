@@ -1,5 +1,6 @@
-// client/pages/displayUsers/displayUsers.js
 var that = this
+var util = require("../../utils/util.js")
+var config = require('../../config')
 
 Page({
   data: {
@@ -26,6 +27,44 @@ Page({
 //粉丝；关注
 
   onLoad: function(options) {
+    if(options){
+      var data = JSON.parse(options.dataString)
+      if(data.aid){
+        var aInfoP = util.getActivityInfo(data.aid)
+        aInfoP.then(result => {
+          console.log(result)
+          that.setData({
+            usersArray : result.members
+          })
+          that.checkoutFollow()
+        })
+      }
+      if(data.uid){
+        if(data.type==0){
+          wx.request({
+            url: `${config.service.host}/weapp/getFollowings`,
+            data: {
+              uid: wx.getStorageSync('openid')
+            },
+            success(result) {
+              console.log(result)
+            }
+          })
+        }
+        if(data.type==1){
+          wx.request({
+            url: `${config.service.host}/weapp/getFollowers`,
+            data: {
+              uid: wx.getStorageSync('openid')
+            },
+            success(result) {
+              console.log(result)
+            }
+          })
+        }
+      }
+    }
+
     that = this
     for(var i=0; i<that.data.usersArray.length; i++){
       that.data.usersArray[i].followed = 1
@@ -34,11 +73,50 @@ Page({
       usersArray: that.data.usersArray
     })
   },
-  follow: function(e) {
-    that.data.usersArray[e.currentTarget.dataset.index].followed = (that.data.usersArray[e.currentTarget.dataset.index].followed+1)%2
-    that.setData({
-      usersArray: that.data.usersArray
+  checkoutFollow: function(){
+    wx.request({
+      url: `${config.service.host}/weapp/getFollowings`,
+      data: {
+        uid: wx.getStorageSync('openid')
+      },
+      success(result) {
+        console.log(result)
+      }
     })
+  },
+  follow: function(e) {
+    console.log(e.currentTarget.dataset.uid)
+    var followed = that.data.usersArray[e.currentTarget.dataset.index].followed
+    if(!followed){
+      wx.request({
+        url: `${config.service.host}/weapp/follow`,
+        data: {
+          fromUid: wx.getStorageSync('openid'),
+          toUid: e.currentTarget.dataset.uid
+        },
+        success(result){
+          that.data.usersArray[e.currentTarget.dataset.index].followed = 1
+          that.setData({
+            usersArray: that.data.usersArray
+          })
+        }
+      })
+    }
+    else{
+      wx.request({
+        url: `${config.service.host}/weapp/unfollow`,
+        data: {
+          fromUid: wx.getStorageSync('openid'),
+          toUid: e.currentTarget.dataset.uid
+        },
+        success(result) {
+          that.data.usersArray[e.currentTarget.dataset.index].followed = 0
+          that.setData({
+            usersArray: that.data.usersArray
+          })
+        }
+      })
+    }
   },
   onReady: function() {
 

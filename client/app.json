@@ -1,10 +1,10 @@
 {
   "pages": [
-    "pages/modifyMyinfo/modifyMyinfo",
     "pages/begin/begin",
+    "pages/viewActivityInfo/viewActivityInfo",
+    "pages/modifyMyinfo/modifyMyinfo",
     "pages/displayActivities/displayActivities",
     "pages/displayUsers/displayUsers",
-    "pages/viewActivityInfo/viewActivityInfo",
     "pages/addActy/addActy",
     "pages/viewUserInfo/viewUserInfo",
     "pages/message/message",

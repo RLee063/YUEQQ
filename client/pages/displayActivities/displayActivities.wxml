@@ -1,6 +1,6 @@
-<view wx:for="{{activitiesArray}}" class="info-block" bindtap="gotoChat" data-uid="{{item.uid}}">
+<view wx:for="{{activitiesArray}}" class="info-block" bindtap='viewActivity' data-aid="{{item.aid}}">
   <view class="avatar-block">
-    <image class="avatar-image" src="{{item.imgUrl}}" mode="aspectFill"></image>
+    <image class="avatar-image" src="{{item.picUrl}}" mode="aspectFill"></image>
   </view>
   <view class="text-block">  
     <view class="name-text">{{item.title}}</view>

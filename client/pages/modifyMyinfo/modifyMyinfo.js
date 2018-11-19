@@ -16,11 +16,18 @@ Page({
     sportType: [],
     skills: [0,0,0,0,0,0]
   },
-  onLoad: function(e) {
+  onLoad: function(options) {
     that = this
+    that.setData({
+      grades: app.globalData.grades,
+      colleges: app.globalData.colleges,
+    })
 
-    if(e.options){
-      var data = JSON.parse(e.options)
+    var uid 
+
+    if(options){
+      var data = JSON.parse(options.dataString)
+      uid = data.uid
       if (data.isFirstLogin) {
         this.setData({
           sportType: app.globalData.sportType
@@ -32,12 +39,9 @@ Page({
       }
     }
 
-    var uid = wx.getStorageSync('openid')
     var myInfoPromise = util.getUserInfo(uid)
     myInfoPromise.then(userInfo => {
       that.setData({
-        grades: app.globalData.grades,
-        colleges: app.globalData.colleges,
         userInfo: userInfo
       })
       console.log(userInfo)

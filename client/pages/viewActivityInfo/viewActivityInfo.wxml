@@ -23,7 +23,7 @@
     </view>
     <view wx:if="{{activityInfo.creditLimit}}" class="info-in-block">
       <view class="info-title">信用限制:</view>
-      <view class="info-text">{{activityInfo.creditLimit}}</view>
+      <view class="info-text" style='letter-spacing:0.1rem;' wx:for="{{activityInfo.creditLimit}}">❤</view>
     </view>
     <view wx:if="{{activityInfo.averageSkills}}" class="info-in-block">
       <view class="info-title">平均战力:</view>
@@ -34,15 +34,15 @@
 
   <view class="info-block">
     <view class="info-intro">参与者：</view>
-    <view class="join-chat" bindtap="joinChat" wx:if="hasJoined">加入聊天室</view>
+    <view class="join-chat" bindtap="joinChat" wx:if="{{hasJoined}}">加入聊天室</view>
     <view class="members-block">
       <view wx:for="{{membersArray}}">
         <view wx:if="{{index<5}}">
           <image catchtap="viewMemberInfo" class="avatar" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill" />
         </view>
         <view wx:elif="{{index==5}}">
-          <view class="avatar-more">
-            <image catchtap="viewMemberInfo" class="avatar-more-image" src="../../images/more.png" data-uid="{{item.uid}}" mode="aspectFill" />
+          <view class="avatar-more" catchtap='viewAllMembers'>
+            <image class="avatar-more-image" src="../../images/more.png" mode="aspectFill" />
           </view>
         </view>
       </view>
@@ -59,7 +59,7 @@
   <view style='height:200rpx;'></view>
 
   <view class="canvas">
-    <image class="canvas-image" src="../../images/篮球.png"></image>
+    <image class="canvas-image" src="{{sportIcon}}"></image>
   </view>
 </view>
 
@@ -86,7 +86,6 @@
     <swiper-item wx:for="{{membersArray}}" class="evaluate-item">
       <view class="evaluate-block">
         <image class="avatar-biger" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill" />
-        <view class="skill-wave" catchtap='completeRemoveMember'></view>
         <view wx:if="{{index==swiperIndex}}">
           <canvas class="skill-wave-mask" canvas-id='joinMask2'></canvas>
           <canvas class="skill-wave-mask" canvas-id='joinMask'></canvas>
@@ -135,7 +134,7 @@
     <view wx:for="{{membersArray}}">
       <view wx:if="{{item.uid==myUid}}"></view>
       <image catchtap="chooseRemove" data-index="{{index}}" wx:elif="{{!item.removed}}" class="avatar-big-unsigned" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill" />
-      <image catchtap="chooseRemove" data-index="{{index}}" wx:else="{{item.removed}}" class="avatar-big-signed" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill" />
+      <image catchtap="chooseRemove" data-index="{{index}}" wx:elif="{{item.removed}}" class="avatar-big-signed" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill" />
     </view>
   </scroll-view>
   <view class="join" catchtap='completeRemoveMember'>完成</view>

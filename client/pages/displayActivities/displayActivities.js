@@ -14,21 +14,34 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var uid
+    if(options){
+      var dataString = options.dataString
+      var data = JSON.parse(dataString)
+      uid = data.uid
+    }
     that = this
     wx.request({
       url: `${config.service.host}/weapp/getMyActivities`,
       data: {
-        uid: wx.getStorageSync('openid')
+        uid: uid
       },
       success(result){
         console.log(result)
         that.setData({
-          activitiesArray: result.data.data.createdActivities.started
+          activitiesArray: result.data.data.activities
         })
       },
       fail(error){
 
       }
+    })
+  },
+  viewActivity: function(e){
+    var aid = e.currentTarget.dataset.aid
+    wx.navigateTo({
+      // url: "../viewUserInfo/viewUserInfo?id=2"
+      url: "../viewActivityInfo/viewActivityInfo?aid=" + aid
     })
   },
 

@@ -1,15 +1,20 @@
 // pages/viewUserInfo/viewUserInfo.js
-
 var config = require('../../config')
 var util = require('../../utils/util.js')
 var app = getApp()
+var that
 
 Page({
   data: {
-    isViewOtherInfo: false
+    isViewOtherInfo: false,
+    userInfo:{},
+    numOfFollowings:0,
+    numOfFollowers:0,
+    numOfMyActivities:0,
   },
 
   onLoad: function (options) {
+    that = this
     var uid = options.uid
     // var uid = "o5ko3434RP2lZQNVamvVxfrAugoY"
     var myUid = wx.getStorageSync('openid')
@@ -17,21 +22,56 @@ Page({
       uid = myUid
     }
     this.setData({
+      uid: uid,
       isViewOtherInfo: uid == myUid ? false : true
     })
-    var that = this
     var userInfoPromise = util.getUserInfoFromServer(uid)
     userInfoPromise.then(userInfo => {
       console.log(userInfo)
+      userInfo.skills=[0,20,40,60,10,80]
       that.setData({
         userInfo: userInfo
       })
+      this.drawSkillCanvas()
     })
-  
+    this.initNumbers()
   },
-
+  initNumbers: function(){
+    wx.request({
+      url: `${config.service.host}/weapp/getFollowings`,
+      data: {
+        uid: that.data.uid
+      },
+      success(result){
+        that.setData({
+          // numOfFollowings: result.data.length
+        })
+      }
+    })
+    wx.request({
+      url: `${config.service.host}/weapp/getFollowers`,
+      data: {
+        uid: that.data.uid
+      },
+      success(result) {
+        that.setData({
+          // numOfFollowers: result.data.length
+        })
+      }
+    })
+    wx.request({
+      url: `${config.service.host}/weapp/getMyActivities`,
+      data: {
+        uid: that.data.uid
+      },
+      success(result) {
+        that.setData({
+          numOfMyActivities: result.data.data.activities.length
+        })
+      }
+    })
+  },
   onReady: function(){
-    this.drawSkillCanvas()
   },
   drawSkillCanvas: function(){
     var ctx = wx.createCanvasContext("skillCanvas")
@@ -42,7 +82,7 @@ Page({
     ctx.draw()
   },
   drawSkillPolygon(ctx){
-    var points = this.getPolygonPointsByRadius([40, 21, 60, 41, 83, 20])
+    var points = this.getPolygonPointsByRadius(that.data.userInfo.skills)
     ctx.setStrokeStyle('#3C3C3C')
     this.drawPolygonByPoints(points, ctx)
     ctx.setGlobalAlpha(0.5)
@@ -52,7 +92,6 @@ Page({
   drawCobweb(ctx){
     var points = this.getPolygonPointsByRadius([90, 90, 90, 90, 90, 90])
     console.log(points)
-    //text
     ctx.setFontSize(18)
     ctx.setFillStyle()
     ctx.translate(-20, 7)
@@ -132,4 +171,30 @@ Page({
       }
     })
   },
+  viewFollowings: function(){
+    var data = {}
+    data.uid = that.data.uid
+    data.type = 0
+    var dataString = JSON.stringify(data)
+    wx.navigateTo({
+      url: '../displayUsers/displayUsers?dataString=' + dataString,
+    })
+  },
+  viewFollowers: function () {
+    var data = {}
+    data.uid = that.data.uid
+    data.type = 1
+    var dataString = JSON.stringify(data)
+    wx.navigateTo({
+      url: '../displayUsers/displayUsers?dataString=' + dataString,
+    })
+  },
+  viewMyActivities: function(){
+    var data = {}
+    data.uid = that.data.uid
+    var dataString = JSON.stringify(data)
+    wx.navigateTo({
+      url: '../displayActivities/displayActivities?dataString=' + dataString,
+    })
+  }
 })
