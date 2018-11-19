@@ -9,9 +9,18 @@ module.exports = async(ctx) => {
   } = ctx.query
   try {
     var activity = (await mysql().select().from('ActivityInfo').where('aid', aid))[0]
-    var imgUrl = (await mysql().select().from('ActivityPic').where('aid', aid))[0]
+
+    if (activity['startTime'] > new Date()) {
+      activity['status'] = 0
+    } else if (activity['endTime'] < new Date()) {
+      activity['status'] = 2
+    } else {
+      activity['status'] = 1
+    }
+    
     activity['startTime'] = tool.formatTime(activity['startTime'])
     activity['createTime'] = tool.formatTime(activity['createTime'])
+    activity['imgUrl'] = activity['picUrl']
     tags = await mysql('tag as t').join('actTag as at', 'at.tid', 't.tid').where('aid', activity['aid'])
     activity['tags'] = tags
     uids = await mysql('userAct as ua').join('ActivityInfo as ai', 'ua.aid', 'ai.aid').select('ua.uid').where('ua.aid', activity['aid'])
@@ -20,14 +29,8 @@ module.exports = async(ctx) => {
     {
       uidss[i]=uids[i]['uid']
     }
-    activity['members'] = await mysql('UserInfo as ui').select().whereIn('ui.uid', uidss)
-    for(var i in activity['members'])
-    {
-      activity['members'][i]['avatarUrl'] = (await mysql('UserAvatar').select().where('uid', activity['members'][i]['uid']))[0]['avatarUrl']
-      activity['members'][i]['imgUrl'] = (await mysql('UserHomePic').select().where('uid', activity['members'][i]['uid']))[0]['homePicUrl']
-    }
+    activity['members'] = await mysql('userInfo as ui').select().whereIn('ui.uid', uidss)
 
-    activity['imgUrl'] = imgUrl['picUrl']
 
     ctx.body = {
       code: 1,

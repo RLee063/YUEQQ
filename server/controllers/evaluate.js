@@ -6,7 +6,7 @@ module.exports = async (ctx) => {
   try{
     var sportType = (await mysql('ActivityInfo').select('sportType').where('aid', aid))[0]['sportType']
     for (var i in members) {
-      await mysql('UserInfo').where('uid', members[i]['uid']).increment(sports[sportType], members[i]['evaluation'] * 10)
+      await mysql('userInfo').where('uid', members[i]['uid']).increment(sports[sportType], members[i]['evaluation'] * 10)
     }
     await mysql('userAct').where('aid', aid).andWhere('uid', uid).update('evaluated',1)
   }catch(e){

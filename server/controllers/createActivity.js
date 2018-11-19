@@ -1,7 +1,7 @@
 const {mysql} = require('../qcloud')
 
 module.exports = async(ctx) => {
-  const { uid, title, sportType, startTime, createTime, imgUrl, tags, maxNum, description} = ctx.query
+  const { uid, title, sportType, startTime, createTime, imgUrl, tags, maxNum, description, introduction, creditLimit} = ctx.query
 
   var timeStamp = Math.round(new Date().getTime()/1000)
   var aid = uid + timeStamp
@@ -15,7 +15,10 @@ module.exports = async(ctx) => {
       CreatorUid : uid,
       MaxNum : maxNum,
       ord: 0,
-    'description': description
+    'description': description,
+    'introduction ': introduction ,
+    'creditLimit': creditLimit,
+    picUrl:imgUrl
   }
 
   var formatedTags = tags.split(' ')
@@ -27,10 +30,6 @@ module.exports = async(ctx) => {
       //添加活动信息
       activity['ord'] = (await mysql('ActivityInfo').select().where('startTime', startTime)).length
       await mysql('ActivityInfo').insert(activity)
-      await mysql('ActivityPic').insert({
-        Aid : aid,
-        PicUrl : imgUrl
-      })
 
       //将创建者加入活动
       await mysql('userAct').insert({

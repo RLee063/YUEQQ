@@ -17,8 +17,7 @@ module.exports = async(ctx) => {
       var activities = await mysql('ActivityInfo as info').select().whereRaw('StartTime > ?', [tool.getNowFormatDate()]).andWhere('disbanded', 0).orderBy('StartTime', 'asc').orderBy('ord', 'asc').limit(10)
       for(var i in activities)
       {
-        activities[i]['picUrl'] = (await mysql('ActivityPic').select('picUrl').where('aid', activities[i]['aid']))[0]['picUrl']
-        activities[i]['avatarUrl'] = (await mysql('UserAvatar').select('avatarUrl').where('uid', activities[i]['creatorUid']))[0]['avatarUrl']
+        activities[i]['avatarUrl'] = (await mysql('userInfo').select('avatarUrl').where('uid', activities[i]['creatorUid']))[0]['avatarUrl']
       }
 
     } else {
@@ -30,8 +29,7 @@ module.exports = async(ctx) => {
       ).orderBy('StartTime', 'asc').orderBy('ord', 'asc').limit(10)
       
       for (var i in activities) {
-        activities[i]['picUrl'] = (await mysql('ActivityPic').select('picUrl').where('aid', activities[i]['aid']))[0]['picUrl']
-        activities[i]['avatarUrl'] = (await mysql('UserAvatar').select('avatarUrl').where('uid', activities[i]['creatorUid']))[0]['avatarUrl']
+        activities[i]['avatarUrl'] = (await mysql('userInfo').select('avatarUrl').where('uid', activities[i]['creatorUid']))[0]['avatarUrl']
       }
 
     }

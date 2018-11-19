@@ -1,6 +1,7 @@
 const {
   mysql
 } = require('../qcloud')
+var sports = new Array('basketball', 'badminton', 'pingpong', 'tennis', 'soccer', 'running')
 
 module.exports = async (ctx) => {
   const {
@@ -10,12 +11,27 @@ module.exports = async (ctx) => {
     phone,
     motto,
     grade,
-    college
+    college,
+    skill
   } = ctx.query
 
+  var user = {
+    credit: credit,
+    phone: phone,
+    motto: motto,
+    grade: grade,
+    college: college,
+    homePicUrl: homePicUrl
+  }
+
+  if(skill === undefined){
+    for(var i in sports){
+      user[sports[i]] = skill[i]
+    }
+  }
   //判断用户是否存在
   try{
-    if((await mysql('UserInfo').select().where('uid',uid)).length===0){
+    if((await mysql('userInfo').select().where('uid',uid)).length===0){
       ctx.body = {
         code:-1,
         data:'user:'+uid+'doesn\'t exist'
@@ -33,16 +49,7 @@ module.exports = async (ctx) => {
  
   //更新信息
   try {
-    await mysql('UserInfo').where('uid', uid).update({
-      credit: credit,
-      phone: phone,
-      motto: motto,
-      grade: grade,
-      college: college
-    })
-    await mysql('UserHomePic').where('uid', uid).update({
-      homePicUrl: homePicUrl
-    })
+    await mysql('userInfo').where('uid', uid).update()
 
     ctx.body = {
       code: 1

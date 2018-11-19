@@ -4,7 +4,7 @@ module.exports = async (ctx) => {
   const {aid, uid} = ctx.query
 
   try {
-    var act = (await mysql('ActivityIfo').select('currentNum').where('aid',aid))[0]
+    var act = (await mysql('ActivityInfo').select('currentNum').where('aid',aid))[0]
     if(act['currentNum']>= act['maxNum']){
       ctx.body = {
         code: -1,

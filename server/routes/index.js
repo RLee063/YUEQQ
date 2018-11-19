@@ -60,4 +60,16 @@ router.get('/signForActivity',controllers.signForActivity)
 router.get('/transferActivity',controllers.transferActivity)
 //活动结束后评价
 router.get('/evaluate',controllers.evaluate)
+//用户推荐
+router.get('/getRecommendUsers',controllers.getRecommendUsers)
+//删除用户
+router.get('/removeFromActivity',controllers.removeFromActivity)
+//关注
+router.get('/follow',controllers.follow)
+//取关
+router.get('/unfollow',controllers.unfollow)
+//获取粉丝信息
+router.get('/getFollowers',controllers.getFollowers)
+//获取关注的人的信息
+router.get('/getFollowings', controllers.getFollowings)
 module.exports = router

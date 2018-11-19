@@ -6,6 +6,16 @@ module.exports = async(ctx) => {
   var joinedActivities = { started: [], notStart: [] }
 
   try{
+    activities = await mysql('ActivityInfo').select().where('creatorUid', uid)
+    if (activities['startTime'] > new Date()) {
+      activities['status'] = 0
+    } else if (activities['endTime'] < new Date()) {
+      activities['status'] = 2
+    } else {
+      activities['status'] = 1
+    }
+
+
     createdActivities['started'] = await mysql('ActivityInfo').select().where('creatorUid', uid).andWhereRaw('StartTime <= ?', [tool.getNowFormatDate()])
     createdActivities['notStart'] = await mysql('ActivityInfo').select().where('creatorUid', uid).andWhereRaw('StartTime > ?', [tool.getNowFormatDate()])
     joinedAids = await mysql('userAct').select('aid').where('uid', uid)
@@ -16,7 +26,8 @@ module.exports = async(ctx) => {
       'code': 1,
       'data':{
         'createdActivities': createdActivities,
-        'joinedActivities': joinedActivities
+        'joinedActivities': joinedActivities,
+        'activities': activities
       }
     }
   }catch(e)

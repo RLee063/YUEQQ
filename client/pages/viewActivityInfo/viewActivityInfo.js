@@ -95,7 +95,6 @@ Page({
         activityInfo.members.push(activityInfo.members[0])
         activityInfo.members.push(activityInfo.members[0])
         activityInfo.description ="activityInfo.descriptionactivityInfo.descriptionactivityInfo.descriptionactivityInfo.descriptionactivityInfo.descriptionactivityInfo.description"
-        activityInfo.status = 2
 
         that.setData({
           activityInfo: activityInfo,
