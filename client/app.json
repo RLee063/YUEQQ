@@ -2,8 +2,10 @@
   "pages": [
     "pages/begin/begin",
     "pages/viewActivityInfo/viewActivityInfo",
-    "pages/addActy/addActy",
     "pages/modifyMyinfo/modifyMyinfo",
+    "pages/displayActivities/displayActivities",
+    "pages/displayUsers/displayUsers",
+    "pages/addActy/addActy",
     "pages/viewUserInfo/viewUserInfo",
     "pages/message/message",
     "pages/home/home",
@@ -23,8 +25,7 @@
     "pages/attendDid/attendDid",
     "pages/myActy/myActy",
     "pages/evaluate/evaluate",
-    "pages/cropper/cropper",
-    "pages/displayUsers/displayUsers"
+    "pages/cropper/cropper"
   ],
   "window": {
     "backgroundColor": "white",

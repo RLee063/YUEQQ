@@ -201,13 +201,48 @@ page{
   margin-top: 11.25%;
 }
 
+.sport-type-0,.sport-type-1,.sport-type-2,.sport-type-3,.sport-type-4,.sport-type-5{
+  float: left;
+  text-align: center;
+  margin: 17rpx;
+  margin-left: 160rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  padding-top: 2rpx;
+  padding-bottom: 2rpx;
+  color: white;
+  line-height: 37rpx;
+  font-size: 25rpx;
+  font-weight: bold;
+  letter-spacing: 2rpx;
+  border-radius: 8rpx 8rpx 8rpx 8rpx / 8rpx 8rpx 8rpx 8rpx;
+}
+
+.sport-type-0{
+  background: rgb(151, 99, 199);
+}
+.sport-type-1{
+  background: rgb(185, 87, 87);
+}
+.sport-type-2{
+  background: rgb(85, 85, 187);
+}
+.sport-type-3{
+  background: rgb(90, 167, 90);
+}
+.sport-type-4{
+  background: rgb(173, 173, 81);
+}
+.sport-type-5{
+  background: rgb(129, 129, 129);
+}
+
 .activity-title{
   /* margin-top: 10rpx; */
   float: left;
   text-align: center;
   height: 70rpx;
   line-height: 70rpx;
-  margin-left: 150rpx;
   color: rgb(39, 39, 39);
   font-family: "黑体";
   font-size: 32rpx;

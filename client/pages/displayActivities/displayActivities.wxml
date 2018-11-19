@@ -1,0 +1,12 @@
+<view wx:for="{{activitiesArray}}" class="info-block" bindtap='viewActivity' data-aid="{{item.aid}}">
+  <view class="avatar-block">
+    <image class="avatar-image" src="{{item.picUrl}}" mode="aspectFill"></image>
+  </view>
+  <view class="text-block">  
+    <view class="name-text">{{item.title}}</view>
+    <view class="motto-text">{{item.introduction}}</view>
+  </view>
+  <view data-index="{{index}}" wx:if="{{item.status==0}}" class="ready-block">准备中</view>
+  <view data-index="{{index}}" wx:elif="{{item.status==1}}" class="ongoing-block">进行中</view>
+  <view data-index="{{index}}" wx:elif="{{item.status==2}}" class="ended-block">已结束</view>
+</view>

@@ -15,13 +15,15 @@ Page({
       ["升序", "降序"],
       ["与我相关"]
     ],
-    criteriaHidden: 0,
+    criteriaHidden: 1,
     criteriasMap:[
       [0,0,0], [0,0], [0,0,0,0,0,0]
-    ]
+    ],
+    sportType:[]
   },
   onReachBottom: function(){
     var that = this
+
     var activitiesArray = this.data.activitiesArray
     var lastAid = activitiesArray[activitiesArray.length-1].aid
     wx.request({
@@ -61,8 +63,18 @@ Page({
   refreshRecommendUsers: function(){
     wx.request({
       url: `${config.service.host}/weapp/getRecommendUsers`,
+      data: {
+        uid: wx.getStorageSync('openid')
+      },
       success: result=>{
         console.log(result)
+        var recommendationUsers = result.data.data
+        recommendationUsers.push(recommendationUsers[0])
+        recommendationUsers.push(recommendationUsers[0])
+        recommendationUsers.push(recommendationUsers[0])
+        that.setData({
+          recommendationUsers: recommendationUsers
+        })
       }
     })
   },
@@ -76,8 +88,7 @@ Page({
         console.log(acties)
         that.setData({
           activitiesArray: acties,
-          recommendationActivities: acties,
-          recommendationUsers: acties
+          recommendationActivities: acties.slice(0, 5)
         })
         wx.stopPullDownRefresh()
       },
@@ -88,6 +99,9 @@ Page({
   },
   onLoad: function(){
     that = this
+    that.setData({
+      sportType: app.globalData.sportType
+    })
     this.refresh(this)
     this.initData()
   },
@@ -128,25 +142,11 @@ Page({
     //var startTimeArray = startTime.split(' ');
   },
   formatEachSportType(item){
-    switch(item.sportType){
-      case "篮球":
-        item.sportType = 0
-        break
-      case "羽毛球":
-        item.sportType = 1
-        break
-      case "乒乓球":
-        item.sportType = 2
-        break
-      case "网球":
-        item.sportType = 3
-        break
-      case "足球":
-        item.sportType = 4
-        break
-      case "跑步":
-        item.sportType = 5
-        break
+    console.log(that.data.sportType)
+    for (var i = 0; i < that.data.sportType.length; i++) {
+      if (item.sportType == that.data.sportType[i]) {
+        item.sportType = i
+      }
     }
   },
   formatEachActivity(item){
@@ -252,6 +252,12 @@ Page({
     else {
       this.criteriaMultipleChoose(i1, i2)
     }
+  },
+  criteriaComfirm: function(){
+    that.setData({
+      criteriaHidden: 1
+    })
+    that.refreshActivities()
   },
   addActy: function(){
     wx.navigateTo({

@@ -6,24 +6,48 @@ var that
 
 Page({
   data: {
-    userInfo :{},
+    userInfo :{
+      college: "请选择学院",
+      grade: "请选择年级"
+    },
     grades: [],
-    colleges: []
+    colleges: [],
+    isFirstLogin: false,
+    sportType: [],
+    skills: [0,0,0,0,0,0]
   },
-  onLoad: function(e) {
+  onLoad: function(options) {
     that = this
-    var uid = wx.getStorageSync('openid')
+    that.setData({
+      grades: app.globalData.grades,
+      colleges: app.globalData.colleges,
+    })
+
+    var uid 
+
+    if(options){
+      var data = JSON.parse(options.dataString)
+      uid = data.uid
+      if (data.isFirstLogin) {
+        this.setData({
+          sportType: app.globalData.sportType
+        })
+        this.setData({
+          isFirstLogin: true
+        })
+        return
+      }
+    }
+
     var myInfoPromise = util.getUserInfo(uid)
     myInfoPromise.then(userInfo => {
       that.setData({
-        grades: app.globalData.grades,
-        colleges: app.globalData.colleges,
         userInfo: userInfo
       })
       console.log(userInfo)
     })
     var maxNumRange = [];
-
+    
   },
   receiveImageUrl: function(imgUrl){
     var userInfo = that.data.userInfo
@@ -55,16 +79,22 @@ Page({
     var userInfo = that.data.userInfo
     userInfo.motto = e.detail.value.motto
     userInfo.phone = e.detail.value.phone
+    var data = {
+      uid: wx.getStorageSync('openid'),
+      homePicUrl: userInfo.homePicUrl,
+      phone: userInfo.phone,
+      motto: userInfo.motto,
+      grade: userInfo.grade,
+      college: userInfo.college
+    }
+    if(that.data.isFirstLogin){
+      data.skills = that.data.skills
+    }
+
+
     wx.request({
       url: `${config.service.host}/weapp/updateUserInfo`,
-      data: {
-        uid: wx.getStorageSync('openid'),
-        homePicUrl: userInfo.homePicUrl,
-        phone: userInfo.phone,
-        motto: userInfo.motto,
-        grade: userInfo.grade,
-        college: userInfo.college
-      },
+      data: data,
       success: result => {
         console.log(result)
         wx.navigateBack({
@@ -96,4 +126,11 @@ Page({
       tags: tags
     })
   },
+
+  bindSkillsChange: function(e) {
+    that.data.skills[e.currentTarget.index] = e.detail.value
+    that.setData({
+      skills: that.data.skills
+    })
+  }
 })

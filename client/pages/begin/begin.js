@@ -147,6 +147,7 @@ Page({
       success(result) {
         util.showBusy('正在登录')
         if (result) {
+          console.log(result)
           util.showSuccess('登录成功')
           that.setData({
             userInfo: result,
@@ -155,15 +156,25 @@ Page({
           console.log("logged")
           wx.setStorageSync('userInfo', result);
           wx.setStorageSync('logged', true)
-          wx.switchTab({
-            url: '../home/home'
-          })
+          if( 1){
+            var data = {
+              isFirstLogin : true
+            }
+            var dataString = JSON.stringify(data)
+            wx.redirectTo({
+              url: '../modifyMyinfo/modifyMyinfo?dataString=' + dataString,
+            })
+          }
+          // wx.switchTab({
+          //   url: '../home/home'
+          // })
         } else {
           // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
           qcloud.request({
             url: config.service.requestUrl,
             login: true,
             success(result) {
+              console.log(result)
               util.showSuccess('登录成功')
               console.log(result)
               wx.setStorageSync('me', result.data.data)

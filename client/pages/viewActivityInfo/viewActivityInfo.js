@@ -5,10 +5,10 @@ var app = getApp()
 var that
 
 Page({
-
   data: {
     membersArray: [],
     activityInfo: {},
+    sportIcon: "",
     evaluating: false,
     ending: false,
     transfering: false,
@@ -25,7 +25,7 @@ Page({
   },
 
   onLoad: function(options) {
-    //var aid = "o5ko3434RP2lZQNVamvVxfrAugoY1542197043"
+    // var aid = "o5ko3434RP2lZQNVamvVxfrAugoY1542197043"
     var aid = options.aid
     that = this
     var myUid = wx.getStorageSync('openid')
@@ -73,7 +73,6 @@ Page({
 //faker
         activityInfo.introduction = "大家都可以来玩呀！"
         activityInfo.averageSkills = "白银"
-        activityInfo.creditLimit = "❤ ❤ ❤"
         activityInfo.members.push(activityInfo.members[0])
         activityInfo.members.push(activityInfo.members[0])
         activityInfo.members.push(activityInfo.members[0])
@@ -96,19 +95,41 @@ Page({
         activityInfo.members.push(activityInfo.members[0])
         activityInfo.description ="activityInfo.descriptionactivityInfo.descriptionactivityInfo.descriptionactivityInfo.descriptionactivityInfo.descriptionactivityInfo.description"
 
+        var sportIcon = "../../images/sportType/" +that.name2Num(activityInfo.sportType)+".png"
         that.setData({
           activityInfo: activityInfo,
           hasJoined: hasJoined,
           isOwner: isOwner,
           hasEvaluated: 0,
-          membersArray: activityInfo.members
+          membersArray: activityInfo.members,
+          sportIcon: sportIcon
         })
       },
       fail: function(error) {
-        console.log(error)
+        wx.showModal({
+          title: '获取活动信息失败',
+          content: '点击确定重试',
+          success(res) {
+            if (res.confirm) {
+              that.refresh()
+            } else if (res.cancel) {
+              wx.navigateBack({
+                delta: 1
+              })
+            }
+          }
+        })
       }
     })
     this.drawJoinMask()
+  },
+  name2Num: function(name){
+    var sportType = app.globalData.sportType
+    for(var i=0; i<sportType.length; i++){
+      if(sportType[i]==name){
+        return i
+      }
+    }
   },
   setMemberInfo: function(userInfo) {
     var membersArray = that.data.membersArray
@@ -142,10 +163,14 @@ Page({
         aid: this.data.aid
       },
       success(result) {
-        if (result.data.code == 1) {
-          util.showModel('加入成功', "");
-        }
         that.refresh()
+        if (result.data.code == 1) {
+          wx.showToast({
+            title: '加入活动成功',
+            icon: 'success',
+            duration: 1000
+          })
+        }
       },
       fail(error) {
         util.showModel('加入失败', error);
@@ -171,8 +196,10 @@ Page({
       membersArray: membersArray
     })
   },
-  viewMemberInfo: function(){
-    
+  viewMemberInfo: function(e){
+    wx.navigateTo({
+      url: '../viewUserInfo/viewUserInfo?uid='+e.currentTarget.dataset.uid,
+    })
   },
   showMoreOptions: function(){
     var itemList = []
@@ -238,6 +265,19 @@ Page({
       data: {
         aid: that.data.aid
       },
+      success(result){
+        wx.showToast({
+          title: '解散活动成功',
+          icon: 'success',
+          duration: 1000
+        })
+        wx.navigateBack({
+          delta: 1
+        })
+      },
+      fail(error){
+
+      }
     })
   },
   transferActivity: function() {
@@ -255,15 +295,23 @@ Page({
         aid: that.data.aid,
         uid: that.data.transferTo
       },
+      success(result){
+        wx.showToast({
+          title: '转让活动成功',
+          icon: 'success',
+          duration: 1000
+        })
+      }
     })
   },
   chooseRemove: function(e){
     console.log(e)
     var membersArray = that.data.membersArray
-    membersArray[e.currentTarget.dataset.index] = (membersArray[e.currentTarget.dataset.index] + 1) % 2
+    membersArray[e.currentTarget.dataset.index].removed = (membersArray[e.currentTarget.dataset.index].removed + 1) % 2
     that.setData({
       membersArray: membersArray
     })
+    console.log(membersArray)
   },
   removeMember: function() {
     that.setData({
@@ -282,11 +330,19 @@ Page({
       }
     }
     wx.request({
-      url: `${config.service.host}/weapp/remove`,
+      url: `${config.service.host}/weapp/removeFromActivity`,
       data: {
         aid: that.data.aid,
         members: removeMembers
       },
+      success(result){
+        that.refresh()
+        wx.showToast({
+          title: '移除成员成功',
+          icon: 'success',
+          duration: 1000
+        })
+      }
     })
   },
   reportActivity: function() {
@@ -295,6 +351,13 @@ Page({
       data: {
         aid: that.data.aid
       },
+      success(){
+        wx.showToast({
+          title: '举报成功',
+          icon: 'success',
+          duration: 1000
+        })
+      }
     })
   },
   exitActivity: function() {
@@ -305,6 +368,14 @@ Page({
         aid: that.data.aid,
         uid: uid
       },
+      success(){
+        wx.showToast({
+          title: '退出活动成功',
+          icon: 'success',
+          duration: 1000
+        })
+        that.refresh()
+      }
     })
   },
   evaluateActivity: function() {
@@ -324,8 +395,28 @@ Page({
     console.log("current2:" + e.detail.current)
   },
   completeEvaluateActivity: function(){
-    this.setData({
-      evaluating: false
+    var data = {
+      uid: wx.getStorageSync('openid'),
+      aid: that.data.aid,
+      members: that.data.members
+    }
+    console.log(data)
+    wx.request({
+      url: `${config.service.host}/weapp/evaluateUsers`,
+      data: data,
+      success(result){
+        wx.showToast({
+          title: '评价成功',
+          icon: 'success',
+          duration: 1000
+        })
+        this.setData({
+          evaluating: false
+        })
+      },
+      fail(error){
+
+      }
     })
   },
   endActivity: function(){
@@ -340,6 +431,11 @@ Page({
       },
       success: result => {
         wx.hideLoading()
+        wx.showToast({
+          title: '结束活动成功',
+          icon: 'success',
+          duration: 1000
+        })
         console.log(result)
         this.setData({
           ending: true
@@ -365,6 +461,11 @@ Page({
         members: this.data.members
       },
       success: result => {
+        wx.showToast({
+          title: '签到成功',
+          icon: 'success',
+          duration: 1000
+        })
         this.setData({
           ending: false
         })
@@ -486,6 +587,14 @@ Page({
     var chatInfoString = JSON.stringify(chatInfo)
     wx.navigateTo({
       url: '../chat/chat?chatInfo=' + chatInfoString,
+    })
+  },
+  viewAllMembers:function(){
+    var data = {}
+    data.aid = that.data.aid
+    var dataString = JSON.stringify(data)
+    wx.navigateTo({
+      url: '../displayUsers/displayUsers?dataString=' + dataString,
     })
   },
   onReady: function() {

@@ -8,20 +8,20 @@
   <!-- <view class="gender"></view> -->
   <view class="mid-block">
     <view class="mid-in-block">
-      <view class="mid-in-in-block">
-        <view class="mid-top-text">1</view>
+      <view class="mid-in-in-block" bindtap='viewFollowings'>
+        <view class="mid-top-text">{{numOfFollowings}}</view>
         <view class="mid-bottom-text">关注</view>
       </view>
     </view>
     <view class="mid-in-block">
-      <view class="mid-in-in-block">
-        <view class="mid-top-text">2</view>
+      <view class="mid-in-in-block" bindtap="viewMyActivities">
+        <view class="mid-top-text">{{numOfMyActivities}}</view>
         <view class="mid-bottom-text">活动</view>
       </view>
     </view>
-    <view class="mid-in-block">
+    <view class="mid-in-block" bindtap="viewFollowers">
       <view class="mid-in-in-right-block">
-        <view class="mid-top-text">3</view>
+        <view class="mid-top-text">{{numOfFollowers}}</view>
         <view class="mid-bottom-text">粉丝</view>
       </view>
     </view>
@@ -49,11 +49,6 @@
     <view class="info-intro">能力值：</view>
     <canvas canvas-id='skillCanvas' class="skill-canvas"></canvas>
   </view>
-  <view class="recent-block">
-    <view class="info-intro">近期活动：</view>
-    <view style='clear:both;'></view>
-  </view>
-    
   <view class="talk" bindtap="talkTo" wx:if="{{isViewOtherInfo}}">FA</view>
 </view>
 

@@ -1,7 +1,7 @@
  /* pages/viewUserInfo/viewUserInfo.wxss */
 page{
   height: 100%;
-  background: rgb(243, 243, 243);
+  background: rgb(252, 252, 252);
 }
 
 .more{
@@ -20,7 +20,7 @@ page{
 .home-pic{
   width: 100%;
   height: 450rpx;
-  margin-bottom: 40rpx;
+  margin-bottom: 70rpx;
   box-shadow: 0 0rpx 15rpx rgb(109, 109, 109);
 }
 
@@ -132,6 +132,7 @@ page{
 }
 
 .info-title {
+  width: 20%;
   clear: left;
   font-weight: bolder;
   color: rgb(87, 87, 87);
