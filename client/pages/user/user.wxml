@@ -1,44 +1,62 @@
-<view class='container' style="background-image: url({{ homePicUrl}}); background-size:  100%  480rpx">
-
-  <view class='down'>
-    <image class="userinfo-avatar" src="{{logged ? userInfo.avatarUrl : './user-unlogin.png'}}" background-size="cover"></image>
+<!--pages/viewUserInfo/viewUserInfo.wxml-->
+<view class="father">
+  <view catchtap='showMoreOptions'>
+    <image src="../../images/more.png" class="more"></image>
   </view>
-  <view class='down'>
-    <view class='loginshow'>
-      <text class="userinfo-nickname" wx:if="{{logged}}">{{userInfo.nickName}}  </text>
-      <image class="seximg" wx:if='{{userInfo.gender==1}}' src='sex1.png' style='width:55rpx;height:55rpx'></image>
-      <image class="seximg" wx:elif='{{userInfo.gender==2}}' src='sex2.png' style='width:55rpx;height:55rpx'></image>
+  <image src="{{userInfo.avatarUrl}}" class="avatar-pic" mode="aspectFill"/>
+  <view class="nick-name">{{userInfo.nickName}}</view>
+  <!-- <view class="gender"></view> -->
+  <view class="mid-block">
+    <view class="mid-in-block">
+      <view class="mid-in-in-block" bindtap='viewFollowings'>
+        <view class="mid-top-text">{{numOfFollowings}}</view>
+        <view class="mid-bottom-text">关注</view>
+      </view>
     </view>
-    <view class='loginshow'>
-      <text class="userinfo-motto">{{motto}}  </text>
+    <view class="mid-in-block">
+      <view class="mid-in-in-block" bindtap="viewMyActivities">
+        <view class="mid-top-text">{{numOfMyActivities}}</view>
+        <view class="mid-bottom-text">活动</view>
+      </view>
     </view>
-  </view>
-
-
-  <view class="uploader">
-    <view bindtap="information">
-      <image src='info.png ' style='width:22px;height:22px ' class='icon '></image>
-      <text class="uploader-text"> 个人资料 </text>
-      <image  src='../../images/intoarray.png' class='arrow'></image>
-      
-    </view>
-  </view>
-  <view class="uploader">
-    <view bindtap="activities">
-      <image src='activity.png ' style='width:22px;height:22px ' class='icon '></image>
-      <text class="uploader-text"> 活动一览 </text>
-      <image  src='../../images/intoarray.png' class='arrow'></image>
+    <view class="mid-in-block" bindtap="viewFollowers">
+      <view class="mid-in-in-right-block">
+        <view class="mid-top-text">{{numOfFollowers}}</view>
+        <view class="mid-bottom-text">粉丝</view>
+      </view>
     </view>
   </view>
+  <image class="home-pic" src="{{userInfo.homePicUrl}}" mode="aspectFill"></image> 
 
-  <view class="uploader">
-    <view bindtap="recommend">
-      <image src='share.png ' style='width:22px;height:22px ' class='icon '></image>
-      <text class="uploader-text"> 推荐给好友 </text>
-      <image  src='../../images/intoarray.png' class='arrow2'></image>
+  <view class="info-block">
+    <view wx:if="{{userInfo.motto}}" class="info-in-block">
+      <view class="info-title">签名：</view>
+      <view class="info-text">{{userInfo.motto}}</view>
     </view>
+    <view wx:if="{{userInfo.phone}}" class="info-in-block">
+      <view class="info-title">电话：</view>
+      <view class="info-text">{{userInfo.phone}}</view>
+    </view>
+    <view wx:if="{{userInfo.college}}" class="info-in-top-block">
+      <view class="info-title">学院：</view>
+      <view class="info-text">{{userInfo.college}}</view>
+    </view>
+    <view wx:if="{{userInfo.grade}}" class="info-in-block">
+      <view class="info-title">年级：</view>
+      <view class="info-text">{{userInfo.grade}}</view>
+    </view>
+    <view wx:if="{{userInfo.grade}}" class="info-in-block">
+      <view class="info-title">信用：</view>
+      <view class="info-text" style='letter-spacing:0.1rem;' wx:for="{{userInfo.credit}}">❤</view>
+    </view>
+    <view style='clear:both;'></view>
   </view>
 
 
-
+  <view class="skill-block">
+    <view class="info-intro">能力值：</view>
+    <canvas canvas-id='skillCanvas' class="skill-canvas"></canvas>
+  </view>
+  <view class="talk" bindtap="talkTo" wx:if="{{isViewOtherInfo}}">发消息</view>
 </view>
+

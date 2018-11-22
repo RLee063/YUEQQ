@@ -25,16 +25,21 @@ Page({
       uid: uid,
       isViewOtherInfo: uid == myUid ? false : true
     })
-    var userInfoPromise = util.getUserInfoFromServer(uid)
+  },
+  refresh: function(){
+    var userInfoPromise = util.getUserInfoFromServer(that.data.uid)
     userInfoPromise.then(userInfo => {
       console.log(userInfo)
-      userInfo.skills=[0,20,40,60,10,80]
+      userInfo.skills = [0, 20, 40, 60, 10, 80]
       that.setData({
         userInfo: userInfo
       })
       this.drawSkillCanvas()
     })
     this.initNumbers()
+  },
+  onShow: function(){
+    that.refresh()
   },
   initNumbers: function(){
     wx.request({
@@ -154,17 +159,22 @@ Page({
     })
   },
   showMoreOptions: function () {
-    var itemList = ["修改个人信息"]
+    var itemList = ["举报"]
+    if(!that.data.isViewOtherInfo){
+      itemList.push("修改个人信息")
+    }
     wx.showActionSheet({
       itemList: itemList,
       success(res) {
-        var data = {
-          uid: wx.getStorageSync('openid')
+        if(res.tapIndex==1){
+          var data = {
+            uid: wx.getStorageSync('openid')
+          }
+          var dataString = JSON.stringify(data)
+          wx.navigateTo({
+            url: '../modifyMyinfo/modifyMyinfo?data=' + dataString,
+          })
         }
-        var dataString = JSON.stringify(data)
-        wx.navigateTo({
-          url: '../modifyMyinfo/modifyMyinfo?data='+dataString,
-        })
       },
       fail(res) {
         console.log(res.errMsg)

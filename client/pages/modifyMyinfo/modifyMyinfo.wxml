@@ -7,11 +7,11 @@
   <form bindsubmit='doSubmit'>
     <view class="fixed-view">
       <view class="input-title">个性签名:</view>
-      <input class="input-text" name="motto" value="{{userInfo.motto}}" placeholder="输入个性签名"></input>
+      <input class="input-text" bindblur="mottoChange" name="motto" value="{{userInfo.motto}}" placeholder="输入个性签名"></input>
     </view>
     <view class="fixed-view">
       <view class="input-title">电话:</view>
-      <input class="input-text" name="phone" value="{{userInfo.phone}}" placeholder="输入号码"></input>
+      <input class="input-text" bindblur='phoneChange' name="phone" value="{{userInfo.phone}}" placeholder="输入号码"></input>
     </view>
 
     <view class="fixed-view">

@@ -165,8 +165,9 @@ Page({
       var avatarList = {}
       avatarList[myInfo.openId] = myInfo.avatarUrl
       console.log(this.data.chatId)
-      var otherInfoPromise =  util.getUserInfo(this.data.chatId)
+      var otherInfoPromise =  util.getUserInfoFromServer(this.data.chatId)
       otherInfoPromise.then(userInfo => {
+        console.log(userInfo)
         avatarList[userInfo.uid] = userInfo.avatarUrl
         that.setData({
           avatarList: avatarList
