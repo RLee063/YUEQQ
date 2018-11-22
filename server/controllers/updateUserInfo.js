@@ -4,7 +4,7 @@ const {
 var sports = new Array('basketball', 'badminton', 'pingpong', 'tennis', 'soccer', 'running')
 
 module.exports = async (ctx) => {
-  const {
+  var {
     uid,
     homePicUrl,
     credit,
@@ -23,11 +23,15 @@ module.exports = async (ctx) => {
     college: college,
     homePicUrl: homePicUrl
   }
+  if (skill === undefined) {
 
-  if(skill === undefined){
-    for(var i in sports){
+  } else {
+    skill = skill.split(',')
+    for (var i in sports) {
       user[sports[i]] = skill[i]
+
     }
+
   }
   //判断用户是否存在
   try{
@@ -49,7 +53,7 @@ module.exports = async (ctx) => {
  
   //更新信息
   try {
-    await mysql('userInfo').where('uid', uid).update()
+    await mysql('userInfo').where('uid', uid).update(user)
 
     ctx.body = {
       code: 1

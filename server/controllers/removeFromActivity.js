@@ -1,8 +1,8 @@
 const { mysql } = require('../qcloud')
 
 module.exports = async (ctx) => {
-  const { aid, members } = ctx.query
-
+  var { aid, members } = ctx.query
+  members = members.split(',')
   try {
     for(var i in members){
       await mysql('userAct').where('uid', members[i]).andWhere('aid', aid).del()

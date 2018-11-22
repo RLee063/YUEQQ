@@ -15,7 +15,7 @@ module.exports = async (ctx) => {
     try {
       //update 
       await mysql('userInfo').where('Uid',user['Uid']).update(user)
-      ctx.body['first'] = 1
+
     } catch (e) {
       console.log('failed to update userInfo')
       console.log(e)
@@ -26,7 +26,7 @@ module.exports = async (ctx) => {
     console.log('first login,now register')
     try {
       await mysql('userInfo').insert(user)
-      ctx.body['first'] = 0
+
     } catch (e) {
       console.log(e)
     }

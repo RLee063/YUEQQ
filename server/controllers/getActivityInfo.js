@@ -9,7 +9,6 @@ module.exports = async(ctx) => {
   } = ctx.query
   try {
     var activity = (await mysql().select().from('ActivityInfo').where('aid', aid))[0]
-
     if (activity['startTime'] > new Date()) {
       activity['status'] = 0
     } else if (activity['endTime'] < new Date()) {
@@ -17,7 +16,6 @@ module.exports = async(ctx) => {
     } else {
       activity['status'] = 1
     }
-    
     activity['startTime'] = tool.formatTime(activity['startTime'])
     activity['createTime'] = tool.formatTime(activity['createTime'])
     activity['imgUrl'] = activity['picUrl']
@@ -30,6 +28,9 @@ module.exports = async(ctx) => {
       uidss[i]=uids[i]['uid']
     }
     activity['members'] = await mysql('userInfo as ui').select().whereIn('ui.uid', uidss)
+    for (var i in activity['members']){
+      activity['members'][i]['evaluated'] = (await mysql('userAct').select().where('aid', aid).andWhere('uid', activity['members'][i]['uid']))[0]['evaluated']
+    }
 
 
     ctx.body = {
