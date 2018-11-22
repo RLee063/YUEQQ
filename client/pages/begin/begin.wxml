@@ -1,2 +1,17 @@
 <!--pages/beginlogin/beginlogin.wxml-->
-<button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="startprogram">获取用户信息</button>
+<view >
+    <view class='header'>
+        <image src='/images/icon.svg'></image>
+
+    </view>
+ 
+    <view class='content'>
+        <view>该小程序由UESTC0510工作室开发，需提供以下权限</view>
+        <text>·获得你的公开信息(昵称，头像等)</text>
+    </view>
+ 
+    <button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="startprogram">
+        确认登陆
+    </button>
+</view>
+

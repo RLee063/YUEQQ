@@ -48,7 +48,7 @@
 
 .pnum {
   position: absolute;
-  left: 360rpx;
+  left: 440rpx;
 }
 
 .pnum-text {

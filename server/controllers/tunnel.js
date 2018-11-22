@@ -6,6 +6,7 @@ const { mysql } = require('../qcloud')
 
 const debug = require('debug')('koa-weapp-demo')
 
+var CHAT_MESSAGE = '1'
 /**
  * 这里实现一个简单的聊天室
  * userMap 为 tunnelId 和 用户信息的映射
@@ -28,11 +29,21 @@ const $broadcast = async (type, content) => {
   if (!(content['word']['to'] in uidMap)) {
     //toDo : 接送方不在线时的处理
     console.log('target is not online')
-    await mysql('messageHistory').insert({
-      fromUid: content['word']['from'],
-      toUid: content['word']['to'],
-      content: JSON.stringify(content)
-    })
+    try{
+      await mysql('messageHistory').insert({
+        fromUid: content['word']['from'],
+        toUid: content['word']['to'],
+        content: JSON.stringify(content)
+      })
+    }catch(e){
+      console.log(e)
+      ctx.body = {
+        code: -1,
+        data: 'failed' + e.sqlMessage
+      }
+      return
+    }
+    
 
     return
   }
@@ -99,11 +110,22 @@ async function onConnect(tunnelId) {
       'enter': userMap[tunnelId]
     })
 
-    msgs = await mysql('messageHistory').select().where({'isSent':0,'toUid':userMap[tunnelId].openId})
-    await mysql('messageHistory').where({ 'isSent': 0, 'toUid': userMap[tunnelId].openId }).del()
-    for (var n in msgs){
-      $broadcast('speak',JSON.parse(msgs[n]['content']))
+    try{
+      msgs = await mysql('messageHistory').select().where({ 'isSent': 0, 'toUid': userMap[tunnelId].openId })
+      await mysql('messageHistory').where({ 'isSent': 0, 'toUid': userMap[tunnelId].openId }).del()
+      for (var n in msgs) {
+        $broadcast('speak', JSON.parse(msgs[n]['content']))
+      }
+
+    }catch(e){
+      console.log(e)
+      ctx.body = {
+        code: -1,
+        data: 'failed' + e.sqlMessage
+      }
+      return
     }
+
 
   } else {
     console.log(`Unknown tunnelId(${tunnelId}) was connectd, close it`)
@@ -119,7 +141,7 @@ async function onConnect(tunnelId) {
  * 我们把这个发言的信息广播到所有在线的 WebSocket 信道上
  */
 
-function onMessage(tunnelId, type, content) {
+async function onMessage(tunnelId, type, content) {
   console.log(`[onMessage] =>`, {
     tunnelId,
     type,
@@ -129,10 +151,35 @@ function onMessage(tunnelId, type, content) {
   switch (type) {
     case 'speak':
       if (tunnelId in userMap) {
-        $broadcast('speak', {
-          'who': userMap[tunnelId],
-          'word': content.word
-        })
+        var aids = await mysql('ActivityInfo').select().where('aid',content.word['to'])
+        if(aids.length === 1){
+          try{
+            var chatMems = await mysql('userACt').select('uid').where('aid', content.word['aid'])
+            for (var n in chatMems) {
+              content.word['to'] = chatMems[n]
+              $broadcast('speak', {
+                'who': userMap[tunnelId],
+                'word': content.word
+              })
+            }
+
+          }catch(e){
+            console.log(e)
+            ctx.body = {
+              code: -1,
+              data: 'failed' + e.sqlMessage
+            }
+            return
+          }
+
+        }
+        else{
+          $broadcast('speak', {
+            'who': userMap[tunnelId],
+            'word': content.word
+          })
+        }
+        
       } else {
         $close(tunnelId)
       }

@@ -1,7 +1,7 @@
 <!--pages/create_undo/create_undo.wxml-->
 <view class='container'>
   <view class="head"></view>
-  <view class="lists" wx:for="{{newActyInfo}}" bindtap="details">
+  <view class="lists" wx:for="{{newActyInfo}}"  bindtap="details" data-aid="{{item.aid}}">
     <view wx:if="{{item.sportType===0}}">
       <image class="activityclass"  src="./tabletennis.png" background-size="cover"></image>
     </view>
@@ -9,10 +9,10 @@
       <image class="activityclass"  src="./basketball.png" background-size="cover"></image>
     </view>
     <view wx:elif="{{item.sportType===2}}">
-      <image class="activityclass"  src="./badminton.png" background-size="cover"></image>
+      <image class="activityclass"  src="./tennis.png" background-size="cover"></image>
     </view>
     <view wx:elif="{{item.sportType===3}}">
-      <image class="activityclass"  src="./tabletennis.png" background-size="cover"></image>
+      <image class="activityclass"  src="./badminton.png" background-size="cover"></image>
     </view>
     <view wx:elif="{{item.sportType===4}}">
       <image class="activityclass"  src="./football.png" background-size="cover"></image>

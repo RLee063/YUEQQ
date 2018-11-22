@@ -23,6 +23,8 @@
     "pages/createUndo/createUndo",
     "pages/attendUndo/attendUndo",
     "pages/attendDid/attendDid",
+    "pages/message/message",
+    "pages/joinerlist/joinerlist",
     "pages/myActy/myActy",
     "pages/evaluate/evaluate",
     "pages/cropper/cropper"
