@@ -1,56 +1,35 @@
-page{
+page {
+  height: 100%;
+  background-color: whitesmoke;
+}
+
+
+.father {
   position: relative;
   height: 100%;
-  background:rgb(250, 250, 250);
 }
 
-.father{
-  position: relative;
-  height: 100%;
+.pic-block {
+  height: 30%;
 }
 
-.canvas{
-  border-radius: 50%;
-  position: absolute;
-  height: 170rpx;
-  width: 170rpx;
-  right: 20rpx;
-  top: 320rpx;
-  background-color:rgb(255, 255, 255);
-  box-shadow: 0rpx 0rpx 7rpx rgb(158, 158, 158) inset;
-}
-
-.canvas-image{
-  border-radius: 50%;
-  margin: 8%;
-  height: 84%;
-  width: 84%;
-}
-
-.pic-block{
-  width: 100%;
-  height: 400rpx;
-  box-shadow: 0rpx 0rpx 15rpx rgb(163, 163, 163);
-  margin-bottom: 40rpx;
-}
-
-.pic{
+.pic {
   width: 750rpx;
   height: 100%;
 }
 
-.title{
+.title {
   position: absolute;
-  top: 330rpx;
-  left: 30rpx;
-  font-size: 43rpx;
+  left: 20rpx;
+  top: -10rpx;
+  font-family: "microsoft yahei";
+  font-size: 40rpx;
   color: white;
-  letter-spacing: 0.05rem;
-  /* font-weight: 599; */
-  text-shadow: 0 0 10rpx black;
+  -webkit-text-stroke: 0.1px rgb(0, 0, 0);
+  letter-spacing: 0.2rem;
 }
 
-.avatar, .avatar-signed, .avatar-unsigned, .avatar-more{
+.avatar {
   float: left;
   height: 100rpx;
   width: 100rpx;
@@ -58,121 +37,184 @@ page{
   border-radius: 100%;
 }
 
-.avatar-biger{
-  border-radius: 50%;
-  height: 200rpx;
-  width: 200rpx;
-  margin-left: 175rpx;
-  margin-top: 30rpx;
-  border: solid;
-  border-color: rgba(255, 112, 112, 0.5);
-}
-
-.avatar-big ,.avatar-big-signed,.avatar-big-unsigned{
-  float: left;
-  height: 140rpx;
-  width: 140rpx;
-  border-radius: 100%;
-  margin: 20rpx;
-}
-
-.avatar-big-signed{
-  height: 130rpx;
-  width: 130rpx;
-  border-width: 5rpx;
-  border: solid;
-  border-color: #4facfe;
-}
-
-.avatar-more{
-  background: rgb(250, 250, 250);
-}
-
-.avatar-more-image{
-  transform: rotate(90deg);
-  margin: 30%;
-  height: 40%;
-  width: 40%;
-}
-
-.avatar-signed{
-  border: solid;
-  border-color: green;
-}
-
-.intro-block, .info-block, .skill-block, .recent-block, .members-block{
-  width: 96%;
-  margin: auto;
-  margin-top: 10rpx;
-  background: white;
-}
-
-.members-block{
-  margin-left: 50rpx;
-  height: 130rpx;
-  clear: both;
-  width: 92%;
-  background: rgb(255, 255, 255);
-}
-
-.info-in-block, .info-in-top-block{
-  height: 80rpx;
-  /* background: rgb(245, 151, 151); */
-  margin: 15rpx;
-  padding-left: 30rpx;
-  clear: both;  
-  border-top: solid;
-  border-width: thin;
-  border-color: rgb(226, 226, 226);
-}
-
-.info-in-top-block{
-  border: none;
-}
-
-.info-text ,.info-title,.info-intro,.join-chat {
-  float: left;
-  line-height: 85rpx;
-  color: rgb(94, 94, 94);
-  font-size: 30rpx;
-}
-
-.description-text{
-  clear: both;
-  text-indent:60rpx;
-  font-size: 30rpx;
-  margin-left: 50rpx;
-  margin-right: 40rpx;
-  padding-bottom: 30rpx;
-  line-height: 50rpx;
-  color: rgb(94, 94, 94);
-  word-break: break-all;
-}
-
-.info-title {
-  width: 30%;
-  clear: left;
-  font-weight: bolder;
-  color: rgb(87, 87, 87);
-}
-
-.info-intro{
-  font-weight: bolder;
-  color: rgb(87, 87, 87);
-  margin-left: 45rpx;
-}
-
-.join-chat{
-  float: right;
-  font-weight: bold;
-  margin-right: 30rpx;
-}
-
-.join{
+.joinActy {
   position: fixed;
   bottom: 50rpx;
-  left: 10%; 
-  width: 80%; 
+  left: 0%;
+  width: 50%;
+  background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  letter-spacing: 0.2rem;
+  font-size: 0.9rem;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 7% / 50%;
+}
+
+.joinRoom {
+  position: fixed;
+  bottom: 50rpx;
+  right: 0%;
+  width: 50%;
+  background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  letter-spacing: 0.2rem;
+  font-size: 0.9rem;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 7% / 50%;
+}
+
+.activityclass {
+  width: 60rpx;
+  height: 60rpx;
+  margin: 20rpx;
+  border-radius: 20%;
+  position: relative;
+  top: 10rpx;
+}
+
+.activityinfo-title {
+  border-top: 4px, outset, black;
+  line-height: 52px;
+  font-size: 40rpx;
+  color: black;
+  font: '微软雅黑';
+  font-weight: 500;
+  letter-spacing: 5rpx;
+}
+
+.titleAndClass {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+}
+
+.allinfo {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20rpx;
+}
+
+.detailInfo {
+  height: auto;
+  width: auto;
+  padding: 0 0 0 20rpx;
+  margin: 3rpx;
+  flex-direction: column;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.detailInfo-text {
+  position: relative;
+  left: 60rpx;
+  border-top: 4px, outset, black;
+  width: 100%;
+  line-height: 52px;
+  font-size: 29rpx;
+  color: black;
+  font: '微软雅黑';
+  font-weight: 520;
+  letter-spacing: 3rpx;
+}
+
+.detailInfo-title {
+  position: relative;
+  left: 20rpx;
+  border-top: 4px, outset, black;
+  width: 100%;
+  line-height: 52px;
+  font-size: 28rpx;
+  color: rgba(0, 0, 0, 0.534);
+  font: '微软雅黑';
+  font-weight: 400;
+  letter-spacing: 2rpx;
+}
+
+.icon {
+  position: relative;
+  top: 5px;
+}
+
+.creatorInfo-avatar {
+  width: 75rpx;
+  height: 75rpx;
+  border-radius: 50%;
+  position: relative;
+  top: 30rpx;
+  left: 45rpx;
+}
+
+.detailInfo-creator {
+  height: auto;
+  width: auto;
+  padding: 0 0 0 20rpx;
+  margin: 3rpx;
+  flex-direction: column;
+  align-items: flex-start;
+  box-sizing: border-box;
+  position: relative;
+  bottom: 30rpx;
+}
+
+.detailInfo-creator-text {
+  position: relative;
+  left: 35rpx;
+  border-top: 4px, outset, black;
+  width: 100%;
+  line-height: 52px;
+  font-size: 30rpx;
+  color: black;
+  font: '微软雅黑';
+  font-weight: 500;
+  letter-spacing: 5rpx;
+}
+
+.detailInfo-joiner {
+  height: auto;
+  width: auto;
+  padding: 0 0 0 20rpx;
+  margin-top: 35rpx;
+  flex-direction: row;
+  align-items: flex-start;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.joinerInfo-avatar {
+  width: 75rpx;
+  height: 75rpx;
+  margin-left: 5rpx;
+  border-radius: 50%;
+  position: relative;
+  top: 30rpx;
+  left: 140rpx;
+}
+
+.joinerInfo-num {
+  position: relative;
+  left: 160rpx;
+  border-top: 4px, outset, black;
+  width: 100%;
+  line-height: 52px;
+  font-size: 30rpx;
+  color: black;
+  font: '微软雅黑';
+  font-weight: 500;
+  letter-spacing: 5rpx;
+}
+
+.joinerInfo-avatar {
+  flex-direction: row;
+}
+
+.join, .join-mask {
+  position: fixed;
+  bottom: 50rpx;
+  left: 10%;
+  width: 80%;
   height: 80rpx;
   background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
   color: white;
@@ -180,24 +222,15 @@ page{
   font-size: 0.9rem;
   line-height: 80rpx;
   text-align: center;
-  border-radius: 6.65%  / 50% ;
+  border-radius: 6.65%  / 50%;
+  box-shadow: 0px 0px 10px rgb(189, 189, 189);
 }
 
-.skill-wave,.skill-wave-mask{
-  position: fixed;
-  top: 300rpx;
-  left: 50rpx;
-  width: 450rpx; 
-  height: 80rpx;
-  background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-  border-radius: 7%  / 50% ;
-}
-
-.skill-wave-mask{
+.join-mask {
   background-image: none;
 }
 
-.sub-mask{
+.sub-mask {
   position: absolute;
   background: rgb(255, 255, 255);
   opacity: 0.5;
@@ -208,8 +241,8 @@ page{
 
 .evaluate-swiper{
   position: absolute;
-  top: 400rpx;
-  height: 550rpx;
+  top: 25%;
+  height: 50%;
   width: 100%;
 }
 
@@ -220,77 +253,25 @@ page{
 }
 
 .evaluate-block{
-  position: relative;
-  height: 98%;
+  height: 100%;
   width: 550rpx;
-  background: white;
-  border: solid;
-  border-width: 5rpx;
-  border-color: #4facfe;
-  border-radius: 15rpx 15rpx 15rpx 15rpx / 15rpx 15rpx 15rpx 15rpx;
+  background: rgb(255, 0, 0);
 }
 
-.evlauate-button,.evaluate-button-left,.evaluate-button-right,.evaluate-button-left-down,.evaluate-button-right-down{
-  border-top: solid;
-  border-width: 5rpx;
-  border-color: #4facfe;
-  line-height: 100rpx;
-  text-align: center;
-  position: absolute;
-  bottom: 0rpx;
-  width: 50%;
-  color: red;
-}
-
-.evaluate-button-left-down{
-  left: 0rpx;
-  background: #4facfe;
-}
-
-.evaluate-button-right-down{
-  right: 0rpx;
-  background: #4facfe;
-}
-
-.evaluate-button-left{
-  left: 0rpx;
-}
-
-.evaluate-button-right{
-  right: 0rpx;
-}
-
-.child-block{
+.end-block{
   top: 25%;
   height: 50%;
   width: 550rpx;
   position: absolute;
   margin-left: 100rpx;
-  background: rgb(255, 255, 255);
-  border-radius: 10rpx 10rpx 10rpx 10rpx / 10rpx 10rpx 10rpx 10rpx;
-  box-shadow: 0 0 20rpx rgb(150, 150, 150);
-}
-
-.child-block-title{
-  line-height: 70rpx;
-  text-align: center;
-  font-size: 35rpx;
-  color: rgb(54, 54, 54);
-  font-weight: bold;
-  letter-spacing: 0.05rem;
-}
-
-.child-block-warning{
-  line-height: 50rpx;
-  text-align: center;
-  font-size: 30rpx;
-  color: rgb(83, 83, 83);
+  background: rgb(255, 0, 0);
 }
 
 .more{
   position: absolute;
-  height: 50rpx;
-  width: 50rpx;
-  right: 20rpx;
-  top: 20rpx;
+  height: 100rpx;
+  width: 100rpx;
+  left: 650rpx;
+  top: 0rpx;
+  line-height: 100rpx;
 }

@@ -5,27 +5,25 @@ var app = getApp()
 var that
 
 Page({
+
   data: {
     membersArray: [],
     activityInfo: {},
-    sportIcon: "",
     evaluating: false,
     ending: false,
     transfering: false,
-    revoming: false,
     transferTo: "",
     myUid: "",
     aid: "",
-    swiperIndex: 0,
-    current: 0,
-    waveCanvasHeight: 80,
-    waveCanvasWidth: 500,
-    waveHeight: 80,
-    waveWidth: 400
+    creatorUid: '',
+    joiner: [],
+    joinerShow: []
   },
 
-  onLoad: function(options) {
-    // var aid = "o5ko3434RP2lZQNVamvVxfrAugoY1542197043"
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
     var aid = options.aid
     that = this
     var myUid = wx.getStorageSync('openid')
@@ -35,10 +33,104 @@ Page({
     })
     console.log(this.data)
     this.refresh()
+    wx.request({
+      url: `${config.service.host}/weapp/getActivityInfo`,
+      data: {
+        aid: aid
+      },
+      success: function (result) {
+        console.log(result)
+        that.setData({
+          activityInfo: result.data.data,
+          creatorUid: result.data.data.creatorUid,
+          joiner: result.data.data.members,
+        })
+        that.formatInfo()
+        that.getCreaterInfo()
+
+      },
+      fail: function (error) {
+        console.log(error)
+      }
+    })
     // var aid = options.aid
   },
-  
-  refresh: function() {
+  viewCreator: function () {
+    wx.navigateTo({
+      url: '../viewUserInfo/viewUserInfo?uId=' + this.data.activityInfo.creatorUid
+    })
+  },
+  joinerlist: function () {
+
+    wx.navigateTo({
+      url: '../joinerlist/joinerlist?members=' + JSON.stringify(this.data.joiner)
+    })
+
+  },
+
+  formatInfo: function () {
+    var tempActyInfo = this.data.activityInfo
+
+    switch (tempActyInfo.sportType) {
+      case '乒乓球':
+        tempActyInfo.sportType = 0
+        break
+
+      case '篮球':
+        tempActyInfo.sportType = 1
+        break
+      case '网球':
+        tempActyInfo.sportType = 2
+        break
+      case '羽毛球':
+        tempActyInfo.sportType = 3
+        break
+      case '足球':
+        tempActyInfo.sportType = 4
+        break
+      case '跑步':
+        tempActyInfo.sportType = 5
+        break
+    }
+    console.log(this.data.joiner)
+    var tempJoiner = this.data.joiner
+    var showJoiner = []
+    if (tempJoiner.length < 4) {
+      showJoiner.push(tempJoiner.slice(0, tempJoiner.length))
+    } else {
+      showJoiner.push(tempJoiner.slice(0, 3))
+    }
+
+    this.setData({
+      activityInfo: tempActyInfo,
+      joinerShow: showJoiner[0]
+    })
+  },
+
+  getCreaterInfo: function () {
+    var that = this
+    wx.request({
+      url: `${config.service.host}/weapp/getUserInfo`,
+      method: 'GET',
+      data: {
+        uid: that.data.creatorUid,
+      },
+
+      success(result) {
+        that.setData({
+          creator: result.data.data[0]
+
+        })
+        console.log(that.data.creator)
+      },
+      fail: function (error) {
+        console.log(error)
+      }
+    })
+
+  },
+
+  refresh: function () {
     var that = this
     var aid = this.data.aid
     console.log(aid)
@@ -50,14 +142,12 @@ Page({
       data: {
         aid: aid
       },
-      success: function(result) {
-        console.log(result)
+      success: function (result) {
         wx.hideLoading()
         var activityInfo = result.data.data
         console.log(activityInfo)
         var creatorUid = activityInfo.creatorUid
         var me = wx.getStorageSync('openid')
-        var myUid = me
         var isOwner = me == creatorUid ? 1 : 0
         var hasJoined = 0
         var isFull = activityInfo.currentNum == activityInfo.maxNum ? 1 : 0
@@ -67,59 +157,29 @@ Page({
             break
           }
         }
-        var hasEvaluated = false
-        var skillss = 0
-        for(var i=0; i<activityInfo.members.length; i++){
-          skillss += 
+        for (var i = 0; i < activityInfo.members.length; i++) {
           activityInfo.members[i].signed = false
-          activityInfo.members[i].removed = false
-          activityInfo.members[i].evaluate = 0
-          if(activityInfo.members[i].uid == myUid){
-            if (activityInfo.members[i].evaluated == 1){
-              hasEvaluated = true
-            }
-          }
         }
-//faker
-        activityInfo.averageSkills = "黄金"
-
-        var sportIcon = "../../images/sportType/" +that.name2Num(activityInfo.sportType)+".png"
         that.setData({
           activityInfo: activityInfo,
           hasJoined: hasJoined,
           isOwner: isOwner,
-          hasEvaluated: hasEvaluated,
-          membersArray: activityInfo.members,
-          sportIcon: sportIcon
+          hasEvaluated: 0,
+          membersArray: activityInfo.members
         })
+        // that.data.membersArray.splice(0, that.data.membersArray.length)
+        // for (var i = 0; i < activityInfo.members.length; i++) {
+        //   var pMemberInfo = util.getUserInfo(activityInfo.members[i].uid)
+        //   pMemberInfo.then(userInfo => that.setMemberInfo(userInfo))
+        // }
       },
-      fail: function(error) {
-        wx.showModal({
-          title: '获取活动信息失败',
-          content: '点击确定重试',
-          success(res) {
-            if (res.confirm) {
-              that.refresh()
-            } else if (res.cancel) {
-              wx.navigateBack({
-                delta: 1
-              })
-            }
-          }
-        })
+      fail: function (error) {
+        console.log(error)
       }
     })
     this.drawJoinMask()
   },
-  name2Num: function(name){
-    var sportType = app.globalData.sportType
-    for(var i=0; i<sportType.length; i++){
-      if(sportType[i]==name){
-        return i
-      }
-    }
-  },
-  setMemberInfo: function(userInfo) {
+  setMemberInfo: function (userInfo) {
     var membersArray = that.data.membersArray
     userInfo.signed = false
     membersArray.push(userInfo)
@@ -127,16 +187,7 @@ Page({
       membersArray: membersArray
     })
   },
-  onSlideChangeEnd:function(e){
-    console.log(e)
-    that.setData({
-    swiperIndex: e.detail.current
-    })
-    console.log("INDEX:"+e.currentTarget.index)
-    console.log("CURRENT:" + e.currentTarget.current)
-    console.log("current2:" + e.detail.current)
-  },
-  joinActivity: function() {
+  joinActivity: function () {
     var uid = wx.getStorageSync('openid')
     if (uid == "") {
       util.showModel('请先登录', '刷新失败')
@@ -144,9 +195,6 @@ Page({
     var that = this
     console.log(uid)
     console.log(this.data.aid)
-    wx.showLoading({
-      title: '',
-    })
     wx.request({
       url: `${config.service.host}/weapp/joinActivity`,
       data: {
@@ -154,32 +202,26 @@ Page({
         aid: this.data.aid
       },
       success(result) {
-        wx.hideLoading()
-        that.refresh()
         if (result.data.code == 1) {
-          wx.showToast({
-            title: '加入活动成功',
-            icon: 'success',
-            duration: 1000
-          })
+          util.showModel('加入成功', "");
         }
+        that.refresh()
       },
       fail(error) {
-        wx.hideLoading()
         util.showModel('加入失败', error);
       }
     })
   },
-  chooseTransfer: function(e){
+  chooseTransfer: function (e) {
     this.setData({
       transferTo: e.currentTarget.dataset.uid == this.data.transferTo ? "" : e.currentTarget.dataset.uid
     })
   },
-  sign: function(e){
+  sign: function (e) {
     console.log(e)
     var membersArray = this.data.membersArray
-    for(var i=0; i<membersArray.length; i++){
-      if (e.currentTarget.dataset.uid == membersArray[i].uid){
+    for (var i = 0; i < membersArray.length; i++) {
+      if (e.currentTarget.dataset.uid == membersArray[i].uid) {
         console.log(membersArray)
         membersArray[i].signed = (membersArray[i].signed + 1) % 2
         //break
@@ -189,19 +231,15 @@ Page({
       membersArray: membersArray
     })
   },
-  viewMemberInfo: function(e){
-    wx.navigateTo({
-      url: '../viewUserInfo/viewUserInfo?uid='+e.currentTarget.dataset.uid,
-    })
+  viewMemberInfo: function () {
+
   },
-  showMoreOptions: function(){
+  showMoreOptions: function () {
     var itemList = []
-    if(this.data.isOwner){
+    if (this.data.isOwner) {
       itemList.push("解散活动")
       itemList.push("转让活动")
-      itemList.push("移除成员")
-    }
-    else{
+    } else {
       itemList.push("举报")
       if (this.data.hasJoined) {
         itemList.push("退出活动")
@@ -213,22 +251,18 @@ Page({
       // 参与者：[举报，退出活动]
       // 未参与者: [举报]
       success(res) {
-        if(that.data.isOwner){
-          switch(res.tapIndex){
-          case 0:
-            that.disbandedActivity()
-            break;
-          case 1:
-            that.transferActivity()
-            break;
-          case 2:
-            that.removeMember()
-            break;
+        if (that.data.isOwner) {
+          switch (res.tapIndex) {
+            case 0:
+              that.disbandedActivity()
+              break;
+            case 1:
+              that.transferActivity()
+              break;
           }
-        }
-        else{
-          if(that.data.hasJoined){
-            switch(res.tapIndex){
+        } else {
+          if (that.data.hasJoined) {
+            switch (res.tapIndex) {
               case 0:
                 that.reportActivity()
                 break
@@ -236,9 +270,8 @@ Page({
                 that.exitActivity()
                 break
             }
-          }
-          else{
-            switch(res.tapIndex){
+          } else {
+            switch (res.tapIndex) {
               case 0:
                 that.reportActivity()
                 break
@@ -252,225 +285,64 @@ Page({
       }
     })
   },
-  disbandedActivity: function() {
-    wx.showLoading({
-      title: '',
-    })
+  disbandedActivity: function () {
     wx.request({
       url: `${config.service.host}/weapp/disbandActivity`,
       data: {
         aid: that.data.aid
       },
-      success(result){
-        wx.hideLoading()
-        wx.showToast({
-          title: '解散活动成功',
-          icon: 'success',
-          duration: 1000
-        })
-        wx.navigateBack({
-          delta: 1
-        })
-      },
-      fail(error){
-        wx.hideLoading()
-        util.showModel('解散活动失败', error);
-      }
     })
   },
-  transferActivity: function() {
+  transferActivity: function () {
     this.setData({
       transfering: true
     })
+    // wx.request({
+    //   url: `${config.service.host}/weapp/transferActivity`,
+    //   data: {
+    //     aid: that.data.aid,
+    //     uid: ""
+    //   }
+    // })
   },
   completeTransfer: function () {
     this.setData({
       transfering: false
     })
-    wx.showLoading({
-      title: '',
-    })
-    wx.request({
-      url: `${config.service.host}/weapp/transferActivity`,
-      data: {
-        aid: that.data.aid,
-        uid: that.data.transferTo
-      },
-      success(result){
-        wx.hideLoading()
-        wx.showToast({
-          title: '转让活动成功',
-          icon: 'success',
-          duration: 1000
-        })
-      },
-      fail(error){
-        wx.hideLoading()
-        util.showModel('转让活动失败', error);
-      }
-    })
   },
-  chooseRemove: function(e){
-    console.log(e)
-    var membersArray = that.data.membersArray
-    membersArray[e.currentTarget.dataset.index].removed = (membersArray[e.currentTarget.dataset.index].removed + 1) % 2
-    that.setData({
-      membersArray: membersArray
-    })
-    console.log(membersArray)
-  },
-  removeMember: function() {
-    that.setData({
-      removing: true
-    })
-  },
-  completeRemoveMember: function(){
-    that.setData({
-      removing: false
-    })
-    var members = that.data.membersArray
-    var removeMembers = []
-    for(var i=0; i<members.length; i++){
-      if(members[i].removed){
-        removeMembers.push(members[i].uid)
-      }
-    }
-    wx.showLoading({
-      title: '',
-    })
-    var removeMembersString  = removeMembers.join(',')
-    wx.request({
-      url: `${config.service.host}/weapp/removeFromActivity`,
-      data: {
-        aid: that.data.aid,
-        members: removeMembersString
-      },
-      success(result){
-        wx.hideLoading()
-        that.refresh()
-        wx.showToast({
-          title: '移除成员成功',
-          icon: 'success',
-          duration: 1000
-        })
-      },
-      fail(error){
-        wx.hideLoading()
-        util.showModel('移除成员失败', error);
-      }
-    })
-  },
-  reportActivity: function() {
-    wx.showLoading({
-      title: '',
-    })
+  reportActivity: function () {
     wx.request({
       url: `${config.service.host}/weapp/reportActivity`,
       data: {
         aid: that.data.aid
       },
-      success(){
-        wx.hideLoading()
-        wx.showToast({
-          title: '举报成功',
-          icon: 'success',
-          duration: 1000
-        })
-      },
-      fail(error){
-        wx.hideLoading()
-        util.showModel('举报活动失败', error);
-      }
     })
   },
-  exitActivity: function() {
+  exitActivity: function () {
     var uid = wx.getStorageSync('openid')
-    wx.showLoading({
-      title: '',
-    })
     wx.request({
       url: `${config.service.host}/weapp/exitActivity`,
       data: {
         aid: that.data.aid,
         uid: uid
       },
-      success(){
-        wx.hideLoading()
-        wx.showToast({
-          title: '退出活动成功',
-          icon: 'success',
-          duration: 1000
-        })
-        that.refresh()
-      },
-      fail(error){
-        wx.hideLoading()
-        util.showModel('退出失败', error);
-      }
     })
   },
-  evaluateActivity: function() {
+  evaluateActivity: function () {
     console.log("here")
     this.setData({
       evaluating: true
     })
   },
-  evaluate: function (e) {
-    var membersArray = that.data.membersArray
-    membersArray[e.target.dataset.index].evaluate = e.target.dataset.code
-    that.setData({
-      membersArray: membersArray
-    })
-    console.log("INDEX:" + e.target.dataset.index)
-    console.log("CURRENT:" + e.target.dataset.current)
-    console.log("current2:" + e.detail.current)
-  },
-  completeEvaluateActivity: function(){
-    var up = []
-    var down = []
-    for(var i=0; i<that.data.membersArray.length; i++){
-      if (that.data.membersArray[i].evaluate == 1){
-        up.push(that.data.membersArray[i].uid)
-      }
-      if (that.data.membersArray[i].evaluate == -1){
-        down.push(that.data.membersArray[i].uid)
-      }
-    }
-    var data = {
-      uid: wx.getStorageSync('openid'),
-      aid: that.data.aid,
-      up: up.join(','),
-      down: down.join(',')
-    }
-    console.log(data)
-    wx.showLoading({
-      title: '',
-    })
-    wx.request({
-      url: `${config.service.host}/weapp/evaluate`,
-      data: data,
-      success(result){
-        console.log(result)
-        wx.hideLoading()
-        wx.showToast({
-          title: '评价成功',
-          icon: 'success',
-          duration: 1000
-        })
-        that.setData({
-          evaluating: false
-        })
-      },
-      fail(error){
-        wx.hideLoading()
-        util.showModel('评价失败', error);
-      }
+  completeEvaluateActivity: function () {
+    this.setData({
+      evaluating: false
     })
   },
-  endActivity: function(){
+  endActivity: function () {
     var aid = this.data.aid
     wx.showLoading({
-      title: '',
+      title: '正在结束活动',
     })
     wx.request({
       url: `${config.service.host}/weapp/endActivity`,
@@ -479,11 +351,6 @@ Page({
       },
       success: result => {
         wx.hideLoading()
-        wx.showToast({
-          title: '结束活动成功',
-          icon: 'success',
-          duration: 1000
-        })
         console.log(result)
         this.setData({
           ending: true
@@ -492,56 +359,43 @@ Page({
       },
       fail: error => {
         wx.hideLoading()
-        util.showModel('结束活动失败', error);
       }
     })
   },
-  completeEndActivity: function(){
-    var members = []
-    for (var i = 0; i < this.data.membersArray.length; i++){
-      if (this.data.membersArray[i].signed){
-        members.push(this.data.membersArray[i].uid)
-      }
-    }
-
-    wx.showLoading({
-      title: '',
-    })
+  completeEndActivity: function () {
+    // var members = []
+    // for(var i=0; i<this.data.members.length; i++){
+    //   var member = {
+    //     uid : this.data.members[i].uid,
+    //     signed: this.data.members[i].signed
+    //   }
+    // }
     wx.request({
       url: `${config.service.host}/weapp/signForActivity`,
       data: {
-        members: members.join(',')
+        members: this.data.members
       },
       success: result => {
-        wx.hideLoading()
-        wx.showToast({
-          title: '',
-          icon: 'success',
-          duration: 1000
-        })
         this.setData({
           ending: false
         })
         this.refresh()
       },
-      fail: error => {
-        wx.hideLoading()
-        util.showModel('签到失败', error);
-      }
+      fail: error => { }
     })
   },
-  drawJoinMask: function() {
-    var height = util.rpx2px(that.data.waveHeight)
-    var width = util.rpx2px(that.data.waveWidth)
+  drawJoinMask: function () {
+    var height = util.rpx2px(80)
+    var width = 200
     this.p1 = {
       x: width,
-      y: height/4,
+      y: height / 4,
       directionX: 1.2,
       directionY: -1
     }
     this.p2 = {
       x: width,
-      y: height*3/4,
+      y: height * 3 / 4,
       directionX: -1,
       directionY: 1.2
     }
@@ -552,7 +406,7 @@ Page({
       directionY: -2
     }
     this.p4 = {
-      x: width ,
+      x: width,
       y: height * 3 / 4,
       directionX: 1,
       directionY: 2
@@ -560,16 +414,16 @@ Page({
     setInterval(this.waveAmination, 10)
     setInterval(this.waveAmination2, 10)
   },
-  waveAmination: function() {
+  waveAmination: function () {
     var ctx = wx.createCanvasContext('joinMask')
-    var height = util.rpx2px(that.data.waveCanvasHeight)
-    var width = util.rpx2px(that.data.waveCanvasWidth)
-    var rate = util.rpx2px(that.data.waveWidth)
+    var height = util.rpx2px(80)
+    var width = util.rpx2px(560)
+    var rate = 200
     ctx.beginPath()
     ctx.setGlobalAlpha(0.5)
     ctx.moveTo(rate, 0)
     ctx.lineTo(width, 0)
-    ctx.arc(width, height/2, util.rpx2px(40), 1.5*Math.PI, 0.5*Math.PI)
+    ctx.arc(width, height / 2, util.rpx2px(40), 1.5 * Math.PI, 0.5 * Math.PI)
     ctx.lineTo(width, height)
     ctx.lineTo(rate, height)
     ctx.bezierCurveTo(this.p2.x, this.p2.y, this.p1.x, this.p1.y, rate, 0)
@@ -578,12 +432,12 @@ Page({
     ctx.fill()
     ctx.draw()
     var point = {
-      x: util.rpx2px(that.data.waveWidth)
+      x: 200
     }
     if ((this.p1.x + this.p1.directionX > (point.x + 10)) || (this.p1.x + this.p1.directionX < (point.x - 10))) {
       this.p1.directionX = 0 - (this.p1.directionX)
     }
-    if ((this.p1.y + this.p1.directionY > (2*height / 3)) || ((this.p1.y + this.p1.directionY) < (height/4))) {
+    if ((this.p1.y + this.p1.directionY > (2 * height / 3)) || ((this.p1.y + this.p1.directionY) < (height / 4))) {
       this.p1.directionY = 0 - (this.p1.directionY)
     }
     this.p1.x += this.p1.directionX
@@ -591,7 +445,7 @@ Page({
     if ((this.p2.x + this.p2.directionX > (point.x + 10)) || (this.p2.x + this.p2.directionX < (point.x - 10))) {
       this.p2.directionX = 0 - (this.p2.directionX)
     }
-    if ((this.p2.y + this.p2.directionY > (height*3/4)) || ((this.p2.y + this.p2.directionY) < height*1/3))     {
+    if ((this.p2.y + this.p2.directionY > (height * 3 / 4)) || ((this.p2.y + this.p2.directionY) < height * 1 / 3)) {
       this.p2.directionY = 0 - (this.p2.directionY)
     }
     this.p2.x += this.p2.directionX
@@ -599,10 +453,10 @@ Page({
   },
   waveAmination2: function () {
     var ctx = wx.createCanvasContext('joinMask2')
-    var height = util.rpx2px(that.data.waveCanvasHeight)
-    var width = util.rpx2px(that.data.waveCanvasWidth)
-    var rate = util.rpx2px(that.data.waveWidth)
-    ctx.setGlobalAlpha(0.5)
+    var height = util.rpx2px(80)
+    var width = util.rpx2px(560)
+    var rate = 200
+    ctx.setGlobalAlpha(0.2)
     ctx.beginPath()
     ctx.moveTo(rate, 0)
     ctx.lineTo(width, 0)
@@ -615,7 +469,7 @@ Page({
     ctx.fill()
     ctx.draw()
     var point = {
-      x: util.rpx2px(that.data.waveWidth)
+      x: 200
     }
     if ((this.p3.x + this.p3.directionX > (point.x + 10)) || (this.p3.x + this.p3.directionX < (point.x - 10))) {
       this.p3.directionX = 0 - (this.p3.directionX)
@@ -635,7 +489,7 @@ Page({
     this.p4.y += this.p4.directionY
   },
 
-  joinChat:function() {
+  joinChat: function () {
     var chatInfo = {}
     chatInfo.chatId = this.data.aid
     chatInfo.isGroup = true
@@ -644,57 +498,49 @@ Page({
       url: '../chat/chat?chatInfo=' + chatInfoString,
     })
   },
-  viewAllMembers:function(){
-    var data = {}
-    data.aid = that.data.aid
-    var dataString = JSON.stringify(data)
-    wx.navigateTo({
-      url: '../displayUsers/displayUsers?dataString=' + dataString,
-    })
-  },
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
-    that.refresh()
+  onShow: function () {
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })
@@ -703,38 +549,38 @@ Page({
 
 
 
-  // navigateToChat: function() {
-  //   var activityInfo = this.data.activityInfo
-  //   var chatListRaw = app.getArrayFromStorage('chatListRaw')
-  //   var chatId = this.data.activityInfo.chatId
-  //   var chat = {
-  //     chatId: chatId,
-  //     statusChanged: true,
-  //     newMessage: true,
-  //     unReaded: true,
-  //     messageArray: []
-  //   }
-  //   for (var i = 0; i < chatListRaw.length; i++) {
-  //     if (chatListRaw[i].chatId == chatId) {
-  //       chat.messageArray = chatListRaw[i].messageArray
-  //       chatListRaw.splice(i, 1)
-  //       break
-  //     }
-  //   }
-  //   var message = {}
-  //   message.uid = "systemUid"
-  //   message.messageText = "你已经加入活动拉！快和其他人聊聊吧！"
-  //   message.userType = 1
-  //   chat.messageArray.push(message)
-  //   chatListRaw.unshift(chat)
-  //   wx.setStorageSync('chatListRaw', chatListRaw)
+// navigateToChat: function() {
+//   var activityInfo = this.data.activityInfo
+//   var chatListRaw = app.getArrayFromStorage('chatListRaw')
+//   var chatId = this.data.activityInfo.chatId
+//   var chat = {
+//     chatId: chatId,
+//     statusChanged: true,
+//     newMessage: true,
+//     unReaded: true,
+//     messageArray: []
+//   }
+//   for (var i = 0; i < chatListRaw.length; i++) {
+//     if (chatListRaw[i].chatId == chatId) {
+//       chat.messageArray = chatListRaw[i].messageArray
+//       chatListRaw.splice(i, 1)
+//       break
+//     }
+//   }
+//   var message = {}
+//   message.uid = "systemUid"
+//   message.messageText = "你已经加入活动拉！快和其他人聊聊吧！"
+//   message.userType = 1
+//   chat.messageArray.push(message)
+//   chatListRaw.unshift(chat)
+//   wx.setStorageSync('chatListRaw', chatListRaw)
 
-  //   var chatRoomInfo = {
-  //     avatarUrl: activityInfo.picUrl,
-  //     nickName: activityInfo.title
-  //   }
-  //   wx.setStorageSync(chatId, chatRoomInfo)
-  //   wx.navigateTo({
-  //     url: '../chat/chat?chatId=' + this.data.activityInfo.chatId
-  //   })
-  // },
+//   var chatRoomInfo = {
+//     avatarUrl: activityInfo.picUrl,
+//     nickName: activityInfo.title
+//   }
+//   wx.setStorageSync(chatId, chatRoomInfo)
+//   wx.navigateTo({
+//     url: '../chat/chat?chatId=' + this.data.activityInfo.chatId
+//   })
+// },
