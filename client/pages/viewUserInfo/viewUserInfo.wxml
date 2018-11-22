@@ -29,6 +29,14 @@
   <image class="home-pic" src="{{userInfo.homePicUrl}}" mode="aspectFill"></image> 
 
   <view class="info-block">
+    <view wx:if="{{userInfo.motto}}" class="info-in-block">
+      <view class="info-title">签名：</view>
+      <view class="info-text">{{userInfo.motto}}</view>
+    </view>
+    <view wx:if="{{userInfo.phone}}" class="info-in-block">
+      <view class="info-title">电话：</view>
+      <view class="info-text">{{userInfo.phone}}</view>
+    </view>
     <view wx:if="{{userInfo.college}}" class="info-in-top-block">
       <view class="info-title">学院：</view>
       <view class="info-text">{{userInfo.college}}</view>
@@ -37,9 +45,9 @@
       <view class="info-title">年级：</view>
       <view class="info-text">{{userInfo.grade}}</view>
     </view>
-    <view wx:if="{{userInfo.phone}}" class="info-in-block">
-      <view class="info-title">电话：</view>
-      <view class="info-text">{{userInfo.phone}}</view>
+    <view wx:if="{{userInfo.grade}}" class="info-in-block">
+      <view class="info-title">信用：</view>
+      <view class="info-text" style='letter-spacing:0.1rem;' wx:for="{{userInfo.credit}}">❤</view>
     </view>
     <view style='clear:both;'></view>
   </view>
@@ -49,6 +57,6 @@
     <view class="info-intro">能力值：</view>
     <canvas canvas-id='skillCanvas' class="skill-canvas"></canvas>
   </view>
-  <view class="talk" bindtap="talkTo" wx:if="{{isViewOtherInfo}}">FA</view>
+  <view class="talk" bindtap="talkTo" wx:if="{{isViewOtherInfo}}">发消息</view>
 </view>
 

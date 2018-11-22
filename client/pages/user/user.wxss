@@ -1,135 +1,171 @@
-page {
-  background-color: white;
-  width: 100%;
+ /* pages/viewUserInfo/viewUserInfo.wxss */
+page{
   height: 100%;
+  background: rgb(252, 252, 252);
 }
 
-.down {
-  position: relative;
-  top: 310rpx;
+.more{
+  position: absolute;
+  height: 50rpx;
+  width: 50rpx;
+  right: 20rpx;
+  top: 20rpx;
 }
 
-.container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-  background: no-repeat;
+.father{
   height: 100%;
+  position: relative;
 }
 
-.userinfo-avatar {
-  width: 220rpx;
-  height: 220rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-  position: relative;
-  right: 240rpx;
-  top: 70rpx;
-}
-
-.loginshow {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  left: 10rpx;
-}
-
-.uploader {
-  position: relative;
-  top: 290rpx;
-  height: auto;
+.home-pic{
   width: 100%;
-  padding: 0 0 0 40rpx;
-  margin: 5rpx;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
+  height: 450rpx;
+  margin-bottom: 70rpx;
+  box-shadow: 0 0rpx 15rpx rgb(109, 109, 109);
 }
 
-.uploader-text {
-  border-top: 4px, outset, black;
+.nick-name{
+  position: absolute;
+  top: 330rpx;
+  margin: auto;
   width: 100%;
-  line-height: 52px;
+  text-align: center;
   font-size: 30rpx;
-  color: gray;
-  font: '微软雅黑';
-  font-weight: 500;
-  letter-spacing: 5rpx;
-  position: relative;
-  left: 28rpx;
+  color: white;
+  text-shadow: 0 0 10rpx black;
 }
 
-.userinfo-nickname {
-  display: flex;
-  flex-direction: row;
-  font-size: 35rpx;
-  color: black;
-  font: '微软雅黑';
-  font-weight: 500;
-  letter-spacing: 5rpx;
-  position: relative;
-  bottom: 80rpx;
-  left: 45rpx;
+.gender{
+  top: 20%;
+  position: absolute;
+  left: 350rpx;
+  height: 25rpx;
+  width: 25rpx;
+  border-radius: 50%;
+  /* background: rgb(255, 107, 107); */
 }
 
-.userinfo-motto {
-  margin-top: 15rpx;
-  display: flex;
-  flex-direction: row;
-  font-size: 31rpx;
-  color: gray;
-  font: '微软雅黑';
-  font-weight: 500;
-  letter-spacing: 5rpx;
-  position: relative;
-  left: 45rpx;
-  bottom: 80rpx;
+.avatar-pic{
+  height: 150rpx;
+  width: 150rpx; 
+  left: 300rpx;
+  top: 150rpx;
+  border-radius: 100%;
+  position: absolute;
+  border: solid;
+  border-color: rgba(255, 122, 122, 0.8);
+  box-shadow: 0px 0px 2px rgb(0, 0, 0);
 }
 
-.class {
-  position: relative;
-  top: 380rpx;
-  height: auto;
-  width: 100%;
-  padding: 0 0 0 40rpx;
-  margin: 20rpx;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
+.mid-block{
+  position: absolute;
+  height: 100rpx;
+  width: 550rpx;
+  left: 100rpx;
+  top: 400rpx;
+  background: white;
+  box-shadow: 0px 0px 5px black;
+  border-radius: 10rpx 10rpx 10rpx 10rpx/ 10rpx 10rpx 10rpx 10rpx
 }
 
-.arrow {
-  position: relative;
-  left: 410rpx;
-  width: 14px;
-  height: 14px;
-}
-.arrow2 {
-  position: relative;
-  left: 375rpx;
-  width: 14px;
-  height: 14px;
+.mid-in-block{
+  height: 100%;
+  width: 33.33%;
+  float: left;
 }
 
-.icon {
+.mid-in-in-block, .mid-in-in-right-block{
   position: relative;
-  top: 5px;
+  top: 10%;
+  height: 80%;
+  /* background:rgb(115, 207, 115); */
+  border-right: solid;
+  border-width: 5rpx;
+  border-color: rgb(202, 202, 202);
 }
 
-.class2 {
-  font-size: 32rpx;
-  color: gray;
-  font: '微软雅黑';
-  font-weight: 500;
-  letter-spacing: 5rpx;
+.mid-in-in-right-block{
+  border: none;
 }
 
-.seximg {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  left: 55rpx;
-  bottom: 88rpx;
+.mid-top-text{
+  font-size: medium;
+  text-align: center;
+  color: rgb(100, 100, 100);
+  font-weight: bold;
+}
+
+.mid-bottom-text{
+  font-size: 30rpx;
+  text-align: center;
+  color:  rgb(100, 100, 100);
+}
+
+.intro-block, .info-block, .skill-block, .recent-block{
+  width: 96%;
+  margin: auto;
+  margin-top: 10rpx;
+  background: white;
+
+}
+
+.info-in-block, .info-in-top-block{
+  height: 80rpx;
+  /* background: rgb(245, 151, 151); */
+  margin: 15rpx;
+  padding-left: 30rpx;
+  clear: both;  
+  border-top: solid;
+  border-width: thin;
+  border-color: rgb(226, 226, 226);
+}
+
+.info-in-top-block{
+  border: none;
+}
+
+.info-text ,.info-title,.info-intro {
+  float: left;
+  font-size: 30rpx;
+  line-height: 85rpx;
+  color: rgb(94, 94, 94);
+}
+
+.info-title {
+  width: 20%;
+  clear: left;
+  font-weight: bolder;
+  color: rgb(87, 87, 87);
+}
+
+.info-intro{
+  font-weight: bolder;
+  color: rgb(87, 87, 87);
+  margin-left: 45rpx;
+}
+
+.skill-block{
+  height: 240px;
+}
+
+.skill-canvas{
+  margin: auto;
+  width: 250px;
+  height: 100%;
+}
+
+.talk{
+  position: fixed;
+  bottom: 50rpx;
+  left: 10%; 
+  width: 80%; 
+  height: 80rpx;
+  background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  letter-spacing: 0.2rem;
+  font-size: 0.9rem;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 6.65%  / 50% ;
+  box-shadow: 0px 0px 10px rgb(189, 189, 189);
 }

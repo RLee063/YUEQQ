@@ -86,6 +86,7 @@
     <swiper-item wx:for="{{membersArray}}" class="evaluate-item">
       <view class="evaluate-block">
         <image class="avatar-biger" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill" />
+        <view class="skill-wave"></view>
         <view wx:if="{{index==swiperIndex}}">
           <canvas class="skill-wave-mask" canvas-id='joinMask2'></canvas>
           <canvas class="skill-wave-mask" canvas-id='joinMask'></canvas>

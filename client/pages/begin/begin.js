@@ -26,7 +26,6 @@ var showModel = (title, content) => {
   });
 };
 
-
 Page({
   data: {
     userInfo: {},
@@ -37,8 +36,8 @@ Page({
   },
   onLoad: function(options) {
     if (wx.getStorageSync('logged') == true) {
-      this.login()
       this.openTunnel()
+      this.login()
       this.setData({
         authorized: true
       })
@@ -154,7 +153,7 @@ Page({
           console.log("logged")
           wx.setStorageSync('userInfo', result);
           wx.setStorageSync('logged', true)
-          if( 1){
+          if(1){
             var data = {
               isFirstLogin : true
             }
@@ -163,11 +162,7 @@ Page({
               url: '../modifyMyinfo/modifyMyinfo?dataString=' + dataString,
             })
           }
-          // wx.switchTab({
-          //   url: '../home/home'
-          // })
         } else {
-          // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
           qcloud.request({
             url: config.service.requestUrl,
             login: true,

@@ -23,9 +23,7 @@ Page({
       colleges: app.globalData.colleges,
     })
 
-    var uid 
-
-    if(options){
+    if(options.dataString){
       var data = JSON.parse(options.dataString)
       uid = data.uid
       if (data.isFirstLogin) {
@@ -38,7 +36,7 @@ Page({
         return
       }
     }
-
+    var uid = wx.getStorageSync('openid')
     var myInfoPromise = util.getUserInfo(uid)
     myInfoPromise.then(userInfo => {
       that.setData({
@@ -70,6 +68,20 @@ Page({
       userInfo: userInfo
     })
   },
+  mottoChange: function(e){
+    var userInfo = this.data.userInfo
+    userInfo.motto = e.detail.value
+    this.setData({
+      userInfo: userInfo
+    })
+  },
+  phoneChange: function(e){
+    var userInfo = this.data.userInfo
+    userInfo.phone = e.detail.value
+    this.setData({
+      userInfo: userInfo
+    })
+  },
   chooseImg: function (e) {
     wx.navigateTo({
       url: '../cropper/cropper',
@@ -88,18 +100,24 @@ Page({
       college: userInfo.college
     }
     if(that.data.isFirstLogin){
-      data.skills = that.data.skills
+      data.skills = that.data.skills.join(',')
     }
-
-
+    console.log("AKLDJKLASJKLDALSD")
     wx.request({
       url: `${config.service.host}/weapp/updateUserInfo`,
       data: data,
       success: result => {
         console.log(result)
-        wx.navigateBack({
-          delta: 1,
-        })
+        if(that.data.isFirstLogin){
+          wx.switchTab({
+            url: '../home/home',
+          })
+        }
+        else{
+          wx.navigateBack({
+            delta: 1,
+          })
+        }
       }
     })
   },
