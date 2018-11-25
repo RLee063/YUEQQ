@@ -1,0 +1,92 @@
+.head {
+  height: 40rpx;
+  width: 100%;
+  background-color: #f6f6f6;
+}
+
+.lists {
+  display: flex;
+  flex-direction: row;
+  height: 140rpx;
+  width: 100%;
+  background: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  align-items: center;
+  transition: all 300ms ease;
+}
+
+.activityclass {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.introduce {
+  display: flex;
+  flex-direction: column;
+}
+
+.introduce-name {
+  font-size: 35rpx;
+  color: black;
+  font: '微软雅黑';
+  font-weight: 500;
+  letter-spacing: 5rpx;
+  padding-bottom: 3px;
+}
+
+.introduce-time {
+  font-size: 30rpx;
+  color: gray;
+  font: '微软雅黑';
+  font-weight: 500;
+  letter-spacing: 2rpx;
+}
+
+.pnum {
+  position: absolute;
+  left: 440rpx;
+}
+
+.pnum-text {
+  font-size: 30rpx;
+  color: gray;
+  font: '微软雅黑';
+  font-weight: 500;
+  letter-spacing: 5rpx;
+  position: relative;
+  right: 5rpx;
+}
+
+.punmsrc {
+  width: 53rpx;
+  height: 53rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  position: relative;
+  top: 34rpx;
+}
+
+.array {
+  position: absolute;
+  left: 660rpx;
+}
+
+.array-text {
+  font-size: 38rpx;
+  color: gray;
+  font: '微软雅黑';
+  font-weight: 500;
+  letter-spacing: 5rpx;
+}
+
+.introduce-name{
+  display: flex;
+  flex-direction: row;
+}
+.seximg{
+  position: relative;
+  left: 10rpx;
+  bottom: 5rpx
+}

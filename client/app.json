@@ -7,7 +7,6 @@
     "pages/displayUsers/displayUsers",
     "pages/addActy/addActy",
     "pages/viewUserInfo/viewUserInfo",
-    "pages/message/message",
     "pages/home/home",
     "pages/user/user",
     "pages/chat/chat",
@@ -23,6 +22,8 @@
     "pages/createUndo/createUndo",
     "pages/attendUndo/attendUndo",
     "pages/attendDid/attendDid",
+    "pages/message/message",
+    "pages/joinerlist/joinerlist",
     "pages/myActy/myActy",
     "pages/evaluate/evaluate",
     "pages/cropper/cropper"

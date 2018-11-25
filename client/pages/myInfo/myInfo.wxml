@@ -33,12 +33,15 @@
       <text>年级:  </text>
       <text wx:if="{{grade}}">{{grade}}</text>
       <action-sheet hidden="{{actionSheetHidden2}}" bindchange="listenerActionSheet2">
-        <action-sheet-item bindtap='setgrade' data-grade='大一'>大一 </action-sheet-item>
-        <action-sheet-item bindtap='setgrade' data-grade='大二'>大二 </action-sheet-item>
-        <action-sheet-item bindtap='setgrade' data-grade='大三'>大三 </action-sheet-item>
-        <action-sheet-item bindtap='setgrade' data-grade='大四'>大四 </action-sheet-item>
-        <action-sheet-item bindtap='setgrade' data-grade='研究生'>研究生 </action-sheet-item>
+        <action-sheet-item bindtap='setgrade' data-grade='本科15级'>本科15级 </action-sheet-item>
+        <action-sheet-item bindtap='setgrade' data-grade='本科16级'>本科16级 </action-sheet-item>
+        <action-sheet-item bindtap='setgrade' data-grade='本科17级'>本科17级 </action-sheet-item>
+        <action-sheet-item bindtap='setgrade' data-grade='本科18级'>本科18级 </action-sheet-item>
+        <action-sheet-item bindtap='setgrade' data-grade='研究生16级'>研究生16级 </action-sheet-item>
+        <action-sheet-item bindtap='setgrade' data-grade='研究生17级'>研究生17级 </action-sheet-item>
+        <action-sheet-item bindtap='setgrade' data-grade='研究生18级'>研究生18级 </action-sheet-item>
         <action-sheet-item bindtap='setgrade' data-grade='博士生'>博士生 </action-sheet-item>
+        <action-sheet-item bindtap='setgrade' data-grade='留学生'>留学生 </action-sheet-item>
         <action-sheet-cancel>取消</action-sheet-cancel>
       </action-sheet>
       <image bindtap='addgrade' src='../../images/intoarray.png' class='changeinfo'></image>
