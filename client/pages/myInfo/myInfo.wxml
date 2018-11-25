@@ -69,7 +69,7 @@
     <view class="allinfo-text-motto">
       <text>个性签名:   </text>
       <image bindtap='addmotto' src='../../images/intoarray.png' class='changeinfo-motto'></image>
-      <view wx:if="{{motto}}">{{motto}}</view>
+      <text wx:if="{{motto}}">{{motto}}</text>
     </view>
   </view>
 

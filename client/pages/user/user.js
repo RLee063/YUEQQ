@@ -172,7 +172,7 @@ Page({
           }
           var dataString = JSON.stringify(data)
           wx.navigateTo({
-            url: '../modifyMyinfo/modifyMyinfo?data=' + dataString,
+            url: '../myInfo/myInfo' ,
           })
         }
       },

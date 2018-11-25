@@ -179,7 +179,7 @@ Page({
    */
   onLoad: function(options) {
     this.setData({
-      userInfo: wx.getStorageSync('userInfo'),
+      userInfo: wx.getStorageSync('userInfo').data.data,
       openId: wx.getStorageSync('openid'),
       logged: wx.getStorageSync('logged')
     })

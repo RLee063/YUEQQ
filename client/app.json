@@ -26,7 +26,8 @@
     "pages/joinerlist/joinerlist",
     "pages/myActy/myActy",
     "pages/evaluate/evaluate",
-    "pages/cropper/cropper"
+    "pages/cropper/cropper",
+    "pages/userCenter/userCenter"
   ],
   "window": {
     "backgroundColor": "white",
@@ -50,7 +51,7 @@
         "selectedIconPath": "images/tabbar_c_s.png"
       },
       {
-        "pagePath": "pages/user/user",
+        "pagePath": "pages/userCenter/userCenter",
         "text": "用户",
         "iconPath": "images/tabbar_d_u.png",
         "selectedIconPath": "images/tabbar_d_s.png"
