@@ -11,15 +11,14 @@ Page({
     newActyInfo: {},
   },
 
-  details: function (e) {
+  details: function(e) {
 
     var aid = e.currentTarget.dataset.aid
-    console.log(aid+"before")
     wx.navigateTo({
       url: "../viewActivityInfo/viewActivityInfo?aid=" + aid
     })
   },
-  getActyInfo: function () {
+  getActyInfo: function() {
     var that = this
     wx.request({
       url: `${config.service.host}/weapp/getMyActivities`,
@@ -31,38 +30,24 @@ Page({
 
         that.setData({
           newActyInfo: result.data.data.createdActivities.notStart
+
         })
-        console.log(result)
-        console.log(that.data.newActyInfo)
+
         that.formatInfo()
+        console.log(that.data.newActyInfo)
+        console.log(that.data.newActyInfo)
+        console.log(that.data.newActyInfo)
+
+        console.log(that.data.newActyInfo)
       },
       fail(error) {
         util.showModel('查看活动列表失败', error);
       }
     })
   },
-  formatInfo: function () {
+  formatInfo: function() {
     var tempActyInfo = this.data.newActyInfo
 
-    var nowDate = new Date();
-    var nowYear = nowDate.getFullYear();
-    var nowMonth = nowDate.getMonth();
-    var nowDay = nowDate.getDate();
-    var nowHour = nowDate.getHours();
-    var nowMinute = nowDate.getMinutes();
-    nowMonth++;
-    if (nowMonth > 12) {
-      nowMonth = 1
-    }
-
-    var str1 = nowYear + "-" + nowMonth + "-" + nowDay + "-" + nowHour + "-" + nowMinute;
-    var str2 = nowYear + "-" + (nowMonth + 1) + "-" + nowDay + "-" + nowHour + "-" + nowMinute;
-    var sTime = tempActyInfo[1].startTime.substring(0, 10) + '-' + tempActyInfo[1].startTime.substring(11, 13) + '-' + tempActyInfo[1].startTime.substring(14, 16)
-    console.log(str1)
-    console.log(sTime)
-    if (Date.parse(str1) < Date.parse(str2)) {
-      console.log('yessssss!')
-    }
 
     for (var i = 0; i < tempActyInfo.length; i++) {
       var sTime = tempActyInfo[i].startTime.substring(0, 10) + '-' + tempActyInfo[i].startTime.substring(11, 16)
@@ -94,11 +79,12 @@ Page({
       newActyInfo: tempActyInfo
     })
 
+
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.setData({
       uid: options.uid
     })

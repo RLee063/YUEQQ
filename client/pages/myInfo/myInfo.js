@@ -187,8 +187,6 @@ Page({
   },
 
   onShow: function() {
-
-
     var that = this
     wx.request({
       url: `${config.service.host}/weapp/getUserInfo`,

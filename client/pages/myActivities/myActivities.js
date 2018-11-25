@@ -1,16 +1,19 @@
 // pages/activities/activities.js
+var util = require('../../utils/util.js')
+var config = require('../../config')
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    homePicUrl: "./background.jpg",
+    homePicUrl: "",
     userInfo: {},
     logged: true,
   },
 
-  
+
   create_undo: function() {
     console.log(this.data.userInfo.uid)
     wx.navigateTo({
@@ -42,7 +45,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log("接收到的参数是testData=" + options.info);
+
     if (options.info == null) {
       wx.showToast({
         title: '数据为空',
@@ -54,7 +57,6 @@ Page({
     this.setData({
       userInfo: Info
     })
-    console.log(this.data.userInfo)
 
   },
 
@@ -70,6 +72,32 @@ Page({
    */
   onShow: function() {
 
+    this.setData({
+      changebkgd: wx.getStorageSync('changebkgd')
+    })
+    if (this.data.changebkgd == 0) {
+      var that=this
+      wx.request({
+        url: `${config.service.host}/weapp/randPic`,
+        method: 'GET',
+        data: {},
+        success(result) {
+          console.log(result.data.data)
+          that.setData({
+            homePicUrl: result.data.data.link
+          })
+        },
+        fail(error) {
+          util.showModel('读取数据失败', error);
+        }
+      })
+    }
+    console.log(wx.getStorageSync('bkgdpic'))
+    if (this.data.changebkgd == 1) {
+      this.setData({
+        homePicUrl: wx.getStorageSync('bkgdpic')
+      })
+    }
   },
 
   /**
