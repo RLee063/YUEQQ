@@ -11,6 +11,8 @@ Page({
     numOfFollowings: 0,
     numOfFollowers: 0,
     numOfMyActivities: 0,
+    followed: false,
+    uid: "",
     homePicUrl: 'https://uestc0510-1257207887.cos.ap-chengdu.myqcloud.com/1543237069447-mHdJscD5W.png',
     hasOwnPic: true
   },
@@ -43,13 +45,65 @@ Page({
           hasOwnPic: false
         })
       }
-      that.drawSkillCanvas()
+      // that.drawSkillCanvas()
+      that.initNumbers()
+      that.checkFollowed()
     })
-    this.initNumbers()
+  },
+  checkFollowed: function(){
+
+    wx.request({
+      url: `${config.service.host}/weapp/getFollowings`,
+      data: {
+        uid: wx.getStorageSync('openid')
+      },
+      success(result) {
+        var followings = result.data.followers
+        for (var i = 0; i < followings.length; i++) {
+          if(followings[i].uid == that.data.uid){
+            that.setData({
+              followed: true
+            })
+            break;
+          }
+        }
+      }
+    })
+  },
+  follow: function () {
+    if (!that.data.followed) {
+      console.log(that.data.uid)
+      wx.request({
+        url: `${config.service.host}/weapp/follow`,
+        data: {
+          fromUid: wx.getStorageSync('openid'),
+          toUid: that.data.uid
+        },
+        success(result) {
+          that.setData({
+            followed : true,
+            numOfFollowers: that.data.numOfFollowers+1
+          })
+        }
+      })
+    }
+    else {
+      wx.request({
+        url: `${config.service.host}/weapp/unfollow`,
+        data: {
+          fromUid: wx.getStorageSync('openid'),
+          toUid: that.data.uid
+        },
+        success(result) {
+          that.setData({
+            followed: false,
+            numOfFollowers: that.data.numOfFollowers - 1
+          })
+        }
+      })
+    }
   },
   onShow: function() {
-
-    this.refresh()
   },
   initNumbers: function() {
     wx.request({
@@ -69,6 +123,7 @@ Page({
         uid: that.data.uid
       },
       success(result) {
+        console.log(result)
         that.setData({
           numOfFollowers: result.data.followers.length
         })

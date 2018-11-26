@@ -4,6 +4,32 @@ page{
   background: rgb(252, 252, 252);
 }
 
+.follow-button,.follow,.unfollow{
+  position: absolute;
+  font-size: 30rpx;
+  border: solid;
+  border-width: thin;
+  border-radius: 8rpx 8rpx 8rpx 8rpx /8rpx 8rpx 8rpx 8rpx ;
+  padding-top: 5rpx;
+  padding-bottom: 5rpx;
+  padding-left: 12rpx;
+  padding-right: 12rpx;
+  right: 50rpx;
+  top: 300rpx;
+}
+
+.follow{
+  border-color: rgb(129, 209, 255);
+  color: white;
+  background: rgb(129, 215, 255);
+}
+
+.unfollow{
+  border-color: rgb(255, 132, 132);
+  color: white;
+  background: rgb(255, 132, 132);
+}
+
 .more{
   position: absolute;
   height: 50rpx;
