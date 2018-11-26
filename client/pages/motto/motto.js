@@ -26,7 +26,7 @@ Page({
       method: 'GET',
       data: {
         uid: that.data.openId,
-        motto: that.data.motto,
+        motto: 'that.data.motto',
       },
       success(result) {
         util.showSuccess('成功保存数据')

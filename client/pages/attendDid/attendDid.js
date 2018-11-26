@@ -11,7 +11,7 @@ Page({
     newActyInfo: {},
   },
 
-  details: function (e) {
+  details: function(e) {
 
     var aid = e.currentTarget.dataset.aid
     wx.navigateTo({
@@ -43,27 +43,6 @@ Page({
   },
   formatInfo: function() {
     var tempActyInfo = this.data.newActyInfo
-
-    var nowDate = new Date();
-    var nowYear = nowDate.getFullYear();
-    var nowMonth = nowDate.getMonth();
-    var nowDay = nowDate.getDate();
-    var nowHour = nowDate.getHours();
-    var nowMinute = nowDate.getMinutes();
-    nowMonth++;
-    if (nowMonth > 12) {
-      nowMonth = 1
-    }
-
-    var str1 = nowYear + "-" + nowMonth + "-" + nowDay + "-" + nowHour + "-" + nowMinute;
-    var str2 = nowYear + "-" + (nowMonth+1) + "-" + nowDay + "-" + nowHour + "-" + nowMinute;
-    var sTime = tempActyInfo[1].startTime.substring(0, 10) + '-' + tempActyInfo[1].startTime.substring(11, 13) + '-' + tempActyInfo[1].startTime.substring(14, 16)
-    console.log(str1)
-    console.log(sTime)
-    if (Date.parse(str1) < Date.parse(str2)){
-      console.log('yessssss!')
-    }
-
     for (var i = 0; i < tempActyInfo.length; i++) {
       var sTime = tempActyInfo[i].startTime.substring(0, 10) + '-' + tempActyInfo[i].startTime.substring(11, 16)
       tempActyInfo[i].startTime = sTime

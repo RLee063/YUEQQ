@@ -6,7 +6,7 @@ var that
 
 Page({
   data: {
-    userInfo :{
+    userInfo: {
       college: "请选择学院",
       grade: "请选择年级"
     },
@@ -14,7 +14,8 @@ Page({
     colleges: [],
     isFirstLogin: false,
     sportType: [],
-    skills: [0,0,0,0,0,0]
+    skills: [0, 0, 0, 0, 0, 0],
+    homePicUrl: ''
   },
   onLoad: function(options) {
     that = this
@@ -23,7 +24,7 @@ Page({
       colleges: app.globalData.colleges,
     })
 
-    if(options.dataString){
+    if (options.dataString) {
       var data = JSON.parse(options.dataString)
       uid = data.uid
       if (data.isFirstLogin) {
@@ -45,9 +46,9 @@ Page({
       console.log(userInfo)
     })
     var maxNumRange = [];
-    
+
   },
-  receiveImageUrl: function(imgUrl){
+  receiveImageUrl: function(imgUrl) {
     var userInfo = that.data.userInfo
     userInfo.homePicUrl = imgUrl
     that.setData({
@@ -61,28 +62,28 @@ Page({
       userInfo: userInfo
     })
   },
-  bindCollegeChange: function(e){
+  bindCollegeChange: function(e) {
     var userInfo = this.data.userInfo
     userInfo.college = this.data.colleges[e.detail.value]
     this.setData({
       userInfo: userInfo
     })
   },
-  mottoChange: function(e){
+  mottoChange: function(e) {
     var userInfo = this.data.userInfo
     userInfo.motto = e.detail.value
     this.setData({
       userInfo: userInfo
     })
   },
-  phoneChange: function(e){
+  phoneChange: function(e) {
     var userInfo = this.data.userInfo
     userInfo.phone = e.detail.value
     this.setData({
       userInfo: userInfo
     })
   },
-  chooseImg: function (e) {
+  chooseImg: function(e) {
     wx.navigateTo({
       url: '../cropper/cropper',
     })
@@ -91,6 +92,12 @@ Page({
     var userInfo = that.data.userInfo
     userInfo.motto = e.detail.value.motto
     userInfo.phone = e.detail.value.phone
+    if (userInfo.grade == "请选择年级") {
+      userInfo.grade='未设置'
+    }
+    if (userInfo.college == "请选择学院") {
+      userInfo.college = '未设置'
+    }
     var data = {
       uid: wx.getStorageSync('openid'),
       homePicUrl: userInfo.homePicUrl,
@@ -99,21 +106,26 @@ Page({
       grade: userInfo.grade,
       college: userInfo.college
     }
-    if(that.data.isFirstLogin){
+    console.log(data)
+    console.log(data)
+    console.log(data)
+    console.log(data)
+
+    if (that.data.isFirstLogin) {
       data.skills = that.data.skills.join(',')
     }
+    
     console.log("AKLDJKLASJKLDALSD")
     wx.request({
       url: `${config.service.host}/weapp/updateUserInfo`,
       data: data,
       success: result => {
         console.log(result)
-        if(that.data.isFirstLogin){
+        if (that.data.isFirstLogin) {
           wx.switchTab({
             url: '../home/home',
           })
-        }
-        else{
+        } else {
           wx.navigateBack({
             delta: 1,
           })
@@ -150,5 +162,24 @@ Page({
     that.setData({
       skills: that.data.skills
     })
+  },
+  onShow: function() {
+    var that = this
+    if (1) {
+      wx.request({
+        url: `${config.service.host}/weapp/randPic`,
+        method: 'GET',
+        data: {},
+        success(result) {
+
+          that.setData({
+            homePicUrl: result.data.data.link
+          })
+        },
+        fail(error) {
+          util.showModel('读取数据失败', error);
+        }
+      })
+    }
   }
 })
