@@ -13,7 +13,7 @@ Page({
     numOfMyActivities: 0,
     followed: false,
     uid: "",
-    homePicUrl: 'https://uestc0510-1257207887.cos.ap-chengdu.myqcloud.com/1543237069447-mHdJscD5W.png',
+    homePicUrl: '',
     hasOwnPic: true
   },
 

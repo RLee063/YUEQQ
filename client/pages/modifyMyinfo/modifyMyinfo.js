@@ -161,22 +161,5 @@ Page({
     })
   },
   onShow: function() {
-    var that = this
-    if (1) {
-      wx.request({
-        url: `${config.service.host}/weapp/randPic`,
-        method: 'GET',
-        data: {},
-        success(result) {
-
-          that.setData({
-            homePicUrl: result.data.data.link
-          })
-        },
-        fail(error) {
-          util.showModel('读取数据失败', error);
-        }
-      })
-    }
   }
 })

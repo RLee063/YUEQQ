@@ -11,7 +11,7 @@ Page({
     numOfFollowings:0,
     numOfFollowers:0,
     numOfMyActivities:0,
-    homePicUrl:'https://uestc0510-1257207887.cos.ap-chengdu.myqcloud.com/1543237069447-mHdJscD5W.png'
+    homePicUrl:''
   },
 
   onLoad: function (options) {
@@ -76,31 +76,7 @@ Page({
         })
       }
     })
-    that.setData({
-      changebkgd: wx.getStorageSync('changebkgd')
-    })
-    if (that.data.changebkgd == 0) {
-      wx.request({
-        url: `${config.service.host}/weapp/randPic`,
-        method: 'GET',
-        data: {},
-        success(result) {
-          console.log(result.data.data)
-          that.setData({
-            homePicUrl: result.data.data.link
-          })
-        },
-        fail(error) {
-          util.showModel('读取数据失败', error);
-        }
-      })
-    }
-    console.log(wx.getStorageSync('bkgdpic'))
-    if (that.data.changebkgd == 1) {
-      that.setData({
-        homePicUrl: wx.getStorageSync('bkgdpic')
-      })
-    }
+    
   },
   onReady: function(){
   },

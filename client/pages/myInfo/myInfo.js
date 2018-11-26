@@ -16,7 +16,7 @@ Page({
     phone: '',
     grade: '',
     motto: '',
-    homePicUrl: "https://uestc0510-1257207887.cos.ap-chengdu.myqcloud.com/1543237069447-mHdJscD5W.png",
+    homePicUrl: "",
     creditstar: 5,
     creditarray: [1, 2, 3, 4, 5],
     flag: true,
