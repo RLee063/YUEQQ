@@ -11,7 +11,7 @@ Page({
     numOfFollowings:0,
     numOfFollowers:0,
     numOfMyActivities:0,
-    homePicUrl:''
+    homePicUrl:'https://uestc0510-1257207887.cos.ap-chengdu.myqcloud.com/1543237069447-mHdJscD5W.png'
   },
 
   onLoad: function (options) {
