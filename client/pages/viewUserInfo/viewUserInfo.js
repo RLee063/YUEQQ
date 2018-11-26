@@ -11,7 +11,9 @@ Page({
     numOfFollowings: 0,
     numOfFollowers: 0,
     numOfMyActivities: 0,
-    homePicUrl: ''
+    homePicUrl: '',
+    followed: false,
+    uid: ""
   },
 
   onLoad: function(options) {
@@ -36,9 +38,61 @@ Page({
       that.setData({
         userInfo: userInfo
       })
-      this.drawSkillCanvas()
+      // this.drawSkillCanvas()
     })
     this.initNumbers()
+  },
+  checkFollowed: function(){
+    wx.request({
+      url: `${config.service.host}/weapp/getFollowings`,
+      data: {
+        uid: wx.getStorageSync('openid')
+      },
+      success(result) {
+        var followings = result.data.followers
+        for (var i = 0; i < followings.length; i++) {
+          if(followings[i].uid == uid){
+            that.setData({
+              followed: true
+            })
+            break;
+          }
+        }
+      }
+    })
+  },
+  follow: function () {
+    if (!that.data.followed) {
+      console.log(that.data.uid)
+      wx.request({
+        url: `${config.service.host}/weapp/follow`,
+        data: {
+          fromUid: wx.getStorageSync('openid'),
+          toUid: that.data.uid
+        },
+        success(result) {
+          that.setData({
+            followed : true,
+            numOfFollowers: that.data.numOfFollowers+1
+          })
+        }
+      })
+    }
+    else {
+      wx.request({
+        url: `${config.service.host}/weapp/unfollow`,
+        data: {
+          fromUid: wx.getStorageSync('openid'),
+          toUid: that.data.uid
+        },
+        success(result) {
+          that.setData({
+            followed: false,
+            numOfFollowers: that.data.numOfFollowers - 1
+          })
+        }
+      })
+    }
   },
   onShow: function() {
     var that=this
@@ -64,9 +118,7 @@ Page({
         homePicUrl: newHPU
       })
       console.log(that.data)
-      
     }
-
     that.refresh()
   },
   initNumbers: function() {
@@ -87,6 +139,7 @@ Page({
         uid: that.data.uid
       },
       success(result) {
+        console.log(result)
         that.setData({
           numOfFollowers: result.data.followers.length
         })

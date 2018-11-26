@@ -26,13 +26,15 @@ var showModel = (title, content) => {
   });
 };
 
+
 Page({
   data: {
     userInfo: {},
     logged: false,
     takeSession: false,
     requestResult: '',
-    authorized: false
+    authorized: false,
+    firstLog: false
   },
   onLoad: function(options) {
     if (wx.getStorageSync('logged') == true) {
@@ -130,6 +132,27 @@ Page({
     if (wx.getStorageSync('logged') == true) {
       this.openTunnel()
     }
+    wx.showModal({
+      title: '完善信息',
+      content: '是否要完善个人信息',
+      success(res){
+        console.log(res)
+        if(res.confirm){
+          var data = {
+            isFirstLogin: true
+          }
+          var dataString = JSON.stringify(data)
+          wx.redirectTo({
+            url: '../modifyMyinfo/modifyMyinfo?dataString=' + dataString,
+          })
+        }
+        else{
+          wx.switchTab({
+            url: '../home/home'
+          })
+        }
+      }
+    })
 
   },
 
@@ -153,15 +176,6 @@ Page({
           console.log("logged")
           wx.setStorageSync('userInfo', result);
           wx.setStorageSync('logged', true)
-          if(1){
-            var data = {
-              isFirstLogin : true
-            }
-            var dataString = JSON.stringify(data)
-            wx.redirectTo({
-              url: '../modifyMyinfo/modifyMyinfo?dataString=' + dataString,
-            })
-          }
         } else {
           qcloud.request({
             url: config.service.requestUrl,
