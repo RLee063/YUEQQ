@@ -93,7 +93,7 @@ Page({
   },
   bindSportTypeChange: function(e) {
     this.setData({
-      sportType: this.data.sportTypeRange[e.detail.value]
+      sportType: e.detail.value
     })
   },
   bindCreditLimitChange: function(e) {

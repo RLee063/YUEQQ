@@ -4,29 +4,12 @@ var config = require('../../config')
 
 Page({
   data: {
-    usersArray: [{
-      age: 0,
-      avatarUrl: "https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83erV2px9QVSr6vF2KMHm5kUgeATsZ3ERtMeia4tKibXK21OjEADgtY8ibk57JdYLCTTHDl20jaF9q3uew/132",
-      badminton: 0,
-      basketBall: 0,
-      college: "计算机科学与技术学院",
-      credit: -1,
-      grade: "null",
-      homePicUrl: "",
-      motto: "白金之星，世界！",
-      nickName: "江流水涌",
-      phone: "null",
-      pingpong: 0,
-      running: 0,
-      sex: "1",
-      soccer: 0,
-      tennis: 0,
-      uid: "o5ko344qvKlQYv5kYMdTkWbkH8lg"
-    }]
+    usersArray: []
   },
 //粉丝；关注
 
   onLoad: function(options) {
+    that = this
     if(options){
       var data = JSON.parse(options.dataString)
       if(data.aid){
@@ -47,7 +30,9 @@ Page({
               uid: wx.getStorageSync('openid')
             },
             success(result) {
-              console.log(result)
+              that.setData({
+                usersArray: result.data.followers
+              })
             }
           })
         }
@@ -58,20 +43,15 @@ Page({
               uid: wx.getStorageSync('openid')
             },
             success(result) {
-              console.log(result)
+              that.setData({
+                usersArray: result.data.followers
+              })
             }
           })
         }
       }
     }
-
-    that = this
-    for(var i=0; i<that.data.usersArray.length; i++){
-      that.data.usersArray[i].followed = 1
-    }
-    that.setData({
-      usersArray: that.data.usersArray
-    })
+    that.checkoutFollow()
   },
   checkoutFollow: function(){
     wx.request({
@@ -80,7 +60,20 @@ Page({
         uid: wx.getStorageSync('openid')
       },
       success(result) {
-        console.log(result)
+        var usersArray = that.data.usersArray
+        var followings = result.data.followers
+        for(var i=0; i<usersArray.length; i++){
+          usersArray[i].followed = 0
+          for(var j=0; j<followings.length; j++){
+            if(followings[j].uid == usersArray[i].uid){
+              usersArray[i].followed = 1
+              break;
+            }
+          }
+        }
+        that.setData({
+          usersArray: usersArray
+        })
       }
     })
   },

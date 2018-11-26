@@ -43,7 +43,7 @@ Page({
 
   information: function () {
     wx.navigateTo({
-      url: '../user/user',
+      url: '../viewUserInfo/viewUserInfo',
     })
   },
   activities: function () {

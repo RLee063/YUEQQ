@@ -49,7 +49,7 @@ Page({
       },
       success(result){
         that.setData({
-          // numOfFollowings: result.data.length
+          numOfFollowings: result.data.length
         })
       }
     })
@@ -60,7 +60,7 @@ Page({
       },
       success(result) {
         that.setData({
-          // numOfFollowers: result.data.length
+          numOfFollowers: result.data.length
         })
       }
     })
