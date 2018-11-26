@@ -13,7 +13,8 @@
 
 <swiper autoplay="1" circular="1" interval="8000" duration="500" class="recommendation-user-block" display-multiple-items="3">
   <swiper-item wx:for="{{recommendationUsers}}" wx:key="item.aid">
-    <view bindtap="viewUserInfo" data-uid="{{item.uid}}" style="background-image:url({{item.homePicUrl}});" mode="center" class="recommendation-user-item">
+    <view  bindtap="viewUserInfo" data-uid="{{item.uid}}" style="background-image:url({{item.homePicUrl}});" mode="center" class="recommendation-user-item">
+
         <view class="recommendation-user-item-background"> </view>
         <image src="{{item.avatarUrl}}" mode="aspectFill" class="recommendation-user-image"></image>
         <view class="recommendation-user-name">{{item.nickName}}</view>

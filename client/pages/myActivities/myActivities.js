@@ -20,6 +20,13 @@ Page({
       url: '../createUndo/createUndo?uid=' + this.data.userInfo.uid,
     })
   },
+  create_doing: function () {
+    console.log(this.data.userInfo.uid)
+    wx.navigateTo({
+      url: '../createDoing/createDoing?uid=' + this.data.userInfo.uid,
+    })
+  },
+
 
   create_did: function() {
     wx.navigateTo({
@@ -32,6 +39,12 @@ Page({
     })
   },
 
+  attend_doing: function () {
+    console.log(this.data.userInfo.uid)
+    wx.navigateTo({
+      url: '../attendDoing/attendDoing?uid=' + this.data.userInfo.uid,
+    })
+  },
   attend_did: function() {
     wx.navigateTo({
       url: '../attendDid/attendDid?uid=' + this.data.userInfo.uid,

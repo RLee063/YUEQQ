@@ -11,14 +11,14 @@ Page({
     newActyInfo: {},
   },
 
-  details: function(e) {
+  details: function (e) {
 
     var aid = e.currentTarget.dataset.aid
     wx.navigateTo({
       url: "../viewActivityInfo/viewActivityInfo?aid=" + aid
     })
   },
-  getActyInfo: function() {
+  getActyInfo: function () {
     var that = this
     wx.request({
       url: `${config.service.host}/weapp/getMyActivities`,
@@ -29,7 +29,7 @@ Page({
       success(result) {
 
         that.setData({
-          newActyInfo: result.data.data.joinedActivities.started
+          newActyInfo: result.data.data.joinedActivities.starting
 
         })
         console.log(result)
@@ -41,7 +41,7 @@ Page({
       }
     })
   },
-  formatInfo: function() {
+  formatInfo: function () {
     var tempActyInfo = this.data.newActyInfo
     for (var i = 0; i < tempActyInfo.length; i++) {
       var sTime = tempActyInfo[i].startTime.substring(0, 10) + '-' + tempActyInfo[i].startTime.substring(11, 16)
@@ -77,7 +77,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     this.setData({
       uid: options.uid
     })

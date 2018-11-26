@@ -1,4 +1,4 @@
-
+<!--pages/create_undo/create_undo.wxml-->
 <view class='container'>
   <view class="head"></view>
   <view class="lists" wx:for="{{newActyInfo}}" wx:key="item.aid" bindtap="details" data-aid="{{item.aid}}">
