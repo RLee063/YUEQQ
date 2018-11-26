@@ -84,7 +84,7 @@ Page({
 //faker
         activityInfo.averageSkills = "黄金"
 
-        var sportIcon = "../../images/sportType/" +that.name2Num(activityInfo.sportType)+".png"
+        var sportIcon = "../../images/sportType/" + activityInfo.sportType +".png"
         that.setData({
           activityInfo: activityInfo,
           hasJoined: hasJoined,
