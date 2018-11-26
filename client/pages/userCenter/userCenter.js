@@ -13,15 +13,24 @@ Page({
     changemotto: 0,
   },
 
-  onLoad: function () {
-    this.setData({
-      userInfo: wx.getStorageSync('userInfo').data.data,
-      logged: wx.getStorageSync('logged')
-    })
+  onLoad: function() {
+    console.log(wx.getStorageSync('userInfo'))
+    if (wx.getStorageSync('userInfo').nickName) {
+      this.setData({
+        userInfo: wx.getStorageSync('userInfo'),
+        logged: wx.getStorageSync('logged')
+      })
+    } else {
+      this.setData({
+        userInfo: wx.getStorageSync('userInfo').data.data,
+        logged: wx.getStorageSync('logged')
+      })
+    }
+
     console.log(this.data)
   },
 
-  onShow: function () {
+  onShow: function() {
 
     this.setData({
       changemotto: wx.getStorageSync('changemotto')
@@ -41,12 +50,12 @@ Page({
     }
   },
 
-  information: function () {
+  information: function() {
     wx.navigateTo({
       url: '../viewUserInfo/viewUserInfo',
     })
   },
-  activities: function () {
+  activities: function() {
     var selfinfo = {
       nickName: this.data.userInfo.nickName,
       avatarUrl: this.data.userInfo.avatarUrl,
@@ -61,7 +70,7 @@ Page({
     })
   },
 
-  recommend: function () {
+  recommend: function() {
 
   }
 
