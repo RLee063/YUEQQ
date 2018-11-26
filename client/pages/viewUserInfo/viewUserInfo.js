@@ -33,7 +33,7 @@ Page({
     var userInfoPromise = util.getUserInfoFromServer(that.data.uid)
     userInfoPromise.then(userInfo => {
       console.log(userInfo)
-      userInfo.skills = [0, 20, 40, 60, 10, 80]
+      // userInfo.skills = [0, 20, 40, 60, 10, 80]
       that.setData({
         userInfo: userInfo
       })
@@ -59,7 +59,7 @@ Page({
       },
       success(result) {
         that.setData({
-          // numOfFollowings: result.data.length
+          numOfFollowings: result.data.followers.length
         })
       }
     })
@@ -70,7 +70,7 @@ Page({
       },
       success(result) {
         that.setData({
-          // numOfFollowers: result.data.length
+          numOfFollowers: result.data.followers.length
         })
       }
     })

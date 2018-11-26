@@ -22,6 +22,7 @@ Page({
     date: "",
     time: "",
     sportType: "",
+    sportTypeIndex: 0,
     creditLimit: 3,
     maxNum: 6,
     description: "",
@@ -93,7 +94,8 @@ Page({
   },
   bindSportTypeChange: function(e) {
     this.setData({
-      sportType: this.data.sportTypeRange[e.detail.value]
+      sportType: that.data.sportTypeRange[e.detail.value],
+      sportTypeIndex: e.detail.value
     })
   },
   bindCreditLimitChange: function(e) {
@@ -169,7 +171,7 @@ Page({
       title: that.data.title,
       introduction: that.data.introduction,
       startTime: startTime,
-      sportType: that.data.sportType,
+      sportType: that.data.sportTypeIndex,
       imgUrl: that.data.imgTempPath,
       maxNum: that.data.maxNum,
       creditLimit: that.data.creditLimit,
