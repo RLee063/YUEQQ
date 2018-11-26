@@ -11,7 +11,8 @@ Page({
     numOfFollowings: 0,
     numOfFollowers: 0,
     numOfMyActivities: 0,
-    homePicUrl: ''
+    homePicUrl: 'https://uestc0510-1257207887.cos.ap-chengdu.myqcloud.com/1543237069447-mHdJscD5W.png',
+    hasOwnPic: true
   },
 
   onLoad: function(options) {
@@ -26,7 +27,7 @@ Page({
       uid: uid,
       isViewOtherInfo: uid == myUid ? false : true
     })
-
+    that.refresh()
   },
   refresh: function() {
     var userInfoPromise = util.getUserInfoFromServer(that.data.uid)
@@ -36,38 +37,19 @@ Page({
       that.setData({
         userInfo: userInfo
       })
-      this.drawSkillCanvas()
+      if (that.data.userInfo.homePicUrl == "0") {
+        console.log("flag")
+        that.setData({
+          hasOwnPic: false
+        })
+      }
+      that.drawSkillCanvas()
     })
     this.initNumbers()
   },
   onShow: function() {
-    var that=this
-    var newHPU
-    if (that.data.userInfo.homePicUrl == undefined) {
-      wx.request({
-        url: `${config.service.host}/weapp/randPic`,
-        method: 'GET',
-        data: {},
-        success(result) {
-          console.log(result.data.data)
-          that.setData({
-            homePicUrl: result.data.data.link
-          })
-        },
-        fail(error) {
-          util.showModel('读取数据失败', error);
-        }
-      })
-    } else {
-      newHPU = that.data.userInfo.homePicUrl
-      that.setData({
-        homePicUrl: newHPU
-      })
-      console.log(that.data)
-      
-    }
 
-    that.refresh()
+    this.refresh()
   },
   initNumbers: function() {
     wx.request({

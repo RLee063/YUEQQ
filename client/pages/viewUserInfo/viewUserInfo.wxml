@@ -3,7 +3,7 @@
   <view catchtap='showMoreOptions'>
     <image src="../../images/more.png" class="more"></image>
   </view>
-  <image src="{{userInfo.avatarUrl}}" class="avatar-pic" mode="aspectFill"/>
+  <image src="{{userInfo.avatarUrl}}" class="avatar-pic" mode="aspectFill" />
   <view class="nick-name">{{userInfo.nickName}}</view>
   <!-- <view class="gender"></view> -->
   <view class="mid-block">
@@ -26,7 +26,14 @@
       </view>
     </view>
   </view>
-  <image class="home-pic" src="{{homePicUrl}}" mode="aspectFill"></image> 
+  <view wx:if="{{hasOwnPic==true}}">
+    <image class="home-pic" src="{{userInfo.homePicUrl}}" mode="aspectFill"></image>
+  </view>
+  <view wx:if="{{hasOwnPic==false}}">
+    <image class="home-pic" src="{{homePicUrl}}" mode="aspectFill"></image>
+  </view>
+
+
 
   <view class="info-block">
     <view wx:if="{{userInfo.motto}}" class="info-in-block">
@@ -59,4 +66,3 @@
   </view>
   <view class="talk" bindtap="talkTo" wx:if="{{isViewOtherInfo}}">发消息</view>
 </view>
-

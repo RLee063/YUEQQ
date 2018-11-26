@@ -33,7 +33,7 @@ Page({
 
         })
 
-        that.formatInfo()
+        /*that.formatInfo()*/
         console.log(that.data.newActyInfo)
         console.log(that.data.newActyInfo)
         console.log(that.data.newActyInfo)

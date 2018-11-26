@@ -34,7 +34,7 @@ Page({
         })
         console.log(result)
         console.log(that.data.newActyInfo)
-        that.formatInfo()
+       /* that.formatInfo()*/
       },
       fail(error) {
         util.showModel('查看活动列表失败', error);

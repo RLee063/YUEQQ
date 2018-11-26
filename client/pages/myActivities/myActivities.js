@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    homePicUrl: "",
+    homePicUrl: "https://uestc0510-1257207887.cos.ap-chengdu.myqcloud.com/1543237069447-mHdJscD5W.png",
     userInfo: {},
     logged: true,
   },
@@ -45,6 +45,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.setData({
+      openId: wx.getStorageSync('openid'),
+    })
 
     if (options.info == null) {
       wx.showToast({
@@ -71,32 +74,46 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
-    this.setData({
-      changebkgd: wx.getStorageSync('changebkgd')
+    var that = this
+    wx.request({
+      url: `${config.service.host}/weapp/getUserInfo`,
+      method: 'GET',
+      data: {
+        uid: that.data.openId,
+      },
+      success(result) {
+        console.log(result.data.data)
+        that.setData({
+          userInfo: result.data.data[0]
+        })
+      },
+      fail(error) {
+        util.showModel('保存失败', error);
+      }
     })
-    if (this.data.changebkgd == 0) {
-      var that=this
-      wx.request({
-        url: `${config.service.host}/weapp/randPic`,
-        method: 'GET',
-        data: {},
-        success(result) {
-          console.log(result.data.data)
-          that.setData({
-            homePicUrl: result.data.data.link
-          })
-        },
-        fail(error) {
-          util.showModel('读取数据失败', error);
-        }
-      })
-    }
-    console.log(wx.getStorageSync('bkgdpic'))
-    if (this.data.changebkgd == 1) {
+    var pic
+    if (this.data.userInfo.homePicUrl != "undefined") {
+      pic = this.data.userInfo.homePicUrl
       this.setData({
-        homePicUrl: wx.getStorageSync('bkgdpic')
+        homePicUrl: pic
       })
+    } else {
+      this.setData({
+        changemotto: wx.getStorageSync('changemotto')
+      })
+      if (this.data.changemotto == 1) {
+        this.setData({
+          motto: wx.getStorageSync('newmotto')
+        })
+      }
+      this.setData({
+        changebkgd: wx.getStorageSync('changebkgd')
+      })
+      if (this.data.changebkgd == 1) {
+        this.setData({
+          homePicUrl: wx.getStorageSync('bkgdpic')
+        })
+      }
     }
   },
 

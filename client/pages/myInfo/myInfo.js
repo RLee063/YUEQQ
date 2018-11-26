@@ -16,7 +16,7 @@ Page({
     phone: '',
     grade: '',
     motto: '',
-    homePicUrl: "https://qcloudtest-1257207887.cos.ap-guangzhou.myqcloud.com/1536468704720-MUpMq2yU3.jpg",
+    homePicUrl: "https://uestc0510-1257207887.cos.ap-chengdu.myqcloud.com/1543237069447-mHdJscD5W.png",
     creditstar: 5,
     creditarray: [1, 2, 3, 4, 5],
     flag: true,
@@ -178,11 +178,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.setData({
-      userInfo: wx.getStorageSync('userInfo').data.data,
-      openId: wx.getStorageSync('openid'),
-      logged: wx.getStorageSync('logged')
-    })
+
+    if (wx.getStorageSync('userInfo').nickName) {
+      this.setData({
+        userInfo: wx.getStorageSync('userInfo'),
+        logged: wx.getStorageSync('logged'),
+        openId: wx.getStorageSync('openid'),
+
+      })
+    } else {
+      this.setData({
+        userInfo: wx.getStorageSync('userInfo').data.data,
+        logged: wx.getStorageSync('logged'),
+        openId: wx.getStorageSync('openid'),
+      })
+    }
+
 
   },
 
