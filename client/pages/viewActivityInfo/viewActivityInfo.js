@@ -3,7 +3,8 @@ var util = require('../../utils/util.js')
 var config = require('../../config')
 var app = getApp()
 var that
-
+var waveI1
+var waveI2
 Page({
   data: {
     membersArray: [],
@@ -510,6 +511,7 @@ Page({
     wx.request({
       url: `${config.service.host}/weapp/signForActivity`,
       data: {
+        aid: that.data.aid,
         members: members.join(',')
       },
       success: result => {
@@ -557,8 +559,8 @@ Page({
       directionX: 1,
       directionY: 2
     }
-    setInterval(this.waveAmination, 10)
-    setInterval(this.waveAmination2, 10)
+    waveI1 = setInterval(this.waveAmination, 10)
+    waveI2 = setInterval(this.waveAmination2, 10)
   },
   waveAmination: function() {
     var ctx = wx.createCanvasContext('joinMask')
@@ -674,7 +676,8 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    clearInterval(waveI1)
+    clearInterval(waveI2)
   },
 
   /**
