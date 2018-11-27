@@ -55,6 +55,12 @@ Page({
 
   },
 
+  appInfo:function(){
+    wx.navigateTo({
+      url: '../appInfo/appInfo',
+    })
+  },
+
   information: function() {
     wx.navigateTo({
       url: '../viewUserInfo/viewUserInfo',

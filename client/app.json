@@ -29,7 +29,9 @@
     "pages/myActy/myActy",
     "pages/evaluate/evaluate",
     "pages/cropper/cropper",
-    "pages/userCenter/userCenter"
+    "pages/userCenter/userCenter",
+    "pages/appInfo/appInfo"
+  
   ],
   "window": {
     "backgroundColor": "white",
