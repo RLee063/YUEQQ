@@ -12,7 +12,7 @@ Page({
   },
 
   details: function (e) {
-    
+
     var aid = e.currentTarget.dataset.aid
     wx.navigateTo({
       url: "../viewActivityInfo/viewActivityInfo?aid=" + aid
@@ -29,7 +29,7 @@ Page({
       success(result) {
 
         that.setData({
-          newActyInfo: result.data.data.createdActivities.started
+          newActyInfo: result.data.data.createdActivities.starting
         })
         console.log(result)
         console.log(that.data.newActyInfo)

@@ -10,6 +10,9 @@ Page({
 
   onLoad: function(options) {
     that = this
+    this.setData({
+      myUid: wx.getStorageSync('openid')
+    })
     if(options){
       var data = JSON.parse(options.dataString)
       if(data.aid){
@@ -27,7 +30,7 @@ Page({
           wx.request({
             url: `${config.service.host}/weapp/getFollowings`,
             data: {
-              uid: wx.getStorageSync('openid')
+              uid: data.uid
             },
             success(result) {
               that.setData({
@@ -37,12 +40,14 @@ Page({
           })
         }
         if(data.type==1){
+          console.log(data.uid)
           wx.request({
             url: `${config.service.host}/weapp/getFollowers`,
             data: {
-              uid: wx.getStorageSync('openid')
+              uid: data.uid
             },
             success(result) {
+              console.log(result)
               that.setData({
                 usersArray: result.data.followers
               })

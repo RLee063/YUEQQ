@@ -16,7 +16,7 @@ Page({
     phone: '',
     grade: '',
     motto: '',
-    homePicUrl: "https://qcloudtest-1257207887.cos.ap-guangzhou.myqcloud.com/1536468704720-MUpMq2yU3.jpg",
+    homePicUrl: "",
     creditstar: 5,
     creditarray: [1, 2, 3, 4, 5],
     flag: true,
@@ -178,11 +178,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.setData({
-      userInfo: wx.getStorageSync('userInfo').data.data,
-      openId: wx.getStorageSync('openid'),
-      logged: wx.getStorageSync('logged')
-    })
+
+    if (wx.getStorageSync('userInfo').nickName) {
+      this.setData({
+        userInfo: wx.getStorageSync('userInfo'),
+        logged: wx.getStorageSync('logged'),
+        openId: wx.getStorageSync('openid'),
+
+      })
+    } else {
+      this.setData({
+        userInfo: wx.getStorageSync('userInfo').data.data,
+        logged: wx.getStorageSync('logged'),
+        openId: wx.getStorageSync('openid'),
+      })
+    }
+
 
   },
 
@@ -235,22 +246,6 @@ Page({
         that.setData({
           changebkgd: wx.getStorageSync('changebkgd')
         })
-        if (that.data.changebkgd == 0) {
-          wx.request({
-            url: `${config.service.host}/weapp/randPic`,
-            method: 'GET',
-            data: {},
-            success(result) {
-              console.log(result.data.data)
-              that.setData({
-                homePicUrl: result.data.data.link
-              })
-            },
-            fail(error) {
-              util.showModel('读取数据失败', error);
-            }
-          })
-        }
         console.log(wx.getStorageSync('bkgdpic'))
         if (that.data.changebkgd == 1) {
           that.setData({

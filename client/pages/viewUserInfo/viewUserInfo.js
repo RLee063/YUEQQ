@@ -11,7 +11,10 @@ Page({
     numOfFollowings: 0,
     numOfFollowers: 0,
     numOfMyActivities: 0,
-    homePicUrl: ''
+    followed: false,
+    uid: "",
+    homePicUrl: '',
+    hasOwnPic: true
   },
 
   onLoad: function(options) {
@@ -36,38 +39,71 @@ Page({
       that.setData({
         userInfo: userInfo
       })
-      this.drawSkillCanvas()
+      if (that.data.userInfo.homePicUrl == "0") {
+        console.log("flag")
+        that.setData({
+          hasOwnPic: false
+        })
+      }
+      // that.drawSkillCanvas()
+      that.initNumbers()
+      that.checkFollowed()
     })
-    this.initNumbers()
   },
-  onShow: function() {
-    var that=this
-    var newHPU
-    if (that.data.userInfo.homePicUrl == undefined) {
+  checkFollowed: function(){
+
+    wx.request({
+      url: `${config.service.host}/weapp/getFollowings`,
+      data: {
+        uid: wx.getStorageSync('openid')
+      },
+      success(result) {
+        var followings = result.data.followers
+        for (var i = 0; i < followings.length; i++) {
+          if(followings[i].uid == that.data.uid){
+            that.setData({
+              followed: true
+            })
+            break;
+          }
+        }
+      }
+    })
+  },
+  follow: function () {
+    if (!that.data.followed) {
+      console.log(that.data.uid)
       wx.request({
-        url: `${config.service.host}/weapp/randPic`,
-        method: 'GET',
-        data: {},
-        success(result) {
-          console.log(result.data.data)
-          that.setData({
-            homePicUrl: result.data.data.link
-          })
+        url: `${config.service.host}/weapp/follow`,
+        data: {
+          fromUid: wx.getStorageSync('openid'),
+          toUid: that.data.uid
         },
-        fail(error) {
-          util.showModel('读取数据失败', error);
+        success(result) {
+          that.setData({
+            followed : true,
+            numOfFollowers: that.data.numOfFollowers+1
+          })
         }
       })
-    } else {
-      newHPU = that.data.userInfo.homePicUrl
-      that.setData({
-        homePicUrl: newHPU
-      })
-      console.log(that.data)
-      
     }
-
-    that.refresh()
+    else {
+      wx.request({
+        url: `${config.service.host}/weapp/unfollow`,
+        data: {
+          fromUid: wx.getStorageSync('openid'),
+          toUid: that.data.uid
+        },
+        success(result) {
+          that.setData({
+            followed: false,
+            numOfFollowers: that.data.numOfFollowers - 1
+          })
+        }
+      })
+    }
+  },
+  onShow: function() {
   },
   initNumbers: function() {
     wx.request({
@@ -87,6 +123,7 @@ Page({
         uid: that.data.uid
       },
       success(result) {
+        console.log(result)
         that.setData({
           numOfFollowers: result.data.followers.length
         })

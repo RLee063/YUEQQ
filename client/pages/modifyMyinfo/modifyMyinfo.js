@@ -23,7 +23,6 @@ Page({
       grades: app.globalData.grades,
       colleges: app.globalData.colleges,
     })
-
     if (options.dataString) {
       var data = JSON.parse(options.dataString)
       uid = data.uid
@@ -34,7 +33,6 @@ Page({
         this.setData({
           isFirstLogin: true
         })
-        return
       }
     }
     var uid = wx.getStorageSync('openid')
@@ -46,7 +44,6 @@ Page({
       console.log(userInfo)
     })
     var maxNumRange = [];
-
   },
   receiveImageUrl: function(imgUrl) {
     var userInfo = that.data.userInfo
@@ -164,22 +161,5 @@ Page({
     })
   },
   onShow: function() {
-    var that = this
-    if (1) {
-      wx.request({
-        url: `${config.service.host}/weapp/randPic`,
-        method: 'GET',
-        data: {},
-        success(result) {
-
-          that.setData({
-            homePicUrl: result.data.data.link
-          })
-        },
-        fail(error) {
-          util.showModel('读取数据失败', error);
-        }
-      })
-    }
   }
 })

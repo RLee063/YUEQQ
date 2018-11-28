@@ -1,4 +1,4 @@
-// pages/create_undo/create_undo.js
+
 var util = require('../../utils/util.js')
 var config = require('../../config')
 Page({
@@ -12,7 +12,7 @@ Page({
   },
 
   details: function (e) {
-    
+
     var aid = e.currentTarget.dataset.aid
     wx.navigateTo({
       url: "../viewActivityInfo/viewActivityInfo?aid=" + aid
@@ -29,7 +29,8 @@ Page({
       success(result) {
 
         that.setData({
-          newActyInfo: result.data.data.createdActivities.started
+          newActyInfo: result.data.data.joinedActivities.starting
+
         })
         console.log(result)
         console.log(that.data.newActyInfo)
@@ -42,7 +43,6 @@ Page({
   },
   formatInfo: function () {
     var tempActyInfo = this.data.newActyInfo
-
     for (var i = 0; i < tempActyInfo.length; i++) {
       var sTime = tempActyInfo[i].startTime.substring(0, 10) + '-' + tempActyInfo[i].startTime.substring(11, 16)
       tempActyInfo[i].startTime = sTime

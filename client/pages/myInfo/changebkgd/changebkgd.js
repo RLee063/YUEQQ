@@ -10,6 +10,7 @@ const height = device.windowHeight - 20
 
 Page({
   data: {
+
     bkgdpic: '',
     cropperOpt: {
       id: 'cropper',
@@ -27,6 +28,11 @@ Page({
   },
 
   onLoad(option) {
+    this.setData({
+      openId: wx.getStorageSync('openid'),
+    })
+    
+
     const {
       cropperOpt
     } = this.data
@@ -103,7 +109,7 @@ Page({
           method: 'GET',
           data: {
             uid: that.data.openId,
-            bkgdpic: that.data.bkgdpic,
+            homePicUrl: that.data.bkgdpic,
           },
           success(result) {
             util.showSuccess('成功保存数据')

@@ -6,6 +6,7 @@ var that
 
 Page({
   data:{
+    hasOwnPic:true,
     activitiesArray: [],
     recommendationActivities:[],
     recommendationUsers:[{},{},{},{},{},{}],
@@ -106,6 +107,12 @@ Page({
     this.initData()
   },
   onShow: function(){
+    if (this.data.userInfo.homePicUrl == "0") {
+      console.log("flag")
+      that.setData({
+        hasOwnPic: false
+      })
+    }
   },
   initData: function(){
     var old = this.data.criterias[2]

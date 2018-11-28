@@ -20,6 +20,13 @@ Page({
       url: '../createUndo/createUndo?uid=' + this.data.userInfo.uid,
     })
   },
+  create_doing: function () {
+    console.log(this.data.userInfo.uid)
+    wx.navigateTo({
+      url: '../createDoing/createDoing?uid=' + this.data.userInfo.uid,
+    })
+  },
+
 
   create_did: function() {
     wx.navigateTo({
@@ -32,6 +39,12 @@ Page({
     })
   },
 
+  attend_doing: function () {
+    console.log(this.data.userInfo.uid)
+    wx.navigateTo({
+      url: '../attendDoing/attendDoing?uid=' + this.data.userInfo.uid,
+    })
+  },
   attend_did: function() {
     wx.navigateTo({
       url: '../attendDid/attendDid?uid=' + this.data.userInfo.uid,
@@ -45,6 +58,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.setData({
+      openId: wx.getStorageSync('openid'),
+    })
 
     if (options.info == null) {
       wx.showToast({
@@ -71,33 +87,25 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
-    this.setData({
-      changebkgd: wx.getStorageSync('changebkgd')
+    var that = this
+    wx.request({
+      url: `${config.service.host}/weapp/getUserInfo`,
+      method: 'GET',
+      data: {
+        uid: that.data.openId,
+      },
+      success(result) {
+        console.log(result.data.data)
+        that.setData({
+          userInfo: result.data.data[0],
+          homePicUrl: result.data.data[0].homePicUrl
+        })
+      },
+      fail(error) {
+        util.showModel('保存失败', error);
+      }
     })
-    if (this.data.changebkgd == 0) {
-      var that=this
-      wx.request({
-        url: `${config.service.host}/weapp/randPic`,
-        method: 'GET',
-        data: {},
-        success(result) {
-          console.log(result.data.data)
-          that.setData({
-            homePicUrl: result.data.data.link
-          })
-        },
-        fail(error) {
-          util.showModel('读取数据失败', error);
-        }
-      })
-    }
-    console.log(wx.getStorageSync('bkgdpic'))
-    if (this.data.changebkgd == 1) {
-      this.setData({
-        homePicUrl: wx.getStorageSync('bkgdpic')
-      })
-    }
+   
   },
 
   /**
