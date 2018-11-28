@@ -1,4 +1,6 @@
-// pages/motto/motto.js
+var qcloud = require('../../vendor/wafer2-client-sdk/index')
+var config = require('../../config')
+var util = require('../../utils/util.js')
 Page({
 
   /**
@@ -20,16 +22,19 @@ Page({
     this.setData({
       motto: e.detail.value
     })
+    console.log(this.data.motto)
     var that = this
     wx.request({
       url: `${config.service.host}/weapp/updateUserInfo`,
       method: 'GET',
       data: {
         uid: that.data.openId,
-        motto: 'that.data.motto',
+        motto: that.data.motto,
       },
       success(result) {
         util.showSuccess('成功保存数据')
+        console.log(result)
+        wx.navigateBack()
       },
       fail(error) {
         util.showModel('保存失败', error);
