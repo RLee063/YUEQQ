@@ -140,11 +140,11 @@ Page({
     var that = this
     var myinfoP = util.getUserInfoFromServer(uid)
     myinfoP.then(userInfo => {
-      if(userInfo.credit < that.activityInfo.creditLimit){
-        wx.showToast({
-          title: '加入失败，你的信用值太低了哦',
-          icon: 'fail',
-          duration: 2000
+      if(userInfo.credit < that.data.activityInfo.creditLimit){
+        wx.showModal({
+          title: '加入活动失败',
+          content: '你的信用值太低了哦',
+          showCancel: false
         })
       }
       else{
