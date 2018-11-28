@@ -30,12 +30,11 @@ Page({
   refresh: function(){
     var userInfoPromise = util.getUserInfoFromServer(that.data.uid)
     userInfoPromise.then(userInfo => {
-      console.log(userInfo)
       userInfo.skills = [0, 20, 40, 60, 10, 80]
       that.setData({
         userInfo: userInfo
       })
-      this.drawSkillCanvas()
+      that.drawSkillCanvas()
     })
     this.initNumbers()
   },

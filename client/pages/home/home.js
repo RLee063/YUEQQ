@@ -24,8 +24,10 @@ Page({
   },
   onReachBottom: function(){
     var that = this
-
     var activitiesArray = this.data.activitiesArray
+    if(activitiesArray.length==0){
+      return
+    }
     var lastAid = activitiesArray[activitiesArray.length-1].aid
     wx.request({
       url: `${config.service.host}/weapp/pullRefresh`,
@@ -59,7 +61,14 @@ Page({
     that.refreshActivities()
   },
   refreshRecommendActivities: function(){
-
+    wx.request({
+      url: `${config.service.host}/weapp/getPopular`,
+      success: result=>{
+        that.setData({
+          recommendationActivities: result.data.data
+        })
+      }
+    })
   },
   refreshRecommendUsers: function(){
     wx.request({
@@ -89,7 +98,6 @@ Page({
         console.log(acties)
         that.setData({
           activitiesArray: acties,
-          recommendationActivities: acties.slice(0, 5)
         })
         wx.stopPullDownRefresh()
       },
@@ -107,12 +115,6 @@ Page({
     this.initData()
   },
   onShow: function(){
-    if (this.data.userInfo.homePicUrl == "0") {
-      console.log("flag")
-      that.setData({
-        hasOwnPic: false
-      })
-    }
   },
   initData: function(){
     var old = this.data.criterias[2]

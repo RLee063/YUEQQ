@@ -36,6 +36,7 @@ Page({
     userInfoPromise.then(userInfo => {
       console.log(userInfo)
       // userInfo.skills = [0, 20, 40, 60, 10, 80]
+      userInfo.sex = parseInt(userInfo.sex)
       that.setData({
         userInfo: userInfo
       })
@@ -45,7 +46,7 @@ Page({
           hasOwnPic: false
         })
       }
-      // that.drawSkillCanvas()
+      that.drawSkillCanvas()
       that.initNumbers()
       that.checkFollowed()
     })
@@ -104,6 +105,7 @@ Page({
     }
   },
   onShow: function() {
+    this.refresh()
   },
   initNumbers: function() {
     wx.request({

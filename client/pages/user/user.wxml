@@ -3,7 +3,8 @@
   <view catchtap='showMoreOptions'>
     <image src="../../images/more.png" class="more"></image>
   </view>
-  <image src="{{userInfo.avatarUrl}}" class="avatar-pic" mode="aspectFill"/>
+  <image wx:if="{{userInfo.sex==2}}" src="{{userInfo.avatarUrl}}" class="avatar-pic-boy" mode="aspectFill"/>
+  <image wx:else src="{{userInfo.avatarUrl}}" class="avatar-pic-girl" mode="aspectFill"/>
   <view class="nick-name">{{userInfo.nickName}}</view>
   <!-- <view class="gender"></view> -->
   <view class="mid-block">

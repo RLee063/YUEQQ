@@ -1,6 +1,6 @@
 <swiper autoplay="1" indicator-dots="1" circular="1" interval="5000" duration="1000" previous-margin="15px" next-margin="15px" class="recommendation-acty-block">
   <swiper-item wx:for="{{recommendationActivities}}" wx:key="item.aid" class="recommendation-acty-item">
-    <image src="{{item.picUrl}}" mode="center" class="recommendation-acty-image" bindtap='tapActivity' data-aid="{{item.aid}}"></image>
+    <image src="{{item.picUrl}}" mode="aspectFill" class="recommendation-acty-image" bindtap='tapActivity' data-aid="{{item.aid}}"></image>
   </swiper-item>
 </swiper>
 

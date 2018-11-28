@@ -16,6 +16,8 @@ page{
   padding-right: 12rpx;
   right: 50rpx;
   top: 300rpx;
+  box-shadow: 0px 0px 2px rgb(0, 0, 0);
+  text-shadow: 0px 0px 2px rgb(0, 0, 0);
 }
 
 .follow{
@@ -71,7 +73,7 @@ page{
   /* background: rgb(255, 107, 107); */
 }
 
-.avatar-pic{
+.avatar-pic-girl,.avatar-pic-boy{
   height: 150rpx;
   width: 150rpx; 
   left: 300rpx;
@@ -81,6 +83,10 @@ page{
   border: solid;
   border-color: rgba(255, 122, 122, 0.8);
   box-shadow: 0px 0px 2px rgb(0, 0, 0);
+}
+
+.avatar-pic-boy{
+  border-color: rgb(101, 180, 255);
 }
 
 .mid-block{

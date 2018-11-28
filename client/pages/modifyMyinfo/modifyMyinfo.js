@@ -36,20 +36,23 @@ Page({
       }
     }
     var uid = wx.getStorageSync('openid')
-    var myInfoPromise = util.getUserInfo(uid)
+    var myInfoPromise = util.getUserInfoFromServer(uid)
     myInfoPromise.then(userInfo => {
-      that.setData({
-        userInfo: userInfo
-      })
       console.log(userInfo)
+      that.setData({
+        userInfo: userInfo,
+        homePicUrl: userInfo.homePicUrl
+      })
     })
     var maxNumRange = [];
   },
   receiveImageUrl: function(imgUrl) {
+    console.log(imgUrl)
     var userInfo = that.data.userInfo
     userInfo.homePicUrl = imgUrl
     that.setData({
-      userInfo: userInfo
+      userInfo: userInfo,
+      homePicUrl: imgUrl
     })
   },
   bindGradeChange: function(e) {
@@ -104,14 +107,11 @@ Page({
       college: userInfo.college
     }
     console.log(data)
-    console.log(data)
-    console.log(data)
-    console.log(data)
 
     if (that.data.isFirstLogin) {
       data.skills = that.data.skills.join(',')
     }
-    
+    console.log(data)
     console.log("AKLDJKLASJKLDALSD")
     wx.request({
       url: `${config.service.host}/weapp/updateUserInfo`,
@@ -155,11 +155,13 @@ Page({
   },
 
   bindSkillsChange: function(e) {
-    that.data.skills[e.currentTarget.index] = e.detail.value
+    console.log(e)
+    that.data.skills[e.currentTarget.dataset.index] = e.detail.value
     that.setData({
       skills: that.data.skills
     })
   },
   onShow: function() {
+    var that = this
   }
 })
