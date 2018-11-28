@@ -22,7 +22,7 @@ Page({
     waveCanvasHeight: 80,
     waveCanvasWidth: 500,
     waveHeight: 80,
-    waveWidth: 400
+    waveWidth: 30
   },
 
   onLoad: function(options) {
@@ -37,6 +37,7 @@ Page({
     console.log(this.data)
     this.refresh()
     // var aid = options.aid
+    that.drawJoinMask()
   },
   
   refresh: function() {
@@ -83,7 +84,10 @@ Page({
         activityInfo.averageSkills = "黄金"
 
         var sportIcon = "../../images/sportType/" + activityInfo.sportType +".png"
+
+        var waveWidth = activityInfo.members[0].skills[activityInfo.sportType] * 500 / 80
         that.setData({
+          waveWidth: waveWidth,
           activityInfo: activityInfo,
           hasJoined: hasJoined,
           isOwner: isOwner,
@@ -91,6 +95,7 @@ Page({
           membersArray: activityInfo.members,
           sportIcon: sportIcon
         })
+        that.setPoint()
       },
       fail: function(error) {
         wx.showModal({
@@ -108,7 +113,6 @@ Page({
         })
       }
     })
-    this.drawJoinMask()
   },
   name2Num: function(name){
     var sportType = app.globalData.sportType
@@ -128,12 +132,13 @@ Page({
   },
   onSlideChangeEnd:function(e){
     console.log(e)
+    var value = that.data.membersArray[e.detail.current].skills[that.data.activityInfo.sportType]
+    value = value * 500 / 80
     that.setData({
-    swiperIndex: e.detail.current
+      swiperIndex: e.detail.current,
+      waveWidth: value
     })
-    console.log("INDEX:"+e.currentTarget.index)
-    console.log("CURRENT:" + e.currentTarget.current)
-    console.log("current2:" + e.detail.current)
+    that.setPoint()
   },
   joinActivity: function() {
     var uid = wx.getStorageSync('openid')
@@ -534,33 +539,37 @@ Page({
       }
     })
   },
-  drawJoinMask: function() {
+  setPoint: function(){
     var height = util.rpx2px(that.data.waveHeight)
     var width = util.rpx2px(that.data.waveWidth)
-    this.p1 = {
+    that.p1 = {
       x: width,
-      y: height/4,
+      y: height / 4,
       directionX: 1.2,
       directionY: -1
     }
-    this.p2 = {
+    that.p2 = {
       x: width,
-      y: height*3/4,
+      y: height * 3 / 4,
       directionX: -1,
       directionY: 1.2
     }
-    this.p3 = {
+    that.p3 = {
       x: width,
       y: height / 4,
       directionX: -0.8,
       directionY: -2
     }
-    this.p4 = {
-      x: width ,
+    that.p4 = {
+      x: width,
       y: height * 3 / 4,
       directionX: 1,
       directionY: 2
     }
+    console.log(that)
+  },
+  drawJoinMask: function() {
+    that.setPoint()
     waveI1 = setInterval(this.waveAmination, 100)
     waveI2 = setInterval(this.waveAmination2, 100)
   },
@@ -576,7 +585,7 @@ Page({
     ctx.arc(width, height/2, util.rpx2px(40), 1.5*Math.PI, 0.5*Math.PI)
     ctx.lineTo(width, height)
     ctx.lineTo(rate, height)
-    ctx.bezierCurveTo(this.p2.x, this.p2.y, this.p1.x, this.p1.y, rate, 0)
+    ctx.bezierCurveTo(that.p2.x, that.p2.y, that.p1.x, that.p1.y, rate, 0)
     ctx.closePath()
     ctx.setFillStyle('white')
     ctx.fill()
