@@ -30,7 +30,7 @@
   <view bindtap="refreshActivities" class="recommendation-right-text">刷新</view>
 </view>
 
-<view class="query-criterias-block">
+<!-- <view class="query-criterias-block">
   <view class="criteria" wx:if="{{!criteriaHidden}}" catchtap="hideShowCriteria" wx:for="{{criteriasTitle}}">{{item}}</view>
   <view class="criteria-show" wx:if="{{criteriaHidden}}" catchtap="hideShowCriteria" wx:for="{{criteriasTitle}}">{{item}}</view>
 
@@ -42,7 +42,7 @@
       </view>
     </scroll-view>
   </view>
-</view>
+</view> -->
 
 <view bindtap='criteriaComfirm' wx:if='{{!criteriaHidden}}' class="criteria-comfirm">确定</view>
 

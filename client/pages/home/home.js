@@ -23,7 +23,6 @@ Page({
     sportType:[]
   },
   onReachBottom: function(){
-    var that = this
     var activitiesArray = this.data.activitiesArray
     if(activitiesArray.length==0){
       return
@@ -52,10 +51,10 @@ Page({
     })
   },
   onPullDownRefresh: function(){
-    var that=this
-    this.refresh(that)
+
+    this.refresh()
   },
-  refresh: function(that){
+  refresh: function(){
     that.refreshRecommendActivities()
     that.refreshRecommendUsers()
     that.refreshActivities()
@@ -89,7 +88,7 @@ Page({
     })
   },
   refreshActivities: function(){
-    var that = this
+    that = this
     wx.request({
       url: `${config.service.host}/weapp/pullRefresh`,
       success(result) {
@@ -115,6 +114,7 @@ Page({
     this.initData()
   },
   onShow: function(){
+    that.refresh()
   },
   initData: function(){
     var old = this.data.criterias[2]

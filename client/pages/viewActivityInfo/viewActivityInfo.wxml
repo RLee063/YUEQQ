@@ -81,7 +81,7 @@
 <view wx:if="{{evaluating}}">
   <view class="sub-mask"></view>
   <swiper interval="5000" duration="1000" current="{{current}}" class="evaluate-swiper" next-margin='150rpx' bindchange='onSlideChangeEnd'>
-    <swiper-item wx:for="{{membersArray}}" class="evaluate-item">
+    <swiper-item wx:for="{{membersArray}}" class="evaluate-item" wx:if="{{item.uid!=myUid}}">
       <view class="evaluate-block">
         <image class="avatar-biger" src="{{item.avatarUrl}}" data-uid="{{item.uid}}" mode="aspectFill" />
         <view class="skill-wave"></view>

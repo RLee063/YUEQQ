@@ -22,6 +22,7 @@ Page({
   },
 
   onLoad: function (options) {
+    that = this
     console.log(options)
     var chatInfoString = options.chatInfo
     var chatInfo = JSON.parse(chatInfoString)
@@ -30,8 +31,6 @@ Page({
       chatId: chatInfo.chatId,
       isGroup: chatInfo.isGroup
     })
-
-    that = this
     this.tunnel = app.tunnel
     messageGetor = setInterval(this.getMessage, 1000)
 
@@ -120,8 +119,10 @@ Page({
       messageArray: currentMessageArray,
       messageHeadIndex: start-1
     })
+    that.pageScrollToBottom()
   },
   getMessage(){
+    that.pageScrollToBottom()
     var chatListRaw = app.getArrayFromStorage('chatListRaw')
     for (var i = 0; i < chatListRaw.length; i++) {
       if (chatListRaw[i].chatId == this.data.chatId) {
@@ -139,9 +140,9 @@ Page({
           this.setData({
             messageArray: messageArray
           })
+          that.pageScrollToBottom()
           chatListRaw[i].unReadedNum = 0
           chatListRaw[i].unReaded = false
-
         }
       }
       break
@@ -177,11 +178,10 @@ Page({
     }
   }, 
   pageScrollToBottom: function () {
-    wx.createSelectorQuery().select('#j_page').boundingClientRect(function (rect) {                    wx.pageScrollTo({
-        scrollTop: 1000000000,
-        duration: 0
-      })
-    }).exec()
+    wx.pageScrollTo({
+      scrollTop: 1000000000,
+      duration: 0
+    })
   },
 
   onPullDownRefresh: function(){
