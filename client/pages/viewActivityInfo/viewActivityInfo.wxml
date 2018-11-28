@@ -78,8 +78,6 @@
   <image src="../../images/more.png" class="more"></image>
 </view>
 
-
-
 <view wx:if="{{evaluating}}">
   <view class="sub-mask"></view>
   <swiper interval="5000" duration="1000" current="{{current}}" class="evaluate-swiper" next-margin='150rpx' bindchange='onSlideChangeEnd'>
@@ -91,10 +89,10 @@
           <canvas class="skill-wave-mask" canvas-id='joinMask2'></canvas>
           <canvas class="skill-wave-mask" canvas-id='joinMask'></canvas>
         </view>
-        <view class="evaluate-button-left" data-code="1" data-uid="{{item.uid}}" bindtap='evaluate' data-index="{{index}}" data-current="{{current}}" wx:if="{{item.evaluate!=1}}">👆</view>
-        <view class="evaluate-button-left-down" data-code="0" data-uid="{{item.uid}}" bindtap='evaluate' data-index="{{index}}" data-current="{{current}}" wx:else>👆</view>
-        <view class="evaluate-button-right" data-code="-1" data-uid="{{item.uid}}" bindtap='evaluate' data-index="{{index}}" data-current="{{current}}" wx:if="{{item.evaluate!=-1}}">👇</view>
-        <view class="evaluate-button-right-down" data-code="0" data-uid="{{item.uid}}" bindtap='evaluate' data-index="{{index}}" data-current="{{current}}" wx:if="{{item.evaluate==-1}}">👇</view>
+        <view class="evaluate-button-left" data-code="1" data-uid="{{item.uid}}" catchtap='evaluate' data-index="{{index}}" data-current="{{current}}" wx:if="{{item.evaluate!=1}}">👆</view>
+        <view class="evaluate-button-left-down" data-code="0" data-uid="{{item.uid}}" catchtap='evaluate' data-index="{{index}}" data-current="{{current}}" wx:else>👆</view>
+        <view class="evaluate-button-right" data-code="-1" data-uid="{{item.uid}}" catchtap='evaluate' data-index="{{index}}" data-current="{{current}}" wx:if="{{item.evaluate!=-1}}">👇</view>
+        <view class="evaluate-button-right-down" data-code="0" data-uid="{{item.uid}}" catchtap='evaluate' data-index="{{index}}" data-current="{{current}}" wx:else="{{item.evaluate==-1}}">👇</view>
       </view>
     </swiper-item>
   </swiper>

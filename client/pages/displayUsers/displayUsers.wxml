@@ -1,4 +1,4 @@
-<view wx:for="{{usersArray}}" class="info-block" data-uid="{{item.uid}}">
+<view wx:for="{{usersArray}}" class="info-block" data-uid="{{item.uid}}" bindtap="viewUserInfo">
   <view class="avatar-block">
     <image class="avatar-image" src="{{item.avatarUrl}}" mode="aspectFill"></image>
   </view>
@@ -6,6 +6,6 @@
     <view class="name-text">{{item.nickName}}</view>
     <view class="motto-text">{{item.motto}}</view>
   </view>
-  <view bindtap='follow' data-index="{{index}}" data-uid="{{item.uid}}" wx:if="{{followed&&(item.uid!=myUid)}}" class="unfollow-block">取消关注</view>
-  <view bindtap='follow' data-index="{{index}}" data-uid="{{item.uid}}" wx:if="{{!followed&&(item.uid!=myUid)}}" class="follow-block">添加关注</view>
+  <view catchtap='follow' data-index="{{index}}" data-uid="{{item.uid}}" wx:if="{{item.followed&&(item.uid!=myUid)}}" class="unfollow-block">取消关注</view>
+  <view catchtap='follow' data-index="{{index}}" data-uid="{{item.uid}}" wx:if="{{!item.followed&&(item.uid!=myUid)}}" class="follow-block">添加关注</view>
 </view>

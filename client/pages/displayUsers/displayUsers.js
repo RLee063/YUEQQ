@@ -67,6 +67,8 @@ Page({
       success(result) {
         var usersArray = that.data.usersArray
         var followings = result.data.followers
+        console.log(usersArray)
+        console.log(followings)
         for(var i=0; i<usersArray.length; i++){
           usersArray[i].followed = 0
           for(var j=0; j<followings.length; j++){
@@ -79,6 +81,7 @@ Page({
         that.setData({
           usersArray: usersArray
         })
+        console.log(usersArray)
       }
     })
   },
@@ -115,6 +118,13 @@ Page({
         }
       })
     }
+  },
+  viewUserInfo: function(e){
+    console.log(e)
+    var uid = e.currentTarget.dataset.uid
+    wx.navigateTo({
+      url: "../viewUserInfo/viewUserInfo?uid=" + uid
+    })
   },
   onReady: function() {
 

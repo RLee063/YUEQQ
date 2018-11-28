@@ -69,9 +69,7 @@ Page({
           }
         }
         var hasEvaluated = false
-        var skillss = 0
         for(var i=0; i<activityInfo.members.length; i++){
-          skillss += 
           activityInfo.members[i].signed = false
           activityInfo.members[i].removed = false
           activityInfo.members[i].evaluate = 0
@@ -139,35 +137,40 @@ Page({
   },
   joinActivity: function() {
     var uid = wx.getStorageSync('openid')
-    if (uid == "") {
-      util.showModel('请先登录', '刷新失败')
-    }
     var that = this
-    console.log(uid)
-    console.log(this.data.aid)
-    wx.showLoading({
-      title: '',
-    })
-    wx.request({
-      url: `${config.service.host}/weapp/joinActivity`,
-      data: {
-        uid: uid,
-        aid: this.data.aid
-      },
-      success(result) {
-        wx.hideLoading()
-        that.refresh()
-        if (result.data.code == 1) {
-          wx.showToast({
-            title: '加入活动成功',
-            icon: 'success',
-            duration: 1000
-          })
-        }
-      },
-      fail(error) {
-        wx.hideLoading()
-        util.showModel('加入失败', error);
+    var myinfoP = util.getUserInfoFromServer(uid)
+    myinfoP.then(userInfo => {
+      if(userInfo.credit < that.activityInfo.creditLimit){
+        wx.showToast({
+          title: '加入失败，你的信用值太低了哦',
+          icon: 'fail',
+          duration: 2000
+        })
+      }
+      else{
+        wx.showLoading({
+          title: '',
+        })
+        wx.request({
+          url: `${config.service.host}/weapp/joinActivity`,
+          data: {
+            uid: uid,
+            aid: this.data.aid
+          },
+          success(result) {
+            wx.hideLoading()
+            that.refresh()
+            wx.showToast({
+              title: '加入活动成功',
+              icon: 'success',
+              duration: 1000
+            })
+          },
+          fail(error) {
+            wx.hideLoading()
+            util.showModel('加入失败', error);
+          }
+        })
       }
     })
   },
@@ -417,14 +420,12 @@ Page({
     })
   },
   evaluate: function (e) {
+    console.log("evaluate")
     var membersArray = that.data.membersArray
     membersArray[e.target.dataset.index].evaluate = e.target.dataset.code
     that.setData({
       membersArray: membersArray
     })
-    console.log("INDEX:" + e.target.dataset.index)
-    console.log("CURRENT:" + e.target.dataset.current)
-    console.log("current2:" + e.detail.current)
   },
   completeEvaluateActivity: function(){
     var up = []
@@ -461,6 +462,7 @@ Page({
         that.setData({
           evaluating: false
         })
+        that.refresh()
       },
       fail(error){
         wx.hideLoading()
@@ -559,8 +561,8 @@ Page({
       directionX: 1,
       directionY: 2
     }
-    waveI1 = setInterval(this.waveAmination, 10)
-    waveI2 = setInterval(this.waveAmination2, 10)
+    waveI1 = setInterval(this.waveAmination, 100)
+    waveI2 = setInterval(this.waveAmination2, 100)
   },
   waveAmination: function() {
     var ctx = wx.createCanvasContext('joinMask')
