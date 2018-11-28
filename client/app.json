@@ -19,15 +19,19 @@
     "pages/scoreinfo/scoreinfo",
     "pages/myActivities/myActivities",
     "pages/createDid/createDid",
+    "pages/createDoing/createDoing",
     "pages/createUndo/createUndo",
     "pages/attendUndo/attendUndo",
+    "pages/attendDoing/attendDoing",
     "pages/attendDid/attendDid",
     "pages/message/message",
     "pages/joinerlist/joinerlist",
     "pages/myActy/myActy",
     "pages/evaluate/evaluate",
     "pages/cropper/cropper",
-    "pages/userCenter/userCenter"
+    "pages/userCenter/userCenter",
+    "pages/appInfo/appInfo"
+  
   ],
   "window": {
     "backgroundColor": "white",

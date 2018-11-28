@@ -6,6 +6,7 @@ var that
 
 Page({
   data:{
+    hasOwnPic:true,
     activitiesArray: [],
     recommendationActivities:[],
     recommendationUsers:[{},{},{},{},{},{}],

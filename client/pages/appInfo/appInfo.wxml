@@ -1,0 +1,19 @@
+<!--pages/appInfo/appInfo.wxml-->
+<view class='container'>
+  <view class='all'>
+    <text class='text'>1.</text>
+    <text class='text'>该小程序仅限本校学生使用，禁止外来人员使用 或用作其他商业用途.</text>
+  </view>
+  <view class='all'>
+    <text class='text'>2.</text>
+    <text class='text'>若未按时参加活动且之前未退出活动，信用值会下降，信用值过低可能无法参加活动。反之，按时参加活动能提升信用值。初始信用值均为5.</text>
+  </view>
+  <view class='all'>
+    <text class='text'>3.</text>
+    <text class='text'>初始能力值一经设置，不可在由本人修改。每次活动结束后，其他活动参与者会根据你的水平和表现为你打分，你的能力值也会随之变化。系统会为你推荐能力值和兴趣相似的朋友。</text>
+  </view>
+  <view class='all'>
+    <text class='text'>4.</text>
+    <text class='text'>在活动开始前，活动发布者可以解散或者转让活动，活动一经转让，原活动发布者失去活动所有权。</text>
+  </view>
+</view>

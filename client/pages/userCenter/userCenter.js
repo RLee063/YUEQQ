@@ -5,7 +5,7 @@ var util = require('../../utils/util.js')
 
 Page({
   data: {
-    homePicUrl: "https://uestc0510-1257207887.cos.ap-chengdu.myqcloud.com/1543237069447-mHdJscD5W.png",
+    homePicUrl: "",
     userInfo: {},
     logged: false,
     requestResult: '',
@@ -42,38 +42,23 @@ Page({
       success(result) {
         console.log(result.data.data)
         that.setData({
-          userInfo: result.data.data[0]
+          userInfo: result.data.data[0],
+          homePicUrl: result.data.data[0].homePicUrl
         })
       },
       fail(error) {
         util.showModel('保存失败', error);
       }
     })
-    var pic
-    if (this.data.userInfo.homePicUrl != "undefined") {
-      pic = this.data.userInfo.homePicUrl
-      this.setData({
-        homePicUrl: pic
-      })
-    } else {
-      this.setData({
-        changemotto: wx.getStorageSync('changemotto')
-      })
-      if (this.data.changemotto == 1) {
-        this.setData({
-          motto: wx.getStorageSync('newmotto')
-        })
-      }
-      this.setData({
-        changebkgd: wx.getStorageSync('changebkgd')
-      })
-      if (this.data.changebkgd == 1) {
-        this.setData({
-          homePicUrl: wx.getStorageSync('bkgdpic')
-        })
-      }
-    }
+    
 
+
+  },
+
+  appInfo:function(){
+    wx.navigateTo({
+      url: '../appInfo/appInfo',
+    })
   },
 
   information: function() {
