@@ -38,7 +38,11 @@ Page({
     var uid = wx.getStorageSync('openid')
     var myInfoPromise = util.getUserInfoFromServer(uid)
     myInfoPromise.then(userInfo => {
-      console.log(userInfo)
+      if(userInfo.regsisted){
+        that.setData({
+          isFirstLogin: false
+        })
+      }
       that.setData({
         userInfo: userInfo,
         homePicUrl: userInfo.homePicUrl
@@ -118,15 +122,9 @@ Page({
       data: data,
       success: result => {
         console.log(result)
-        if (that.data.isFirstLogin) {
-          wx.switchTab({
-            url: '../home/home',
-          })
-        } else {
-          wx.navigateBack({
-            delta: 1,
-          })
-        }
+        wx.switchTab({
+          url: '../home/home',
+        })
       }
     })
   },

@@ -53,6 +53,19 @@ Page({
         aid: aid
       },
       success: function(result) {
+        if(!result){
+          wx.showModal({
+            title: '获取活动信息失败',
+            content: '没有查到此活动的相关信息，重试可能会解决此问题',
+            showCancel: false,
+            success(){
+              wx.navigateBack({
+                delta: 1,
+              })
+            }
+          })
+      
+        }
         console.log(result)
         wx.hideLoading()
         var activityInfo = result.data.data
@@ -708,7 +721,13 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-
-  }
+  onShareAppMessage: function () {
+    console.log("share")
+    var obj = {
+      title: "快来加入这个活动吧！",
+      path: "/pages/begin/begin?aid=" + that.data.activityInfo.aid,
+    }
+    console.log(obj)
+    return obj
+  },
 })

@@ -105,7 +105,13 @@ Page({
       }
     })
   },
-  onLoad: function(){
+  onLoad: function(options){
+    console.log(app.globalData)
+    if(app.globalData.shareAid){
+      wx.navigateTo({
+        url: "../viewActivityInfo/viewActivityInfo?aid=" + app.globalData.shareAid
+      })
+    }
     that = this
     that.setData({
       sportType: app.globalData.sportType

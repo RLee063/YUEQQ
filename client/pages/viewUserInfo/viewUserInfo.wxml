@@ -66,5 +66,6 @@
     <view class="info-intro">能力值：</view>
     <canvas canvas-id='skillCanvas' class="skill-canvas"></canvas>
   </view>
-  <view class="talk" bindtap="talkTo" wx:if="{{isViewOtherInfo}}">发消息</view>
+  <view style='height:200rpx;'></view>
+  <cover-view class="talk" bindtap="talkTo" wx:if="{{isViewOtherInfo}}">发消息</cover-view>
 </view>

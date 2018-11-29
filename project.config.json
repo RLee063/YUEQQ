@@ -12,5 +12,32 @@
 	"projectname": "YueQiunewestJs",
 	"compileType": "miniprogram",
 	"libVersion": "2.4.0",
-	"condition": {}
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 0,
+			"list": [
+				{
+					"id": 0,
+					"name": "通过分享进入",
+					"pathName": "pages/begin/begin",
+					"query": "aid=o5ko3434RP2lZQNVamvVxfrAugoY1543394774"
+				}
+			]
+		}
+	}
 }
