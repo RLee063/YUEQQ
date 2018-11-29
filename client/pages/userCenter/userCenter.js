@@ -9,7 +9,7 @@ Page({
     userInfo: {},
     logged: false,
     requestResult: '',
-    motto: 'this is the motto',
+    motto: '',
     changemotto: 0,
   },
 
@@ -43,7 +43,9 @@ Page({
         console.log(result.data.data)
         that.setData({
           userInfo: result.data.data[0],
-          homePicUrl: result.data.data[0].homePicUrl
+          homePicUrl: result.data.data[0].homePicUrl,
+          motto: result.data.data[0].motto
+
         })
       },
       fail(error) {

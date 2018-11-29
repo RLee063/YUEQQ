@@ -33,12 +33,8 @@ Page({
 
         })
 
-        /*that.formatInfo()*/
-        console.log(that.data.newActyInfo)
-        console.log(that.data.newActyInfo)
-        console.log(that.data.newActyInfo)
+        that.formatInfo()
 
-        console.log(that.data.newActyInfo)
       },
       fail(error) {
         util.showModel('查看活动列表失败', error);
@@ -53,23 +49,23 @@ Page({
       var sTime = tempActyInfo[i].startTime.substring(0, 10) + '-' + tempActyInfo[i].startTime.substring(11, 16)
       tempActyInfo[i].startTime = sTime
       switch (tempActyInfo[i].sportType) {
-        case '乒乓球':
+        case '0':
           tempActyInfo[i].sportType = 0
           break
 
-        case '篮球':
+        case '1':
           tempActyInfo[i].sportType = 1
           break
-        case '网球':
+        case '2':
           tempActyInfo[i].sportType = 2
           break
-        case '羽毛球':
+        case '3':
           tempActyInfo[i].sportType = 3
           break
-        case '足球':
+        case '4':
           tempActyInfo[i].sportType = 4
           break
-        case '跑步':
+        case '5':
           tempActyInfo[i].sportType = 5
           break
       }
