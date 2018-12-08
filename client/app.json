@@ -37,7 +37,7 @@
     "backgroundColor": "white",
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "white",
-    "navigationBarTitleText": "Wafer Quick Start",
+    "navigationBarTitleText": "",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {

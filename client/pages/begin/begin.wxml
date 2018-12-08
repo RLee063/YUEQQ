@@ -1,16 +1,15 @@
 <!--pages/beginlogin/beginlogin.wxml-->
 <view >
     <view class='header'>
-        <image src='/images/icon.svg'></image>
-
+        <image src='/images/main.png'></image>
     </view>
  
-    <view class='content'>
-        <view>该小程序由UESTC0510工作室开发，需提供以下权限</view>
-        <text>·获得你的公开信息(昵称，头像等)</text>
+    <view>
+        <view class="title">成电约球</view>
+        <view class="hint">*需要获得你的微信公开信息(昵称，头像等)</view>
     </view>
  
-    <button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="startprogram">
+    <button type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="startprogram">
         确认登陆
     </button>
 </view>

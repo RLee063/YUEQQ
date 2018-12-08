@@ -6,6 +6,7 @@ var that
 
 App({
   globalData:{
+    shareAid: "",
     isAdmin: false,
     logged: false,
     authorized: false,

@@ -82,13 +82,16 @@ Page({
   },
   upLoadImgAndGetUrl: function (that) {
     util.showBusy('正在上传')
+    console.log(that.data.bkgdpic)
     wx.uploadFile({
       url: config.service.uploadUrl,
       filePath: that.data.bkgdpic,
       name: 'file',
       success: function (res) {
+        console.log(res)
         util.showSuccess('上传图片成功')
         res = JSON.parse(res.data)
+
         console.log(pages)
         var prevPage = pages[pages.length - 2];
         prevPage.receiveImageUrl(res.data.imgUrl)

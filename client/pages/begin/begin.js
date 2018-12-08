@@ -37,6 +37,22 @@ Page({
     firstLog: false
   },
   onLoad: function(options) {
+    console.log(options)
+    if(options.aid){
+      if (wx.getStorageSync('logged')){
+        app.globalData.shareAid = options.aid
+        wx.switchTab({
+          url: '../home/home?',
+        })
+      }
+      else{
+        wx.showModal({
+          title: '提示',
+          content: '检测到你未授权本小程序，请授权登录之后重新点击分享进入',
+          showCancel: false
+        })
+      }
+    }
     if (wx.getStorageSync('logged') == true) {
       this.openTunnel()
       this.login()
