@@ -34,3 +34,5 @@ module.exports = async (ctx) => {
 
 
 }
+
+[({'uid':1}),(1)]

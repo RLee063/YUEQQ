@@ -2,6 +2,7 @@ const {
   mysql
 } = require('../qcloud')
 var tool = require('./tool.js')
+var sports = new Array('basketball', 'badminton', 'pingpong', 'tennis', 'soccer', 'running')
 
 module.exports = async(ctx) => {
   const {
@@ -30,6 +31,11 @@ module.exports = async(ctx) => {
     activity['members'] = await mysql('userInfo as ui').select().whereIn('ui.uid', uidss)
     for (var i in activity['members']){
       activity['members'][i]['evaluated'] = (await mysql('userAct').select().where('aid', aid).andWhere('uid', activity['members'][i]['uid']))[0]['evaluated']
+      activity['members'][i]['skills'] = []
+      for (var j in sports) {
+        activity['members'][i]['skills'].push(activity['members'][i][sports[j]])
+
+      }
     }
 
 

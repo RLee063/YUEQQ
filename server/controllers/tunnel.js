@@ -158,7 +158,7 @@ async function onMessage(tunnelId, type, content) {
           try {
             var chatMems = await mysql('userAct').select('uid').where('aid', content.word['to'])
             for (var n in chatMems) {
-              if (chatMems[n]['uid'] != content.word['from'])
+              if (chatMems[n]['uid'] != uuid)
               content.word['to'] = chatMems[n]['uid']
               $broadcast('speak', {
                 'who': userMap[tunnelId],

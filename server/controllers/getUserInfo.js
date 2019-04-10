@@ -1,4 +1,5 @@
 const {mysql} = require('../qcloud')
+var sports = new Array('basketball', 'badminton', 'pingpong', 'tennis', 'soccer', 'running')
 
 module.exports = async(ctx) => {
     const {uid} = ctx.query
@@ -13,6 +14,11 @@ module.exports = async(ctx) => {
                 }
             }
         } else{
+            resInfo[0]['skills'] = []
+            for(var i in sports){
+              resInfo[0]['skills'].push(resInfo[0][sports[i]])            
+
+            }
 
             ctx.body = {
                 code : 1,

@@ -23,3 +23,4 @@ module.exports =
   'getNowFormatDate': getNowFormatDate,
   'formatTime': formatTime
 }
+

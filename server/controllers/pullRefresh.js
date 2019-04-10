@@ -3,10 +3,7 @@ const {
 } = require('../qcloud')
 var tool = require('./tool.js')
 
-
-
-
-module.exports = async(ctx) => {
+module.exports = async (ctx) => {
 
   const {
     aid
@@ -15,8 +12,7 @@ module.exports = async(ctx) => {
 
     if (aid === undefined) {
       var activities = await mysql('ActivityInfo as info').select().whereRaw('StartTime > ?', [tool.getNowFormatDate()]).andWhere('disbanded', 0).orderBy('StartTime', 'asc').orderBy('ord', 'asc').limit(10)
-      for(var i in activities)
-      {
+      for (var i in activities) {
         activities[i]['avatarUrl'] = (await mysql('userInfo').select('avatarUrl').where('uid', activities[i]['creatorUid']))[0]['avatarUrl']
       }
 
@@ -27,7 +23,7 @@ module.exports = async(ctx) => {
           this.where('startTime', lastAct['startTime']).andWhereRaw("ord > ?", [lastAct['ord']])
         }
       ).orderBy('StartTime', 'asc').orderBy('ord', 'asc').limit(10)
-      
+
       for (var i in activities) {
         activities[i]['avatarUrl'] = (await mysql('userInfo').select('avatarUrl').where('uid', activities[i]['creatorUid']))[0]['avatarUrl']
       }
@@ -37,11 +33,11 @@ module.exports = async(ctx) => {
 
     for (var i in activities) {
       //calculate status
-      if(activities[i]['startTime'] > new Date()){
+      if (activities[i]['startTime'] > new Date()) {
         activities[i]['status'] = 0
-      } else if(activities[i]['endTime'] < new Date()){
+      } else if (activities[i]['endTime'] < new Date()) {
         activities[i]['status'] = 2
-      }else{
+      } else {
         activities[i]['status'] = 1
       }
       //  fromat time
@@ -54,7 +50,7 @@ module.exports = async(ctx) => {
       //get members
       uids = await mysql('userAct as ua').join('ActivityInfo as ai', 'ua.aid', 'ai.aid').select('ua.uid').where('ua.aid', activities[i]['aid'])
       activities[i]['members'] = uids
-      
+
 
 
     }

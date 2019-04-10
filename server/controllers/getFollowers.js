@@ -4,9 +4,16 @@ module.exports = async (ctx) => {
   const { uid } = ctx.query
 
   try {
-    uids = await mysql('following').select('toUid').where('toUid',uid)
-    followers = await mysql('userInfo').select().whereIn('uid',uids)
-    ctx.bdoy = {
+    uids = await mysql('following').select().where('toUid',uid)
+    var _uids = []
+    for (var i in uids) {
+      _uids.push(uids[i]['fromUid'])
+    }
+    var followers = await mysql('userInfo').select().whereIn('uid',_uids)
+    if(followers.length === 0){
+      followers = []
+    }
+    ctx.body = {
       code:1,
       followers:followers
     }

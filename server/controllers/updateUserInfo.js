@@ -12,7 +12,7 @@ module.exports = async (ctx) => {
     motto,
     grade,
     college,
-    skill
+    skills
   } = ctx.query
 
   var user = {
@@ -23,16 +23,7 @@ module.exports = async (ctx) => {
     college: college,
     homePicUrl: homePicUrl
   }
-  if (skill === undefined) {
 
-  } else {
-    skill = skill.split(',')
-    for (var i in sports) {
-      user[sports[i]] = skill[i]
-
-    }
-
-  }
   //判断用户是否存在
   try{
     if((await mysql('userInfo').select().where('uid',uid)).length===0){
@@ -53,6 +44,16 @@ module.exports = async (ctx) => {
  
   //更新信息
   try {
+    if (skills === undefined) {
+
+    } else {
+      skills = skills.split(',')
+      for (var i in sports) {
+        user[sports[i]] = skills[i]
+      }
+      await mysql('userInfo').where('uid', uid).update({'regsisted':1})
+
+    }
     await mysql('userInfo').where('uid', uid).update(user)
 
     ctx.body = {

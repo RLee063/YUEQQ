@@ -72,4 +72,8 @@ router.get('/unfollow',controllers.unfollow)
 router.get('/getFollowers',controllers.getFollowers)
 //获取关注的人的信息
 router.get('/getFollowings', controllers.getFollowings)
+//随机图片
+router.get('/randPic',controllers.randPic)
+//热度前3
+router.get('/getPopular', controllers.getPopular)
 module.exports = router

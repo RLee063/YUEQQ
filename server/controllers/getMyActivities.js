@@ -6,7 +6,7 @@ module.exports = async(ctx) => {
   var joinedActivities = { started: [], notStart: [] }
 
   try{
-    activities = await mysql('ActivityInfo').select().where('creatorUid', uid).orderBy('StartTime', 'desc').orderBy('ord', 'asc')
+    activities = await mysql('ActivityInfo').select().where('creatorUid', uid).andWhere('disbanded', 0).orderBy('StartTime', 'desc').orderBy('ord', 'asc')
     for(var i in activities){
       if (activities[i]['startTime'] > new Date()) {
         activities[i]['status'] = 0
@@ -19,11 +19,14 @@ module.exports = async(ctx) => {
 
 
 
-    createdActivities['started'] = await mysql('ActivityInfo').select().where('creatorUid', uid).andWhereRaw('StartTime <= ?', [tool.getNowFormatDate()])
-    createdActivities['notStart'] = await mysql('ActivityInfo').select().where('creatorUid', uid).andWhereRaw('StartTime > ?', [tool.getNowFormatDate()])
+    createdActivities['started'] = await mysql('ActivityInfo').select().where('creatorUid', uid).andWhereRaw('StartTime <= ?', [tool.getNowFormatDate()]).andWhere('disbanded', 0).andWhereRaw('endTime <= ?', [tool.getNowFormatDate()])
+    createdActivities['starting'] = await mysql('ActivityInfo').select().where('creatorUid', uid).andWhereRaw('StartTime <= ?', [tool.getNowFormatDate()]).andWhere('disbanded', 0).andWhereRaw('endTime >= ?', [tool.getNowFormatDate()])
+    createdActivities['notStart'] = await mysql('ActivityInfo').select().where('creatorUid', uid).andWhereRaw('StartTime > ?', [tool.getNowFormatDate()]).andWhere('disbanded', 0)
+
     joinedAids = await mysql('userAct').select('aid').where('uid', uid)
-    joinedActivities['started'] = await mysql('ActivityInfo').select().whereRaw('StartTime <= ?', [tool.getNowFormatDate()]).andWhere('aid', 'in', joinedAids)
-    joinedActivities['notStart'] = await mysql('ActivityInfo').select().whereRaw('StartTime <= ?', [tool.getNowFormatDate()]).andWhere('aid', 'in', joinedAids)
+    joinedActivities['started'] = await mysql('ActivityInfo').select().whereRaw('StartTime <= ?', [tool.getNowFormatDate()]).andWhere('aid', 'in', joinedAids).andWhere('disbanded', 0).andWhereRaw('endTime <= ?', [tool.getNowFormatDate()])
+    joinedActivities['starting'] = await mysql('ActivityInfo').select().whereRaw('StartTime <= ?', [tool.getNowFormatDate()]).andWhere('aid', 'in', joinedAids).andWhere('disbanded', 0).andWhereRaw('endTime >= ?', [tool.getNowFormatDate()])
+    joinedActivities['notStart'] = await mysql('ActivityInfo').select().whereRaw('StartTime <= ?', [tool.getNowFormatDate()]).andWhere('aid', 'in', joinedAids).andWhere('disbanded', 0)
     
     ctx.body = {
       'code': 1,
@@ -44,3 +47,4 @@ module.exports = async(ctx) => {
   }
 
 }
+

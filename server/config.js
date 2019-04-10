@@ -24,7 +24,7 @@ const CONF = {
     port: 3306,
     user: 'root',
     db: 'cAuth',
-    pass: 'wx9564c30c15e103a2',
+    pass: 'UESTC0510',
     char: 'utf8mb4'
   },
 
@@ -48,7 +48,7 @@ const CONF = {
   qcloudSecretKey: '890vlPrNhqowxmaDetxvhU5Wn3LZcUAi',
 
   //信道服务器
-  serverHost: '1qz2ek2e.qcloud.la',
+  serverHost: '808665603.uestc0510.xyz',
   tunnelServerUrl: "http://120.77.81.121",
   tunnelSignatureKey:'abcdefg'
 }

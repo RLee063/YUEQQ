@@ -1,6 +1,6 @@
 {
-	"miniprogramRoot": "./client",
-	"qcloudRoot": "./server",
+	"miniprogramRoot": "client/",
+	"qcloudRoot": "server/",
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
@@ -9,7 +9,7 @@
 		"newFeature": true
 	},
 	"appid": "wx9564c30c15e103a2",
-	"projectname": "YueQiunewestJs",
+	"projectname": "yueqq",
 	"compileType": "miniprogram",
 	"libVersion": "2.4.0",
 	"condition": {
