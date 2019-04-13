@@ -43,14 +43,6 @@ const CONF = {
   // 微信登录态有效期
   wxLoginExpires: 7200,
   wxMessageToken: 'abcdefgh',
-  qcloudAppId: '1257207887',
-  qcloudSecretId: 'AKIDUpyVSG5JYbR4mIE0GCxAHE0jmqiXv4zp',
-  qcloudSecretKey: '890vlPrNhqowxmaDetxvhU5Wn3LZcUAi',
-
-  //信道服务器
-  serverHost: '808665603.uestc0510.xyz',
-  tunnelServerUrl: "http://120.77.81.121",
-  tunnelSignatureKey:'abcdefg'
 }
 
 module.exports = CONF
