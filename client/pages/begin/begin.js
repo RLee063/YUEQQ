@@ -98,6 +98,7 @@ Page({
 
     // 监听自定义消息（服务器进行推送）
     tunnel.on('speak', speak => {
+      console.log("speak"+speak)
       console.log(speak)
       var uid = speak.who.openId
       var chatId = speak.word.from

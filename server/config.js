@@ -28,14 +28,15 @@ const CONF = {
     char: 'utf8mb4'
   },
 
+
   cos: {
     /**
      * 地区简称
      * @查看 https://cloud.tencent.com/document/product/436/6224
      */
-    region: 'ap-chengdu',
+    region: 'ap-guangzhou',
     // Bucket 名称
-    fileBucket: 'uestc0510',
+    fileBucket: 'qcloudtest',
     // 文件夹
     uploadFolder: ''
   },
@@ -43,6 +44,12 @@ const CONF = {
   // 微信登录态有效期
   wxLoginExpires: 7200,
   wxMessageToken: 'abcdefgh',
+
+  //信道服务器
+  serverHost: '1qz2ek2e.qcloud.la',
+  tunnelServerUrl: "http://120.77.81.121",
+  tunnelSignatureKey: 'abcdefg'
+
 }
 
 module.exports = CONF

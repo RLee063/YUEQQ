@@ -45,7 +45,7 @@ router.get('/getUserInfo', controllers.getUserInfo)
 //更新信息
 router.get('/updateUserInfo',controllers.updateUserInfo)
 //参加活动
-router.get('/joinActivity', controllers.joinActivity)
+// router.get('/joinActivity', controllers.joinActivity)
 //查询用户参与/创建过的互动
 router.get('/getMyActivities', controllers.getMyActivities)
 //解散活动
